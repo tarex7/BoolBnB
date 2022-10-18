@@ -16,4 +16,9 @@ class Flat extends Model
     public function messages() {
         return $this->hasMany('App\Models\Message');
     }
+
+
+    public function user() {
+        return $this->belongsTo('App\User');
+    }
 }
