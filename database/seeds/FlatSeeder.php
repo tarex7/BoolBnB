@@ -11,6 +11,6 @@ class FlatSeeder extends Seeder
      */
     public function run()
     {
-        //
+        
     }
 }
