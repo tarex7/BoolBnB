@@ -17,7 +17,7 @@ class AddUserDetailsToUsersTable extends Migration
             $table->string('first_name')->nullable();
             $table->string('last_name')->nullable();
             $table->string('phone')->nullable();
-            $table->year('birthdate')->nullable();
+            $table->date('birthdate')->nullable();
         });
     }
 
