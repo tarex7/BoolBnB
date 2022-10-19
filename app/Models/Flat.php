@@ -25,4 +25,8 @@ class Flat extends Model
     public function services() {
         return $this->belongsToMany('App\Models\Service');
     }
+
+    public function sponsorships() {
+        return $this->belongsToMany('App\Models\Sponsorship');
+    }
 }
