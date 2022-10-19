@@ -3,7 +3,9 @@
 namespace App\Http\Controllers;
 
 use App\Models\Flat;
+use App\Models\Service;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class FlatController extends Controller
 {
@@ -14,7 +16,10 @@ class FlatController extends Controller
      */
     public function index()
     {
-        //
+        $flats = Flat::all();
+        $services = Service::select('label','icon')->get();
+
+        return view('registered_user.flats.index', compact('flats','services'));
     }
 
     /**
@@ -24,7 +29,12 @@ class FlatController extends Controller
      */
     public function create()
     {
-        //
+        $flats = Flat::all();
+
+        $services = Service::select('label','icon')->get();
+
+
+        return view('registered_user.flats.create',compact('flats','services'));
     }
 
     /**
@@ -35,7 +45,16 @@ class FlatController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $data = $request->all();
+
+        $flat = new Flat();
+        $flat->fill($data);
+        $flat->user_id = Auth::id();
+
+        $flat->save();
+
+        //return redirect()->route('registered_user.show', $flat);
+       
     }
 
     /**

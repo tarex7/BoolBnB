@@ -23,4 +23,4 @@ Auth::routes();
 Route::get('/home', 'HomeController@index')->name('home');
 //Route::get('/home', 'HomeController@index')->name('home');
 
-Route::resource('Flat','FlatController');
+Route::resource('flats','FlatController');

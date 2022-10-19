@@ -16,17 +16,17 @@ class CreateFlatsTable extends Migration
         Schema::create('flats', function (Blueprint $table) {
             $table->id();
             $table->string('title', 30)->required();
-            $table->unsignedTinyInteger('room_number')->required();
-            $table->unsignedTinyInteger('bed_number')->required();
-            $table->unsignedTinyInteger('bathroom_number')->required();
-            $table->unsignedSmallInteger('square_mt')->required();
+            $table->unsignedTinyInteger('room_number')->nullable();
+            $table->unsignedTinyInteger('bed_number')->nullable();
+            $table->unsignedTinyInteger('bathroom_number')->nullable();
+            $table->unsignedSmallInteger('square_mt')->nullable();
             $table->string('image')->nullable();
             $table->text('description')->nullable();
-            $table->unsignedFloat('price_per_day', 6, 2);
-            $table->string('address');
-            $table->decimal('latitude', 10, 8);
-            $table->decimal('longitude', 10, 7);
-            $table->boolean('visible');
+            $table->unsignedFloat('price_per_day', 6, 2)->nullable();
+            $table->string('address')->nullable();
+            $table->decimal('latitude', 10, 8)->nullable();
+            $table->decimal('longitude', 10, 7)->nullable();
+            $table->boolean('visible')->nullable();
             $table->timestamps();
         });
     }

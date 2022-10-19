@@ -6,6 +6,23 @@ use Illuminate\Database\Eloquent\Model;
 
 class Flat extends Model
 {
+
+    protected $fillable =
+     [
+       'title',
+       'room_number',
+       'bed_number',
+       'bathroom_number',
+       'square_mt',
+       'image',
+       'description',
+       'price_per_day',
+       'address',
+       'latitude',
+       'longitude',
+       'visible',
+     ];
+
     //Relazione 1 to 1 con views
     public function flatViews() {
         return $this->hasOne('App\Models\View');
@@ -29,4 +46,6 @@ class Flat extends Model
     public function sponsorships() {
         return $this->belongsToMany('App\Models\Sponsorship');
     }
+
+
 }
