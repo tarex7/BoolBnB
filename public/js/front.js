@@ -5280,7 +5280,9 @@ var render = function render() {
     attrs: {
       title: _vm.title
     }
-  }), _vm._v(" "), _c("app-jumbotron"), _vm._v(" "), _c("app-footer")], 1);
+  }), _vm._v(" "), _c("main", {
+    staticClass: "container my-3"
+  }, [_c("router-view")], 1), _vm._v(" "), _c("app-jumbotron"), _vm._v(" "), _c("app-footer")], 1);
 };
 var staticRenderFns = [];
 render._withStripped = true;
@@ -54629,6 +54631,38 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
+/***/ "./resources/js/components/AppAlert.vue":
+/*!**********************************************!*\
+  !*** ./resources/js/components/AppAlert.vue ***!
+  \**********************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
+var render, staticRenderFns
+var script = {}
+
+
+/* normalize component */
+
+var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_0__["default"])(
+  script,
+  render,
+  staticRenderFns,
+  false,
+  null,
+  null,
+  null
+  
+)
+
+component.options.__file = "resources/js/components/AppAlert.vue"
+/* harmony default export */ __webpack_exports__["default"] = (component.exports);
+
+/***/ }),
+
 /***/ "./resources/js/components/AppFooter.vue":
 /*!***********************************************!*\
   !*** ./resources/js/components/AppFooter.vue ***!
@@ -54836,6 +54870,38 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
+/***/ "./resources/js/components/AppLoader.vue":
+/*!***********************************************!*\
+  !*** ./resources/js/components/AppLoader.vue ***!
+  \***********************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
+var render, staticRenderFns
+var script = {}
+
+
+/* normalize component */
+
+var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_0__["default"])(
+  script,
+  render,
+  staticRenderFns,
+  false,
+  null,
+  null,
+  null
+  
+)
+
+component.options.__file = "resources/js/components/AppLoader.vue"
+/* harmony default export */ __webpack_exports__["default"] = (component.exports);
+
+/***/ }),
+
 /***/ "./resources/js/front.js":
 /*!*******************************!*\
   !*** ./resources/js/front.js ***!
@@ -54847,20 +54913,71 @@ __webpack_require__.r(__webpack_exports__);
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var bootstrap_dist_css_bootstrap_css__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! bootstrap/dist/css/bootstrap.css */ "./node_modules/bootstrap/dist/css/bootstrap.css");
 /* harmony import */ var bootstrap_dist_css_bootstrap_css__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(bootstrap_dist_css_bootstrap_css__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var _components_App_vue__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./components/App.vue */ "./resources/js/components/App.vue");
+/* harmony import */ var _router_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./router.js */ "./resources/js/router.js");
+/* harmony import */ var _router_js__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(_router_js__WEBPACK_IMPORTED_MODULE_1__);
+/* harmony import */ var _components_App_vue__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./components/App.vue */ "./resources/js/components/App.vue");
+/* harmony import */ var _components_AppLoader__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./components/AppLoader */ "./resources/js/components/AppLoader.vue");
+/* harmony import */ var _components_AppAlert_vue__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./components/AppAlert.vue */ "./resources/js/components/AppAlert.vue");
 __webpack_require__(/*! ./bootstrap */ "./resources/js/bootstrap.js");
 window.Vue = __webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.common.js");
 
 // IMPORTO BOOTSTRAP
 
 
+
+
+
+Vue.component('AppLoader', _components_AppLoader__WEBPACK_IMPORTED_MODULE_3__["default"]);
+Vue.component('AppAlert', _components_AppAlert_vue__WEBPACK_IMPORTED_MODULE_4__["default"]);
 var root = new Vue({
-  //router,
-  el: "#root",
+  router: _router_js__WEBPACK_IMPORTED_MODULE_1___default.a,
+  el: '#root',
   render: function render(h) {
-    return h(_components_App_vue__WEBPACK_IMPORTED_MODULE_1__["default"]);
+    return h(_components_App_vue__WEBPACK_IMPORTED_MODULE_2__["default"]);
   }
 });
+
+/***/ }),
+
+/***/ "./resources/js/router.js":
+/*!********************************!*\
+  !*** ./resources/js/router.js ***!
+  \********************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+
+// // IMPORT VUE E VUE ROUTER
+// import Vue from 'vue'
+// import VueRouter from 'vue-router'
+
+// // IMPORTO I COMPONENTI DELLLE PAGINE
+// import HomePage from './components/pages/HomePage.vue'
+// import AboutPage from './components/pages/AboutPage.vue'
+// import ContactsPage from './components/pages/ContactsPage.vue'
+// // import PostDetailPage from './components/pages/PostDetailPage.vue'
+
+// // //IMPORT PAGE ERROR SOTTO A TUTTO
+// // import NotFoundPage from './components/pages/NotFoundPage.vue'
+
+// //DICO A VUE DI USARE VUEROUTER
+// Vue.use(VueRouter)
+
+// //DEFINZIONE DELLE ROTTE
+// const routes = new VueRouter({
+//     mode: 'history',
+//     linkExactActiveClass: 'active',
+// routes: [
+//         { path: '/', component: HomePage, name: 'home' },
+//         { path: '/about', component: AboutPage, name: 'about' },
+//         { path: '/contacts', component: ContactsPage, name: 'contacts' },
+//         // { path: '/posts/:slug', component: PostDetailPage, name: 'post-detail' },
+//         // { path: '*', component: NotFoundPage, name: 'not_found' },
+
+//     ]
+// });
+
+// export default routes;
 
 /***/ }),
 
