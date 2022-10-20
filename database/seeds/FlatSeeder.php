@@ -32,7 +32,7 @@ class FlatSeeder extends Seeder
         $new_flat->address = $faker->address();
         $new_flat->latitude = $faker->latitude($min = -90, $max = 90);
         $new_flat->longitude = $faker->longitude($min = -180, $max = 180);
-        $new_flat->image = $faker->imageUrl(640, 480, 'animals', true);
+        $new_flat->image = $faker->imageUrl(640, 480, 'apartment', true);
         //$faker->image('public/storage/images',640,480, null, false);
         $new_flat->visible = $faker->boolean();
 

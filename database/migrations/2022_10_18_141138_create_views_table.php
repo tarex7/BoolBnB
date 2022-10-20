@@ -18,7 +18,7 @@ class CreateViewsTable extends Migration
             $table->dateTime('date');
             $table->string('IP', 15);
             $table->timestamps();
-        });
+        }); 
     }
 
     /**

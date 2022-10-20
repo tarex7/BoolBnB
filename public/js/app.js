@@ -41412,6 +41412,7 @@ module.exports = function(module) {
  */
 
 __webpack_require__(/*! ./bootstrap */ "./resources/js/bootstrap.js");
+__webpack_require__(/*! ./image_preview */ "./resources/js/image_preview.js");
 
 /***/ }),
 
@@ -41461,6 +41462,22 @@ window.axios.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest';
 //     cluster: process.env.MIX_PUSHER_APP_CLUSTER,
 //     forceTLS: true
 // });
+
+/***/ }),
+
+/***/ "./resources/js/image_preview.js":
+/*!***************************************!*\
+  !*** ./resources/js/image_preview.js ***!
+  \***************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+var preview = document.getElementById("preview");
+var imageField = document.getElementById("image-field");
+placeholder = "https://cdn2.vectorstock.com/i/thumb-large/48/06/image-preview-icon-picture-placeholder-vector-31284806.jpg";
+imageField.addEventListener("input", function () {
+  if (imageField.value) preview.src = imageField.value;else preview.src = placeholder;
+});
 
 /***/ }),
 

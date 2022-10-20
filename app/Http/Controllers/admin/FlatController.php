@@ -30,12 +30,13 @@ class FlatController extends Controller
      */
     public function create() //                                          CREATEEEEEE
     {
-        $flats = Flat::all();
 
+        $flats = Flat::all();
+        $flat = new Flat;
         $services = Service::select('id','label','icon')->get();
         
 
-        return view('admin.flats.create',compact('flats','services'));
+        return view('admin.flats.create',compact('flat','flats','services'));
     }
 
     /**
@@ -69,7 +70,8 @@ class FlatController extends Controller
      */
     public function show(Flat $flat)
     {
-        return view('admin.flats.show', $flat);
+       //$flat = Flat::select('id')->get();
+        return view('admin.flats.show', $flat, compact('flat'));
     }
 
     /**
@@ -78,21 +80,41 @@ class FlatController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit(Flat $flat)
     {
-        //
+         //controllo che sia l'autore, se non lo è ridirigo sulla index
+        //  if($post->user_id !== Auth::id()){
+        //     return redirect()->route('admin.posts.index')
+        //     ->with('message', 'Non sei Autorizzato a modificare questo post')
+        //     ->with('type', 'warning');
+        // }
+        $services = Service::select('id', 'label', 'icon')->get();
+        
+        $prev_services = $flat->services->pluck('id')->toArray();
+        return view('admin.flats.edit', compact('flat','services'));
     }
 
     /**
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
+     * @param  int  Flat $flat
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, Flat $flat)
     {
-        //
+        $data = $request->all();        
+        
+        $flat->user_id = Auth::id();       
+        
+        if(array_key_exists('services', $data)) {
+            
+            $flat->services()->sync($data['services']);
+        }
+        
+        $flat->update($data);
+
+        return redirect()->route('admin.flats.show', $flat);
     }
 
     /**
