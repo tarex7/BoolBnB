@@ -2,11 +2,12 @@
 
 <div class="container-fluid">
 
-    @section('content')
+   @section('content')
         <header>
             <h1 class="text-center">Crea appartamento</h1>
         </header>
 
         @include('includes.admin.flats.form')
-    </div>
-@endsection
+    @endsection
+    
+</div>
