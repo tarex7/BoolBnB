@@ -12591,3 +12591,87 @@ fieldset:disabled .btn {
   }
 }
 
+header ul {
+  list-style-type: none;
+}
+
+header img {
+  height: 40px;
+  width: 40px;
+}
+
+header .py-2 ul {
+  display: flex;
+  list-style-type: none;
+  text-align: center;
+  margin: 0;
+}
+
+header .py-2 ul li {
+  padding: 10px;
+  margin-right: 10px;
+  text-transform: uppercase;
+  font-size: 13px;
+  font-weight: bolder;
+}
+
+header .py-2 ul li a:hover,
+header .py-2 ul li a:active {
+  color: dodgerblue;
+  border-bottom: 5px solid dodgerblue;
+}
+
+.container {
+  position: relative;
+  z-index: 1;
+}
+
+.flag {
+  background-color: #0282f9;
+  position: absolute;
+  top: -56px;
+  left: 10px;
+  padding: 0.5rem;
+  text-align: center;
+}
+
+.flat-card {
+  width: 16.6666666667%;
+  padding: 1rem;
+  position: relative;
+  top: 0;
+  left: 0;
+}
+
+.flat-card .appair {
+  position: absolute;
+  top: 20px;
+  left: 32px;
+  z-index: 2;
+  display: none;
+}
+
+.flat-card .imaginary {
+  background-color: aqua;
+  height: 12rem;
+  width: 9.5rem;
+  -o-object-fit: cover;
+     object-fit: cover;
+  -o-object-position: top;
+     object-position: top;
+}
+
+.flat-card .imaginary:hover {
+  filter: opacity(0.3);
+}
+
+.flat-card:hover .appair {
+  display: block;
+}
+
+button {
+  text-transform: uppercase;
+  padding: 1rem 6rem;
+  margin: 2rem;
+}
+
