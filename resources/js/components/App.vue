@@ -2,7 +2,9 @@
   <div class="content">
     <!-- HEADER -->
     <app-header :title="title" />
-
+    <main class="container my-3">
+      <router-view></router-view>
+    </main>
     <!-- JUMBOTRON -->
     <app-jumbotron />
 
