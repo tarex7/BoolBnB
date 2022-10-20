@@ -7,11 +7,30 @@
 
 <script>
 import FlatList from "../flats/FlatList.vue";
+
 export default {
   name: "HomePage",
+
+  //COMPONENTS
   components: { FlatList },
+
+  // DATA
+  data() {
+    return {};
+  },
+
+  //PROPS
+  props: {},
+
+  //METHODS
+  methods: {},
+
+  //COMPUTED
+  computed: {},
 };
 </script>
 
-<style>
+
+<!-- STYLE -->
+<style lang="scss" scoped>
 </style>
