@@ -1,24 +1,38 @@
 <template>
-    <div class="container">
-        <div class="row justify-content-center">
-            <div class="col-md-8">
-                <div class="card">
-                    <div class="card-header">Example Component</div>
+  <div class="content">
+    <!-- HEADER -->
+    <app-header :title="title" />
 
-                    <div class="card-body">
-                     <h1>  COMING SOON!!!</h1>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
+    <!-- JUMBOTRON -->
+    <app-jumbotron />
+
+    <!--FOOTER -->
+    <app-footer />
+  </div>
 </template>
 
 <script>
+// IMPORT COMPONENTS
+import AppHeader from "./AppHeader.vue";
+import AppJumbotron from "./AppJumbotron.vue";
+import AppFooter from "./AppFooter.vue";
+
 export default {
-        name:'App',
-        mounted() {
-            console.log('Component mounted.')
-        }
-    }
+  name: "App",
+
+  // COMPONENTS
+  components: { AppHeader, AppJumbotron, AppFooter },
+
+  name: "App",
+  // DATA
+  data() {
+    return {
+      title: "BoolBnb",
+    };
+  },
+  // MOUNTED
+  mounted() {
+    console.log("Component mounted.");
+  },
+};
 </script>
