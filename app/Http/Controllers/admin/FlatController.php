@@ -15,10 +15,10 @@ class FlatController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index() ///////////////////////////////////////////////INDEX
     {
         $flats = Flat::all()->where('user_id', Auth::id());
-        $services = Service::select('label','icon')->get();
+        $services = Service::select('id','label','icon')->get();
 
         return view('admin.flats.index', compact('flats','services'));
     }
@@ -28,12 +28,12 @@ class FlatController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
+    public function create() //                                          CREATEEEEEE
     {
         $flats = Flat::all();
 
-        $services = Service::select('label','icon')->get();
-
+        $services = Service::select('id','label','icon')->get();
+        
 
         return view('admin.flats.create',compact('flats','services'));
     }
@@ -47,12 +47,16 @@ class FlatController extends Controller
     public function store(Request $request)
     {
         $data = $request->all();
-
         $flat = new Flat();
         $flat->fill($data);
         $flat->user_id = Auth::id();
 
         $flat->save();
+
+        if(array_key_exists('services', $data)) {
+
+            $flat->services()->attach($data['services']);
+        }
 
         return redirect()->route('admin.flats.show', $flat);
     }
@@ -99,7 +103,8 @@ class FlatController extends Controller
      */
     public function destroy(Flat $flat)
     {
-        
+        $flat->services()->detach();
+       
         $flat->delete();
 
         return redirect()->route('admin.flats.index');
