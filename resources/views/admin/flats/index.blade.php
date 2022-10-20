@@ -54,12 +54,12 @@
 
                     <td class="p-1">
 
-                        <form action="{{ route('admin.flats.destroy', $flat->id) }}" method="POST" class="delete-form"> 
+                        <form action="{{ route('admin.flats.destroy', $flat->id) }}" method="POST" class="delete-form">
 
-                        
+
                             <a class='btn btn-sm btn-primary mr-2' href="{{ route('admin.flats.show', $flat) }}"><i
                                     class='fa-solid fa-eye'></i>vedi</a>
-                        
+
                             <a class="btn btn-sm btn-warning" href="{{ route('admin.flats.edit', $flat) }}"><i
                                     class="fa-solid fa-pencil"></i>Edit </a>
 
@@ -67,10 +67,10 @@
                             @method('DELETE')
                             <button class="btn btn-sm btn-danger ml-2" type="submit">
                                 <i class="fa-solid fa-trash"></i>Elimina
-                            </button> 
+                            </button>
 
-                        {{-- @endif --}}
-                        </form> 
+                            {{-- @endif --}}
+                        </form>
 
                     </td>
                 </tr>
