@@ -7,6 +7,6 @@
             <h1 class="text-center">Crea appartamento</h1>
         </header>
 
-        @include('includes.registered_user.flats.form')
+        @include('includes.admin.flats.form')
     </div>
 @endsection

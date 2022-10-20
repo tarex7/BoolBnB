@@ -9,7 +9,7 @@
 
 
             {{-- Add new Flat --}}
-            <a class='btn btn-success'href="{{ route('flats.create') }}">
+            <a class='btn btn-success'href="{{ route('admin.flats.create') }}">
                 <i class='fa-solid fa-plus mr-2'></i> Nuovo
                 Appartamneto</a>
 
@@ -54,22 +54,23 @@
 
                     <td class="p-1">
 
-                        {{-- <form action="{{ route('admin.posts.destroy', $post->id) }}" method="POST" class="delete-form"> --}}
+                        <form action="{{ route('admin.flats.destroy', $flat->id) }}" method="POST" class="delete-form"> 
 
-                        {{-- 
-                            <a class='btn btn-sm btn-primary mr-2' href="{{ route('admin.posts.show', $post) }}"><i
-                                    class='fa-solid fa-eye'></i></a>
                         
-                            <a class="btn btn-sm btn-warning" href="{{ route('admin.posts.edit', $post) }}"><i
-                                    class="fa-solid fa-pencil"></i> </a>
+                            <a class='btn btn-sm btn-primary mr-2' href="{{ route('admin.flats.show', $flat) }}"><i
+                                    class='fa-solid fa-eye'></i>vedi</a>
+                        
+                            <a class="btn btn-sm btn-warning" href="{{ route('admin.flats.edit', $flat) }}"><i
+                                    class="fa-solid fa-pencil"></i>Edit </a>
 
                             @csrf
                             @method('DELETE')
                             <button class="btn btn-sm btn-danger ml-2" type="submit">
-                                <i class="fa-solid fa-trash"></i>
-                            </button> --}}
+                                <i class="fa-solid fa-trash"></i>Elimina
+                            </button> 
+
                         {{-- @endif --}}
-                        {{-- </form> --}}
+                        </form> 
 
                     </td>
                 </tr>

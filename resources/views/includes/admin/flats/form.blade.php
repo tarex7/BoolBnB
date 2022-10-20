@@ -1,6 +1,6 @@
 <div class="row border">
         <div class="col-6 col-md-12 mx-5">
-            <form action="{{ route('flats.store') }}" method="POST">
+            <form action="{{ route('admin.flats.store') }}" method="POST">
                 @csrf
     
             <div class="mb-3 col-6">
