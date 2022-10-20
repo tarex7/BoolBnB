@@ -11,7 +11,7 @@
             {{-- Add new Flat --}}
             <a class='btn btn-success'href="{{ route('admin.flats.create') }}">
                 <i class='fa-solid fa-plus mr-2'></i> Nuovo
-                Appartamneto</a>
+                Appartamento</a>
 
             <div>
             </div>

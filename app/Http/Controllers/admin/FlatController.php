@@ -70,7 +70,8 @@ class FlatController extends Controller
      */
     public function show(Flat $flat)
     {
-        return view('admin.flats.show', $flat);
+       //$flat = Flat::select('id')->get();
+        return view('admin.flats.show', $flat, compact('flat'));
     }
 
     /**
