@@ -18,7 +18,7 @@ class MessageSeeder extends Seeder
     {
         $flat_ids = Flat::pluck('id')->toArray();
 
-        for($i=0;$i < 9;$i++) {
+        for ($i = 0; $i < 9; $i++) {
 
             $new_message = new Message();
             $new_message->flat_id = Arr::random($flat_ids);
@@ -26,7 +26,7 @@ class MessageSeeder extends Seeder
             $new_message->sender_email = $faker->email();
             $new_message->object = $faker->sentence();
             $new_message->text = $faker->text(500);
-         
+
             $new_message->save();
         }
     }
