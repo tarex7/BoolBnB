@@ -1899,6 +1899,7 @@ module.exports = {
 
 /***/ }),
 
+<<<<<<< HEAD
 /***/ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/ExampleComponent.vue?vue&type=script&lang=js&":
 /*!***************************************************************************************************************************************************************************!*\
   !*** ./node_modules/babel-loader/lib??ref--4-0!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/ExampleComponent.vue?vue&type=script&lang=js& ***!
@@ -1961,6 +1962,15 @@ render._withStripped = true;
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
+=======
+/***/ "./node_modules/bootstrap/dist/js/bootstrap.js":
+/*!*****************************************************!*\
+  !*** ./node_modules/bootstrap/dist/js/bootstrap.js ***!
+  \*****************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+>>>>>>> admin-flats-index-and-show
 /*!
   * Bootstrap v4.6.2 (https://getbootstrap.com/)
   * Copyright 2011-2022 The Bootstrap Authors (https://github.com/twbs/bootstrap/graphs/contributors)

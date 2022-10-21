@@ -15,7 +15,7 @@ class CreateFlatsTable extends Migration
     {
         Schema::create('flats', function (Blueprint $table) {
             $table->id();
-            $table->string('title', 30)->required();
+            $table->string('title')->required();
             $table->unsignedTinyInteger('room_number')->nullable();
             $table->unsignedTinyInteger('bed_number')->nullable();
             $table->unsignedTinyInteger('bathroom_number')->nullable();
