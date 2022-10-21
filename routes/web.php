@@ -32,3 +32,9 @@ Route::get('/', function () {
 Route::get('/home', 'HomeController@index')->name('home');
 
 
+<<<<<<< HEAD
+=======
+Auth::routes();
+
+Route::get('/home', 'HomeController@index')->name('home');
+>>>>>>> dfc879a5a6b9588f10107f522cf12e07d0a59c85
