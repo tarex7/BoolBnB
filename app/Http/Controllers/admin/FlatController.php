@@ -19,9 +19,9 @@ class FlatController extends Controller
     public function index() ///////////////////////////////////////////////INDEX
     {
         $flats = Flat::all()->where('user_id', Auth::id());
-        $services = Service::select('id','label','icon')->get();
+        $services = Service::select('id', 'label', 'icon')->get();
 
-        return view('admin.flats.index', compact('flats','services'));
+        return view('admin.flats.index', compact('flats', 'services'));
     }
 
     /**
@@ -34,10 +34,10 @@ class FlatController extends Controller
 
         $flats = Flat::all();
         $flat = new Flat;
-        $services = Service::select('id','label','icon')->get();
-        
+        $services = Service::select('id', 'label', 'icon')->get();
 
-        return view('admin.flats.create',compact('flat','flats','services'));
+
+        return view('admin.flats.create', compact('flat', 'flats', 'services'));
     }
 
     /**
@@ -48,25 +48,46 @@ class FlatController extends Controller
      */
     public function store(Request $request)
     {
+        // VALIDATION
+        $request->validate(
+            [
+                'title' => 'required|string|min:5|max:50|unique:posts',
+                'description' => 'required|string',
+                'image' => 'nullable|image| mimes:jpeg,jpg,png',
+
+            ],
+            [
+                'title.required' => 'Il titolo è obbligatorio',
+                'description.required' => 'Devi scrivere il contenuto del post',
+                'title.min' => 'Il titolo deve avere almeno :min caratteri',
+                'title.max' => 'Il titolo deve avere almeno :max caratteri',
+                'title.unique' => "Esiste già un post dal titolo $request->title",
+                'image.image' => "Il file caricato non è di tipo immagine",
+                'image.mimes' => "Le immagini ammesse sono solo in formato .jpeg, .jpg o .png",
+
+            ]
+        );
+
+
         $data = $request->all();
         $flat = new Flat();
         $flat->fill($data);
-       // $flat->image = Storage::url('img_12.webp');
+        // $flat->image = Storage::url('img_12.webp');
         $flat->user_id = Auth::id();
 
-        
-        if(array_key_exists('image', $data)) {
-        $image_url = Storage::put('flat_images',$data['image']);
+
+        if (array_key_exists('image', $data)) {
+            $image_url = Storage::put('flat_images', $data['image']);
             $flat->image = $image_url;
         }
-        
+
         $flat->save();
-        
-        
 
 
 
-        if(array_key_exists('services', $data)) {
+
+
+        if (array_key_exists('services', $data)) {
 
             $flat->services()->attach($data['services']);
         }
@@ -82,7 +103,7 @@ class FlatController extends Controller
      */
     public function show(Flat $flat)
     {
-       //$flat = Flat::select('id')->get();
+        //$flat = Flat::select('id')->get();
         return view('admin.flats.show', $flat, compact('flat'));
     }
 
@@ -94,16 +115,16 @@ class FlatController extends Controller
      */
     public function edit(Flat $flat)
     {
-         //controllo che sia l'autore, se non lo è ridirigo sulla index
+        //controllo che sia l'autore, se non lo è ridirigo sulla index
         //  if($post->user_id !== Auth::id()){
         //     return redirect()->route('admin.posts.index')
         //     ->with('message', 'Non sei Autorizzato a modificare questo post')
         //     ->with('type', 'warning');
         // }
         $services = Service::select('id', 'label', 'icon')->get();
-        
+
         $prev_services = $flat->services->pluck('id')->toArray();
-        return view('admin.flats.edit', compact('flat','services'));
+        return view('admin.flats.edit', compact('flat', 'services'));
     }
 
     /**
@@ -115,15 +136,15 @@ class FlatController extends Controller
      */
     public function update(Request $request, Flat $flat)
     {
-        $data = $request->all();        
-        
-        $flat->user_id = Auth::id();       
-        
-        if(array_key_exists('services', $data)) {
-            
+        $data = $request->all();
+
+        $flat->user_id = Auth::id();
+
+        if (array_key_exists('services', $data)) {
+
             $flat->services()->sync($data['services']);
         }
-        
+
         $flat->update($data);
 
         return redirect()->route('admin.flats.show', $flat);
@@ -138,11 +159,9 @@ class FlatController extends Controller
     public function destroy(Flat $flat)
     {
         $flat->services()->detach();
-       
+
         $flat->delete();
 
         return redirect()->route('admin.flats.index');
-
-
     }
 }

@@ -1,3 +1,12 @@
+@if ($errors->any())
+    <div class="alert alert-danger">
+        @foreach ($errors->all() as $error)
+            <li> {{ $error }} </li>
+        @endforeach
+    </div>
+@endif
+
+
 @if ($flat->exists)
     <form action="{{ route('admin.flats.update', $flat) }}" method="POST" enctype="multipart/form-data">
         @method('PUT')
@@ -34,9 +43,9 @@
             </div>
         </div>
 
-        
 
-       
+
+
 
         <div class="mb-3 col-3">
             <label for="price_per_day" class="form-label">Prezzo</label>
