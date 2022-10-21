@@ -16,8 +16,27 @@
 <script>
 export default {
   name: "AboutPage",
+  // COMPONENTS
+  components: {},
+
+  // DATA
+  data() {
+    return {};
+  },
+
+  //PROPS
+  props: {},
+
+  //METHODS
+  methods: {},
+
+  //COMPUTED
+  computed: {},
 };
 </script>
 
-<style>
+
+
+<!-- STYLE -->
+<style lang="scss" scoped>
 </style>

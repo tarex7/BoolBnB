@@ -1,19 +1,11 @@
-<template>
-  <section id="flat-detail">
-    Show Appartamenti Dettagli
-    <flat-card />
-  </section>
-</template>
+<template></template>
 
 <script>
-//IMPORTO FLAT CARD
-import FlatCard from "../flats/FlatCard.vue";
-
 export default {
-  name: "FlatDetail",
+  name: "SearchBar",
 
   //COMPONENTS
-  components: { FlatCard },
+  components: {},
 
   // DATA
   data() {

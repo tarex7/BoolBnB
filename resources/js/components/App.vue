@@ -3,10 +3,11 @@
     <!-- HEADER -->
     <app-header :title="title" />
     <main class="container my-3">
+      <!-- JUMBOTRON -->
+      <app-jumbotron />
+      <!-- ROTTE VIEW (CONTENUTO DINAMICO ALl'INTERNO DELLE PAGINE) -->
       <router-view></router-view>
     </main>
-    <!-- JUMBOTRON -->
-    <app-jumbotron />
 
     <!--FOOTER -->
     <app-footer />
