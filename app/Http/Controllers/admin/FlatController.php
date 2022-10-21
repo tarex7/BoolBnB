@@ -211,12 +211,7 @@ class FlatController extends Controller
     public function destroy(Flat $flat)
     {
         $flat->services()->detach();
-<<<<<<< HEAD
 
-=======
-        $flat->views()->detach();
-       
->>>>>>> admin-flats-index-and-show
         $flat->delete();
 
         return redirect()->route('admin.flats.index');
