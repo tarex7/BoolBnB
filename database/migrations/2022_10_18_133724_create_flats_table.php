@@ -22,7 +22,7 @@ class CreateFlatsTable extends Migration
             $table->unsignedSmallInteger('square_mt')->nullable();
             $table->string('image')->nullable();
             $table->text('description')->nullable();
-            $table->unsignedFloat('price_per_day', 6, 2)->nullable();
+            $table->unsignedSmallInteger('price_per_day')->nullable();
             $table->string('address')->nullable();
             $table->decimal('latitude', 10, 8)->nullable();
             $table->decimal('longitude', 10, 7)->nullable();

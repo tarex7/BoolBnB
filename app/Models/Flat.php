@@ -14,7 +14,6 @@ class Flat extends Model
        'bed_number',
        'bathroom_number',
        'square_mt',
-       'image',
        'description',
        'price_per_day',
        'address',

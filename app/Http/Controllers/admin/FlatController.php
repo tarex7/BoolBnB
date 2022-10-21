@@ -7,6 +7,7 @@ use App\Models\Service;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Storage;
 
 class FlatController extends Controller
 {
@@ -50,9 +51,20 @@ class FlatController extends Controller
         $data = $request->all();
         $flat = new Flat();
         $flat->fill($data);
+       // $flat->image = Storage::url('img_12.webp');
         $flat->user_id = Auth::id();
 
+        
+        if(array_key_exists('image', $data)) {
+        $image_url = Storage::put('flat_images',$data['image']);
+            $flat->image = $image_url;
+        }
+        
         $flat->save();
+        
+        
+
+
 
         if(array_key_exists('services', $data)) {
 

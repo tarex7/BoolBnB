@@ -1,13 +1,24 @@
 @if ($flat->exists)
-    <form action="{{ route('admin.flats.update', $flat) }}" method="POST">
+    <form action="{{ route('admin.flats.update', $flat) }}" method="POST" enctype="multipart/form-data">
         @method('PUT')
     @else
-        <form action="{{ route('admin.flats.store') }}" method="POST">
+        <form action="{{ route('admin.flats.store') }}" method="POST" enctype="multipart/form-data">
 @endif
 
 @csrf
 <div class="container">
     <div class="row">
+        <div class="col-8 ">
+            <img class="img-fluid"
+                src="{{ $flat->image ?? 'https://images.vexels.com/media/users/3/131734/isolated/preview/05d86a9b63d1930d6298b27081ddc345-photo-preview-frame-icon.png' }}"
+                alt="flat-image" id="preview">
+        </div>
+
+        <div class="mb-3 col-6">
+            <label for="image" class="form-label">Immagine</label>
+            <input type="file" class="form-control" id="image-field" name="image"
+                value="{{ old('image', $flat->image) }}">
+        </div>
 
         <div class="mb-3 col-12">
             <label for="title" class="form-label">Titolo</label>
@@ -17,22 +28,15 @@
 
         <div class="mb-3 col-12">
             <div class="form-floating">
-                <textarea class="form-control" placeholder="Leave a comment here" id="floatingTextarea2" style="height: 400px"
+                <textarea class="form-control" placeholder="Leave a comment here" id="floatingTextarea2" style="height: 300px"
                     name="description">{{ old('description', $flat->description) }}</textarea>
                 <label for="floatingTextarea2">Descrizione</label>
             </div>
         </div>
 
-        <div class="mb-3 col-10">
-            <label for="image" class="form-label">Immagine</label>
-            <input type="url" class="form-control" id="image-field" name="image"
-                value="{{ old('image', $flat->image) }}">
-        </div>
-        <div class="col-2">
-            <img class="img-fluid"
-                src="{{ $flat->image ?? 'https://cdn2.vectorstock.com/i/thumb-large/48/06/image-preview-icon-picture-placeholder-vector-31284806.jpg' }}"
-                alt="flat-image" id="preview">
-        </div>
+        
+
+       
 
         <div class="mb-3 col-3">
             <label for="price_per_day" class="form-label">Prezzo</label>

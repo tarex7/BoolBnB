@@ -10,7 +10,7 @@
          
          <div class="row justify-content-center border">
             <div class="col bg-dark">
-              <img src="https://a0.muscache.com/im/pictures/miso/Hosting-631564783833927857/original/42232fae-ee5a-40c9-b24b-24571763df7b.jpeg?im_w=1200" alt="" class="img-fluid">
+              <img src="{{ $flat->image }}" alt="" class="img-fluid">
             </div>
         </div>
             <div class="col bg-primary">
