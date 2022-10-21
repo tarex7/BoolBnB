@@ -1,20 +1,22 @@
-@include('includes.header')
 @extends('layouts.app')
 
 @section('content')
 
     <div class="container">
         <div class="row">
+            <div class="col-12">
+                <div class="d-flex justify-content-center align-items-center">
+                    <h1>I tuoi appartamenti</h1>
+                </div>
+            </div>
+            <div class="col-12">
+                <div class="d-flex justify-content-end align-items-center">
+                    <a href="" class="btn btn-primary text-white"><h4>Aggiungi appartamento</h4></a>
+                </div>
+            </div>
             <div class="col-12 wrapper d-flex flex-wrap">
                 @forelse ($flats as $flat)
-                <div class="card m-3 p-3" style="width: 18rem;">
-                    <img src="{{ $flat->image }}" class="card-img-top" alt="...">
-                    <div class="card-body">
-                      <h5 class="card-title">{{ $flat->title }}</h5>
-                      <p class="card-text"><strong>{{ $flat->price_per_day }} € </strong>notte</p>
-                      <a href="{{ route('admin.flats.edit', $flat->id) }}" class="btn btn-primary">Dettagli</a>
-                    </div>
-                  </div>
+               <a href="{{ Route('') }}"></a>
                 @empty
                     <tr>
                         <td colspan="8">

@@ -17,22 +17,6 @@
                 </ul>
             </nav>
         </div>
-        <div class="d-flex justify-content-center align-items-center">
-            <h1>I tuoi appartamenti</h1>
-    
-    
-            <div class="d-flex justify-content-end align-items-center">
-    
-    
-                {{-- Add new Flat --}}
-                <a class='btn btn-success'href="{{ route('admin.flats.create') }}">
-                    <i class='fa-solid fa-plus mr-2'></i> Nuovo
-                    Appartamento</a>
-    
-                <div>
-                </div>
-            </div>
-    
-        </div>
+       
     </div>
 </header>
