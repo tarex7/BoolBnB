@@ -54,16 +54,60 @@ class FlatController extends Controller
                 'title' => 'required|string|min:5|max:50|unique:posts',
                 'description' => 'required|string',
                 'image' => 'nullable|image| mimes:jpeg,jpg,png',
+                //ADDRESS AGGIUNGERE
+                'price_per_day' => 'required|numeric|min:1|max:3000',
+                'room_number' => 'required|numeric|min:1|max:50',
+                'bed_number' => 'required|numeric|min:1|max:10',
+                'bathroom_number' => 'required|numeric|min:1|max:10',
+                'square_mt' => 'required|numeric|min:5|max:5000',
 
             ],
             [
+                //TITLE
                 'title.required' => 'Il titolo è obbligatorio',
-                'description.required' => 'Devi scrivere il contenuto del post',
                 'title.min' => 'Il titolo deve avere almeno :min caratteri',
                 'title.max' => 'Il titolo deve avere almeno :max caratteri',
-                'title.unique' => "Esiste già un post dal titolo $request->title",
+                // 'title.unique' => "Esiste già un post dal titolo $request->title",
+
+                //DESCRIPTION
+                'description.required' => "La descrizione dell'appartamento è obbligatoria",
+
+                // IMAGE
                 'image.image' => "Il file caricato non è di tipo immagine",
                 'image.mimes' => "Le immagini ammesse sono solo in formato .jpeg, .jpg o .png",
+
+                //ADDRESS
+                // 'address.required' => 'Questo è un parametro obbligatorio',
+
+                // PRICE FOR DAY
+                'price_per_day.required' => 'Questo campo è obbligatorio',
+                'price_per_day.numeric' => 'Questo campo deve essere un numero',
+                'price_per_day.min' => 'Il prezzo per notte può essere minimo :min',
+                'price_per_day.max' => 'Il prezzo per notte può essere massimo :max',
+
+                //ROOM_NUMBER
+                'room_number.required' => 'Questo campo è obbligatorio',
+                'room_number.numeric' => 'Questo campo deve essere un numero',
+                'room_number.min' => 'Il numero delle stanze devono essere almeno :min',
+                'room_number.max' => 'Il numero delle stanze posssono essere massimo :max',
+
+                //BATHROOM_NUMEBER
+                'bathroom_number.required' => 'Questo campo è obbligatorio',
+                'bathroom_number.numeric' => 'Questo campo deve essere un numero',
+                'bathroom_number.min' => 'Il numero dei bagni devono essere almeno :min',
+                'bathroom_number.max' => 'Il numero dei bagni possono essere massimo :max',
+
+                //BED_NUMBER
+                'bed_number.required' => 'Questo campo è obbligatorio',
+                'bed_number.numeric' => 'Questo campo deve essere un numero',
+                'bed_number.min' => 'Il numero dei letti devono essere essere almeno :min',
+                'bed_number.max' => 'Il numero dei letti possono essere massimo :max',
+
+                //SQUARE_MT
+                'square_mt.required' => 'Questo campo è obbligatoro',
+                'square_mt.numeric' => 'Questo campo deve essere un numero',
+                'square_mt.min' => 'I metri quadri devono essere almeno :min',
+                'square_mt.max' => 'I metri quadri possono essere massimo :max',
 
             ]
         );
