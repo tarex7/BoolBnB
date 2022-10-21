@@ -151,8 +151,9 @@ class FlatController extends Controller
      */
     public function show(Flat $flat)
     {
-        //$flat = Flat::select('id')->get();
-        return view('admin.flats.show', $flat, compact('flat'));
+        $services = Service::select('id', 'label', 'icon')->get();
+
+        return view('admin.flats.show', $flat, compact('flat','services'));
     }
 
     /**
