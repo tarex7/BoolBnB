@@ -5773,11 +5773,7 @@ var render = function render() {
 var staticRenderFns = [function () {
   var _vm = this,
     _c = _vm._self._c;
-  return _c("div", {
-    attrs: {
-      id: "home-page"
-    }
-  }, [_c("div", {
+  return _c("section", {
     attrs: {
       id: "contact-page"
     }
@@ -5787,7 +5783,7 @@ var staticRenderFns = [function () {
     staticClass: "fa-solid fa-envelope mr-2"
   }), _vm._v("pippo@hotmail.it")]), _vm._v(" "), _c("li", [_c("i", {
     staticClass: "fa-solid fa-location-dot mr-2"
-  }), _vm._v("Via Garibali, 22")])])])]);
+  }), _vm._v("Via Garibali, 22")])])]);
 }];
 render._withStripped = true;
 
