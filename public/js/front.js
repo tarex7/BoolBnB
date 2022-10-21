@@ -59174,7 +59174,11 @@ var routes = new vue_router__WEBPACK_IMPORTED_MODULE_1__["default"]({
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
+<<<<<<< HEAD
 module.exports = __webpack_require__(/*! C:\laravel\boolbnb\resources\js\front.js */"./resources/js/front.js");
+=======
+module.exports = __webpack_require__(/*! /Applications/MAMP/htdocs/boolbnb/resources/js/front.js */"./resources/js/front.js");
+>>>>>>> origin/feature-validation-form
 
 
 /***/ })
