@@ -15,26 +15,26 @@ class ServiceSeeder extends Seeder
     public function run(Faker $faker)
     {
         $labels =
-         [
-          'wi-fi',
-          'giardino',
-          'ascensore',
-          'piscina',
-          'aria condizionata',
-          'vista mare',
-          'vista montagna',
-          'area fumatori',
-          'TV',
-          'cucina',
+            [
+                'wi-fi',
+                'giardino',
+                'ascensore',
+                'piscina',
+                'aria condizionata',
+                'vista mare',
+                'vista montagna',
+                'area fumatori',
+                'TV',
+                'cucina',
 
-        ];
-        foreach($labels as $label){
+            ];
+        foreach ($labels as $label) {
 
             $service = new Service();
             $service->label = $label;
             $service->icon = 'pippo';
 
             $service->save();
+        }
     }
-}
 }
