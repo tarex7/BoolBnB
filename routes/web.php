@@ -21,7 +21,7 @@ Route::middleware('auth')
 ->name('admin.')
 ->group(function(){
     Route::resource('flats','FlatController');
-
+    Route::get('/', 'HomeController@index')->name('home');
 });
 
 Route::get('/', function () {
