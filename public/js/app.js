@@ -49726,6 +49726,7 @@ __webpack_require__.r(__webpack_exports__);
 /***/ (function(module, exports, __webpack_require__) {
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 __webpack_require__(/*! C:\laravel\BoolBnB\resources\js\app.js */"./resources/js/app.js");
 module.exports = __webpack_require__(/*! C:\laravel\BoolBnB\resources\sass\app.scss */"./resources/sass/app.scss");
 =======
@@ -49737,6 +49738,10 @@ __webpack_require__(/*! C:\laravel\boolbnb\resources\js\app.js */"./resources/js
 module.exports = __webpack_require__(/*! C:\laravel\boolbnb\resources\sass\app.scss */"./resources/sass/app.scss");
 >>>>>>> b1d462e0a41b99a6ac385cfc68cffbdb43dd2f45
 >>>>>>> dfc879a5a6b9588f10107f522cf12e07d0a59c85
+=======
+__webpack_require__(/*! C:\laravel\boolbnb\resources\js\app.js */"./resources/js/app.js");
+module.exports = __webpack_require__(/*! C:\laravel\boolbnb\resources\sass\app.scss */"./resources/sass/app.scss");
+>>>>>>> abb21f046351fc5a69671adde32d4fce0307812c
 
 
 /***/ })
