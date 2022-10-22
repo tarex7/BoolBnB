@@ -35,7 +35,7 @@
               <h3 class="mt-3">Servizi</h3>
               <div class="d-flex justify-content-between flex-wrap">
   
-              @foreach ($services as $service)
+              @foreach ($flat->services as $service)
               
                 <p class="mt-2 me-5"><i class="{{ $service->icon }} fa-2x"></i> {{$service->label }}</p>
             
