@@ -14,3 +14,6 @@ yarn-error.log
 !public/
 !.gitignore
 
+public/css/app.css
+public/js/app.js
+
