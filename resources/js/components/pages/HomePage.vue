@@ -1,18 +1,19 @@
 <template>
   <div id="home-page">
-    stampo tutti gli appartamenti!!!!!
+    <SearchBar />
     <flat-list />
   </div>
 </template>
 
 <script>
 import FlatList from "../flats/FlatList.vue";
+import SearchBar from "../flats/SearchBar.vue";
 
 export default {
   name: "HomePage",
 
   //COMPONENTS
-  components: { FlatList },
+  components: { FlatList, SearchBar },
 
   // DATA
   data() {
