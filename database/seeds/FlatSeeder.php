@@ -31,8 +31,9 @@ class FlatSeeder extends Seeder
         $new_flat->bed_number = $faker->numberBetween(1,10);
         $new_flat->bathroom_number = $faker->numberBetween(1,10);
         $new_flat->address = $faker->address();
-        $new_flat->latitude = $faker->latitude($min = -90, $max = 90);
-        $new_flat->longitude = $faker->longitude($min = -180, $max = 180);
+        $new_flat->latitude = bcdiv($faker->randomFloat(2, 40, 50),2,2);
+        $new_flat->longitude = $faker->randomFloat(2, 40, 50);
+        ;
         
 
         $new_flat->image = $faker->imageUrl(300, 300, 'apartment', true);

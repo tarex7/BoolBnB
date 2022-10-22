@@ -17,6 +17,7 @@
                           <a href="{{ route('admin.flats.edit', $flat->id) }}" class="btn btn-primary">Dettagli</a>
                         </div>
                       </div>
+
                 @empty
                     <tr>
                         <td colspan="8">
