@@ -1,4 +1,4 @@
-<template></template>
+<template><div>SearchBar</div></template>
 
 <script>
 export default {

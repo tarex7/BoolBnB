@@ -3,7 +3,7 @@
     <h1 class="text-danger">Prova</h1>
 
     <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-      <a class="navbar-brand" href="#">Navbar</a>
+      <a class="navbar-brand" href="#">{{ title }}</a>
       <button
         class="navbar-toggler"
         type="button"

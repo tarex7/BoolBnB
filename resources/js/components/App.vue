@@ -5,6 +5,7 @@
     <main class="container my-3">
       <!-- JUMBOTRON -->
       <app-jumbotron />
+      <SearchBar />
       <!-- ROTTE VIEW (CONTENUTO DINAMICO ALl'INTERNO DELLE PAGINE) -->
       <router-view></router-view>
     </main>
@@ -19,12 +20,13 @@
 import AppHeader from "./AppHeader.vue";
 import AppJumbotron from "./AppJumbotron.vue";
 import AppFooter from "./AppFooter.vue";
+import SearchBar from "..SearchBar.vue";
 
 export default {
   name: "App",
 
   // COMPONENTS
-  components: { AppHeader, AppJumbotron, AppFooter },
+  components: { AppHeader, AppJumbotron, AppFooter, SearchBar },
 
   name: "App",
   // DATA

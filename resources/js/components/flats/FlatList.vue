@@ -20,7 +20,7 @@ import AppPagination from "../AppPagination.vue";
 import FlatCard from "./FlatCard.vue";
 
 export default {
-  name: "PostsList",
+  name: "FlatsList",
   data() {
     return {
       flats: [],
@@ -30,18 +30,19 @@ export default {
   components: { FlatCard, AppPagination },
 
   methods: {
-    fetchPosts(page = 1) {
+    fetchFlats() {
       this.isLoading = true;
       axios
 
         //CHIAMATA  QUANDO PASSEREMO I DATI FLATS DAL BACKEND PER STAMPARE  SINGOLE PAGINE
-        .get(`http://localhost:8000/api/flats?page=${page}`)
+        .get(`http://localhost:8000/api/flats`)
         .then((res) => {
-          const { data } = res.data;
+          console.log(res.data);
+          const data = res.data;
           this.flats = data;
         })
         .catch(() => {
-          this.error = "Errore durante il fetch dei post";
+          this.error = "Errore durante il fetch degli appartamenti";
         })
         .then(() => {
           this.isLoading = false;
