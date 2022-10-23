@@ -14,19 +14,15 @@
                         <a href="{{ Route('admin.flats.show', $flat->id) }}">
                             <img src="{{ $flat->image }}" class="card-img-top" alt="...">
                         </a>
-                        <div class="card-body">
+                        <div class="card-body d-flex flex-column justify-content-between">
                             <h5 class="card-title">{{ $flat->title }}</h5>
-                            <p class="card-text"><strong>{{ $flat->price_per_day }} € </strong>notte</p>
-                            <a href="{{ route('admin.flats.edit', $flat->id) }}" class="btn btn-primary">Dettagli</a>
-                            <p>{{ $flat->visible }} visibile</p>
 
-                            <form action="{{ route('admin.flats.toggle', $flat) }}" method="POST">
+                            <form action="{{ route('admin.flats.toggle', $flat) }}" method="POST" class="m-0">
                                 @csrf
                                 @method('PATCH')
-                                <button class="btn btn-outline" type='submit'>
-                                    <i
-                                        class="fa-2x fa-solid fa-toggle-{{ $flat->visible ? 'on' : 'off' }} text-{{ $flat->visible ? 'success' : 'danger' }} "></i>
-                                    <h6>{{ $flat->visible ? 'Pubblicato' : 'Non pubblicato' }}</h6>
+                                <button class="btn btn-outline d-flex align-items-center px-0" type='submit'>
+                                    <i class="fa-2x fa-solid fa-toggle-{{ $flat->visible ? 'on' : 'off' }} text-{{ $flat->visible ? 'success' : 'danger' }} "></i>
+                                    <h6 class="m-0 ml-2">{{ $flat->visible ? 'Visible' : 'Non visible' }}</h6>
                                 </button>
                             </form>
                         </div>
