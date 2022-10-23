@@ -11,13 +11,11 @@
     
 </head>
 <body>
-    
+        
     <div id="map" style="width: 100%;height: 600px">
-        <p>{{$flat->latitude}}</p>
-        <p>{{$flat->longitude}}</p>
     </div>
     <script type="text/javascript">
-        let center = [$flat->latitude,$flat->longitude];
+        let center = [4,44.4];
         //let center = [45.76,44.4];
         let map = tt.map ({
             key:"LoUScCfSMvO6XE0DcnNW32fDqHOr2BKj",
