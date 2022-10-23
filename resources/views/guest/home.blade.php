@@ -1,4 +1,17 @@
-<!DOCTYPE html>
+@extends('layouts.app')
+
+@section('content')
+    <section id="root">
+        Coming Soon...
+    </section>
+@endsection
+
+
+
+
+
+
+{{-- <!DOCTYPE html>
 <html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
     <head>
         <meta charset="utf-8">
@@ -72,4 +85,4 @@
 
            
     </body>
-</html>
+</html> --}}

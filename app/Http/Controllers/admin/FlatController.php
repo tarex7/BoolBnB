@@ -124,6 +124,9 @@ class FlatController extends Controller
         // $flat->image = Storage::url('img_12.webp');
         $flat->user_id = Auth::id();
 
+        //VISIBLE
+        $flat->visible = array_key_exists('visible', $data);
+
 
         if (array_key_exists('image', $data)) {
             $image_url = Storage::put('flat_images', $data['image']);
@@ -153,7 +156,7 @@ class FlatController extends Controller
     {
         $services = Service::select('id', 'label', 'icon')->get();
 
-        return view('admin.flats.show', $flat, compact('flat','services'));
+        return view('admin.flats.show', $flat, compact('flat', 'services'));
     }
 
     /**
@@ -198,6 +201,9 @@ class FlatController extends Controller
             $flat->services()->sync($data['services']);
         }
 
+        //VISIBLE
+        $data['visible'] = array_key_exists('visible', $data);
+
         $flat->update($data);
 
         return redirect()->route('admin.flats.show', $flat);
@@ -216,5 +222,17 @@ class FlatController extends Controller
         $flat->delete();
 
         return redirect()->route('admin.flats.index');
+    }
+
+    //TOGGLE
+    public function toggle(Flat $flat)
+    {
+        $flat->visible = !$flat->visible;
+
+        $status = $flat->visible ? 'pubblicato' : 'rimosso';
+        $flat->save();
+
+
+        return redirect()->route('admin.flats.index')->with('message', "Appartamento $status con succeso")->with('type', 'success');
     }
 }

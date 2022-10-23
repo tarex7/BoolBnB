@@ -120,8 +120,9 @@
 
     {{-- VISIBILITA' --}}
     <div class="mb-3 form-check col-6">
-        <input type="checkbox" class="form-check-input" id="visible">
-        <label class="form-check-label" for="visible">Visibile</label>
+        <input type="checkbox" class="form-check-input" id="visible" name="visible" value="1"
+            @if (old('visible', $flat->visible)) checked @endif>
+        <label class="form-check-label" for="visible">Pubblicato</label>
     </div>
 
     {{-- CHECKBOX - SERVICE --}}
