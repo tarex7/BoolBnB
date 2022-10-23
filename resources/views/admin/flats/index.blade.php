@@ -14,7 +14,6 @@
                         <div class="card-body">
                           <h5 class="card-title">{{ $flat->title }}</h5>
                           <p class="card-text"><strong>{{ $flat->price_per_day }} € </strong>notte</p>
-                          <a href="{{ route('admin.flats.edit', $flat->id) }}" class="btn btn-primary">Dettagli</a>
                         </div>
                       </div>
 
