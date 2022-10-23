@@ -218,6 +218,7 @@ class FlatController extends Controller
     public function destroy(Flat $flat)
     {
         $flat->services()->detach();
+        $flat->messages()->delete();
 
         $flat->delete();
 

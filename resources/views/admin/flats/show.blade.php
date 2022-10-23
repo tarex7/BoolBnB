@@ -9,7 +9,12 @@
           <div class="row">
             <div class="col-12">
               <div class="d-flex justify-content-end my-3">
-                <a href="{{ route('admin.flats.edit',$flat->id)}}" class="btn btn-primary btn-warning me-3">Modifica appartamento</a>
+                <a href="{{ route('admin.flats.edit',$flat->id)}}" class="btn  btn-warning me-3">Modifica appartamento</a>
+                <form action="{{ route('admin.flats.destroy', $flat->id) }}" method="POST">
+                  @csrf
+                  @method('DELETE')
+                  <button class="btn bg-danger text-light my-2 p-1"> Elimina appartamento</button>
+              </form>
                 <a href="{{ route('admin.flats.index')}}" class="btn btn-primary">Indietro</a>
               </div>
             </div>
