@@ -11,7 +11,6 @@
                             <img src="{{ $flat->image }}" class="card-img-top" alt="...">
                         </a>
                         <div class="card-body">
-                            <i class="fa-solid fa-bars"></i>
                             <h5 class="card-title">{{ $flat->title }}</h5>
                             <p class="card-text"><strong>{{ $flat->price_per_day }} € </strong>notte</p>
                             <a href="{{ route('admin.flats.edit', $flat->id) }}" class="btn btn-primary">Dettagli</a>
