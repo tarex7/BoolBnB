@@ -20,6 +20,7 @@
                 
              </div>
   
+             <p>{{ $flat->address }}</p>
             <div class="info d-flex mt-4">
               <p class="mx-3">{{ $flat->square_mt }} m<sup>2</sup></p>
               <p class="mx-3"> {{ $flat->bed_number }} letti</p>
