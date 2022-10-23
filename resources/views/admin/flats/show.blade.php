@@ -7,10 +7,17 @@
 
 
           <div class="row">
+            <div class="col-12">
+              <div class="d-flex justify-content-between my-3">
+                <a href="{{ route('admin.flats.edit',$flat->id)}}" class="btn btn-primary btn-warning">Modifica appartamento</a>
+                <a href="{{ route('admin.flats.index')}}" class="btn btn-primary">Indietro</a>
+              </div>
+            </div>
             <div class="col-5">
               <div class="card p-4">
                 <h2>{{ $flat->title }}</h2>
                 <img src="{{ $flat->image }}" alt="">
+                
              </div>
   
             <div class="info d-flex mt-4">

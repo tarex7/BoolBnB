@@ -7,6 +7,10 @@
  * Licensed under MIT (https://github.com/twbs/bootstrap/blob/main/LICENSE)
  */
 
+ .debug {
+  border: 1px red solid;
+ }
+
 :root {
   --blue: #3490dc;
   --indigo: #6574cd;
