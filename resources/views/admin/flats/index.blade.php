@@ -10,9 +10,9 @@
             </div>
             <div class="col-12 wrapper d-flex flex-wrap justify-content-center">
                 @forelse ($flats as $flat)
-                    <div class="card m-3 p-3 {{ !$flat->visible ? 'opacity-25' : "" }}" style="width: 18rem;">
+                    <div class="card m-3 p-3" style="width: 18rem;">
                         <a href="{{ Route('admin.flats.show', $flat->id) }}">
-                            <img src="{{ $flat->image }}" class="card-img-top" alt="...">
+                            <img src="{{ $flat->image }}" class="card-img-top {{ !$flat->visible ? 'opacity-25' : "" }}" alt="...">
                         </a>
                         <div class="card-body d-flex flex-column justify-content-between">
                             <h5 class="card-title">{{ $flat->title }}</h5>
@@ -22,7 +22,7 @@
                                 @method('PATCH')
                                 <button class="btn btn-outline d-flex align-items-center px-0" type='submit'>
                                     <i class="fa-2x fa-solid fa-toggle-{{ $flat->visible ? 'on' : 'off' }} text-{{ $flat->visible ? 'success' : 'danger' }} "></i>
-                                    <h6 class="m-0 ml-2">{{ $flat->visible ? 'Visibile' : 'Non visibile' }}</h6>
+                                    <h6 class="m-0 ms-2">{{ $flat->visible ? 'Visibile' : 'Non visibile' }}</h6>
                                 </button>
                             </form>
                         </div>
