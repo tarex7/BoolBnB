@@ -10,7 +10,7 @@
             </div>
             <div class="col-12 wrapper d-flex flex-wrap justify-content-center">
                 @forelse ($flats as $flat)
-                    <div class="card m-3 p-3" style="width: 18rem;">
+                    <div class="card m-3 p-3 {{ !$flat->visible ? 'opacity-25' : "" }}" style="width: 18rem;">
                         <a href="{{ Route('admin.flats.show', $flat->id) }}">
                             <img src="{{ $flat->image }}" class="card-img-top" alt="...">
                         </a>
