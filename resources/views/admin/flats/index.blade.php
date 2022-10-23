@@ -22,7 +22,7 @@
                                 @method('PATCH')
                                 <button class="btn btn-outline d-flex align-items-center px-0" type='submit'>
                                     <i class="fa-2x fa-solid fa-toggle-{{ $flat->visible ? 'on' : 'off' }} text-{{ $flat->visible ? 'success' : 'danger' }} "></i>
-                                    <h6 class="m-0 ml-2">{{ $flat->visible ? 'Visible' : 'Non visible' }}</h6>
+                                    <h6 class="m-0 ml-2">{{ $flat->visible ? 'Visibile' : 'Non visibile' }}</h6>
                                 </button>
                             </form>
                         </div>
