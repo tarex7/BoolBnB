@@ -5,12 +5,12 @@
 
 <div class="container">
     <div class="row">
-            <div class="col-12 d-flex justify-content-end my-4 px-3">
+            <div class="col-12 d-flex justify-content-end my-4 mx-5 px-5">
                 <a href="{{ route('admin.flats.create') }}" class="btn btn-primary me-3 text-white "><strong class="h4">Aggiungi un appartamento</strong></a>
             </div>
             <div class="col-12 wrapper d-flex flex-wrap justify-content-center">
                 @forelse ($flats as $flat)
-                    <div class="card m-3 p-3" style="width: 18rem;">
+                    <div class="card m-2 p-3" style="width: 15rem;">
                         <a href="{{ Route('admin.flats.show', $flat->id) }}">
                             <img src="{{ $flat->image }}" class="card-img-top {{ !$flat->visible ? 'opacity-25' : "" }}" alt="...">
                             
