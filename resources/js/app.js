@@ -5,4 +5,4 @@
  */
 
 require('./bootstrap');
-//require('./image_preview.js');
+require('./image_preview.js');
