@@ -8,6 +8,7 @@
         <div class="row">
 
           <div class="col-12">
+
             <div class="d-flex justify-content-end my-5">
               @if ($flat->user_id === Auth::id())
                         <a href="{{ route('admin.flats.edit', $flat->id) }}" class="btn  btn-warning "><strong
@@ -22,11 +23,11 @@
                     <a href="{{ route('admin.flats.index') }}" class="btn btn-primary text-white"><strong
                             class="h4">Torna alla lista </strong></a>
                 </div>
-            </div>
+              </div>
 
             <div class="offset-2"></div>
 
-            <div class="col-4">
+            <div class="col-3">
                 <div class="card p-4">
                     <h2>{{ $flat->title }}</h2>
                     {{-- <img src="{{ asset('storage/' .$flat->image) }}" alt=""> --}}

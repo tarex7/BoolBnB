@@ -11,7 +11,7 @@ src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.js">
 
 </head>
 <body>
-    <canvas id="myChart" style="width:100%;max-width:700px;height: 550px"></canvas>
+    <canvas id="myChart" style="width:100%;height: 550px"></canvas>
     <script>
         var xValues = [
          "Gennaio",
