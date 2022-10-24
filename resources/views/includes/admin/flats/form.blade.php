@@ -17,6 +17,17 @@
 
 @csrf
 <div class="container">
+    <div class="col-8">
+        <div class="form-group">
+            <label for="title">Titolo</label>
+            <input type="text" class="form-control @error('title') is-invalid @enderror" id="title" name="title"
+                value="{{ old('title', $flat->title) }}" required minlength="5" maxlength="50">
+            @error('title')
+                <div class="invalid-feedback">
+                    {{ $message }}
+                </div>
+            @enderror
+        </div>
 
     {{-- IMAGE --}}
     <div class="row">
