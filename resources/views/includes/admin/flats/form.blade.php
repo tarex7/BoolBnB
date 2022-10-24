@@ -1,4 +1,13 @@
+{{-- ACTIVE PER VEDERE LA VALIDAZIONE A INIZIO PAGINA --}}
+{{-- @if ($errors->any())
+    <div class="alert alert-danger">
+        @foreach ($errors->all() as $error)
+            <li> {{ $error }} </li>
+        @endforeach
+    </div>
+@endif --}}
 
+@extends('layouts.app')
 @if ($flat->exists)
 <form action="{{ route('admin.flats.update', $flat) }}" method="POST" enctype="multipart/form-data">
     @method('PUT')
@@ -42,11 +51,30 @@
                     @enderror
                 </div>
 
-                 {{-- Descrizione --}}
-    
-                <div class="form-floating mt-3">
+        {{-- IMAGE --}}
+        <div class="row">
+            <div class="col-8 ">
+                <img class="img-fluid"
+                    src="{{ $flat->image ? asset('storage/' . $flat->image) : 'https://socialistmodernism.com/wp-content/uploads/2017/07/placeholder-image.png' }}"
+                    alt="flat-image" id="preview">
 
-                    <label for="description" class="h4">Descrizione</label>
+            </div>
+
+            <div class="col-11">
+                <div class="form-group">
+                    <label for="image">Immagine</label>
+                    <input type="file" id="image" name="image">
+
+                </div>
+            </div>
+
+
+
+
+
+            {{-- Descrizione --}}
+            <div class="mb-3 col-12">
+                <div class="form-floating">
                     <textarea class="form-control @error('description') is-invalid @enderror" placeholder="Leave a comment here"
                         id="description" style="height: 300px" name="description">{{ old('description', $flat->description) }}</textarea>
 

@@ -24,9 +24,11 @@
             </div>
             <div class="col-6">
                 <div class="card p-4">
-                    <h4>{{ $flat->title }}</h4>
-                    <img src="{{ asset('storage/' . $flat->image) }}" alt="">
-                    <img src="{{ $flat->image }}" alt="">
+                    <h2>{{ $flat->title }}</h2>
+
+
+                    <img class="float-left mr-2 img-fluid" width="500" src="{{ asset('storage/' . $flat->image) }}"
+                        alt="{{ $flat->title }}">
 
                     <p class="h4 my-4 py-2 w-75">{{ $flat->address }}</p>
                     <div class="info d-flex mt-4 border align-items-center my-2 p-3">
