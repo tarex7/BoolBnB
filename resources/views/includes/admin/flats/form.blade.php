@@ -6,7 +6,7 @@
         @endforeach
     </div>
 @endif --}}
-
+@extends('layouts.app')
 @if ($flat->exists)
 <form action="{{ route('admin.flats.update', $flat) }}" method="POST" enctype="multipart/form-data">
     @method('PUT')
@@ -23,10 +23,12 @@
             <div class="col-5">
                {{-- IMAGE --}}
                
-                
+               
                 <img class="w-100"
-                src="{{ $flat->image ?? 'https://images.vexels.com/media/users/3/131734/isolated/preview/05d86a9b63d1930d6298b27081ddc345-photo-preview-frame-icon.png' }}"
+                src="{{  $flat->image ? asset('storage/'.$flat->image) :  'https://images.vexels.com/media/users/3/131734/isolated/preview/05d86a9b63d1930d6298b27081ddc345-photo-preview-frame-icon.png' }}"
                 alt="flat-image" id="preview">
+               
+
                
     
                 <div class="mb-3 col-12 p-0">
@@ -188,4 +190,7 @@
      <a href="{{ route('admin.flats.index') }}" class="btn btn-primary">Indietro</a>
     </div>
 </div>
+
 </form>
+
+
