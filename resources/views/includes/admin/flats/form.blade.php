@@ -7,7 +7,6 @@
     </div>
 @endif --}}
 
-@extends('layouts.app')
 @if ($flat->exists)
 <form action="{{ route('admin.flats.update', $flat) }}" method="POST" enctype="multipart/form-data">
     @method('PUT')
@@ -31,7 +30,7 @@
                
     
                 <div class="mb-3 col-12 p-0">
-                    <input type="file" class="my-3" id="image-field" name="image"
+                    <input type="file" class="my-3" id="image" name="image"
                         value="{{ old('image', $flat->image) }}">
                 </div>
     
@@ -53,20 +52,8 @@
 
         {{-- IMAGE --}}
         <div class="row">
-            <div class="col-8 ">
-                <img class="img-fluid"
-                    src="{{ $flat->image ? asset('storage/' . $flat->image) : 'https://socialistmodernism.com/wp-content/uploads/2017/07/placeholder-image.png' }}"
-                    alt="flat-image" id="preview">
 
-            </div>
-
-            <div class="col-11">
-                <div class="form-group">
-                    <label for="image">Immagine</label>
-                    <input type="file" id="image" name="image">
-
-                </div>
-            </div>
+          
 
 
 

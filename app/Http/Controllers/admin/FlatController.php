@@ -18,7 +18,7 @@ class FlatController extends Controller
 
         'title' => 'required|string|min:5|max:50|',
         'description' => 'required|string',
-        'image' => 'nullable|image| mimes:jpeg,jpg,png',
+        'image' => 'nullable|image| mimes:jpeg,jpg,png,webp',
         //ADDRESS AGGIUNGERE
         'price_per_day' => 'required|numeric|min:1|max:3000',
         'room_number' => 'required|numeric|min:1|max:50',
@@ -120,10 +120,8 @@ class FlatController extends Controller
         $request->validate($this->validationFlat, $this->validationFlatMessage);
 
         $data = $request->all();
-
         $flat = new Flat();
         $flat->fill($data);
-        // $flat->image = Storage::url('img_12.webp');
         $flat->user_id = Auth::id();
 
         //VISIBLE
@@ -173,7 +171,7 @@ class FlatController extends Controller
         //controllo che sia l'autore, se non lo è ridirigo sulla index
         if ($flat->user_id !== Auth::id()) {
             return redirect()->route('admin.flats.index')
-                ->with('message', 'Non sei Autorizzato a modificare questo appartament')
+                ->with('message', 'Non sei Autorizzato a modificare questo appartamento')
                 ->with('type', 'warning');
         }
         $services = Service::select('id', 'label', 'icon')->get();
@@ -197,7 +195,7 @@ class FlatController extends Controller
         $request->validate($this->validationFlat, $this->validationFlatMessage);
 
         $data = $request->all();
-
+        
         $flat->user_id = Auth::id();
 
         if (array_key_exists('services', $data)) {
