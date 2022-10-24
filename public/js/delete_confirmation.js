@@ -112,7 +112,7 @@ deleteForms.forEach(function (form) {
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__(/*! /Applications/MAMP/htdocs/boolbnb/resources/js/delete_confirmation.js */"./resources/js/delete_confirmation.js");
+module.exports = __webpack_require__(/*! C:\laravel\BoolBnB\resources\js\delete_confirmation.js */"./resources/js/delete_confirmation.js");
 
 
 /***/ })

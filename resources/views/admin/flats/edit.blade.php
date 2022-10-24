@@ -1,6 +1,6 @@
 @extends('layouts.app')
 
-<div class="container-fluid">
+
 
     @section('content')
         <header>
@@ -8,5 +8,5 @@
         </header>
 
         @include('includes.admin.flats.form')
-    </div>
+
 @endsection

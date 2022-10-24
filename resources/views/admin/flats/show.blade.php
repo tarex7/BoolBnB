@@ -10,21 +10,21 @@
                 <div class="d-flex justify-content-end my-3">
                     @if ($flat->user_id === Auth::id())
                         <a href="{{ route('admin.flats.edit', $flat->id) }}" class="btn  btn-warning "><strong
-                                class="h4">Modifica </strong></a>
+                                class="h5">Modifica </strong></a>
                         <form action="{{ route('admin.flats.destroy', $flat->id) }}" method="POST" class="delete-form">
                             @csrf
                             @method('DELETE')
-                            <button class="btn btn-danger text-light  mx-3"> <strong class="h4">Elimina
+                            <button class="btn btn-danger text-light  mx-3"> <strong class="h5">Elimina
                                 </strong></button>
                         </form>
                     @endif
                     <a href="{{ route('admin.flats.index') }}" class="btn btn-primary text-white"><strong
-                            class="h4">Torna alla lista </strong></a>
+                            class="h5">Torna alla lista </strong></a>
                 </div>
             </div>
             <div class="col-6">
                 <div class="card p-4">
-                    <h2>{{ $flat->title }}</h2>
+                    <h4>{{ $flat->title }}</h4>
                     <img src="{{ asset('storage/' . $flat->image) }}" alt="">
                     <img src="{{ $flat->image }}" alt="">
 
@@ -44,7 +44,7 @@
                     <div class="border my-3"></div>
 
                     <div class="col-12">
-                        <h2 class="mt-3">Descrizione</h2>
+                        <h4 class="mt-3">Descrizione</h4>
                         <p class="mt-2 text-justify">{{ $flat->description }}</p>
                     </div>
                     @if (count($flat->services))
@@ -53,7 +53,7 @@
 
                     <div class="col-12">
                         @if (count($flat->services))
-                            <h2 class="mt-3">Servizi</h2>
+                            <h4 class="mt-3">Servizi</h4>
                         @endif
                         <div class="d-flex justify-content-between flex-wrap">
 
@@ -74,11 +74,11 @@
             <div class="col-6">
 
                 <div class="card p-3">
-                    <h2 class="mb-3">Statistiche</h2>
+                    <h4 class="mb-0">Statistiche</h4>
                     @include('includes.admin.chart')
 
                     <div class="mt-5">
-                        <h2 class="mb-3">Posizione</h2>
+                        <h4 class="mb-3">Posizione</h4>
                         @include('includes.map')
                     </div>
                 </div>
