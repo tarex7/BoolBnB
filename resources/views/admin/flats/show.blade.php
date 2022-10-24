@@ -9,14 +9,20 @@
           <div class="row">
             <div class="col-12">
               <div class="d-flex justify-content-end my-3">
-                <a href="{{ route('admin.flats.edit',$flat->id)}}" class="btn btn-primary btn-warning me-3">Modifica appartamento</a>
-                <a href="{{ route('admin.flats.index')}}" class="btn btn-primary">Indietro</a>
+                <a href="{{ route('admin.flats.edit',$flat->id)}}" class="btn  btn-warning "><strong class="h4">Modifica </strong></a>
+                <form action="{{ route('admin.flats.destroy', $flat->id) }}" method="POST">
+                  @csrf
+                  @method('DELETE')
+                  <button class="btn btn-danger text-light  mx-3"> <strong class="h4">Elimina </strong></button>
+              </form>
+                <a href="{{ route('admin.flats.index')}}" class="btn btn-primary text-white"><strong class="h4">Torna alla lista </strong></a>
               </div>
             </div>
             <div class="col-6">
               <div class="card p-4">
                 <h2>{{ $flat->title }}</h2>
-                <img src="{{ $flat->image }}" alt="">
+                {{-- <img src="{{ asset('storage/' .$flat->image) }}" alt=""> --}}
+                 <img src="{{ $flat->image}}" alt=""> 
                   
              <p class="h4 my-4 py-2 w-75">{{ $flat->address }}</p>
              <div class="info d-flex mt-4 border align-items-center my-2 p-3">

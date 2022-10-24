@@ -15,7 +15,7 @@ class AddFlatIdToViewsTable extends Migration
     {
         Schema::table('views', function (Blueprint $table) {
             $table->unsignedBigInteger('flat_id')->after('id');
-            $table->foreign('flat_id')->references('id')->on('flats');
+            $table->foreign('flat_id')->references('id')->on('flats')->onDelete('cascade');
         });
     }
 

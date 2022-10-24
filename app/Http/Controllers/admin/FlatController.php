@@ -83,7 +83,7 @@ class FlatController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index() ///////////////////////////////////////////////INDEX
+    public function index() 
     {
         $flats = Flat::all()->where('user_id', Auth::id());
         $services = Service::select('id', 'label', 'icon')->get();
@@ -96,7 +96,7 @@ class FlatController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create() //                                          CREATEEEEEE
+    public function create() //                                       
     {
 
         $flats = Flat::all();
@@ -114,26 +114,28 @@ class FlatController extends Controller
      */
     public function store(Request $request)
     {
-
+        
         // VALIDAZIONE
-        $request->validate($this->validationFlat, $this->validationFlatMessage);
-
+        
         $data = $request->all();
+        
         $flat = new Flat();
         $flat->fill($data);
         // $flat->image = Storage::url('img_12.webp');
         $flat->user_id = Auth::id();
-
+        
         //VISIBLE
         $flat->visible = array_key_exists('visible', $data);
-
-
+        
+        
         if (array_key_exists('image', $data)) {
             $image_url = Storage::put('flat_images', $data['image']);
             $flat->image = $image_url;
         }
-
+        
+        //$request->validate($this->validationFlat, $this->validationFlatMessage);
         $flat->save();
+
 
 
 
@@ -218,6 +220,7 @@ class FlatController extends Controller
     public function destroy(Flat $flat)
     {
         $flat->services()->detach();
+        $flat->messages()->delete();
 
         $flat->delete();
 
