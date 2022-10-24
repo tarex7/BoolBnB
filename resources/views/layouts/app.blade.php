@@ -12,7 +12,8 @@
 
     <!-- Scripts -->
     <script src="{{ asset('js/app.js') }}"></script>
-    <script type="text/javascript" src="https://api.tomtom.com/maps-sdk-for-web/cdn/6.x/6.20.0/maps/maps-web.min.js"></script>
+    <script type="text/javascript" src="https://api.tomtom.com/maps-sdk-for-web/cdn/6.x/6.20.0/maps/maps-web.min.js">
+    </script>
 
     {{-- <script src="{{ asset('js/app.js') }}" defer></script> --}}
     <script src="{{ asset('js/delete_confirmation.js') }}" defer></script>
@@ -92,6 +93,7 @@
         </nav>
 
         <main class="py-4">
+            @include('includes.admin.alert')
             @yield('content')
         </main>
     </div>

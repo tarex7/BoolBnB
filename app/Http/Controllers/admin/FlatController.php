@@ -146,7 +146,7 @@ class FlatController extends Controller
             $flat->services()->attach($data['services']);
         }
 
-        return redirect()->route('admin.flats.show', $flat);
+        return redirect()->route('admin.flats.show', $flat)->with('message', "Appartamento creato con succeso")->with('type', 'success');;
     }
 
     /**
@@ -171,11 +171,11 @@ class FlatController extends Controller
     public function edit(Flat $flat)
     {
         //controllo che sia l'autore, se non lo è ridirigo sulla index
-          if($flat->user_id !== Auth::id()){
-             return redirect()->route('admin.flats.index')
-             ->with('message', 'Non sei Autorizzato a modificare questo appartament')
-             ->with('type', 'warning');
-         }
+        if ($flat->user_id !== Auth::id()) {
+            return redirect()->route('admin.flats.index')
+                ->with('message', 'Non sei Autorizzato a modificare questo appartament')
+                ->with('type', 'warning');
+        }
         $services = Service::select('id', 'label', 'icon')->get();
 
         // SERVICE_IDS
@@ -210,7 +210,7 @@ class FlatController extends Controller
 
         $flat->update($data);
 
-        return redirect()->route('admin.flats.show', $flat);
+        return redirect()->route('admin.flats.show', $flat)->with('message', "Appartamento modificato con succeso")->with('type', 'success');;
     }
 
     /**
@@ -220,18 +220,18 @@ class FlatController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function destroy(Flat $flat)
-    {   
+    {
         if ($flat->user_id !== Auth::id()) {
             return redirect()->route('admin.flats.index')
-            ->with('message', "Non sei autorizzato ad eliminare questo appartamento")
-            ->with('type', "warning");
+                ->with('message', "Non sei autorizzato ad eliminare questo appartamento")
+                ->with('type', "warning");
         }
         $flat->services()->detach();
         $flat->messages()->delete();
         $flat->views()->delete();
 
         $flat->delete();
-        return redirect()->route('admin.flats.index');
+        return redirect()->route('admin.flats.index')->with('message', "Appartamento eliminato con succeso")->with('type', 'success');;
     }
 
     //TOGGLE

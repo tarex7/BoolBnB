@@ -25,7 +25,7 @@
             <div class="col-6">
                 <div class="card p-4">
                     <h2>{{ $flat->title }}</h2>
-                    {{-- <img src="{{ asset('storage/' .$flat->image) }}" alt=""> --}}
+                    <img src="{{ asset('storage/' . $flat->image) }}" alt="">
                     <img src="{{ $flat->image }}" alt="">
 
                     <p class="h4 my-4 py-2 w-75">{{ $flat->address }}</p>

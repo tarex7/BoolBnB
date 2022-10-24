@@ -2,19 +2,20 @@
 @extends('layouts.app')
 
 @section('content')
-
-<div class="container-fluid">
-    <div class="row">
+    <div class="container-fluid">
+        <div class="row">
             <div class="col-12 d-flex justify-content-end my-5 ">
-                <a href="{{ route('admin.flats.create') }}" class="btn btn-primary  text-white "><strong class="h4">Aggiungi appartamento</strong></a>
+                <a href="{{ route('admin.flats.create') }}" class="btn btn-primary  text-white "><strong
+                        class="h4">Aggiungi appartamento</strong></a>
                 <div class="offset-1"></div>
             </div>
             <div class="col-12 wrapper d-flex flex-wrap justify-content-center">
                 @forelse ($flats as $flat)
                     <div class="card m-2 p-3" style="width: 25rem;">
                         <a href="{{ Route('admin.flats.show', $flat->id) }}">
-                            <img src="{{ $flat->image }}" class="card-img-top {{ !$flat->visible ? 'opacity-25' : "" }}" alt="...">
-                            
+                            <img src="{{ $flat->image }}" class="card-img-top {{ !$flat->visible ? 'opacity-25' : '' }}"
+                                alt="...">
+
                         </a>
                         <div class="card-body d-flex flex-column justify-content-between">
                             <h5 class="card-title">{{ $flat->title }}</h5>
@@ -23,7 +24,8 @@
                                 @csrf
                                 @method('PATCH')
                                 <button class="btn btn-outline d-flex align-items-center px-0" type='submit'>
-                                    <i class="fa-3x fa-solid fa-toggle-{{ $flat->visible ? 'on' : 'off' }} text-{{ $flat->visible ? 'success' : 'danger' }} "></i>
+                                    <i
+                                        class="fa-3x fa-solid fa-toggle-{{ $flat->visible ? 'on' : 'off' }} text-{{ $flat->visible ? 'success' : 'danger' }} "></i>
                                     <h5 class="m-0 mx-2">{{ $flat->visible ? 'Visibile' : 'Non visibile' }}</h5>
                                 </button>
                             </form>
