@@ -11,7 +11,7 @@
                     @if ($flat->user_id === Auth::id())
                         <a href="{{ route('admin.flats.edit', $flat->id) }}" class="btn  btn-warning "><strong
                                 class="h4">Modifica </strong></a>
-                        <form action="{{ route('admin.flats.destroy', $flat->id) }}" method="POST">
+                        <form action="{{ route('admin.flats.destroy', $flat->id) }}" method="POST" class="delete-form">
                             @csrf
                             @method('DELETE')
                             <button class="btn btn-danger text-light  mx-3"> <strong class="h4">Elimina
