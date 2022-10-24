@@ -1,8 +1,12 @@
 <?php
 
 namespace App\Http\Controllers;
+use App\Models\Flat;
+use App\Models\Service;
+use Illuminate\Support\Facades\Auth;
 
 use Illuminate\Http\Request;
+use App\Http\Controllers\Controller;
 
 class HomeController extends Controller
 {
@@ -23,6 +27,10 @@ class HomeController extends Controller
      */
     public function index()
     {
-        return view('home');
+         //return view('admin.home');
+        $flats = Flat::all()->where('user_id', Auth::id());
+        $services = Service::select('id', 'label', 'icon')->get();
+
+        return view('admin.flats.index', compact('flats', 'services'));
     }
 }

@@ -23,7 +23,8 @@ Route::middleware('auth')
     ->name('admin.')
     ->group(function () {
 
-        Route::get('/', 'HomeController@index')->name('home');
+        //Route::get('/', 'HomeController@index')->name('home');
+        //Route::get('/', 'HomeController@index')->name('home');
         Route::patch('/flats/{flat}/toggle', 'FlatController@toggle')->name('flats.toggle');
         Route::resource('flats', 'FlatController');
     });
