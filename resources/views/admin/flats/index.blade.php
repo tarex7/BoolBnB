@@ -23,8 +23,8 @@
                                 @csrf
                                 @method('PATCH')
                                 <button class="btn btn-outline d-flex align-items-center px-0" type='submit'>
-                                    <i class="fa-2x fa-solid fa-toggle-{{ $flat->visible ? 'on' : 'off' }} text-{{ $flat->visible ? 'success' : 'danger' }} "></i>
-                                    <h6 class="m-0 mx-2">{{ $flat->visible ? 'Visibile' : 'Non visibile' }}</h6>
+                                    <i class="fa-3x fa-solid fa-toggle-{{ $flat->visible ? 'on' : 'off' }} text-{{ $flat->visible ? 'success' : 'danger' }} "></i>
+                                    <h5 class="m-0 mx-2">{{ $flat->visible ? 'Visibile' : 'Non visibile' }}</h5>
                                 </button>
                             </form>
                         </div>
