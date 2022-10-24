@@ -2,13 +2,14 @@
 
 
 @section('content')
-    <div class="container">
+    <div class="container-fluid">
 
 
         <div class="row">
-            <div class="col-12">
-                <div class="d-flex justify-content-end my-3">
-                    @if ($flat->user_id === Auth::id())
+
+          <div class="col-12">
+            <div class="d-flex justify-content-end my-5">
+              @if ($flat->user_id === Auth::id())
                         <a href="{{ route('admin.flats.edit', $flat->id) }}" class="btn  btn-warning "><strong
                                 class="h4">Modifica </strong></a>
                         <form action="{{ route('admin.flats.destroy', $flat->id) }}" method="POST" class="delete-form">
@@ -22,7 +23,10 @@
                             class="h4">Torna alla lista </strong></a>
                 </div>
             </div>
-            <div class="col-6">
+
+            <div class="offset-2"></div>
+
+            <div class="col-4">
                 <div class="card p-4">
                     <h2>{{ $flat->title }}</h2>
                     {{-- <img src="{{ asset('storage/' .$flat->image) }}" alt=""> --}}
@@ -71,7 +75,7 @@
             </div>
 
 
-            <div class="col-6">
+            <div class="col-5">
 
                 <div class="card p-3">
                     <h2 class="mb-3">Statistiche</h2>
