@@ -65,7 +65,7 @@
         <div class="mb-3 col-3">
             <label for="price_per_day" class="form-label">Prezzo</label>
             <input type="number" class="form-control @error('price_per_day') is-invalid @enderror" id="price"
-                name="price_per_day" step="0.1" value="{{ old('price', $flat->price_per_day) }}">
+                name="price_per_day" step="0.1" value="{{ old('price_per_day', $flat->price_per_day) }}">
             {{-- MESSAGGIO ERRORE --}}
             @error('price_per_day')
                 <div class="invalid-feedback">{{ $message }} </div>
@@ -77,7 +77,7 @@
         <div class="mb-3 col-3">
             <label for="room_number" class="form-label">Camere</label>
             <input type="number" class="form-control @error('room_number') is-invalid @enderror" id="room_number"
-                name="room_number" step="1" value="{{ old('price', $flat->room_number) }}">
+                name="room_number" step="1" value="{{ old('room_number', $flat->room_number) }}">
             {{-- MESSAGGIO ERRORE --}}
             @error('room_number')
                 <div class="invalid-feedback">{{ $message }} </div>
@@ -89,7 +89,7 @@
     <div class="mb-3 col-3">
         <label for="bed_number" class="form-label">Letti</label>
         <input type="number" class="form-control @error('bed_number') is-invalid @enderror" id="bed_number"
-            name="bed_number" step="1" value="{{ old('price', $flat->bed_number) }}">
+            name="bed_number" step="1" value="{{ old('bed_number', $flat->bed_number) }}">
         {{-- MESSAGGIO ERRORE --}}
         @error('bed_number')
             <div class="invalid-feedback">{{ $message }} </div>
@@ -100,7 +100,7 @@
     <div class="mb-3 col-3">
         <label for="bathroom_number" class="form-label">Bagni</label>
         <input type="number" class="form-control @error('bathroom_number') is-invalid @enderror" id="bathroom_number"
-            name="bathroom_number" step="1" value="{{ old('price', $flat->bathroom_number) }}">
+            name="bathroom_number" step="1" value="{{ old('bathroom_number', $flat->bathroom_number) }}">
         {{-- MESSAGGIO ERRORE --}}
         @error('bathroom_number')
             <div class="invalid-feedback">{{ $message }} </div>
@@ -111,7 +111,7 @@
     <div class="mb-3 col-3">
         <label for="square_mt" class="form-label">Dimensione</label>
         <input type="number" class="form-control @error('square_mt') is-invalid @enderror" id="square_mt"
-            name="square_mt" step="1" value="{{ old('price', $flat->square_mt) }}">
+            name="square_mt" step="1" value="{{ old('square_mt', $flat->square_mt) }}">
         {{-- MESSAGGIO ERRORE --}}
         @error('square_mt')
             <div class="invalid-feedback">{{ $message }} </div>
@@ -128,13 +128,13 @@
     {{-- CHECKBOX - SERVICE --}}
     @foreach ($services as $service)
         <div class="form-group form-check-inline">
-            <input type="checkbox" class="form-check-input" id="service-{{ $service->label }}" name="services[]"
-                value="{{ $service->id }}">
-            <label for="service-{{ $service->label }}">{{ $service->label }}</label>
+            <input class="mr-2" type="checkbox" @if (in_array($service->id, old('services', $services_ids))) checked @endif
+                id="{{ $service->label }}" name="services[]" value="{{ $service->id }}">
+            <label class="form-check-label" for="{{ $service->label }}">
+                {{ $service->label }}
+            </label>
         </div>
     @endforeach
-
-
     <button type="submit" class="btn btn-primary">Submit</button>
 </div>
 </div>

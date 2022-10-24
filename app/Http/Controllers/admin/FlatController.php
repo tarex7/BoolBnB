@@ -102,8 +102,9 @@ class FlatController extends Controller
         $flats = Flat::all();
         $flat = new Flat;
         $services = Service::select('id', 'label', 'icon')->get();
+        $services_ids = [];
 
-        return view('admin.flats.create', compact('flat', 'flats', 'services'));
+        return view('admin.flats.create', compact('flat', 'flats', 'services', 'services_ids'));
     }
 
     /**
@@ -177,8 +178,11 @@ class FlatController extends Controller
         // }
         $services = Service::select('id', 'label', 'icon')->get();
 
+        // SERVICE_IDS
+        $services_ids = $flat->services->pluck('id')->toArray();
+
         $prev_services = $flat->services->pluck('id')->toArray();
-        return view('admin.flats.edit', compact('flat', 'services'));
+        return view('admin.flats.edit', compact('flat', 'services', 'services_ids'));
     }
 
     /**
