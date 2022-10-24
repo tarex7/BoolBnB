@@ -223,6 +223,7 @@ class FlatController extends Controller
     {
         $flat->services()->detach();
         $flat->messages()->delete();
+        $flat->views()->delete();
 
         $flat->delete();
 
