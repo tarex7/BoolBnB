@@ -129,7 +129,7 @@ class FlatController extends Controller
         //VISIBLE
         $flat->visible = array_key_exists('visible', $data);
 
-
+        // IMAGE
         if (array_key_exists('image', $data)) {
             $image_url = Storage::put('flat_images', $data['image']);
             $flat->image = $image_url;
@@ -207,6 +207,12 @@ class FlatController extends Controller
 
         //VISIBLE
         $data['visible'] = array_key_exists('visible', $data);
+
+        // IMAGE
+        if (array_key_exists('image', $data)) {
+            $image_url = Storage::put('flat_images', $data['image']);
+            $flat->image = $image_url;
+        }
 
         $flat->update($data);
 
