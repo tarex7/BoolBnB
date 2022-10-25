@@ -36,10 +36,13 @@
 
 <body class="bg-light">
     <div id="app">
+        {{-- @include('includes.header') --}}
+
         <nav class="navbar navbar-expand-md navbar-light bg-white shadow-sm">
             <div class="container">
-                <a class="navbar-brand" href="{{ url('/') }}">
-                    {{ config('app.name', 'Laravel') }}
+                <img class="img fluid col-2" style="height: 30px;width:10px" src={{ asset('images/boolbnb_logo.png') }} alt="logo Air BnB">
+                <a class="" href="{{ url('/') }}">
+
                 </a>
                 <button class="navbar-toggler" type="button" data-toggle="collapse"
                     data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false"
