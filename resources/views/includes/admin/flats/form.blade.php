@@ -24,8 +24,10 @@
                 {{-- IMAGE --}}
 
 
-                <img src="{{ $flat->image ? asset('storage/' . $flat->image) : 'https://images.vexels.com/media/users/3/131734/isolated/preview/05d86a9b63d1930d6298b27081ddc345-photo-preview-frame-icon.png' }}"
-                    alt="flat-image" id="preview">
+                <div class="border rounded mt-4">
+                    <img src="{{ $flat->image ? asset('storage/' . $flat->image) : asset('images/placeholder.png') }}"
+                    alt="flat-image" id="preview" class="img-fluid">
+                </div>
 
 
                 <div class="mb-3 col-12 p-0">
@@ -39,10 +41,10 @@
                 </div>
 
                 {{-- VISIBILITA' --}}
-                <div class="mb-3 form-check col-6">
+                <div class="mb-3 form-check col-6  p-3">
                     <input type="checkbox" class="form-check-input" id="visible" name="visible" value="1"
                         @if (old('visible', $flat->visible)) checked @endif>
-                    <label class="form-check-label" for="visible">Visibile</label>
+                    <label class="form-check-label" for="visible">Rendi visibile l'appartamento</label>
                 </div>
 
             </div>
@@ -51,7 +53,7 @@
 
                 {{-- Titolo --}}
                 <div class="form-group">
-                    <label for="title" class="h4">Titolo</label>
+                    <label for="title" class="">Titolo</label>
                     <input type="text" class="form-control @error('title') is-invalid @enderror" id="title"
                         name="title" value="{{ old('title', $flat->title) }}" required minlength="5" maxlength="50">
                     @error('title')
@@ -68,6 +70,8 @@
                     {{-- Descrizione --}}
                     <div class="mb-3 col-12">
                         <div class="form-floating">
+                    <label for="description" class="">Descrizione</label>
+
                             <textarea class="form-control @error('description') is-invalid @enderror" placeholder="Leave a comment here"
                                 id="description" style="height: 300px" name="description">{{ old('description', $flat->description) }}</textarea>
 
@@ -81,7 +85,7 @@
                         {{-- Indirizzo --}}
                         {{-- Titolo --}}
                         <div class="form-group mt-4">
-                            <label for="address" class="h4 mb-1">Indirizzo</label>
+                            <label for="address" class=" mb-1">Indirizzo</label>
                             <input type="text" class="form-control @error('address') is-invalid @enderror"
                                 id="address" name="address" value="{{ old('address', $flat->address) }}" required
                                 minlength="5" maxlength="50">
@@ -96,7 +100,7 @@
                         <div class="d-flex mt-2">
                             {{-- METRI QUADRI --}}
                             <div class="my-3 col-6 p-0">
-                                <label for="square_mt" class="form-label h4">Superfice mq<sup>2</sup></label>
+                                <label for="square_mt" class="form-label ">Superfice mq<sup>2</sup></label>
                                 <input type="number" class="form-control @error('square_mt') is-invalid @enderror"
                                     id="square_mt" name="square_mt" step="1"
                                     value="{{ old('square_mt', $flat->square_mt) }}">
@@ -109,7 +113,7 @@
 
                             {{-- NUMERO STANZE --}}
                             <div class="my-3 col-6">
-                                <label for="room_number" class="form-label h4">Camere</label>
+                                <label for="room_number" class="form-label ">Camere</label>
                                 <input type="number" class="form-control @error('room_number') is-invalid @enderror"
                                     id="room_number" name="room_number" step="1"
                                     value="{{ old('room_number', $flat->room_number) }}">
@@ -124,7 +128,7 @@
                         <div class="d-flex">
                             {{-- NUMERO LETTI --}}
                             <div class="my-3 col-6 p-0">
-                                <label for="bed_number" class="form-label h4">Letti</label>
+                                <label for="bed_number" class="form-label ">Letti</label>
                                 <input type="number" class="form-control @error('bed_number') is-invalid @enderror"
                                     id="bed_number" name="bed_number" step="1"
                                     value="{{ old('bed_number', $flat->bed_number) }}">
@@ -136,7 +140,7 @@
 
                             {{-- NUMERO BAGNI --}}
                             <div class="my-3 col-6">
-                                <label for="bathroom_number" class="form-label h4">Bagni</label>
+                                <label for="bathroom_number" class="form-label ">Bagni</label>
                                 <input type="number"
                                     class="form-control @error('bathroom_number') is-invalid @enderror"
                                     id="bathroom_number" name="bathroom_number" step="1"
@@ -151,7 +155,7 @@
 
                         <div class="col-12 p-0 mt-2">
                             {{-- CHECKBOX - SERVICE --}}
-                            <p class="mb-2 h4">Servizi</p>
+                            <p class="mb-2 ">Servizi</p>
 
                             <div class=" d-flex flex-wrap justify-content-between">
 
@@ -172,7 +176,7 @@
 
                             {{-- PREZZO PER NOTTE --}}
 
-                            <h4 class="mt-4 mb-2">Prezzo per notte</h4>
+                            <p class="mt-4 mb-2">Prezzo per notte</p>
                             <div class="input-group mb-3 col-3 p-0">
                                 <div class="input-group-prepend">
                                     <span class="input-group-text" id="basic-addon1">€</span>
@@ -193,9 +197,8 @@
                         </div>
                     </div>
                 </div>
-                <div class="col-12 d-flex justify-content-end align-items-center">
-                    <button type="submit"
-                        class="btn btn-success mr-4">{{ !$flat->exists ? 'Crea appartamento' : 'Aggiorna appartamento' }}</button>
+                <div class="col-12 d-flex justify-content-end align-items-center my-5 px-5">
+                    <button type="submit" class="btn {{ !$flat->exists ? 'btn-success' : 'btn-warning' }} mr-5">{{ !$flat->exists ? 'Crea appartamento' : 'Aggiorna appartamento' }}</button>
                     <a href="{{ route('admin.flats.index') }}" class="btn btn-primary">Indietro</a>
                 </div>
             </div>
@@ -203,8 +206,7 @@
             </form>
 
             <script>
-                const placeholder =
-                    "https://cdn2.vectorstock.com/i/thumb-large/48/06/image-preview-icon-picture-placeholder-vector-31284806.jpg"
+                const placeholder = {{ asset('images/placeholder.png')}}
                 const image = document.getElementById('image')
                 const preview = document.getElementById('preview')
 

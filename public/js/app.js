@@ -37368,7 +37368,7 @@ var deleteForms = document.querySelectorAll('.delete-form');
 deleteForms.forEach(function (form) {
   form.addEventListener('submit', function (event) {
     event.preventDefault();
-    var hasConfirmed = confirm('Sei sicuro di voler eliminare questo post?');
+    var hasConfirmed = confirm('Sei sicuro di voler eliminare questo appartamento?');
     if (hasConfirmed) form.submit();
   });
 });
@@ -37416,8 +37416,8 @@ image.addEventListener('input', function () {
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-__webpack_require__(/*! C:\laravel\BoolBnB\resources\js\app.js */"./resources/js/app.js");
-module.exports = __webpack_require__(/*! C:\laravel\BoolBnB\resources\sass\app.scss */"./resources/sass/app.scss");
+__webpack_require__(/*! C:\laravel\boolbnb\resources\js\app.js */"./resources/js/app.js");
+module.exports = __webpack_require__(/*! C:\laravel\boolbnb\resources\sass\app.scss */"./resources/sass/app.scss");
 
 
 /***/ })
