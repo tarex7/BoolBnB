@@ -144,7 +144,7 @@ class FlatController extends Controller
             $flat->services()->attach($data['services']);
         }
 
-        return redirect()->route('admin.flats.show', $flat)->with('message', "Appartamento creato con succeso")->with('type', 'success');;
+        return redirect()->route('admin.flats.show', $flat)->with('message', "Appartamento creato con successo")->with('type', 'success');;
     }
 
     /**
@@ -195,7 +195,7 @@ class FlatController extends Controller
         $request->validate($this->validationFlat, $this->validationFlatMessage);
 
         $data = $request->all();
-        
+
         $flat->user_id = Auth::id();
 
         if (array_key_exists('services', $data)) {
@@ -214,7 +214,7 @@ class FlatController extends Controller
 
         $flat->update($data);
 
-        return redirect()->route('admin.flats.show', $flat)->with('message', "Appartamento modificato con succeso")->with('type', 'success');;
+        return redirect()->route('admin.flats.show', $flat)->with('message', "Appartamento modificato con successo")->with('type', 'success');;
     }
 
     /**
@@ -235,7 +235,7 @@ class FlatController extends Controller
         $flat->views()->delete();
 
         $flat->delete();
-        return redirect()->route('admin.flats.index')->with('message', "Appartamento eliminato con succeso")->with('type', 'success');;
+        return redirect()->route('admin.flats.index')->with('message', "Appartamento eliminato con successo")->with('type', 'success');;
     }
 
     //TOGGLE
@@ -247,6 +247,6 @@ class FlatController extends Controller
         $flat->save();
 
 
-        return redirect()->route('admin.flats.index')->with('message', "Appartamento $status con succeso")->with('type', 'success');
+        return redirect()->route('admin.flats.index')->with('message', "Appartamento $status con successo")->with('type', 'success');
     }
 }
