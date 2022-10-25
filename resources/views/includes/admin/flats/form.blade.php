@@ -84,7 +84,7 @@
 
                         {{-- Indirizzo --}}
                         {{-- Titolo --}}
-                        <div class="form-group mt-4">
+                        {{-- <div class="form-group mt-4">
                             <label for="address" class=" mb-1">Indirizzo</label>
                             <input type="text" class="form-control @error('address') is-invalid @enderror"
                                 id="address" name="address" value="{{ old('address', $flat->address) }}" required
@@ -95,7 +95,23 @@
                                     {{ $message }}
                                 </div>
                             @enderror
+                        </div> --}}
+
+                        {{-- Indirizzo tomtom searchbar --}}
+
+                        <div class="form-group">
+                            <label for="address">Indirizzo:</label>
+                            <div id="address-tomtom"></div>
+
+                            <input id="lat" type="text" class="form-control" name="latitude" id="lat"
+                                value="{{ old('latitude', $flat->latitude) }}" hidden>
+                    
+                            <input id="lon" type="text" class="form-control" name="longitude" id="lon"
+                                value="{{ old('longitude', $flat->longitude) }}" hidden>
+                    
+                    
                         </div>
+                    
 
                         <div class="d-flex mt-2">
                             {{-- METRI QUADRI --}}
@@ -228,7 +244,7 @@
                 addressContainer.append(searchBoxHTML);
                 const tomtomInput = document.getElementsByClassName("tt-search-box-input")[0];
                 let date = {}
-                ttSearchBox.on('tomtom.searchbox.resultsfound', function(data) {
+                ttSearchBox.on("tomtom.searchbox.resultsfound", function(data) {
                     date = (data);
                     let position = date.data.results.fuzzySearch.results[0].position;
                     let lon = position.lng;
@@ -237,26 +253,26 @@
                     lonInput.value = lon;
                 });
                 tomtomInput.setAttribute("name", "address");
-                tomtomInput.value = '<?php echo $flat->address; ?>';
-               // console.log(addressContainer)
+                tomtomInput.value = "<?php echo $flat->address; ?>";
             
-                // let axios = require('axios');
+                 //let axios = require('axios').default;
             
                 
             
             
-                addressContainer.addEventListener("keydown", (e) => {
-                    // axios.get(
-                    //         `https://api.tomtom.com/search/2/autocomplete/${addressContainer.value}.json?key=I7jwOnv7XxCbU6AV64AN8ZPGArFaIoTh&language=it-IT&limit=6`
-                    //     )
-                    //     .then((res) => {
-                    //         console.log(res.data);
-                    //     })
+                addressContainer.addEventListener("input", (e) => {
+                    console.log('call');
+                     axios.get(
+                             `https:api.tomtom.com/search/2/autocomplete/${addressContainer.value}.json?key=I7jwOnv7XxCbU6AV64AN8ZPGArFaIoTh&language=it-IT&limit=6`
+                         )
+                         .then((res) => {
+                             console.log(res.data);
+                         })
                 });
             </script>
 
             <script>
-                const placeholder = {{ asset('images/placeholder.png')}}
+                const placeholder = "https://cdn2.vectorstock.com/i/thumb-large/48/06/image-preview-icon-picture-placeholder-vector-31284806.jpg";
                 const image = document.getElementById('image')
                 const preview = document.getElementById('preview')
 

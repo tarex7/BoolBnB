@@ -81,8 +81,11 @@
 
                     <div class="mt-5">
                         <h4 class="mb-3">Posizione</h4>
-                        @include('includes.map')
+                         @include('includes.map')
+                         
+                      
                     </div>
+
                 </div>
 
             </div>
