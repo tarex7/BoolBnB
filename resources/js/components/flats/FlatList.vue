@@ -4,18 +4,12 @@
 
     <!-- AppLoader -->
     <!-- <app-loader v-if="isLoading" /> -->
-
-    <!-- Flat Card -->
-    <flat-card />
-
-    <!-- PAGINATION -->
-    <app-pagination />
   </section>
 </template>
 
 <script>
 //IMPORTO PAGINATION
-import AppPagination from "../AppPagination.vue";
+
 //IMPORTO LA CARD DEI SINGOLI FLAT
 // import FlatCard from "./FlatCard.vue";
 export default {

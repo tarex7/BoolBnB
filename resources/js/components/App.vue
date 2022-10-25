@@ -7,7 +7,7 @@
       <!-- JUMBOTRON -->
 
       <!-- ROTTE VIEW (CONTENUTO DINAMICO ALl'INTERNO DELLE PAGINE) -->
-      <!-- <router-view></router-view> -->
+      <router-view></router-view>
     </main>
 
     <!--FOOTER -->
