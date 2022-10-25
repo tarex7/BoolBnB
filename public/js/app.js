@@ -37302,7 +37302,8 @@ module.exports = function(module) {
  */
 
 __webpack_require__(/*! ./bootstrap */ "./resources/js/bootstrap.js");
-//require('./image_preview.js');
+__webpack_require__(/*! ./image_preview.js */ "./resources/js/image_preview.js");
+__webpack_require__(/*! ./delete_confirmation.js */ "./resources/js/delete_confirmation.js");
 
 /***/ }),
 
@@ -37352,6 +37353,48 @@ window.axios.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest';
 //     cluster: process.env.MIX_PUSHER_APP_CLUSTER,
 //     forceTLS: true
 // });
+
+/***/ }),
+
+/***/ "./resources/js/delete_confirmation.js":
+/*!*********************************************!*\
+  !*** ./resources/js/delete_confirmation.js ***!
+  \*********************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+// Chiedere conferma ogni qualvolta l'utente tenta di cancellare un post.
+var deleteForms = document.querySelectorAll('.delete-form');
+deleteForms.forEach(function (form) {
+  form.addEventListener('submit', function (event) {
+    event.preventDefault();
+    var hasConfirmed = confirm('Sei sicuro di voler eliminare questo post?');
+    if (hasConfirmed) form.submit();
+  });
+});
+
+/***/ }),
+
+/***/ "./resources/js/image_preview.js":
+/*!***************************************!*\
+  !*** ./resources/js/image_preview.js ***!
+  \***************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+var placeholder = "https://cdn2.vectorstock.com/i/thumb-large/48/06/image-preview-icon-picture-placeholder-vector-31284806.jpg";
+var image = document.getElementById('image');
+var preview = document.getElementById('preview');
+image.addEventListener('input', function () {
+  if (image.files && image.files[0]) {
+    var reader = new FileReader();
+    reader.readAsDataURL(image.files[0]);
+    reader.addEventListener('load', function (event) {
+      preview.src = event.target.result;
+    });
+  } else preview.src = placeholder;
+  preview.setAttribute('src', placeholder);
+});
 
 /***/ }),
 
