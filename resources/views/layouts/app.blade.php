@@ -77,8 +77,8 @@
 
         <nav class="navbar navbar-expand-md navbar-light bg-white shadow-sm">
             <div class="container">
-                <img class="img fluid col-2" style="height: 30px;width:10px" src={{ asset('images/boolbnb_logo.png') }} alt="logo Air BnB">
-                <a class="" href="{{ url('/') }}">
+                <a href="{{ url('/') }}">
+                    <img class="img fluid col-3 p-1" src={{ asset('images/boolbnb_logo.png') }} alt="logo Air BnB">
 
                 </a>
                 <button class="navbar-toggler" type="button" data-toggle="collapse"
