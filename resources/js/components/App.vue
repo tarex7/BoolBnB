@@ -1,23 +1,37 @@
 <template>
-    <div class="container">
-        <div class="row justify-content-center">
-            <div class="col-md-8">
-                <div class="card">
-                    <div class="card-header">Example Component</div>
+  <div class="content">
+    <!-- HEADER -->
+    <app-header :title="title" />
+    <app-jumbotron />
+    <main class="container my-3">
+      <!-- JUMBOTRON -->
 
-                    <div class="card-body">
-                        I'm an example component.
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
+      <!-- ROTTE VIEW (CONTENUTO DINAMICO ALl'INTERNO DELLE PAGINE) -->
+      <!-- <router-view></router-view> -->
+    </main>
+
+    <!--FOOTER -->
+    <app-footer />
+  </div>
 </template>
 
 <script>
-    export default {
-        mounted() {
-            console.log('Component mounted.')
-        }
-    }
+// IMPORT COMPONENTS
+import AppHeader from "./AppHeader.vue";
+import AppJumbotron from "./AppJumbotron.vue";
+import AppFooter from "./AppFooter.vue";
+export default {
+  name: "App",
+  // COMPONENTS
+  components: { AppHeader, AppJumbotron, AppFooter },
+  name: "App",
+  // DATA
+  data() {
+    return {
+      title: "BoolBnb",
+    };
+  },
+  // MOUNTED
+  mounted() {},
+};
 </script>
