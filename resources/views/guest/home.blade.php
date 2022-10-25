@@ -2,7 +2,9 @@
 
 @section('content')
     <section id="root">
-        Coming Soon...
+       <div class="container text-center">
+        <h1 class="text-muted display-1 mt-5"> Coming soon...</h1>
+       </div>
     </section>
 @endsection
 
