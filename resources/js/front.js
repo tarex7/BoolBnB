@@ -12,10 +12,11 @@ window.Vue = require('vue');
 //IMPORTO ROUTER JS
 import router from './router.js'
 
+//IMPORTO I COMPONENTI A LIVELLO GENERICO
 import App from './components/App.vue'
-// import AppLoader from './components/AppLoader'
+import AppLoader from './components/AppLoader'
 
-// Vue.component('AppLoader', AppLoader)
+Vue.component('AppLoader', AppLoader)
 
 const root = new Vue({
   router,
