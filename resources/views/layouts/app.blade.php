@@ -11,38 +11,61 @@
     <title>{{ config('app.name', 'Laravel') }}</title>
 
     <!-- Scripts -->
-    <script src="{{ asset('js/app.js') }}"></script>
-    <script type="text/javascript" src="https://api.tomtom.com/maps-sdk-for-web/cdn/6.x/6.20.0/maps/maps-web.min.js">
-    </script>
-
-    {{-- <script src="{{ asset('js/app.js') }}" defer></script> --}}
-    <script src="{{ asset('js/delete_confirmation.js') }}" defer></script>
+    <script src="{{ asset('js/app.js') }}" defer></script>
 
     <!-- Fonts -->
     <link rel="dns-prefetch" href="//fonts.gstatic.com">
     <link href="https://fonts.googleapis.com/css?family=Nunito" rel="stylesheet">
 
-
-    {{-- Font awesome --}}
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css"
-        integrity="sha512-xh6O/CkQoPOWDdYTDqeRdPCVd1SpvCA9XXcUnZS2FmJNp1coAFzvtCN9BmamE+4aHK8yyUHUSCcJHgXloTyT2A=="
-        crossorigin="anonymous" referrerpolicy="no-referrer" />
-
     <!-- Styles -->
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
-    <link rel="stylesheet" href="https://api.tomtom.com/maps-sdk-for-web/cdn/6.x/6.20.0/maps/maps.css">
 
+    <link rel='stylesheet' type='text/css'
+        href='https://api.tomtom.com/maps-sdk-for-web/cdn/plugins/SearchBox/3.1.3-public-preview.0/SearchBox.css' />
+
+    <script src="https://api.tomtom.com/maps-sdk-for-web/cdn/6.x/6.1.2-public-preview.15/services/services-web.min.js">
+    </script>
+    <script src="https://api.tomtom.com/maps-sdk-for-web/cdn/plugins/SearchBox/3.1.3-public-preview.0/SearchBox-web.js">
+    </script>
+
+    <script src="{{ asset('js/image_preview.js') }}" defer></script>
+
+    <script>
+        (function() {
+            window.SS = window.SS || {};
+            SS.Require = function(callback) {
+                if (typeof callback === 'function') {
+                    if (window.SS && SS.EventTrack) {
+                        callback();
+                    } else {
+                        var siteSpect = document.getElementById('siteSpectLibraries');
+                        var head = document.getElementsByTagName('head')[0];
+                        if (siteSpect === null && typeof head !== 'undefined') {
+                            siteSpect = document.createElement('script');
+                            siteSpect.type = 'text/javascript';
+                            siteSpect.src = '/__ssobj/core.js+ssdomvar.js+generic-adapter.js';
+                            siteSpect.async = true;
+                            siteSpect.id = 'siteSpectLibraries';
+                            head.appendChild(siteSpect);
+                        }
+                        if (window.addEventListener) {
+                            siteSpect.addEventListener('load', callback, false);
+                        } else {
+                            siteSpect.attachEvent('onload', callback, false);
+                        }
+                    }
+                }
+            };
+        })();
+    </script>
 </head>
 
-<body class="bg-light">
+<body>
     <div id="app">
-        {{-- @include('includes.header') --}}
-
         <nav class="navbar navbar-expand-md navbar-light bg-white shadow-sm">
             <div class="container">
-                <img class="img fluid col-2" style="height: 30px;width:10px" src={{ asset('images/boolbnb_logo.png') }} alt="logo Air BnB">
-                <a class="" href="{{ url('/') }}">
-
+                <a class="navbar-brand" href="{{ url('/') }}">
+                    {{ config('app.name', 'Laravel') }}
                 </a>
                 <button class="navbar-toggler" type="button" data-toggle="collapse"
                     data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false"
@@ -61,11 +84,11 @@
                         <!-- Authentication Links -->
                         @guest
                             <li class="nav-item">
-                                <a class="nav-link text-dark" href="{{ route('login') }}">Accedi</a>
+                                <a class="nav-link" href="{{ route('login') }}">{{ __('Login') }}</a>
                             </li>
                             @if (Route::has('register'))
                                 <li class="nav-item">
-                                    <a class="nav-link text-dark" href="{{ route('register') }}">Registrati</a>
+                                    <a class="nav-link" href="{{ route('register') }}">{{ __('Register') }}</a>
                                 </li>
                             @endif
                         @else
@@ -76,13 +99,11 @@
                                 </a>
 
                                 <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
-                                    <a class="dropdown-item text-dark" href="{{ route('admin.flats.index') }}">Admin</a>
                                     <a class="dropdown-item" href="{{ route('logout') }}"
                                         onclick="event.preventDefault();
                                                      document.getElementById('logout-form').submit();">
                                         {{ __('Logout') }}
                                     </a>
-
 
                                     <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
                                         @csrf
@@ -96,7 +117,6 @@
         </nav>
 
         <main class="py-4">
-            @include('includes.admin.alert')
             @yield('content')
         </main>
     </div>

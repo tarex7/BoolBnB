@@ -81,38 +81,42 @@
 /******/
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = 1);
+/******/ 	return __webpack_require__(__webpack_require__.s = 2);
 /******/ })
 /************************************************************************/
 /******/ ({
 
-/***/ "./resources/js/delete_confirmation.js":
-/*!*********************************************!*\
-  !*** ./resources/js/delete_confirmation.js ***!
-  \*********************************************/
+/***/ "./resources/js/image_preview.js":
+/*!***************************************!*\
+  !*** ./resources/js/image_preview.js ***!
+  \***************************************/
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-// Chiedere conferma ogni qualvolta l'utente tenta di cancellare un post.
-var deleteForms = document.querySelectorAll('.delete-form');
-deleteForms.forEach(function (form) {
-  form.addEventListener('submit', function (event) {
-    event.preventDefault();
-    var hasConfirmed = confirm('Sei sicuro di voler eliminare questo post?');
-    if (hasConfirmed) form.submit();
-  });
+var placeholder = "https://cdn2.vectorstock.com/i/thumb-large/48/06/image-preview-icon-picture-placeholder-vector-31284806.jpg";
+var image = document.getElementById('image');
+var preview = document.getElementById('preview');
+image.addEventListener('input', function () {
+  if (image.files && image.files[0]) {
+    var reader = new FileReader();
+    reader.readAsDataURL(image.files[0]);
+    reader.addEventListener('load', function (event) {
+      preview.src = event.target.result;
+    });
+  } else preview.src = placeholder;
+  preview.setAttribute('src', placeholder);
 });
 
 /***/ }),
 
-/***/ 1:
-/*!***************************************************!*\
-  !*** multi ./resources/js/delete_confirmation.js ***!
-  \***************************************************/
+/***/ 2:
+/*!*********************************************!*\
+  !*** multi ./resources/js/image_preview.js ***!
+  \*********************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__(/*! C:\laravel\boolbnb\resources\js\delete_confirmation.js */"./resources/js/delete_confirmation.js");
+module.exports = __webpack_require__(/*! C:\laravel\boolbnb\resources\js\image_preview.js */"./resources/js/image_preview.js");
 
 
 /***/ })
