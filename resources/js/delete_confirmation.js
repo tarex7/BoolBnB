@@ -3,7 +3,7 @@
      deleteForms.forEach( form => {
          form.addEventListener('submit', event => {
          event.preventDefault();
-         const hasConfirmed = confirm('Sei sicuro di voler eliminare questo post?');
+         const hasConfirmed = confirm('Sei sicuro di voler eliminare questo appartamento?');
          if (hasConfirmed) form.submit();
          })
      });
