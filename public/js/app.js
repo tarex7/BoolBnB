@@ -37368,7 +37368,7 @@ var deleteForms = document.querySelectorAll('.delete-form');
 deleteForms.forEach(function (form) {
   form.addEventListener('submit', function (event) {
     event.preventDefault();
-    var hasConfirmed = confirm('Sei sicuro di voler eliminare questo post?');
+    var hasConfirmed = confirm('Sei sicuro di voler eliminare questo appartamento?');
     if (hasConfirmed) form.submit();
   });
 });
