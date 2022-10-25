@@ -179,16 +179,18 @@
     });
     tomtomInput.setAttribute("name", "address");
     tomtomInput.value = '<?php echo $flat->address; ?>';
+    console.log(addressContainer)
 
-    let axios = require('axios').default;
+    // let axios = require('axios');
 
-    addressContainer.addEventListener("keyup", (event) => {
-        axios.get(
-                `https://api.tomtom.com/search/2/autocomplete/${addressContainer.value}.json?key=I7jwOnv7XxCbU6AV64AN8ZPGArFaIoTh&language=it-IT&limit=6`
-            )
-            .then((res) => {
-                console.log(res.data);
-            })
+    addressContainer.addEventListener("keyup", (e) => {
+        console.log(event);
+        // axios.get(
+        //         `https://api.tomtom.com/search/2/autocomplete/${addressContainer.value}.json?key=I7jwOnv7XxCbU6AV64AN8ZPGArFaIoTh&language=it-IT&limit=6`
+        //     )
+        //     .then((res) => {
+        //         console.log(res.data);
+        //     })
     });
 </script>
 </form>
