@@ -26,7 +26,7 @@
 
                 <div class="border rounded mt-4">
                     <img src="{{ $flat->image ? asset('storage/' . $flat->image) : asset('images/placeholder.png') }}"
-                    alt="flat-image" id="preview" class="img-fluid">
+                    alt="flat-image" id="preview" class="img-fluid" style="height: 300px;">
                 </div>
 
 
@@ -290,8 +290,4 @@
 
 
             <style scoped>
-                img {
-                    width: 550px;
-                    height: 500px;
-                }
             </style>

@@ -27,6 +27,9 @@ Route::middleware('auth')
         //Route::get('/', 'HomeController@index')->name('home');
         Route::patch('/flats/{flat}/toggle', 'FlatController@toggle')->name('flats.toggle');
         Route::resource('flats', 'FlatController');
+        Route::get('/{any}', function () {
+            abort('404');
+        })->where('any', '.*');
     });
 
 Route::get('/', function () {
