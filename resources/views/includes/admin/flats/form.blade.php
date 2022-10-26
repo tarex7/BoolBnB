@@ -1,17 +1,17 @@
 {{-- ACTIVE PER VEDERE LA VALIDAZIONE A INIZIO PAGINA --}}
-{{-- @if ($errors->any())
+@if ($errors->any())
     <div class="alert alert-danger">
         @foreach ($errors->all() as $error)
             <li> {{ $error }} </li>
         @endforeach
     </div>
-@endif --}}
+@endif
 
 @if ($flat->exists)
-    <form action="{{ route('admin.flats.update', $flat) }}" method="POST" enctype="multipart/form-data">
+    <form action="{{ route('admin.flats.update', $flat) }}" method="POST" enctype="multipart/form-data" novalidate>
         @method('PUT')
     @else
-        <form action="{{ route('admin.flats.store') }}" method="POST" enctype="multipart/form-data">
+        <form action="{{ route('admin.flats.store') }}" method="POST" enctype="multipart/form-data" novalidate>
 @endif
 
 @csrf
@@ -53,7 +53,7 @@
 
                 {{-- Titolo --}}
                 <div class="form-group">
-                    <label for="title" class="">Titolo</label>
+                    <label for="title" class="">Titolo *</label>
                     <input type="text" class="form-control @error('title') is-invalid @enderror" id="title"
                         name="title" value="{{ old('title', $flat->title) }}" required minlength="5" maxlength="50">
                     @error('title')
@@ -70,7 +70,7 @@
                     {{-- Descrizione --}}
                     <div class="mb-3 col-12">
                         <div class="form-floating">
-                    <label for="description" class="">Descrizione</label>
+                    <label for="description" class="">Descrizione *</label>
 
                             <textarea class="form-control @error('description') is-invalid @enderror" placeholder="Leave a comment here"
                                 id="description" style="height: 300px" name="description">{{ old('description', $flat->description) }}</textarea>
@@ -100,13 +100,13 @@
                         {{-- Indirizzo tomtom searchbar --}}
 
                         <div class="form-group">
-                            <label for="address">Indirizzo:</label>
+                            <label for="address">Indirizzo: *</label>
                             <div id="address-tomtom"></div>
 
-                            <input id="lat" type="text" class="form-control" name="latitude" id="lat"
+                            <input id="lat" type="text" class="form-control" name="latitude" 
                                 value="{{ old('latitude', $flat->latitude) }}" hidden>
                     
-                            <input id="lon" type="text" class="form-control" name="longitude" id="lon"
+                            <input id="lon" type="text" class="form-control" name="longitude" 
                                 value="{{ old('longitude', $flat->longitude) }}" hidden>
                     
                     
@@ -116,7 +116,7 @@
                         <div class="d-flex mt-2">
                             {{-- METRI QUADRI --}}
                             <div class="my-3 col-6 p-0">
-                                <label for="square_mt" class="form-label ">Superfice mq<sup>2</sup></label>
+                                <label for="square_mt" class="form-label ">Superfice mq<sup>2</sup> *</label>
                                 <input type="number" class="form-control @error('square_mt') is-invalid @enderror"
                                     id="square_mt" name="square_mt" step="1"
                                     value="{{ old('square_mt', $flat->square_mt) }}">
@@ -129,7 +129,7 @@
 
                             {{-- NUMERO STANZE --}}
                             <div class="my-3 col-6">
-                                <label for="room_number" class="form-label ">Camere</label>
+                                <label for="room_number" class="form-label ">Camere *</label>
                                 <input type="number" class="form-control @error('room_number') is-invalid @enderror"
                                     id="room_number" name="room_number" step="1"
                                     value="{{ old('room_number', $flat->room_number) }}">
@@ -144,7 +144,7 @@
                         <div class="d-flex">
                             {{-- NUMERO LETTI --}}
                             <div class="my-3 col-6 p-0">
-                                <label for="bed_number" class="form-label ">Letti</label>
+                                <label for="bed_number" class="form-label ">Letti *</label>
                                 <input type="number" class="form-control @error('bed_number') is-invalid @enderror"
                                     id="bed_number" name="bed_number" step="1"
                                     value="{{ old('bed_number', $flat->bed_number) }}">
@@ -156,7 +156,7 @@
 
                             {{-- NUMERO BAGNI --}}
                             <div class="my-3 col-6">
-                                <label for="bathroom_number" class="form-label ">Bagni</label>
+                                <label for="bathroom_number" class="form-label ">Bagni *</label>
                                 <input type="number"
                                     class="form-control @error('bathroom_number') is-invalid @enderror"
                                     id="bathroom_number" name="bathroom_number" step="1"
@@ -192,7 +192,7 @@
 
                             {{-- PREZZO PER NOTTE --}}
 
-                            <p class="mt-4 mb-2">Prezzo per notte</p>
+                            <p class="mt-4 mb-2">Prezzo per notte *</p>
                             <div class="input-group mb-3 col-3 p-0">
                                 <div class="input-group-prepend">
                                     <span class="input-group-text" id="basic-addon1">€</span>
