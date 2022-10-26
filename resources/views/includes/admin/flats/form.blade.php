@@ -1,11 +1,5 @@
 {{-- ACTIVE PER VEDERE LA VALIDAZIONE A INIZIO PAGINA --}}
-@if ($errors->any())
-    <div class="alert alert-danger">
-        @foreach ($errors->all() as $error)
-            <li> {{ $error }} </li>
-        @endforeach
-    </div>
-@endif
+
 
 @if ($flat->exists)
     <form action="{{ route('admin.flats.update', $flat) }}" method="POST" enctype="multipart/form-data" novalidate>
