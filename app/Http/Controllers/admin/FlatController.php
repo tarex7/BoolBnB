@@ -18,7 +18,7 @@ class FlatController extends Controller
 
         'title' => 'required|string|min:5|max:50|',
         'description' => 'required|string',
-        'image' => 'nullable|image| mimes:jpeg,jpg,png',
+        'image' => 'nullable|image| mimes:jpeg,jpg,png,webp',
         //ADDRESS AGGIUNGERE
         'price_per_day' => 'required|numeric|min:1|max:3000',
         'room_number' => 'required|numeric|min:1|max:50',
@@ -83,7 +83,7 @@ class FlatController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index() ///////////////////////////////////////////////INDEX
+    public function index()
     {
         $flats = Flat::all()->where('user_id', Auth::id());
         $services = Service::select('id', 'label', 'icon')->get();
@@ -96,14 +96,15 @@ class FlatController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create() //                                          CREATEEEEEE
+    public function create() //                                       
     {
 
         $flats = Flat::all();
         $flat = new Flat;
         $services = Service::select('id', 'label', 'icon')->get();
+        $services_ids = [];
 
-        return view('admin.flats.create', compact('flat', 'flats', 'services'));
+        return view('admin.flats.create', compact('flat', 'flats', 'services', 'services_ids'));
     }
 
     /**
@@ -121,13 +122,12 @@ class FlatController extends Controller
         $data = $request->all();
         $flat = new Flat();
         $flat->fill($data);
-        // $flat->image = Storage::url('img_12.webp');
         $flat->user_id = Auth::id();
 
         //VISIBLE
         $flat->visible = array_key_exists('visible', $data);
 
-
+        // IMAGE
         if (array_key_exists('image', $data)) {
             $image_url = Storage::put('flat_images', $data['image']);
             $flat->image = $image_url;
@@ -138,12 +138,13 @@ class FlatController extends Controller
 
 
 
+
         if (array_key_exists('services', $data)) {
 
             $flat->services()->attach($data['services']);
         }
 
-        return redirect()->route('admin.flats.show', $flat);
+        return redirect()->route('admin.flats.show', $flat)->with('message', "Appartamento creato con successo")->with('type', 'success');;
     }
 
     /**
@@ -168,15 +169,18 @@ class FlatController extends Controller
     public function edit(Flat $flat)
     {
         //controllo che sia l'autore, se non lo è ridirigo sulla index
-        //  if($post->user_id !== Auth::id()){
-        //     return redirect()->route('admin.posts.index')
-        //     ->with('message', 'Non sei Autorizzato a modificare questo post')
-        //     ->with('type', 'warning');
-        // }
+        if ($flat->user_id !== Auth::id()) {
+            return redirect()->route('admin.flats.index')
+                ->with('message', 'Non sei Autorizzato a modificare questo appartamento')
+                ->with('type', 'warning');
+        }
         $services = Service::select('id', 'label', 'icon')->get();
 
+        // SERVICE_IDS
+        $services_ids = $flat->services->pluck('id')->toArray();
+
         $prev_services = $flat->services->pluck('id')->toArray();
-        return view('admin.flats.edit', compact('flat', 'services'));
+        return view('admin.flats.edit', compact('flat', 'services', 'services_ids'));
     }
 
     /**
@@ -187,12 +191,10 @@ class FlatController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request, Flat $flat)
-    {
-        $data = $request->all();
-
-        // VALIDAZIONE
+    { // VALIDAZIONE
         $request->validate($this->validationFlat, $this->validationFlatMessage);
 
+        $data = $request->all();
 
         $flat->user_id = Auth::id();
 
@@ -204,9 +206,15 @@ class FlatController extends Controller
         //VISIBLE
         $data['visible'] = array_key_exists('visible', $data);
 
+        // IMAGE
+        if (array_key_exists('image', $data)) {
+            $image_url = Storage::put('flat_images', $data['image']);
+            $flat->image = $image_url;
+        }
+
         $flat->update($data);
 
-        return redirect()->route('admin.flats.show', $flat);
+        return redirect()->route('admin.flats.show', $flat)->with('message', "Appartamento modificato con successo")->with('type', 'success');;
     }
 
     /**
@@ -217,11 +225,17 @@ class FlatController extends Controller
      */
     public function destroy(Flat $flat)
     {
+        if ($flat->user_id !== Auth::id()) {
+            return redirect()->route('admin.flats.index')
+                ->with('message', "Non sei autorizzato ad eliminare questo appartamento")
+                ->with('type', "warning");
+        }
         $flat->services()->detach();
+        $flat->messages()->delete();
+        $flat->views()->delete();
 
         $flat->delete();
-
-        return redirect()->route('admin.flats.index');
+        return redirect()->route('admin.flats.index')->with('message', "Appartamento eliminato con successo")->with('type', 'success');;
     }
 
     //TOGGLE
@@ -233,6 +247,6 @@ class FlatController extends Controller
         $flat->save();
 
 
-        return redirect()->route('admin.flats.index')->with('message', "Appartamento $status con succeso")->with('type', 'success');
+        return redirect()->route('admin.flats.index')->with('message', "Appartamento $status con successo")->with('type', 'success');
     }
 }

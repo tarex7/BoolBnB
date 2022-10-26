@@ -11,6 +11,9 @@ const mix = require('laravel-mix');
  |
  */
 
+
 mix.js('resources/js/app.js', 'public/js')
+    .js('resources/js/delete_confirmation.js', 'public/js')
+    .js('resources/js/image_preview.js', 'public/js')
     .sass('resources/sass/app.scss', 'public/css')
     .options({processCssUrls:false});

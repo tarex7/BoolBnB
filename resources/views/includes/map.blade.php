@@ -11,17 +11,25 @@
     
 </head>
 <body>
-        
+    <input id="lat" type="text" class="form-control" name="latitude" id="lat"
+    value="{{ old('latitude', $flat->latitude) }}" hidden>
+
+<input id="lon" type="text" class="form-control" name="longitude" id="lon"
+    value="{{ old('longitude', $flat->longitude) }}" hidden>
+
     <div id="map" style="width: 100%;height: 600px">
     </div>
     <script type="text/javascript">
-        let center = [4,44.4];
-        //let center = [45.76,44.4];
+
+        const latitude = document.getElementById('lat').value;
+        const longitude = document.getElementById('lon').value;
+
+        let center = [longitude,latitude];
         let map = tt.map ({
             key:"LoUScCfSMvO6XE0DcnNW32fDqHOr2BKj",
             container: "map",
             center:center,
-            zoom: 11,
+            zoom: 13,
         })
     
         map.on('load',()=>{

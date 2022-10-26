@@ -4,7 +4,7 @@
 
    @section('content')
         <header>
-            <h1 class="text-center">Crea appartamento</h1>
+            <h3 class="text-center mb-3">Crea appartamento</h3>
         </header>
 
         @include('includes.admin.flats.form')

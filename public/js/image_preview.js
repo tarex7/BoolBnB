@@ -93,11 +93,18 @@
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-var preview = document.getElementById("preview");
-var imageField = document.getElementById("image-field");
-placeholder = "https://cdn2.vectorstock.com/i/thumb-large/48/06/image-preview-icon-picture-placeholder-vector-31284806.jpg";
-imageField.addEventListener("input", function () {
-  if (imageField.value) preview.src = imageField.value;else preview.src = placeholder;
+var placeholder = "https://cdn2.vectorstock.com/i/thumb-large/48/06/image-preview-icon-picture-placeholder-vector-31284806.jpg";
+var image = document.getElementById('image');
+var preview = document.getElementById('preview');
+image.addEventListener('input', function () {
+  if (image.files && image.files[0]) {
+    var reader = new FileReader();
+    reader.readAsDataURL(image.files[0]);
+    reader.addEventListener('load', function (event) {
+      preview.src = event.target.result;
+    });
+  } else preview.src = placeholder;
+  preview.setAttribute('src', placeholder);
 });
 
 /***/ }),

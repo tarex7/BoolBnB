@@ -17,3 +17,10 @@ use Illuminate\Support\Facades\Route;
 Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
 });
+
+
+Route::namespace('api')->group(function(){
+    Route::get('/flats', 'FlatController@index');
+    Route::get('/flats/{id}', 'FlatController@show');
+
+});

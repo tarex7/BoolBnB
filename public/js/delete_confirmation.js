@@ -93,7 +93,15 @@
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-throw new Error("Module build failed (from ./node_modules/babel-loader/lib/index.js):\nError: ENOENT: no such file or directory, open 'C:\\laravel\\boolbnb\\resources\\js\\delete_confirmation.js'");
+// Chiedere conferma ogni qualvolta l'utente tenta di cancellare un post.
+var deleteForms = document.querySelectorAll('.delete-form');
+deleteForms.forEach(function (form) {
+  form.addEventListener('submit', function (event) {
+    event.preventDefault();
+    var hasConfirmed = confirm('Sei sicuro di voler eliminare questo appartamento?');
+    if (hasConfirmed) form.submit();
+  });
+});
 
 /***/ }),
 

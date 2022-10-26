@@ -1,11 +1,13 @@
 <?php
 
 use App\User;
+use Faker\Factory;
 use App\Models\Flat;
 use Illuminate\Support\Arr;
 use Faker\Generator as Faker;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\Auth;
+$faker = Factory::create('it_IT');
 
 class FlatSeeder extends Seeder
 {

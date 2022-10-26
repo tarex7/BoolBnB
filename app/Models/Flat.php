@@ -33,6 +33,10 @@ class Flat extends Model
         return $this->hasMany('App\Models\Message');
     }
 
+    public function views() {
+        return $this->hasMany('App\Models\View');
+    }
+
 
     public function user() {
         return $this->belongsTo('App\User');
