@@ -16,14 +16,13 @@
             <div class="card-body">
               <div class="row justify-content-between">
                 <div class="col-6">
-                  <h1>{{ flat.id }}</h1>
+                  
                 </div>
               </div>
               <h5 class="card-title">{{ flat.title }}</h5>
               <h6 class="card-subtitle mb-2 text-muted">test:</h6>
-              <h6 class="card-subtitle mb-2 text-muted">Test:</h6>
               <p class="card-text">
-                {{ flat.description }}
+               
               </p>
             </div>
           </div>

@@ -29,11 +29,11 @@
 export default {
   name: "AppHeader",
   data: () => ({
-    links: [
+    /*links: [
       { name: "home", title: "Home" },
       { name: "about", title: "About" },
       { name: "contacts", title: "Contacts" },
-    ],
+    ],*/
   }),
   props: {
     title: String,

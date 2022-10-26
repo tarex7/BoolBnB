@@ -1,6 +1,6 @@
 <template>
   <section id="jumbotron">
-    <h1 class="text-danger">JUMBOTRON LLALALLALA</h1>
+    <h1 class="text-danger">Jumbo</h1>
   </section>
 </template>
 
