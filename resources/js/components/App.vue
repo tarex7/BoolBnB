@@ -5,7 +5,6 @@
     <app-jumbotron />
     <main class="container my-3">
       <!-- JUMBOTRON -->
-
       <!-- ROTTE VIEW (CONTENUTO DINAMICO ALl'INTERNO DELLE PAGINE) -->
       <router-view></router-view>
     </main>
