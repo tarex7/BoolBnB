@@ -11,9 +11,10 @@
     <title>{{ config('app.name', 'Laravel') }}</title>
 
     <!-- Scripts -->
+    <script defer src="{{ asset('js/front.js') }}"></script>
     <script src="{{ asset('js/app.js') }}"></script>
     {{-- Import JS --}}
-    <script defer src="{{ asset('js/front.js') }}"></script>
+    <script defer src="{{ asset('js/image_preview.js') }}"></script>
 
     <script type="text/javascript" src="https://api.tomtom.com/maps-sdk-for-web/cdn/6.x/6.20.0/maps/maps-web.min.js">
     </script>

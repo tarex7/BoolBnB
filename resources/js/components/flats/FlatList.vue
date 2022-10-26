@@ -32,7 +32,7 @@ export default {
           this.flats = res.data;
         })
         .catch((err) => {
-          this.error = "Errore durante il fetch dei post";
+          this.error = "Errore durante il fetch dei flats";
         })
         .then(() => {
           this.isLoading = false;
