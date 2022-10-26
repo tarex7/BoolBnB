@@ -1,8 +1,8 @@
 <template>
   <div id="home-page">
-    <!-- FLAT LIST COMPONENTE
- -->
+    <!-- FLAT LIST COMPONENTE-->
     <flat-list />
+    prova
   </div>
 </template>
 

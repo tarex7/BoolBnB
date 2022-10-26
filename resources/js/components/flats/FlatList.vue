@@ -1,35 +1,37 @@
 <template>
-  <section id="posts-list">
-    <h2 class="my-3">Appartamenti</h2>
+  <section id="flat-list">
+    <h2 class="my-3">APPARTAMENTI</h2>
 
     <!-- AppLoader -->
     <app-loader v-if="isLoading" />
+
+    <!-- FLAT CARD -->
+    <div class="row justify-content-between">
+      <flat-card v-for="flat in flats" :key="flat.id" :flat="flat" />
+    </div>
   </section>
 </template>
 
-<script>
-//IMPORTO LA CARD DEI SINGOLI FLAT
-// import FlatCard from "./FlatCard.vue";
+ <script>
+import FlatCard from "../flats/FlatCard.vue";
 export default {
   name: "FlatList",
   data() {
     return {
-      //   flats: [],
+      flats: [],
       isLoading: false,
     };
   },
-  //   components: { FlatCard },
+  components: { FlatCard },
   methods: {
-    fetchPosts(page = 1) {
+    fetchPosts() {
       this.isLoading = true;
       axios
-        //   CHIAMATA  QUANDO PASSEREMO I DATI FLATS DAL BACKEND PER STAMPARE  SINGOLE PAGINE
-        .get(`http://localhost:8000/api/flats?page=${page}`)
+        .get("http://localhost:8000/api/flats")
         .then((res) => {
-          const { data } = res.data;
-          this.flats = data;
+          this.flats = res.data;
         })
-        .catch(() => {
+        .catch((err) => {
           this.error = "Errore durante il fetch dei post";
         })
         .then(() => {
@@ -42,5 +44,5 @@ export default {
   },
 };
 </script>
-<style scoped lang="scss">
+ <style scoped lang="scss">
 </style>
