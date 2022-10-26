@@ -2,7 +2,6 @@
   <div id="home-page">
     <!-- FLAT LIST COMPONENTE-->
     <flat-list />
-    prova
   </div>
 </template>
 

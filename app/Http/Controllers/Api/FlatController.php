@@ -15,8 +15,8 @@ class FlatController extends Controller
      */
     public function index()
     {
-        $flats = Flat::all();
-
+        //Vedo solo i Flat Visibili
+        $flats = Flat::where('visible', 1)->orderBy('created_at', 'DESC')->get();
 
         return response()->json($flats);
     }
