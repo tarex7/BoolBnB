@@ -5161,7 +5161,6 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
   name: "App",
   // COMPONENTS
   components: {
-    AppHeader: AppHeader,
     AppJumbotron: _AppJumbotron_vue__WEBPACK_IMPORTED_MODULE_0__["default"],
     AppFooter: _AppFooter_vue__WEBPACK_IMPORTED_MODULE_1__["default"]
   }
@@ -5733,7 +5732,7 @@ var render = function render() {
   }, [_c("h2", {
     staticClass: "my-3"
   }, [_vm._v("APPARTAMENTI")]), _vm._v(" "), _vm.isLoading ? _c("app-loader") : _vm._e(), _vm._v(" "), _c("div", {
-    staticClass: "row justify-content-between"
+    staticClass: "row"
   }, _vm._l(_vm.flats, function (flat) {
     return _c("flat-card", {
       key: flat.id,

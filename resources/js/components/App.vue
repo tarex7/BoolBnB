@@ -26,7 +26,7 @@ import SearchBar from "./SearchBar.vue";
 export default {
   name: "App",
   // COMPONENTS
-  components: { AppHeader, AppJumbotron, AppFooter },
+  components: {  AppJumbotron, AppFooter },
   name: "App",
   // DATA
   data() {

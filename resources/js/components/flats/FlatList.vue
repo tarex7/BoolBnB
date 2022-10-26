@@ -6,7 +6,7 @@
     <app-loader v-if="isLoading" />
 
     <!-- FLAT CARD -->
-    <div class="row justify-content-between">
+    <div class="row">
       <flat-card v-for="flat in flats" :key="flat.id" :flat="flat" />
     </div>
   </section>
