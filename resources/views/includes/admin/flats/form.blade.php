@@ -289,9 +289,4 @@
             </script>
 
 
-            <style scoped>
-                img {
-                    width: 550px;
-                    height: 500px;
-                }
-            </style>
+            
