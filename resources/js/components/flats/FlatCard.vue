@@ -10,13 +10,13 @@
         <div class="col-6">
           <h1>{{ flat.id }}</h1>
         </div>
-        <!-- <div class="col-6 p-0 m-0">
+        <div class="col-6 p-0 m-0">
           <router-link
-            :to="{ name: 'post-detail', params: { slug: post.slug } }"
+            :to="{ name: 'flat-detail', params: { id: flat.id } }"
             class="ml-5 mt-2 btn btn-primary btn-sm"
             ><i class="fa-solid fa-eye"></i> Vedi</router-link
           >
-        </div> -->
+        </div>
       </div>
       <h5 class="card-title">{{ flat.title }}</h5>
 

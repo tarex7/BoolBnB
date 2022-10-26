@@ -21,4 +21,5 @@ use Illuminate\Support\Facades\Route;
 
 Route::namespace('Api')->group(function () {
     Route::get("/flats", 'FlatController@index');
+    Route::get("/flats/{id}", 'FlatController@show');
 });

@@ -8,7 +8,7 @@ import VueRouter from 'vue-router'
 import HomePage from './components/pages/HomePage.vue'
 import AboutPage from './components/pages/AboutPage.vue'
 import ContactsPage from './components/pages/ContactsPage.vue'
-// import FlatDetailPage from './components/pages/PostDetailPage.vue'
+import FlatDetail from './components/pages/FlatDetail.vue'
 
 
 // //IMPORT PAGE ERROR SOTTO A TUTTO
@@ -26,7 +26,7 @@ routes: [
         { path: '/', component: HomePage, name: 'home' },
         { path: '/about', component: AboutPage, name: 'about' },
         { path: '/contacts', component: ContactsPage, name: 'contacts' },
-        // { path: '/posts/:slug', component: PostDetailPage, name: 'post-detail' },
+        { path: '/flats/:id', component: FlatDetail, name: 'flat-detail' },
         // { path: '*', component: NotFoundPage, name: 'not_found' },
         
     ]
