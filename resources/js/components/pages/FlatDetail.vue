@@ -16,7 +16,6 @@
             <div class="card-body">
               <div class="row justify-content-between">
                 <div class="col-6">
-                  <h1>{{ flat.id }}</h1>
                 </div>
               </div>
               <h5 class="card-title">{{ flat.title }}</h5>

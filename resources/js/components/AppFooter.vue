@@ -1,6 +1,6 @@
 <template>
   <footer>
-    <h1 class="text-danger">FOOTER PIPPOOOO</h1>
+    <h1 class="text-danger"></h1>
   </footer>
 </template>
 

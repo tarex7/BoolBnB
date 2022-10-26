@@ -1,12 +1,11 @@
 <template>
   <div class="content">
     <!-- HEADER -->
-    <app-header :title="title" />
+    <!-- <app-header :title="title" /> -->
     <app-jumbotron />
     <main class="container my-3">
       <!-- JUMBOTRON -->
       <!-- ROTTE VIEW (CONTENUTO DINAMICO ALl'INTERNO DELLE PAGINE) -->
-      <h1>prova</h1>
       <router-view></router-view>
     </main>
 
@@ -17,13 +16,13 @@
 
 <script>
 // IMPORT COMPONENTS
-import AppHeader from "./AppHeader.vue";
+//import AppHeader from "./AppHeader.vue";
 import AppJumbotron from "./AppJumbotron.vue";
 import AppFooter from "./AppFooter.vue";
 export default {
   name: "App",
   // COMPONENTS
-  components: { AppHeader, AppJumbotron, AppFooter },
+  components: {AppJumbotron, AppFooter },
   name: "App",
   // DATA
   data() {

@@ -1,28 +1,26 @@
 <template>
-  <div class="card col-3 m-4 p-0">
+  <div class="card col-3 m-4 p-2">
     <img
       class="card-img-top img-fluid"
       :src="`/storage/${flat.image}`"
       alt="Card image cap"
     />
     <div class="card-body">
+
       <div class="row justify-content-between">
-        <div class="col-6">
-          <h1>{{ flat.id }}</h1>
-        </div>
-        <div class="col-6 p-0 m-0">
+        
+        <h5 class="card-title">{{ flat.title }}</h5>
+        <div class="col-12 p-0 m-0">
           <router-link
             :to="{ name: 'flat-detail', params: { id: flat.id } }"
             class="ml-5 mt-2 btn btn-primary btn-sm"
             ><i class="fa-solid fa-eye"></i> Vedi</router-link
           >
         </div>
-      </div>
-      <h5 class="card-title">{{ flat.title }}</h5>
 
-      <p class="card-text">
-        {{ flat.description }}
-      </p>
+      </div>
+
+
     </div>
   </div>
 </template>
@@ -36,4 +34,9 @@ export default {
 };
 </script>
 <style scoped lang="scss">
+.card {
+  img {
+    height: 250px;
+  }
+}
 </style>
