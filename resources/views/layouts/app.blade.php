@@ -48,7 +48,6 @@
                 };
             })();
         </script>
-        <script src="{{ asset('js/image_preview.js') }}" defer></script>
 
     
         {{-- Delete confirmation --}}

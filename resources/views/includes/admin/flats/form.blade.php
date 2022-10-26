@@ -288,5 +288,8 @@
                 })
             </script>
 
+        <script src="{{ asset('js/image_preview.js') }}"></script>
+
+
 
             
