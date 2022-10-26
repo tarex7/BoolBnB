@@ -2,9 +2,9 @@
 
 namespace App\Http\Controllers\Api;
 
+use App\Http\Controllers\Controller;
 use App\Models\Flat;
 use Illuminate\Http\Request;
-use App\Http\Controllers\Controller;
 
 class FlatController extends Controller
 {
@@ -15,7 +15,9 @@ class FlatController extends Controller
      */
     public function index()
     {
-        $flats= Flat::all();
+        //Vedo solo i Flat Visibili
+        $flats = Flat::where('visible', 1)->orderBy('created_at', 'DESC')->get();
+
         return response()->json($flats);
     }
 

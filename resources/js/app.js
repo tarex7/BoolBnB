@@ -4,6 +4,6 @@
  * building robust, powerful web applications using Vue and Laravel.
  */
 
-require('./bootstrap');
+//require('./bootstrap');
 //require('./image_preview.js');
 require('./delete_confirmation.js');

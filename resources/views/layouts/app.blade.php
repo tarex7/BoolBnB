@@ -11,7 +11,8 @@
         <title>{{ config('app.name', 'Laravel') }}</title>
     
         <!-- Scripts -->
-        <script src="{{ asset('js/app.js') }}"></script>
+        <script src="{{ asset('js/app.js') }}" defer></script>
+        <script src="{{ asset('js/front.js') }}" defer></script>
     
         {{-- Tomtom map --}}
         <script type="text/javascript" src="https://api.tomtom.com/maps-sdk-for-web/cdn/6.x/6.20.0/maps/maps-web.min.js"></script>
@@ -87,7 +88,7 @@
                     <span class="navbar-toggler-icon"></span>
                 </button>
 
-                <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <div class="" id="navbarSupportedContent">
                     <!-- Left Side Of Navbar -->
                     <ul class="navbar-nav mr-auto">
 
@@ -107,13 +108,10 @@
                             @endif
                         @else
                             <li class="nav-item dropdown">
-                                <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button"
-                                    data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
-                                    {{ Auth::user()->name }}
-                                </a>
+                               
 
-                                <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
-                                    <a class="dropdown-item text-dark" href="{{ route('admin.flats.index') }}">Admin</a>
+                                <div class="d-flex " aria-labelledby="navbarDropdown">
+                                    <a class="dropdown-item text-dark mx-3" href="{{ route('admin.flats.index') }}">I miei appartamenti</a>
                                     <a class="dropdown-item" href="{{ route('logout') }}"
                                         onclick="event.preventDefault();
                                                      document.getElementById('logout-form').submit();">
