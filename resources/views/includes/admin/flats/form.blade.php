@@ -103,10 +103,10 @@
                             <label for="address">Indirizzo:</label>
                             <div id="address-tomtom"></div>
 
-                            <input id="lat" type="text" class="form-control" name="latitude" id="lat"
+                            <input id="lat" type="text" class="form-control" name="latitude" 
                                 value="{{ old('latitude', $flat->latitude) }}" hidden>
                     
-                            <input id="lon" type="text" class="form-control" name="longitude" id="lon"
+                            <input id="lon" type="text" class="form-control" name="longitude" 
                                 value="{{ old('longitude', $flat->longitude) }}" hidden>
                     
                     
