@@ -2,7 +2,7 @@
 
 
 @section('content')
-    <section class="admin-flatdetail mt-5">
+    <section class="admin-flatdetail bg-admin-flats-homepage pt-5">
         <div class="container">
 
 

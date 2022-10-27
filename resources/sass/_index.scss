@@ -49,6 +49,7 @@ button {
     background-image: url("../../public/images/backoffice/Top-Header-Background-768x164.png");
     height: 400px;
     background-size: cover;
+    background-color: bisque;
 
     .admin-header-content {
         height: 280px;
@@ -58,4 +59,8 @@ button {
             width: 200px;
         }
     }
+}
+
+.bg-admin-flats-homepage {
+    background-color: bisque;
 }
