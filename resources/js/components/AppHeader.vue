@@ -1,7 +1,7 @@
 <template>
   <header>
     <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-      <a class="navbar-brand" href="#">BoolBnB</a>
+      <a class="navbar-brand" href="#"></a>
       <button
         class="navbar-toggler"
         type="button"
