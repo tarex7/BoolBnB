@@ -20,12 +20,12 @@
 
                 <div class="border rounded mt-4">
                     <img src="{{ $flat->image ? asset('storage/' . $flat->image) : asset('images/placeholder.png') }}"
-                    alt="flat-image" id="preview" class="img-fluid">
+                        alt="flat-image" id="preview" class="img-fluid" height="412" width="548">
                 </div>
 
 
                 <div class="mb-3 col-12 p-0">
-                    <input type="file" class="my-3 @error('image') is-invalid @enderror" id="image"
+                    <input type="file" class="my-3 text-muted @error('image') is-invalid @enderror" id="image"
                         name="image">
                     {{-- MESSAGGIO ERRORE --}}
                     @error('image')
@@ -38,7 +38,7 @@
                 <div class="mb-3 form-check col-6  p-3">
                     <input type="checkbox" class="form-check-input" id="visible" name="visible" value="1"
                         @if (old('visible', $flat->visible)) checked @endif>
-                    <label class="form-check-label" for="visible">Rendi visibile l'appartamento</label>
+                    <label class="form-check-label text-muted" for="visible">Rendi visibile l'appartamento</label>
                 </div>
 
             </div>
@@ -46,10 +46,11 @@
             <div class="col-7">
 
                 {{-- Titolo --}}
-                <div class="form-group">
-                    <label for="title" class="">Titolo *</label>
-                    <input type="text" class="form-control @error('title') is-invalid @enderror" id="title"
-                        name="title" value="{{ old('title', $flat->title) }}" required minlength="5" maxlength="50">
+                <div class="form-group py-2">
+                    <label for="title" class="fw-bold">Titolo</label>
+                    <input type="text" placeholder="* Cambo Obbligatorio"
+                        class="form-control @error('title') is-invalid @enderror" id="title" name="title"
+                        value="{{ old('title', $flat->title) }}" required minlength="5" maxlength="50">
                     @error('title')
                         <div class="invalid-feedback">
                             {{ $message }}
@@ -63,10 +64,10 @@
 
                     {{-- Descrizione --}}
                     <div class="mb-3 col-12">
-                        <div class="form-floating">
-                    <label for="description" class="">Descrizione *</label>
+                        <div class="form-group">
+                            <label for="description" class="fw-bold">Descrizione</label>
 
-                            <textarea class="form-control @error('description') is-invalid @enderror" placeholder="Leave a comment here"
+                            <textarea class="form-control @error('description') is-invalid @enderror" placeholder="* Cambo Obbligatorio"
                                 id="description" style="height: 300px" name="description">{{ old('description', $flat->description) }}</textarea>
 
                             {{-- MESSAGGIO ERRORE --}}
@@ -94,26 +95,26 @@
                         {{-- Indirizzo tomtom searchbar --}}
 
                         <div class="form-group">
-                            <label for="address">Indirizzo: *</label>
+                            <label class='py-2 fw-bold'for="address">Indirizzo: </label>
                             <div id="address-tomtom"></div>
 
-                            <input id="lat" type="text" class="form-control" name="latitude" 
-                                value="{{ old('latitude', $flat->latitude) }}" hidden>
-                    
-                            <input id="lon" type="text" class="form-control" name="longitude" 
-                                value="{{ old('longitude', $flat->longitude) }}" hidden>
-                    
-                    
-                        </div>
-                    
+                            <input id="lat" type="text" placeholder="* Cambo Obbligatorio" class="form-control"
+                                name="latitude" value="{{ old('latitude', $flat->latitude) }}" hidden>
 
-                        <div class="d-flex mt-2">
+                            <input id="lon" type="text" class="form-control" name="longitude"
+                                value="{{ old('longitude', $flat->longitude) }}" hidden>
+
+
+                        </div>
+
+
+                        <div class="d-flex mt-2 justify-content-between">
                             {{-- METRI QUADRI --}}
-                            <div class="my-3 col-6 p-0">
-                                <label for="square_mt" class="form-label ">Superfice mq<sup>2</sup> *</label>
-                                <input type="number" class="form-control @error('square_mt') is-invalid @enderror"
-                                    id="square_mt" name="square_mt" step="1"
-                                    value="{{ old('square_mt', $flat->square_mt) }}">
+                            <div class="my-3 col-5 p-0">
+                                <label for="square_mt" class="form-label fw-bold">Superfice mq<sup>2</sup></label>
+                                <input placeholder="* Cambo Obbligatorio" type="number"
+                                    class="form-control @error('square_mt') is-invalid @enderror" id="square_mt"
+                                    name="square_mt" step="1" value="{{ old('square_mt', $flat->square_mt) }}">
 
                                 {{-- MESSAGGIO ERRORE --}}
                                 @error('square_mt')
@@ -122,10 +123,11 @@
                             </div>
 
                             {{-- NUMERO STANZE --}}
-                            <div class="my-3 col-6">
-                                <label for="room_number" class="form-label ">Camere *</label>
-                                <input type="number" class="form-control @error('room_number') is-invalid @enderror"
-                                    id="room_number" name="room_number" step="1"
+                            <div class="my-3 col-5">
+                                <label for="room_number" class="form-label fw-bold">Camere</label>
+                                <input type="number" placeholder="* Cambo Obbligatorio"
+                                    class="form-control @error('room_number') is-invalid @enderror" id="room_number"
+                                    name="room_number" step="1"
                                     value="{{ old('room_number', $flat->room_number) }}">
                                 {{-- MESSAGGIO ERRORE --}}
                                 @error('room_number')
@@ -135,12 +137,13 @@
 
                         </div>
 
-                        <div class="d-flex">
+                        <div class="d-flex justify-content-between">
                             {{-- NUMERO LETTI --}}
-                            <div class="my-3 col-6 p-0">
-                                <label for="bed_number" class="form-label ">Letti *</label>
-                                <input type="number" class="form-control @error('bed_number') is-invalid @enderror"
-                                    id="bed_number" name="bed_number" step="1"
+                            <div class="my-3 col-5 p-0">
+                                <label for="bed_number" class="form-label fw-bold ">Letti</label>
+                                <input placeholder="* Cambo Obbligatorio" type="number"
+                                    class="form-control @error('bed_number') is-invalid @enderror" id="bed_number"
+                                    name="bed_number" step="1"
                                     value="{{ old('bed_number', $flat->bed_number) }}">
                                 {{-- MESSAGGIO ERRORE --}}
                                 @error('bed_number')
@@ -149,9 +152,9 @@
                             </div>
 
                             {{-- NUMERO BAGNI --}}
-                            <div class="my-3 col-6">
-                                <label for="bathroom_number" class="form-label ">Bagni *</label>
-                                <input type="number"
+                            <div class="my-3 col-5">
+                                <label for="bathroom_number" class="form-label fw-bold ">Bagni</label>
+                                <input placeholder="* Cambo Obbligatorio" type="number"
                                     class="form-control @error('bathroom_number') is-invalid @enderror"
                                     id="bathroom_number" name="bathroom_number" step="1"
                                     value="{{ old('bathroom_number', $flat->bathroom_number) }}">
@@ -165,7 +168,7 @@
 
                         <div class="col-12 p-0 mt-2">
                             {{-- CHECKBOX - SERVICE --}}
-                            <p class="mb-2 ">Servizi</p>
+                            <p class="mb-2 fw-bold">Servizi</p>
 
                             <div class=" d-flex flex-wrap justify-content-between">
 
@@ -175,8 +178,9 @@
                                             @if (in_array($service->id, old('services', $services_ids))) checked @endif
                                             id="{{ $service->label }}" name="services[]"
                                             value="{{ $service->id }}">
-                                        <label class="form-check-label mr-1" for="{{ $service->label }}">
-                                            {{ $service->label }} <i class="{{ $service->icon }}"></i>
+                                        <label class="form-check-label mx-2" for="{{ $service->label }}">
+                                            {{ $service->label }} <i
+                                                class="{{ $service->icon }} px-2 text-danger "></i>
                                         </label>
                                     </div>
                                 @endforeach
@@ -186,13 +190,13 @@
 
                             {{-- PREZZO PER NOTTE --}}
 
-                            <p class="mt-4 mb-2">Prezzo per notte *</p>
+                            <p class="mt-4 mb-2">Prezzo per notte</p>
                             <div class="input-group mb-3 col-3 p-0">
                                 <div class="input-group-prepend">
                                     <span class="input-group-text" id="basic-addon1">€</span>
                                 </div>
 
-                                <input type="number"
+                                <input placeholder="* Campo Obbligatorio" type="number"
                                     class="form-control @error('price_per_day') is-invalid @enderror"
                                     id="price_per_day" name="price_per_day" step="1"
                                     value="{{ old('price_per_day', $flat->price_per_day) }}">
@@ -208,8 +212,9 @@
                     </div>
                 </div>
                 <div class="col-12 d-flex justify-content-end align-items-center my-5 px-5">
-                    <button type="submit" class="btn {{ !$flat->exists ? 'btn-success' : 'btn-warning' }} mr-5">{{ !$flat->exists ? 'Crea appartamento' : 'Aggiorna appartamento' }}</button>
-                    <a href="{{ route('admin.flats.index') }}" class="btn btn-primary">Indietro</a>
+                    <button type="submit"
+                        class="btn {{ !$flat->exists ? 'btn-success' : 'btn-warning' }} mr-5">{{ !$flat->exists ? 'Crea appartamento' : 'Aggiorna appartamento' }}</button>
+                    <a href="{{ route('admin.flats.index') }}" class="btn btn-primary mx-2">Indietro</a>
                 </div>
             </div>
 
@@ -230,9 +235,9 @@
                 const latInput = document.getElementById('lat');
                 const lonInput = document.getElementById('lon');
                 const addressContainer = document.getElementById('address-tomtom')
-            
+
                 const testbtn = document.getElementById('test');
-            
+
                 var ttSearchBox = new tt.plugins.SearchBox(tt.services, options);
                 var searchBoxHTML = ttSearchBox.getSearchBoxHTML();
                 addressContainer.append(searchBoxHTML);
@@ -248,25 +253,26 @@
                 });
                 tomtomInput.setAttribute("name", "address");
                 tomtomInput.value = "<?php echo $flat->address; ?>";
-            
-                 //let axios = require('axios').default;
-            
-                
-            
-            
+
+                //let axios = require('axios').default;
+
+
+
+
                 addressContainer.addEventListener("input", (e) => {
                     console.log('call');
-                     axios.get(
-                             `https:api.tomtom.com/search/2/autocomplete/${addressContainer.value}.json?key=I7jwOnv7XxCbU6AV64AN8ZPGArFaIoTh&language=it-IT&limit=6`
-                         )
-                         .then((res) => {
-                             console.log(res.data);
-                         })
+                    axios.get(
+                            `https:api.tomtom.com/search/2/autocomplete/${addressContainer.value}.json?key=I7jwOnv7XxCbU6AV64AN8ZPGArFaIoTh&language=it-IT&limit=6`
+                        )
+                        .then((res) => {
+                            console.log(res.data);
+                        })
                 });
             </script>
 
             <script>
-                const placeholder = "https://cdn2.vectorstock.com/i/thumb-large/48/06/image-preview-icon-picture-placeholder-vector-31284806.jpg";
+                const placeholder =
+                    "https://cdn2.vectorstock.com/i/thumb-large/48/06/image-preview-icon-picture-placeholder-vector-31284806.jpg";
                 const image = document.getElementById('image')
                 const preview = document.getElementById('preview')
 
@@ -282,8 +288,4 @@
                 })
             </script>
 
-        <script src="{{ asset('js/image_preview.js') }}"></script>
-
-
-
-            
+            <script src="{{ asset('js/image_preview.js') }}"></script>

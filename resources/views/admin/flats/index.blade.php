@@ -12,7 +12,7 @@
                             <div class="col">
                                 <p><span id="greetings">
 
-                                        <h2 class="text-danger">{{ Auth::user()->name }}</h2>
+                                        <h1 class="text-success  text-uppercase  fw-bold ">{{ Auth::user()->name }}</h1>
                                     </span></p>
                             </div>
                             <div>
