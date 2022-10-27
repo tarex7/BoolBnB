@@ -5215,11 +5215,16 @@ __webpack_require__.r(__webpack_exports__);
   name: "AppHeader",
   data: function data() {
     return {
-      /*links: [
-        { name: "home", title: "Home" },
-        { name: "about", title: "About" },
-        { name: "contacts", title: "Contacts" },
-      ],*/
+      links: [{
+        name: "home",
+        title: "Home"
+      }, {
+        name: "about",
+        title: "About"
+      }, {
+        name: "contacts",
+        title: "Contacts"
+      }]
     };
   },
   props: {
@@ -5286,7 +5291,10 @@ __webpack_require__.r(__webpack_exports__);
     return {
       query: "",
       autocomplete: [],
-      radius: 20
+      radius: 20,
+      flats: [],
+      lat: "",
+      lon: ""
     };
   },
   methods: {
@@ -5328,14 +5336,10 @@ __webpack_require__.r(__webpack_exports__);
             params: {
               lat: _this2.lat,
               lon: _this2.lon,
-              radius: radius,
-              rooms: _this2.rooms,
-              beds: _this2.beds,
-              baths: _this2.baths,
-              services: _this2.selectedServices
+              radius: radius
             }
           }).then(function (response) {
-            _this2.apartments = response.data;
+            _this2.flats = response.data;
             _this2.loading = false;
           })["catch"](function (error) {
             return console.error(error);
@@ -5345,6 +5349,15 @@ __webpack_require__.r(__webpack_exports__);
         });
       }
     }
+  },
+  mounted: function mounted() {
+    if (this.$route.params.query) {
+      this.query = this.$route.params.query;
+    }
+    if (this.$route.params.radius) {
+      this.radius = this.$route.params.radius;
+    }
+    this.getGeoPosition();
   }
 });
 

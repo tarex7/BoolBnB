@@ -104,10 +104,10 @@
                             <div id="address-tomtom"></div>
 
                             <input id="lat" type="text" class="form-control" name="latitude" 
-                                value="{{ old('latitude', $flat->latitude) }}" hidden>
+                                value="{{ old('latitude', $flat->latitude) }}">
                     
                             <input id="lon" type="text" class="form-control" name="longitude" 
-                                value="{{ old('longitude', $flat->longitude) }}" hidden>
+                                value="{{ old('longitude', $flat->longitude) }}">
                     
                     
                         </div>
@@ -233,20 +233,28 @@
                         language: 'it-IT',
                     }
                 };
+
                 const latInput = document.getElementById('lat');
                 const lonInput = document.getElementById('lon');
                 const addressContainer = document.getElementById('address-tomtom')
+                console.log(addressContainer);
             
                 const testbtn = document.getElementById('test');
             
                 var ttSearchBox = new tt.plugins.SearchBox(tt.services, options);
                 var searchBoxHTML = ttSearchBox.getSearchBoxHTML();
+
                 addressContainer.append(searchBoxHTML);
+
                 const tomtomInput = document.getElementsByClassName("tt-search-box-input")[0];
+
                 let date = {}
+
                 ttSearchBox.on("tomtom.searchbox.resultsfound", function(data) {
                     date = (data);
                     let position = date.data.results.fuzzySearch.results[0].position;
+                    console.log(date);
+                    console.log(position);
                     let lon = position.lng;
                     let lat = position.lat;
                     latInput.value = lat;
@@ -255,18 +263,19 @@
                 tomtomInput.setAttribute("name", "address");
                 tomtomInput.value = "<?php echo $flat->address; ?>";
             
-                 //let axios = require('axios').default;
+                 //let axios = require('axios');
             
-                
+                //https://api.tomtom.com/search/2/geocode/${query}.json?key=OQPgwY4eUitV7IRklnutdiB8DVqRx8kG&limit=1&radius=${radius}
             
+                let radius = 20000
             
-                addressContainer.addEventListener("input", (e) => {
+                addressContainer.addEventListener("keyup", (e) => {
                     console.log('call');
                      axios.get(
-                             `https:api.tomtom.com/search/2/autocomplete/${addressContainer.value}.json?key=I7jwOnv7XxCbU6AV64AN8ZPGArFaIoTh&language=it-IT&limit=6`
+                             `https://api.tomtom.com/search/2/geocode/${addressContainer}.json?key=I7jwOnv7XxCbU6AV64AN8ZPGArFaIoTh`
                          )
                          .then((res) => {
-                             console.log(res.data);
+                             console.log('risposta',res.data.results);
                          })
                 });
             </script>

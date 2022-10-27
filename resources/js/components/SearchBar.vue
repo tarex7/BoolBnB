@@ -42,7 +42,10 @@ data() {
   return {
     query: "",
     autocomplete: [],
-    radius:20,
+    radius: 20,
+    flats: [],
+    lat: "",
+    lon: "",
   }
 },
 
@@ -100,14 +103,11 @@ data() {
                   lat: this.lat,
                   lon: this.lon,
                   radius: radius,
-                  rooms: this.rooms,
-                  beds: this.beds,
-                  baths: this.baths,
-                  services: this.selectedServices,
+                 
                 },
               })
               .then((response) => {
-                this.apartments = response.data;
+                this.flats = response.data;
                 this.loading = false;
               })
               .catch((error) => console.error(error));
@@ -115,6 +115,16 @@ data() {
           .catch((e) => console.error(e));
       }
     },
+  },
+
+  mounted() {
+    if (this.$route.params.query) {
+      this.query = this.$route.params.query;
+    }
+    if (this.$route.params.radius) {
+      this.radius = this.$route.params.radius;
+    }
+    this.getGeoPosition();
   },
 
 }

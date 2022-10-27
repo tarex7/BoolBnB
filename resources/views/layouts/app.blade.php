@@ -12,7 +12,8 @@
     
         <!-- Scripts -->
         <script src="{{ asset('js/app.js') }}" defer></script>
-        <script src="{{ asset('js/front.js') }}" defer></script>
+        <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+        
     
         {{-- Tomtom map --}}
         <script type="text/javascript" src="https://api.tomtom.com/maps-sdk-for-web/cdn/6.x/6.20.0/maps/maps-web.min.js"></script>

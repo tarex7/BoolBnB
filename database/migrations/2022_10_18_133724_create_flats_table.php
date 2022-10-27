@@ -24,8 +24,8 @@ class CreateFlatsTable extends Migration
             $table->text('description')->nullable();
             $table->unsignedSmallInteger('price_per_day')->nullable();
             $table->string('address')->nullable();
-            $table->float('latitude', 4, 2)->nullable();
-            $table->float('longitude', 4, 2)->nullable();
+            $table->decimal('latitude', 11, 7)->nullable();
+            $table->decimal('longitude', 11, 7)->nullable();
             $table->boolean('visible')->nullable();
             $table->timestamps();
         });
