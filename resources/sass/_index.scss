@@ -1,47 +1,61 @@
 .container {
     position: relative;
     z-index: 1;
-  }
-  
-  .flag{
+}
+
+.flag {
     background-color: #0282f9;
     position: absolute;
-    top:-56px;
+    top: -56px;
     left: 10px;
-    padding:0.5rem;
+    padding: 0.5rem;
     text-align: center;
-  }
-  .flat-card {
+}
+.flat-card {
     width: calc(100% / 6);
     padding: 1rem;
     position: relative;
-    top:0;
+    top: 0;
     left: 0;
-    .appair{
-      position: absolute;
-      top:20px;
-      left: 32px;
-      z-index: 2;
-      display: none;
+    .appair {
+        position: absolute;
+        top: 20px;
+        left: 32px;
+        z-index: 2;
+        display: none;
     }
-    .imaginary{
+    .imaginary {
         background-color: aqua;
         height: 12rem;
         width: 9.5rem;
         object-fit: cover;
         object-position: top;
-        &:hover{
-          filter: opacity(0.3);
+        &:hover {
+            filter: opacity(0.3);
         }
-      }
-      
-
     }
-    .flat-card:hover .appair{
-        display: block;
-    }
-  button{
+}
+.flat-card:hover .appair {
+    display: block;
+}
+button {
     text-transform: uppercase;
     padding: 1rem 6rem;
     margin: 2rem;
-  }  
+}
+
+//ADMINI-INDEX HEADER
+#admin-index-header {
+    background-image: url("../../public/images/backoffice/Top-Header-Background-768x164.png");
+    height: 400px;
+    background-size: cover;
+
+    .admin-header-content {
+        height: 280px;
+
+        .btn {
+            height: 60px;
+            width: 200px;
+        }
+    }
+}

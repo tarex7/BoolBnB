@@ -17,4 +17,4 @@ mix.js('resources/js/app.js', 'public/js')
     .js('resources/js/image_preview.js', 'public/js')
     .js('resources/js/front.js', 'public/js')
     .sass('resources/sass/app.scss', 'public/css')
-    .options({processCssUrls:false});
+    // .options({processCssUrls:false});
