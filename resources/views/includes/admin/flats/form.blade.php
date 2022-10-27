@@ -187,10 +187,11 @@
 
                             </div>
 
+                        </div>
+                        {{-- PREZZO PER NOTTE --}}
 
-                            {{-- PREZZO PER NOTTE --}}
-
-                            <p class="mt-4 mb-2">Prezzo per notte</p>
+                        <div class="col-5">
+                            <p class="mt-4 mb-2 fw-bold">Prezzo per notte</p>
                             <div class="input-group mb-3 col-3 p-0">
                                 <div class="input-group-prepend">
                                     <span class="input-group-text" id="basic-addon1">€</span>
@@ -207,14 +208,16 @@
 
                                 </div>
                             @enderror
-
                         </div>
+
+
                     </div>
                 </div>
                 <div class="col-12 d-flex justify-content-end align-items-center my-5 px-5">
-                    <button type="submit"
-                        class="btn {{ !$flat->exists ? 'btn-success' : 'btn-warning' }} mr-5">{{ !$flat->exists ? 'Crea appartamento' : 'Aggiorna appartamento' }}</button>
-                    <a href="{{ route('admin.flats.index') }}" class="btn btn-primary mx-2">Indietro</a>
+                    <button type="submit" class="mx-5 button-71 "
+                        role="button">{{ !$flat->exists ? 'Crea appartamento' : 'Aggiorna appartamento' }}</button>
+
+                    <a href="{{ route('admin.flats.index') }}" class="button-71 bg-primary ">Indietro</a>
                 </div>
             </div>
 
