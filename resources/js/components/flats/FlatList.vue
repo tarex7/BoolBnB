@@ -1,6 +1,6 @@
 <template>
   <section id="flat-list">
-    <h2 class="my-3">APPARTAMENTI</h2>
+    <h2 class="my-3"></h2>
 
     <!-- AppLoader -->
     <app-loader v-if="isLoading" />
@@ -24,7 +24,7 @@ export default {
   },
   components: { FlatCard },
   methods: {
-    fetchPosts() {
+    fetchFlats() {
       this.isLoading = true;
       axios
         .get("http://localhost:8000/api/flats")
@@ -40,7 +40,7 @@ export default {
     },
   },
   mounted() {
-    this.fetchPosts();
+    this.fetchFlats();
   },
 };
 </script>

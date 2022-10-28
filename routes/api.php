@@ -19,14 +19,11 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
  });
 
 
-Route::namespace('Api')->group(function () {
-    Route::get("/flats", 'FlatController@index');
-    Route::get("/flats/{id}", 'FlatController@show');
-});
 
 
 Route::namespace('api')->group(function(){
     Route::get('/flats', 'FlatController@index');
-    Route::get('/flats/{id}', 'FlatController@show');
+    Route::get('/flats/search', 'FlatController@show');
+   // Route::get('/flats/{id}', 'FlatController@show');
 
 });

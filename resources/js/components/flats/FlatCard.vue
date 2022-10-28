@@ -17,7 +17,7 @@
           >
         </div>
       </div>
-      <h5 class="card-title">{{ flat.title }}</h5>
+      <h5 class="card-title">{{ flat.poi.name }}</h5>
 
       <p class="card-text">
       </p>
@@ -28,9 +28,16 @@
 <script>
 export default {
   name: "FlatCard",
-
+  data() {
+    return {
+      isLoading: false,
+    };
+  },
   props: { flat: Object },
-  methods: {},
+  methods: {
+
+    
+  },
 };
 </script>
 

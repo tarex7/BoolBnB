@@ -1,16 +1,17 @@
 <template>
   <div id="home-page">
     <!-- FLAT LIST COMPONENTE-->
-    <flat-list />
+    <SearchBar/>
   </div>
 </template>
 
 <script>
 import FlatList from "../flats/FlatList.vue";
+import SearchBar from "../SearchBar.vue";
 export default {
   name: "HomePage",
   //COMPONENTS
-  components: { FlatList },
+  components: { FlatList, SearchBar },
   // DATA
   data() {
     return {};

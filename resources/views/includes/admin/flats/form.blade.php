@@ -237,7 +237,7 @@
                 const latInput = document.getElementById('lat');
                 const lonInput = document.getElementById('lon');
                 const addressContainer = document.getElementById('address-tomtom')
-                console.log(addressContainer);
+                console.log('address container',addressContainer);
             
                 const testbtn = document.getElementById('test');
             
@@ -261,9 +261,8 @@
                     lonInput.value = lon;
                 });
                 tomtomInput.setAttribute("name", "address");
-                tomtomInput.value = "<?php echo $flat->address; ?>";
+                tomtomInput.value = "";
             
-                 //let axios = require('axios');
             
                 //https://api.tomtom.com/search/2/geocode/${query}.json?key=OQPgwY4eUitV7IRklnutdiB8DVqRx8kG&limit=1&radius=${radius}
             
@@ -272,9 +271,10 @@
                 addressContainer.addEventListener("keyup", (e) => {
                     console.log('call');
                      axios.get(
-                             `https://api.tomtom.com/search/2/geocode/${addressContainer}.json?key=I7jwOnv7XxCbU6AV64AN8ZPGArFaIoTh`
+                             `https://api.tomtom.com/search/2/geocode/${addressContainer.value}.json?key=I7jwOnv7XxCbU6AV64AN8ZPGArFaIoTh`
                          )
                          .then((res) => {
+                            console.log(addressContainer.value);
                              console.log('risposta',res.data.results);
                          })
                 });

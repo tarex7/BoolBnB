@@ -14,12 +14,18 @@ class FlatController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
-        //Vedo solo i Flat Visibili
-        $flats = Flat::where('visible', 1)->orderBy('created_at', 'DESC')->get();
+        $lat = $request->get('lat');
+       
+        $flats = Flat::
+        where('visible', 1)
+       
+        ->orderBy('created_at', 'DESC')
+        ->get();
 
         return response()->json($flats);
+
     }
 
     /**
@@ -39,12 +45,59 @@ class FlatController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show()
     {
-        $flat_lat_long = Flat::select(['latitude', 'longitude', 'id'])->find($id);
+        $geometryList = [
+            [
+                'type' => 'CIRCLE',
+                'position' => "40.55798 , 8.3222",
+                'radius' => 20000,
+            ]
+        ];
 
-        if(!$flat_lat_long) return response('Not found', 404);
-        return response()->json($flat_lat_long);
+        $flatList =
+        [
+            [
+                'poi' => [
+                    'name' => "Alghero Via Xx Settembre Lato Civico 112, Via 20 S"
+                ],
+                'address' => [
+                    'freeformAddress' => "Alghero Via Xx Settembre Lato Civico 112, Via 20 Settembre, 07041 Alghero"
+                ],
+                'position' => [
+                    'lat' => 40.5584600,
+                    'lon' =>8.3194300,
+                ],
+                'info' => [
+                    'id' => 10,
+                ]
+                ],
+            [
+                'poi' => [
+                    'name' => "Viale Borsellino, 90145 Palermo"
+                ],
+                'address' => [
+                    'freeformAddress' => "Viale Borsellino, 90145 Palermo"
+                ],
+                'position' => [
+                    'lat' => 38.1332800,
+                    'lon' =>13.3049700,
+                ],
+                'info' => [
+                    'id' => 15,
+                ]
+            ]
+
+
+        ];
+
+
+
+
+        $responseTomTom = Http::get("https://api.tomtom.com");
+
+        return response()->json($responseTomTom);
+
     }
 
     /**
@@ -74,9 +127,27 @@ class FlatController extends Controller
     public function search(Request $request)
 
     {
-        $lat = $request->get('lat');
+       $lat = $request->get('lat');
         $lon = $request->get('lon');
         $radius = $request->get('radius');
+
+
+
+
+
+
+         $flats = Flat::all();
+
+        //$flats = Flat::where('latitude','<', $lat)->get();
+        
+
+
+
+
+       // return response()->json($radius);
+
+
+        $flatList = [];
 
         $geometryList = [
             [
@@ -86,9 +157,8 @@ class FlatController extends Controller
             ]
         ];
 
-        $filteredFlats = [];
-
-        foreach ($filteredFlats as $flat) {
+        foreach($flats as $flat) {
+         
             $flatArray = [
                 'poi' => [
                     'name' => $flat->title
@@ -105,25 +175,26 @@ class FlatController extends Controller
                 ]
             ];
             array_push($flatList, $flatArray);
-        };
 
-        $flatList = [];
+        };
 
         $geometryList = json_encode($geometryList);
         $flatList = json_encode($flatList);
+         
+        $responseTomTom = Http::get("https://api.tomtom.com/search/2/geometryFilter.json?key=OQPgwY4eUitV7IRklnutdiB8DVqRx8kG&geometryList=$geometryList&poiList=$flatList");
+        
+       return response()->json($responseTomTom);
+        
 
-        $responseTomTom = Http::get("https://api.tomtom.com/search/2/geometryFilter.json?&key=OQPgwY4eUitV7IRklnutdiB8DVqRx8kG&geometryList=$geometryList&poiList=$flatList");
-
-        $flatIds = [];
-        $flatsFilteredArray = json_decode($responseTomTom);
-
-        foreach ($flatsFilteredArray->results as $flat) {
-
-            array_push($flatIds, $flat->info->id);
-        }
+        // Get data filtered from TomTom and save ids in an Array
        
-        $response = Flat::whereIn('id', $flatIds)->orderByDesc('id')->get();
 
-        return $response;
+        
+
     }
+
+
+
+
+    
 }

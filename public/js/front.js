@@ -5150,11 +5150,9 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _AppHeader_vue__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./AppHeader.vue */ "./resources/js/components/AppHeader.vue");
 /* harmony import */ var _AppJumbotron_vue__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./AppJumbotron.vue */ "./resources/js/components/AppJumbotron.vue");
 /* harmony import */ var _AppFooter_vue__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./AppFooter.vue */ "./resources/js/components/AppFooter.vue");
-/* harmony import */ var _SearchBar_vue__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./SearchBar.vue */ "./resources/js/components/SearchBar.vue");
 var _name$components$name;
 function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
 // IMPORT COMPONENTS
-
 
 
 
@@ -5164,8 +5162,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
   components: {
     AppHeader: _AppHeader_vue__WEBPACK_IMPORTED_MODULE_0__["default"],
     AppJumbotron: _AppJumbotron_vue__WEBPACK_IMPORTED_MODULE_1__["default"],
-    AppFooter: _AppFooter_vue__WEBPACK_IMPORTED_MODULE_2__["default"],
-    SearchBar: _SearchBar_vue__WEBPACK_IMPORTED_MODULE_3__["default"]
+    AppFooter: _AppFooter_vue__WEBPACK_IMPORTED_MODULE_2__["default"]
   }
 }, _defineProperty(_name$components$name, "name", "App"), _defineProperty(_name$components$name, "data", function data() {
   return {
@@ -5285,8 +5282,10 @@ __webpack_require__.r(__webpack_exports__);
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _flats_FlatCard_vue__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./flats/FlatCard.vue */ "./resources/js/components/flats/FlatCard.vue");
+
 /* harmony default export */ __webpack_exports__["default"] = ({
-  name: 'SearchBar',
+  name: "SearchBar",
   data: function data() {
     return {
       query: "",
@@ -5294,19 +5293,39 @@ __webpack_require__.r(__webpack_exports__);
       radius: 20,
       flats: [],
       lat: "",
-      lon: ""
+      lon: "",
+      resultsAPI: "",
+      responseAPI: "",
+      isLoading: false
     };
   },
   methods: {
-    getAutocomplete: function getAutocomplete() {
+    fetchFlats: function fetchFlats() {
       var _this = this;
+      this.isLoading = true;
+      axios.get("http://localhost:8000/api/flats").then(function (res) {
+        _this.flats = res.data;
+      })["catch"](function (err) {
+        _this.error = "Errore durante il fetch dei flats";
+      }).then(function () {
+        _this.isLoading = false;
+      });
+    },
+    getAutocomplete: function getAutocomplete() {
+      var _this2 = this;
       if (this.query) {
-        axios.get("https://api.tomtom.com/search/2/search/".concat(this.query, ".json?key=OQPgwY4eUitV7IRklnutdiB8DVqRx8kG&limit=5&countrySet=IT&language=it-IT")).then(function (response) {
+        axios.get("https://api.tomtom.com/search/2/search/".concat(this.query, ".json?key=qSUikbBmShqOxwAwrrHX28luZ27pYwPx&limit=5&countrySet=IT&language=it-IT&limit=10")).then(function (response) {
           var results = response.data.results;
-          _this.autocomplete = [];
+          // console.log(results);
+          _this2.autocomplete = [];
           results.forEach(function (result) {
             var address = result.address.freeformAddress;
-            _this.autocomplete.push(address);
+
+            // console.log('address', address);
+            // console.log("lat:", result.position.lat);
+            // console.log("lon:", result.position.lon);
+
+            _this2.autocomplete.push(address);
           });
         })["catch"](function (e) {
           console.log(e);
@@ -5314,33 +5333,56 @@ __webpack_require__.r(__webpack_exports__);
       }
     },
     setQuery: function setQuery(add) {
+      console.log(this.query);
       this.query = add;
       this.autocomplete = [];
     },
     getGeoPosition: function getGeoPosition() {
-      var _this2 = this;
+      var _this3 = this;
+      console.log("geoPos");
       this.apartments = [];
       // Get Geodata from Axios based on input and radius(2000 standard)
       var query = this.query;
       var radius = this.radius * 1000;
       if (query) {
         this.loading = true;
-        axios.get("https://api.tomtom.com/search/2/geocode/".concat(query, ".json?key=OQPgwY4eUitV7IRklnutdiB8DVqRx8kG&limit=1&radius=").concat(radius)).then(function (response) {
+        axios.get("https://api.tomtom.com/search/2/geocode/".concat(query, ".json?key=qSUikbBmShqOxwAwrrHX28luZ27pYwPx&limit=1&radius=").concat(radius)).then(function (response) {
           var lat = response.data.results[0].position.lat;
           var lon = response.data.results[0].position.lon;
-          _this2.lat = lat;
-          _this2.lon = lon;
+          console.log("response", response);
+          console.log("geoPoslat", lat);
 
+          // console.log(lat);
+          //console.log(lon);
           // Pass Geo data to ApiController and recieve apartements filtered as response
-          axios.get("api/search", {
-            params: {
-              lat: _this2.lat,
-              lon: _this2.lon,
-              radius: radius
-            }
-          }).then(function (response) {
-            _this2.flats = response.data;
-            _this2.loading = false;
+          var flatList = [];
+          var geometryList = [{
+            type: "CIRCLE",
+            position: "".concat(lat, " , ").concat(lon),
+            radius: "".concat(radius)
+          }];
+          console.log("geometrylist", JSON.stringify(geometryList));
+          _this3.flats.forEach(function (flat) {
+            var flatPOI = {
+              poi: {
+                name: flat.title
+              },
+              address: {
+                freeformAddress: flat.address
+              },
+              position: {
+                lat: flat.latitude,
+                lon: flat.longitude
+              }
+            };
+            flatList.push(flatPOI);
+          });
+          console.log('JSON geometry:', JSON.stringify(geometryList));
+          console.log('JSON flatlist', JSON.stringify(flatList));
+          axios.get("https://api.tomtom.com/search/2/geometryFilter.json?key=OQPgwY4eUitV7IRklnutdiB8DVqRx8kG&geometryList=".concat(JSON.stringify(geometryList), "&poiList=").concat(JSON.stringify(flatList))).then(function (response) {
+            console.log("response:", response.data.results[0]);
+            _this3.flats = [response.data.results[0]];
+            _this3.loading = false;
           })["catch"](function (error) {
             return console.error(error);
           });
@@ -5348,6 +5390,40 @@ __webpack_require__.r(__webpack_exports__);
           return console.error(e);
         });
       }
+    },
+    filterFlats: function filterFlats() {
+      var _this4 = this;
+      var flatList = [];
+      console.log("lat", this.lat);
+      var geometryList = [{
+        type: "CIRCLE",
+        position: "".concat(this.lat, " , ").concat(this.lon),
+        radius: "".concat(this.radius)
+      }];
+      this.flats.forEach(function (flat) {
+        var flatPOI = {
+          poi: {
+            name: flat.title
+          },
+          address: {
+            freeformAddress: flat.address
+          },
+          position: {
+            lat: flat.lat,
+            lon: flat.lon
+          }
+        };
+        flatList.push(flatPOI);
+      });
+      // console.log("geolist", JSON.stringify(geometryList));
+      //console.log(JSON.stringify(flatList));
+      axios.get("https://api.tomtom.com/search/2/geometryFilter.json?key=OQPgwY4eUitV7IRklnutdiB8DVqRx8kG&geometryList=".concat(JSON.stringify(geometryList), "&poiList=").concat(JSON.stringify(flatList))).then(function (response) {
+        console.log("response:", response.data);
+        _this4.flats = response.data;
+        _this4.loading = false;
+      })["catch"](function (error) {
+        return console.error(error);
+      });
     }
   },
   mounted: function mounted() {
@@ -5357,7 +5433,10 @@ __webpack_require__.r(__webpack_exports__);
     if (this.$route.params.radius) {
       this.radius = this.$route.params.radius;
     }
-    this.getGeoPosition();
+    this.fetchFlats();
+  },
+  components: {
+    FlatCard: _flats_FlatCard_vue__WEBPACK_IMPORTED_MODULE_0__["default"]
   }
 });
 
@@ -5374,6 +5453,11 @@ __webpack_require__.r(__webpack_exports__);
 __webpack_require__.r(__webpack_exports__);
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: "FlatCard",
+  data: function data() {
+    return {
+      isLoading: false
+    };
+  },
   props: {
     flat: Object
   },
@@ -5405,7 +5489,7 @@ __webpack_require__.r(__webpack_exports__);
     FlatCard: _flats_FlatCard_vue__WEBPACK_IMPORTED_MODULE_0__["default"]
   },
   methods: {
-    fetchPosts: function fetchPosts() {
+    fetchFlats: function fetchFlats() {
       var _this = this;
       this.isLoading = true;
       axios.get("http://localhost:8000/api/flats").then(function (res) {
@@ -5418,7 +5502,7 @@ __webpack_require__.r(__webpack_exports__);
     }
   },
   mounted: function mounted() {
-    this.fetchPosts();
+    this.fetchFlats();
   }
 });
 
@@ -5504,7 +5588,7 @@ __webpack_require__.r(__webpack_exports__);
     };
   },
   methods: {
-    fetchPost: function fetchPost() {
+    fetchFlat: function fetchFlat() {
       var _this = this;
       this.isLoading = true;
       axios.get("http://localhost:8000/api/flats/" + this.$route.params.id).then(function (res) {
@@ -5517,7 +5601,7 @@ __webpack_require__.r(__webpack_exports__);
     }
   },
   mounted: function mounted() {
-    this.fetchPost();
+    this.fetchFlat();
   }
 });
 
@@ -5533,12 +5617,15 @@ __webpack_require__.r(__webpack_exports__);
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _flats_FlatList_vue__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../flats/FlatList.vue */ "./resources/js/components/flats/FlatList.vue");
+/* harmony import */ var _SearchBar_vue__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../SearchBar.vue */ "./resources/js/components/SearchBar.vue");
+
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: "HomePage",
   //COMPONENTS
   components: {
-    FlatList: _flats_FlatList_vue__WEBPACK_IMPORTED_MODULE_0__["default"]
+    FlatList: _flats_FlatList_vue__WEBPACK_IMPORTED_MODULE_0__["default"],
+    SearchBar: _SearchBar_vue__WEBPACK_IMPORTED_MODULE_1__["default"]
   },
   // DATA
   data: function data() {
@@ -5574,7 +5661,7 @@ var render = function render() {
     attrs: {
       title: _vm.title
     }
-  }), _vm._v(" "), _c("app-jumbotron"), _vm._v(" "), _c("SearchBar"), _vm._v(" "), _c("main", {
+  }), _vm._v(" "), _c("app-jumbotron"), _vm._v(" "), _c("main", {
     staticClass: "container my-3"
   }, [_c("router-view")], 1), _vm._v(" "), _c("app-footer")], 1);
 };
@@ -5605,7 +5692,7 @@ var staticRenderFns = [function () {
     _c = _vm._self._c;
   return _c("footer", [_c("h1", {
     staticClass: "text-danger"
-  }, [_vm._v("Footer")])]);
+  })]);
 }];
 render._withStripped = true;
 
@@ -5698,7 +5785,7 @@ var staticRenderFns = [function () {
     }
   }, [_c("h1", {
     staticClass: "text-danger"
-  }, [_vm._v("Jumbo")])]);
+  })]);
 }];
 render._withStripped = true;
 
@@ -5738,10 +5825,10 @@ render._withStripped = true;
 
 /***/ }),
 
-/***/ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/SearchBar.vue?vue&type=template&id=6849e9f0&":
-/*!******************************************************************************************************************************************************************************************************************************************!*\
-  !*** ./node_modules/babel-loader/lib??ref--4-0!./node_modules/vue-loader/lib/loaders/templateLoader.js??ref--6!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/SearchBar.vue?vue&type=template&id=6849e9f0& ***!
-  \******************************************************************************************************************************************************************************************************************************************/
+/***/ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/SearchBar.vue?vue&type=template&id=6849e9f0&scoped=true&":
+/*!******************************************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/babel-loader/lib??ref--4-0!./node_modules/vue-loader/lib/loaders/templateLoader.js??ref--6!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/SearchBar.vue?vue&type=template&id=6849e9f0&scoped=true& ***!
+  \******************************************************************************************************************************************************************************************************************************************************/
 /*! exports provided: render, staticRenderFns */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
@@ -5752,9 +5839,14 @@ __webpack_require__.r(__webpack_exports__);
 var render = function render() {
   var _vm = this,
     _c = _vm._self._c;
-  return _c("div", [_c("form", {
-    attrs: {
-      action: ""
+  return _c("div", [_c("div", {
+    staticClass: "container"
+  }, [_c("form", {
+    on: {
+      submit: function submit($event) {
+        $event.preventDefault();
+        return _vm.getGeoPosition.apply(null, arguments);
+      }
     }
   }, [_c("div", {
     staticClass: "group"
@@ -5777,6 +5869,12 @@ var render = function render() {
     },
     on: {
       keyup: [_vm.getAutocomplete, function ($event) {
+        if (!$event.type.indexOf("key") && $event.keyCode !== 38) return null;
+        return _vm.listUp.apply(null, arguments);
+      }, function ($event) {
+        if (!$event.type.indexOf("key") && $event.keyCode !== 40) return null;
+        return _vm.listDown.apply(null, arguments);
+      }, function ($event) {
         if (!$event.type.indexOf("key") && _vm._k($event.keyCode, "enter", 13, $event.key, "Enter")) return null;
         return _vm.getGeoPosition.apply(null, arguments);
       }],
@@ -5790,7 +5888,7 @@ var render = function render() {
   }), _vm._v(" "), _c("span", {
     staticClass: "bar"
   }), _vm._v(" "), _c("label", [_vm._v("Cerca per città o per indirizzo:")]), _vm._v(" "), _vm.query.length > 0 ? _c("ul", {
-    staticClass: "dropdown_menu w-50"
+    staticClass: "dropdown_menu w-75 list-unstyled p-1"
   }, _vm._l(_vm.autocomplete, function (address, index) {
     return _c("li", {
       key: index
@@ -5809,7 +5907,26 @@ var render = function render() {
         }
       }
     })]);
-  }), 0) : _vm._e()])])]);
+  }), 0) : _vm._e()]), _vm._v(" "), _c("button", {
+    attrs: {
+      type: "submit"
+    }
+  }, [_vm._v("Cerca")])]), _vm._v(" "), _c("section", {
+    attrs: {
+      id: "flat-list"
+    }
+  }, [_c("h2", {
+    staticClass: "my-3"
+  }), _vm._v(" "), _vm.isLoading ? _c("app-loader") : _vm._e(), _vm._v(" "), _c("div", {
+    staticClass: "row justify-content-between"
+  }, _vm._l(_vm.flats, function (flat) {
+    return _c("FlatCard", {
+      key: flat.id,
+      attrs: {
+        flat: flat
+      }
+    });
+  }), 1)], 1)])]);
 };
 var staticRenderFns = [];
 render._withStripped = true;
@@ -5864,7 +5981,7 @@ var render = function render() {
     staticClass: "fa-solid fa-eye"
   }), _vm._v(" Vedi")])], 1)]), _vm._v(" "), _c("h5", {
     staticClass: "card-title"
-  }, [_vm._v(_vm._s(_vm.flat.title))]), _vm._v(" "), _c("p", {
+  }, [_vm._v(_vm._s(_vm.flat.poi.name))]), _vm._v(" "), _c("p", {
     staticClass: "card-text"
   })])]);
 };
@@ -5894,7 +6011,7 @@ var render = function render() {
     }
   }, [_c("h2", {
     staticClass: "my-3"
-  }, [_vm._v("APPARTAMENTI")]), _vm._v(" "), _vm.isLoading ? _c("app-loader") : _vm._e(), _vm._v(" "), _c("div", {
+  }), _vm._v(" "), _vm.isLoading ? _c("app-loader") : _vm._e(), _vm._v(" "), _c("div", {
     staticClass: "row justify-content-between"
   }, _vm._l(_vm.flats, function (flat) {
     return _c("flat-card", {
@@ -6008,7 +6125,7 @@ var render = function render() {
   }, [_c("img", {
     staticClass: "card-img-top",
     attrs: {
-      src: "/storage/".concat(_vm.flat.image),
+      src: "".concat(_vm.flat.image),
       alt: "Card image cap"
     }
   })]), _vm._v(" "), _c("div", {
@@ -6051,7 +6168,7 @@ var render = function render() {
     attrs: {
       id: "home-page"
     }
-  }, [_c("flat-list")], 1);
+  }, [_c("SearchBar")], 1);
 };
 var staticRenderFns = [];
 render._withStripped = true;
@@ -11309,6 +11426,25 @@ exports = module.exports = __webpack_require__(/*! ../../../node_modules/css-loa
 
 // module
 exports.push([module.i, ".loader-overlay[data-v-d0ad0c8e] {\n  top: 0;\n  left: 0;\n  right: 0;\n  bottom: 0;\n  position: fixed;\n  z-index: 9;\n  background-color: rgba(0, 0, 0, 0.5);\n  display: flex;\n  align-items: center;\n  justify-content: center;\n}\n.loader-overlay .spinner-border[data-v-d0ad0c8e] {\n  width: 150px;\n  height: 150px;\n}", ""]);
+
+// exports
+
+
+/***/ }),
+
+/***/ "./node_modules/css-loader/index.js!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src/index.js?!./node_modules/sass-loader/dist/cjs.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/SearchBar.vue?vue&type=style&index=0&id=6849e9f0&lang=scss&scoped=true&":
+/*!*******************************************************************************************************************************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/css-loader!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src??ref--7-2!./node_modules/sass-loader/dist/cjs.js??ref--7-3!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/SearchBar.vue?vue&type=style&index=0&id=6849e9f0&lang=scss&scoped=true& ***!
+  \*******************************************************************************************************************************************************************************************************************************************************************************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+exports = module.exports = __webpack_require__(/*! ../../../node_modules/css-loader/lib/css-base.js */ "./node_modules/css-loader/lib/css-base.js")(false);
+// imports
+
+
+// module
+exports.push([module.i, ".dropdown_menu[data-v-6849e9f0] {\n  position: absolute;\n  width: 100%;\n  z-index: 100;\n}\n.dropdown_menu input[data-v-6849e9f0] {\n  cursor: pointer;\n}\n.dropdown_menu input[data-v-6849e9f0]:focus {\n  background-color: #3471eb;\n}\n.group[data-v-6849e9f0] {\n  position: relative;\n}\n.input[data-v-6849e9f0] {\n  font-size: 16px;\n  padding: 10px 10px 10px 5px;\n  display: block;\n  width: 200px;\n  border: none;\n  border-bottom: 1px solid #515151;\n  background: transparent;\n}\n.input[data-v-6849e9f0]:focus {\n  outline: none;\n}\nlabel[data-v-6849e9f0] {\n  color: #999;\n  font-size: 18px;\n  font-weight: normal;\n  position: absolute;\n  pointer-events: none;\n  left: 5px;\n  top: 10px;\n  transition: 0.2s ease all;\n  -moz-transition: 0.2s ease all;\n  -webkit-transition: 0.2s ease all;\n}\n.input:focus ~ label[data-v-6849e9f0],\n.input:valid ~ label[data-v-6849e9f0] {\n  top: -20px;\n  font-size: 14px;\n  color: #3471eb;\n}\n.bar[data-v-6849e9f0] {\n  position: relative;\n  display: block;\n  width: 200px;\n}\n.bar[data-v-6849e9f0]:before,\n.bar[data-v-6849e9f0]:after {\n  content: \"\";\n  height: 2px;\n  width: 0;\n  bottom: 1px;\n  position: absolute;\n  background: #3471eb;\n  transition: 0.2s ease all;\n  -moz-transition: 0.2s ease all;\n  -webkit-transition: 0.2s ease all;\n}\n.bar[data-v-6849e9f0]:before {\n  left: 50%;\n}\n.bar[data-v-6849e9f0]:after {\n  right: 50%;\n}\n.input:focus ~ .bar[data-v-6849e9f0]:before,\n.input:focus ~ .bar[data-v-6849e9f0]:after {\n  width: 50%;\n}\n.highlight[data-v-6849e9f0] {\n  position: absolute;\n  height: 60%;\n  width: 100px;\n  top: 25%;\n  left: 0;\n  pointer-events: none;\n  opacity: 0.5;\n}\n.input:focus ~ .highlight[data-v-6849e9f0] {\n  animation: inputHighlighter-6849e9f0 0.3s ease;\n}\n@keyframes inputHighlighter-6849e9f0 {\nfrom {\n    background: #3471eb;\n}\nto {\n    width: 0;\n    background: transparent;\n}\n}\n.loader[data-v-6849e9f0] {\n  display: flex;\n  align-items: center;\n  justify-content: center;\n}\n#page-loader[data-v-6849e9f0] {\n  width: 150px;\n  height: 150px;\n}\n#page-loader circle[data-v-6849e9f0] {\n  fill: none;\n  stroke-width: 5;\n  stroke-linecap: round;\n  animation-name: loader-6849e9f0;\n  animation-duration: 4s;\n  animation-iteration-count: infinite;\n  animation-timing-function: ease-in-out;\n  transform-origin: center center;\n}\n#page-loader circle[data-v-6849e9f0]:nth-child(1) {\n  stroke: #ffc114;\n  stroke-dasharray: 50;\n  animation-delay: -0.2s;\n}\n#page-loader circle[data-v-6849e9f0]:nth-child(2) {\n  stroke: #ff5248;\n  stroke-dasharray: 100;\n  animation-delay: -0.4s;\n}\n#page-loader circle[data-v-6849e9f0]:nth-child(3) {\n  stroke: #19cdca;\n  stroke-dasharray: 180;\n  animation-delay: -0.6s;\n}\n#page-loader circle[data-v-6849e9f0]:nth-child(4) {\n  stroke: #4e88e1;\n  stroke-dasharray: 350;\n  stroke-dashoffset: -100;\n  animation-delay: -0.8s;\n}\n@keyframes loader-6849e9f0 {\n50% {\n    transform: rotate(360deg);\n}\n}\n.card[data-v-6849e9f0] {\n  border: none;\n  height: 100%;\n  padding: 0.5rem;\n  background-color: #f8fafc;\n  transition: border 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);\n  border-radius: 5px;\n  transition: transform 0.5s;\n}\n.card[data-v-6849e9f0]:hover {\n  box-shadow: 0 0 10px 4px rgba(208, 208, 208, 0.9098039216);\n  transform: scale(1.05);\n  z-index: 1;\n}\n.card img[data-v-6849e9f0] {\n  width: 100%;\n  min-height: 160px;\n  border-radius: 10px;\n}\n.header-card[data-v-6849e9f0] {\n  margin-top: 10px;\n  height: 45px;\n  padding: 0;\n  display: flex;\n  justify-content: space-between;\n}\n.header-card .custom-title[data-v-6849e9f0] {\n  color: #050505;\n  font-size: 13px;\n  font-weight: bold;\n  display: -webkit-box;\n  line-height: 1.2rem;\n  overflow: hidden;\n  -webkit-line-clamp: 2;\n  -webkit-box-orient: vertical;\n  /*     white-space: nowrap;\n  overflow: hidden;\n  text-overflow: ellipsis; */\n}\n.costum-text[data-v-6849e9f0] {\n  color: #515151;\n  display: -webkit-box;\n  overflow: hidden;\n  -webkit-line-clamp: 2;\n  -webkit-box-orient: vertical;\n}\nform > .row[data-v-6849e9f0] {\n  align-items: flex-end;\n}\n\n/* From uiverse.io by @adamgiebl */\nbutton[data-v-6849e9f0] {\n  font-family: inherit;\n  font-size: 20px;\n  background: #3471eb;\n  color: white;\n  padding: 0.2em 0.5em;\n  padding-left: 0.7em;\n  display: flex;\n  align-items: center;\n  border: none;\n  border-radius: 16px;\n  overflow: hidden;\n  transition: all 0.2s;\n  margin-top: 15px;\n}\nbutton span[data-v-6849e9f0] {\n  display: block;\n  margin-left: 0.3em;\n  transition: all 0.3s ease-in-out;\n}\nbutton svg[data-v-6849e9f0] {\n  display: block;\n  transform-origin: center center;\n  transition: transform 0.3s ease-in-out;\n}\nbutton:hover .svg-wrapper[data-v-6849e9f0] {\n  animation: fly-1-6849e9f0 0.6s ease-in-out infinite alternate;\n}\nbutton:hover svg[data-v-6849e9f0] {\n  transform: translateX(1.2em) rotate(45deg) scale(1.1);\n}\nbutton:hover span[data-v-6849e9f0] {\n  transform: translateX(5em);\n}\nbutton[data-v-6849e9f0]:active {\n  transform: scale(0.95);\n}\n@keyframes fly-1-6849e9f0 {\nfrom {\n    transform: translateY(0.1em);\n}\nto {\n    transform: translateY(-0.1em);\n}\n}\n.wrapper[data-v-6849e9f0] {\n  min-height: calc(100vh - 173px);\n}", ""]);
 
 // exports
 
@@ -42646,6 +42782,36 @@ if(false) {}
 
 /***/ }),
 
+/***/ "./node_modules/style-loader/index.js!./node_modules/css-loader/index.js!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src/index.js?!./node_modules/sass-loader/dist/cjs.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/SearchBar.vue?vue&type=style&index=0&id=6849e9f0&lang=scss&scoped=true&":
+/*!***********************************************************************************************************************************************************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/style-loader!./node_modules/css-loader!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src??ref--7-2!./node_modules/sass-loader/dist/cjs.js??ref--7-3!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/SearchBar.vue?vue&type=style&index=0&id=6849e9f0&lang=scss&scoped=true& ***!
+  \***********************************************************************************************************************************************************************************************************************************************************************************************************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+
+var content = __webpack_require__(/*! !../../../node_modules/css-loader!../../../node_modules/vue-loader/lib/loaders/stylePostLoader.js!../../../node_modules/postcss-loader/src??ref--7-2!../../../node_modules/sass-loader/dist/cjs.js??ref--7-3!../../../node_modules/vue-loader/lib??vue-loader-options!./SearchBar.vue?vue&type=style&index=0&id=6849e9f0&lang=scss&scoped=true& */ "./node_modules/css-loader/index.js!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src/index.js?!./node_modules/sass-loader/dist/cjs.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/SearchBar.vue?vue&type=style&index=0&id=6849e9f0&lang=scss&scoped=true&");
+
+if(typeof content === 'string') content = [[module.i, content, '']];
+
+var transform;
+var insertInto;
+
+
+
+var options = {"hmr":true}
+
+options.transform = transform
+options.insertInto = undefined;
+
+var update = __webpack_require__(/*! ../../../node_modules/style-loader/lib/addStyles.js */ "./node_modules/style-loader/lib/addStyles.js")(content, options);
+
+if(content.locals) module.exports = content.locals;
+
+if(false) {}
+
+/***/ }),
+
 /***/ "./node_modules/style-loader/index.js!./node_modules/css-loader/index.js!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src/index.js?!./node_modules/sass-loader/dist/cjs.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/flats/FlatCard.vue?vue&type=style&index=0&id=30490ca9&lang=scss&":
 /*!****************************************************************************************************************************************************************************************************************************************************************************************************************************************************************!*\
   !*** ./node_modules/style-loader!./node_modules/css-loader!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src??ref--7-2!./node_modules/sass-loader/dist/cjs.js??ref--7-3!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/flats/FlatCard.vue?vue&type=style&index=0&id=30490ca9&lang=scss& ***!
@@ -58906,9 +59072,11 @@ __webpack_require__.r(__webpack_exports__);
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _SearchBar_vue_vue_type_template_id_6849e9f0___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./SearchBar.vue?vue&type=template&id=6849e9f0& */ "./resources/js/components/SearchBar.vue?vue&type=template&id=6849e9f0&");
+/* harmony import */ var _SearchBar_vue_vue_type_template_id_6849e9f0_scoped_true___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./SearchBar.vue?vue&type=template&id=6849e9f0&scoped=true& */ "./resources/js/components/SearchBar.vue?vue&type=template&id=6849e9f0&scoped=true&");
 /* harmony import */ var _SearchBar_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./SearchBar.vue?vue&type=script&lang=js& */ "./resources/js/components/SearchBar.vue?vue&type=script&lang=js&");
-/* empty/unused harmony star reexport *//* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
+/* empty/unused harmony star reexport *//* harmony import */ var _SearchBar_vue_vue_type_style_index_0_id_6849e9f0_lang_scss_scoped_true___WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./SearchBar.vue?vue&type=style&index=0&id=6849e9f0&lang=scss&scoped=true& */ "./resources/js/components/SearchBar.vue?vue&type=style&index=0&id=6849e9f0&lang=scss&scoped=true&");
+/* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
+
 
 
 
@@ -58916,13 +59084,13 @@ __webpack_require__.r(__webpack_exports__);
 
 /* normalize component */
 
-var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__["default"])(
+var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_3__["default"])(
   _SearchBar_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__["default"],
-  _SearchBar_vue_vue_type_template_id_6849e9f0___WEBPACK_IMPORTED_MODULE_0__["render"],
-  _SearchBar_vue_vue_type_template_id_6849e9f0___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"],
+  _SearchBar_vue_vue_type_template_id_6849e9f0_scoped_true___WEBPACK_IMPORTED_MODULE_0__["render"],
+  _SearchBar_vue_vue_type_template_id_6849e9f0_scoped_true___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"],
   false,
   null,
-  null,
+  "6849e9f0",
   null
   
 )
@@ -58948,19 +59116,35 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
-/***/ "./resources/js/components/SearchBar.vue?vue&type=template&id=6849e9f0&":
-/*!******************************************************************************!*\
-  !*** ./resources/js/components/SearchBar.vue?vue&type=template&id=6849e9f0& ***!
-  \******************************************************************************/
+/***/ "./resources/js/components/SearchBar.vue?vue&type=style&index=0&id=6849e9f0&lang=scss&scoped=true&":
+/*!*********************************************************************************************************!*\
+  !*** ./resources/js/components/SearchBar.vue?vue&type=style&index=0&id=6849e9f0&lang=scss&scoped=true& ***!
+  \*********************************************************************************************************/
+/*! no static exports found */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _node_modules_style_loader_index_js_node_modules_css_loader_index_js_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_7_2_node_modules_sass_loader_dist_cjs_js_ref_7_3_node_modules_vue_loader_lib_index_js_vue_loader_options_SearchBar_vue_vue_type_style_index_0_id_6849e9f0_lang_scss_scoped_true___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../node_modules/style-loader!../../../node_modules/css-loader!../../../node_modules/vue-loader/lib/loaders/stylePostLoader.js!../../../node_modules/postcss-loader/src??ref--7-2!../../../node_modules/sass-loader/dist/cjs.js??ref--7-3!../../../node_modules/vue-loader/lib??vue-loader-options!./SearchBar.vue?vue&type=style&index=0&id=6849e9f0&lang=scss&scoped=true& */ "./node_modules/style-loader/index.js!./node_modules/css-loader/index.js!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src/index.js?!./node_modules/sass-loader/dist/cjs.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/SearchBar.vue?vue&type=style&index=0&id=6849e9f0&lang=scss&scoped=true&");
+/* harmony import */ var _node_modules_style_loader_index_js_node_modules_css_loader_index_js_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_7_2_node_modules_sass_loader_dist_cjs_js_ref_7_3_node_modules_vue_loader_lib_index_js_vue_loader_options_SearchBar_vue_vue_type_style_index_0_id_6849e9f0_lang_scss_scoped_true___WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_node_modules_style_loader_index_js_node_modules_css_loader_index_js_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_7_2_node_modules_sass_loader_dist_cjs_js_ref_7_3_node_modules_vue_loader_lib_index_js_vue_loader_options_SearchBar_vue_vue_type_style_index_0_id_6849e9f0_lang_scss_scoped_true___WEBPACK_IMPORTED_MODULE_0__);
+/* harmony reexport (unknown) */ for(var __WEBPACK_IMPORT_KEY__ in _node_modules_style_loader_index_js_node_modules_css_loader_index_js_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_7_2_node_modules_sass_loader_dist_cjs_js_ref_7_3_node_modules_vue_loader_lib_index_js_vue_loader_options_SearchBar_vue_vue_type_style_index_0_id_6849e9f0_lang_scss_scoped_true___WEBPACK_IMPORTED_MODULE_0__) if(["default"].indexOf(__WEBPACK_IMPORT_KEY__) < 0) (function(key) { __webpack_require__.d(__webpack_exports__, key, function() { return _node_modules_style_loader_index_js_node_modules_css_loader_index_js_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_7_2_node_modules_sass_loader_dist_cjs_js_ref_7_3_node_modules_vue_loader_lib_index_js_vue_loader_options_SearchBar_vue_vue_type_style_index_0_id_6849e9f0_lang_scss_scoped_true___WEBPACK_IMPORTED_MODULE_0__[key]; }) }(__WEBPACK_IMPORT_KEY__));
+
+
+/***/ }),
+
+/***/ "./resources/js/components/SearchBar.vue?vue&type=template&id=6849e9f0&scoped=true&":
+/*!******************************************************************************************!*\
+  !*** ./resources/js/components/SearchBar.vue?vue&type=template&id=6849e9f0&scoped=true& ***!
+  \******************************************************************************************/
 /*! exports provided: render, staticRenderFns */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_loaders_templateLoader_js_ref_6_node_modules_vue_loader_lib_index_js_vue_loader_options_SearchBar_vue_vue_type_template_id_6849e9f0___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../node_modules/babel-loader/lib??ref--4-0!../../../node_modules/vue-loader/lib/loaders/templateLoader.js??ref--6!../../../node_modules/vue-loader/lib??vue-loader-options!./SearchBar.vue?vue&type=template&id=6849e9f0& */ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/SearchBar.vue?vue&type=template&id=6849e9f0&");
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "render", function() { return _node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_loaders_templateLoader_js_ref_6_node_modules_vue_loader_lib_index_js_vue_loader_options_SearchBar_vue_vue_type_template_id_6849e9f0___WEBPACK_IMPORTED_MODULE_0__["render"]; });
+/* harmony import */ var _node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_loaders_templateLoader_js_ref_6_node_modules_vue_loader_lib_index_js_vue_loader_options_SearchBar_vue_vue_type_template_id_6849e9f0_scoped_true___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../node_modules/babel-loader/lib??ref--4-0!../../../node_modules/vue-loader/lib/loaders/templateLoader.js??ref--6!../../../node_modules/vue-loader/lib??vue-loader-options!./SearchBar.vue?vue&type=template&id=6849e9f0&scoped=true& */ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/SearchBar.vue?vue&type=template&id=6849e9f0&scoped=true&");
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "render", function() { return _node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_loaders_templateLoader_js_ref_6_node_modules_vue_loader_lib_index_js_vue_loader_options_SearchBar_vue_vue_type_template_id_6849e9f0_scoped_true___WEBPACK_IMPORTED_MODULE_0__["render"]; });
 
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return _node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_loaders_templateLoader_js_ref_6_node_modules_vue_loader_lib_index_js_vue_loader_options_SearchBar_vue_vue_type_template_id_6849e9f0___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"]; });
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return _node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_loaders_templateLoader_js_ref_6_node_modules_vue_loader_lib_index_js_vue_loader_options_SearchBar_vue_vue_type_template_id_6849e9f0_scoped_true___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"]; });
 
 
 

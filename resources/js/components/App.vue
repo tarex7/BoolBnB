@@ -3,7 +3,6 @@
     <!-- HEADER -->
     <app-header :title="title" />
     <app-jumbotron />
-    <SearchBar/>
     
 
     <main class="container my-3">
@@ -22,11 +21,10 @@
 import AppHeader from "./AppHeader.vue";
 import AppJumbotron from "./AppJumbotron.vue";
 import AppFooter from "./AppFooter.vue";
-import SearchBar from "./SearchBar.vue";
 export default {
   name: "App",
   // COMPONENTS
-  components: { AppHeader, AppJumbotron, AppFooter, SearchBar },
+  components: { AppHeader, AppJumbotron, AppFooter },
   name: "App",
   // DATA
   data() {

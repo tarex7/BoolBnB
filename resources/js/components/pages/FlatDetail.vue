@@ -8,7 +8,7 @@
           <div class="col-6 h-100">
             <img
               class="card-img-top"
-              :src="`/storage/${flat.image}`"
+              :src="`${flat.image}`"
               alt="Card image cap"
             />
           </div>
@@ -50,7 +50,7 @@ export default {
     };
   },
   methods: {
-    fetchPost() {
+    fetchFlat() {
       this.isLoading = true;
       axios
         .get("http://localhost:8000/api/flats/" + this.$route.params.id)
@@ -66,7 +66,7 @@ export default {
     },
   },
   mounted() {
-    this.fetchPost();
+    this.fetchFlat();
   },
 };
 </script>
