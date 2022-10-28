@@ -15,18 +15,13 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::middleware('auth:api')->get('/user', function (Request $request) {
-   return $request->user();
- });
+    return $request->user();
+});
 
 
 Route::namespace('Api')->group(function () {
     Route::get("/flats", 'FlatController@index');
     Route::get("/flats/{id}", 'FlatController@show');
-});
-
-
-Route::namespace('api')->group(function(){
-    Route::get('/flats', 'FlatController@index');
-    Route::get('/flats/{id}', 'FlatController@show');
-
+    //ROTTA MESSAGE
+    Route::post('/contact-message', 'ContactMessageController@send');
 });
