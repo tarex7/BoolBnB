@@ -76,7 +76,9 @@
 </head>
 
 <body class="bg-light">
-    <div id="app">
+
+
+    <header style="position:fixed; top:0; left:0; right:0; z-index: 1">
 
 
         <nav class="navbar navbar-expand-md navbar-light bg-white shadow-sm d-flex justify-content-between">
@@ -133,11 +135,11 @@
             </div>
 
         </nav>
+    </header>
 
 
 
 
-    </div>
     <div id="root"></div>
 </body>
 

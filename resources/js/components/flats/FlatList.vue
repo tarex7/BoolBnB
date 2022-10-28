@@ -1,13 +1,15 @@
 <template>
   <section id="flat-list">
-    <h2 class="my-3">APPARTAMENTI</h2>
+    <div class="container-fluid px-3">
+      <h2 class="my-3">APPARTAMENTI</h2>
 
-    <!-- AppLoader -->
-    <app-loader v-if="isLoading" />
+      <!-- AppLoader -->
+      <app-loader v-if="isLoading" />
 
-    <!-- FLAT CARD -->
-    <div class="row">
-      <flat-card v-for="flat in flats" :key="flat.id" :flat="flat" />
+      <!-- FLAT CARD -->
+      <div class="row g-3">
+        <flat-card v-for="flat in flats" :key="flat.id" :flat="flat" />
+      </div>
     </div>
   </section>
 </template>

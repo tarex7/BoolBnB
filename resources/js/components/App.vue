@@ -2,12 +2,10 @@
   <div class="content">
     <!-- HEADER -->
 
-    <main class="container my-3">
-      <!-- JUMBOTRON -->
+    <!-- JUMBOTRON -->
 
-      <!-- ROTTE VIEW (CONTENUTO DINAMICO ALl'INTERNO DELLE PAGINE) -->
-      <router-view></router-view>
-    </main>
+    <!-- ROTTE VIEW (CONTENUTO DINAMICO ALl'INTERNO DELLE PAGINE) -->
+    <router-view></router-view>
 
     <!--FOOTER -->
     <app-footer />

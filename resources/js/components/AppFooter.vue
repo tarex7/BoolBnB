@@ -1,6 +1,12 @@
 <template>
   <footer>
-    <h1 class="text-danger"></h1>
+    <div class="container">
+      <div class="row row-cols-3">
+        <div class="col"></div>
+        <div class="col">link</div>
+        <div class="col">contacts</div>
+      </div>
+    </div>
   </footer>
 </template>
 
@@ -25,4 +31,10 @@ export default {
 
 <!-- STYLE -->
 <style lang="scss" scoped>
+footer {
+  height: 500px;
+  background-color: #001632;
+  color: #cecece;
+  padding-top: 40px;
+}
 </style>
