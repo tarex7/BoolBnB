@@ -1,7 +1,5 @@
 <template>
-  <section id="jumbotron">
-    <h1 class="text-danger"></h1>
-  </section>
+  <section id="jumbotron">jumbo</section>
 </template>
 
 <script>

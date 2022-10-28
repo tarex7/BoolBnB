@@ -12,7 +12,7 @@
 
     <!-- Scripts -->
     <script src="{{ asset('js/app.js') }}" defer></script>
-    <script src="{{ asset('js/front.js') }}" defer></script>
+
 
     {{-- Tomtom map --}}
     <script type="text/javascript" src="https://api.tomtom.com/maps-sdk-for-web/cdn/6.x/6.20.0/maps/maps-web.min.js">
@@ -59,6 +59,7 @@
     <!-- Fonts -->
     <link rel="dns-prefetch" href="//fonts.gstatic.com">
     <link href="https://fonts.googleapis.com/css?family=Nunito" rel="stylesheet">
+
 
 
     {{-- Font awesome --}}
@@ -110,8 +111,9 @@
 
 
                             <div class="d-flex " aria-labelledby="navbarDropdown">
-                                <a class="dropdown-item text-dark mx-3" href="{{ route('admin.flats.index') }}">I miei
-                                    appartamenti</a>
+                                <a class="dropdown-item text-dark mx-3" href="{{ route('admin.flats.index') }}">
+                                    I miei appartamenti
+                                </a>
                                 <a class="dropdown-item" href="{{ route('logout') }}"
                                     onclick="event.preventDefault();
                                                          document.getElementById('logout-form').submit();">
@@ -132,10 +134,10 @@
 
         </nav>
 
-        <main class="py-4">
-            @include('includes.admin.alert')
-            @yield('content')
-        </main>
+
+        @include('includes.admin.alert')
+        @yield('content')
+
     </div>
 </body>
 

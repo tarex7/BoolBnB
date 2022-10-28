@@ -1,5 +1,6 @@
 <template>
   <div id="home-page">
+    <AppJumbotron />
     <!-- FLAT LIST COMPONENTE-->
     <flat-list />
   </div>
@@ -7,10 +8,11 @@
 
 <script>
 import FlatList from "../flats/FlatList.vue";
+import AppJumbotron from "../AppJumbotron.vue";
 export default {
   name: "HomePage",
   //COMPONENTS
-  components: { FlatList },
+  components: { AppJumbotron, FlatList },
   // DATA
   data() {
     return {};
