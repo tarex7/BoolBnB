@@ -5,6 +5,8 @@ namespace App\Http\Controllers\Api;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
+use Illuminate\Support\Facades\Mail;
+use App\Mail\ContactMessageMail;
 
 class ContactMessageController extends Controller
 {
@@ -34,7 +36,11 @@ class ContactMessageController extends Controller
             );
         }
 
+        $email = new ContactMessageMail($data['email'], $data['message']);
+        //NB MI MANDO L'EMAIL DA SOSTITUIRE
+        Mail::to(env('MAIL_ADMIN_ADDRESS'))->send($email);
+
         //chimata api per verificare 
-        return response()->json($data);
+        return response('Mail Sent' . 204);
     }
 }
