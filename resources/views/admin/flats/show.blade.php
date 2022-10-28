@@ -6,41 +6,43 @@
         <div class="container">
 
 
-            <div class="row">
+            <div class="row flex-column flex-lg-row">
 
-                <div class="col-6">
+                <div class="col-lg-6 col-12">
                     <div class="card p-4">
                         <h1 class="text-danger mb-3 fw-bold">{{ $flat->title }}</h1>
 
                         {{-- IMAGE --}}
-                        <img class="float-left mr-2" width="580" src="{{ asset('storage/' . $flat->image) }}"
-                            alt="{{ $flat->title }}">
+                        <img class="float-left mr-2 img-review-responsive" width="580"
+                            src="{{ asset('storage/' . $flat->image) }}" alt="{{ $flat->title }}">
 
 
                         <hr>
                         {{-- BUTTON --}}
-                        <div class="col">
-                            <div class="d-flex justify-content-between  my-3">
 
-                                <div> <a href="{{ route('admin.flats.index') }}" class="btn btn-primary text-white"><strong
-                                            class="h5">Torna alla lista </strong></a>
+                        <div class="d-flex  flex-column flex-sm-row  justify-content-between  my-3">
 
-                                </div>
-                                <div class="d-flex">
-                                    @if ($flat->user_id === Auth::id())
-                                        <a href="{{ route('admin.flats.edit', $flat->id) }}"
-                                            class="btn  btn-warning "><strong class="h5">Modifica </strong></a>
-                                        <form action="{{ route('admin.flats.destroy', $flat->id) }}" method="POST"
-                                            class="delete-form">
-                                            @csrf
-                                            @method('DELETE')
-                                            <button class="btn btn-danger text-light  mx-3"> <strong class="h5">Elimina
-                                                </strong></button>
-                                        </form>
-                                    @endif
-                                </div>
+                            <div class="mb-2"> <a href="{{ route('admin.flats.index') }}"
+                                    class="btn btn-primary text-white"><strong class="h5">Torna alla lista </strong></a>
+
+                            </div>
+                            <div class="d-flex">
+                                @if ($flat->user_id === Auth::id())
+                                    <form action="{{ route('admin.flats.destroy', $flat->id) }}" method="POST"
+                                        class="delete-form">
+                                        {{-- modifica --}}
+                                        <a href="{{ route('admin.flats.edit', $flat->id) }}" class="btn btn-warning"><strong
+                                                class="h5">Modifica </strong></a>
+                                        {{-- canncella --}}
+                                        @csrf
+                                        @method('DELETE')
+                                        <button class="btn btn-danger text-light  mx-3"> <strong class="h5">Elimina
+                                            </strong></button>
+                                    </form>
+                                @endif
                             </div>
                         </div>
+
 
                         <hr>
                         {{-- INDIRIZZO --}}
@@ -77,7 +79,7 @@
                             @if (count($flat->services))
                                 <h3 class="my-3 fw-bold">Servizi</h3>
                             @endif
-                            <div class="row justify-contet-between">
+                            <div class="row flex-column  flex-sm-row justify-contet-between">
 
                                 @foreach ($flat->services as $service)
                                     <div class="col-3">
@@ -99,7 +101,7 @@
                 </div>
 
 
-                <div class="col-6">
+                <div class="col-12 col-lg-6">
 
                     <div class="card p-3">
                         <h3 class="mt-3 fw-bold ">Statistiche</h3>
@@ -127,3 +129,13 @@
         </div>
     </section>
 @endsection
+
+<style>
+    @media (max-width: 500px) {
+        .img-review-responsive {
+            width: 330px;
+            height: 300px;
+
+        }
+    }
+</style>
