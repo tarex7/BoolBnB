@@ -15,9 +15,10 @@ import router from './router.js'
 //IMPORTO I COMPONENTI A LIVELLO GENERICO
 import App from './components/App.vue'
 import AppLoader from './components/AppLoader'
+import AppAlert from './components/AppAlert.vue'
 
 Vue.component('AppLoader', AppLoader)
-
+Vue.component('AppAlert', AppAlert)
 const root = new Vue({
   router,
     el: '#root',
