@@ -67,7 +67,7 @@ export default {
         return {
             query: "",
             autocomplete: [],
-            radius: 20,
+            radius: 80,
             flats: [],
             lat: "",
             lon: "",
@@ -161,7 +161,7 @@ export default {
 
                         this.flats.forEach((flat) => {
                             let flatPOI = {
-                                poi: {
+                                flat: {
                                     name: flat.title,
                                 },
                                 address: {
@@ -171,21 +171,41 @@ export default {
                                     lat: flat.latitude,
                                     lon: flat.longitude,
                                 },
+                                info: {
+                                    id: flat.id,
+                                },
                             };
 
                             flatList.push(flatPOI);
                         });
 
-                        console.log('JSON geometry:',JSON.stringify(geometryList));
-                        console.log('JSON flatlist',JSON.stringify(flatList));
+                        console.log(
+                            "JSON geometry:",
+                            JSON.stringify(geometryList)
+                        );
+                        console.log("JSON flatlist", JSON.stringify(flatList));
                         axios
                             .get(
-                                `https://api.tomtom.com/search/2/geometryFilter.json?key=OQPgwY4eUitV7IRklnutdiB8DVqRx8kG&geometryList=${JSON.stringify(geometryList)}&poiList=${JSON.stringify(flatList)}`
+                                `https://api.tomtom.com/search/2/geometryFilter.json?key=OQPgwY4eUitV7IRklnutdiB8DVqRx8kG&geometryList=${JSON.stringify(
+                                    geometryList
+                                )}&poiList=${JSON.stringify(flatList)}`
                             )
                             .then((response) => {
-                              console.log("response:", response.data.results[0]);
-                                this.flats = [response.data.results[0]];
+                                console.log("response:", response.data.results);
+                                const tomtomResponse = response.data.results;
                                 this.loading = false;
+
+                                const flatIds = [];
+
+                                tomtomResponse.forEach((flat) => {
+                                    flatIds.push(flat.info.id);
+                                });
+
+                               const filterdFlats = this.flats.filter((flat) => {
+                                    return flatIds.includes(flat.id);
+                                });
+                                console.log(filterdFlats);
+                                this.flats = filterdFlats
                             })
                             .catch((error) => console.error(error));
                     })

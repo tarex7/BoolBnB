@@ -17,7 +17,7 @@
           >
         </div>
       </div>
-      <h5 class="card-title">{{ flat.poi.name }}</h5>
+      <h5 class="card-title">{{ flat.title }}</h5>
 
       <p class="card-text">
       </p>
