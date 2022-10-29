@@ -6,6 +6,8 @@
       alt="Card image cap" style="height:300px"
     />
     <div class="card-body">
+      <input type="number" name="" id="">
+
       <div class="row justify-content-between">
         <div class="col-6">
         </div>

@@ -1,44 +1,67 @@
 <template>
     <div>
         <div class="container">
-            <form @submit.prevent="getGeoPosition">
-                <div class="group">
-                    <input
-                        autocomplete="off"
-                        required=""
-                        type="text"
-                        id="query_address"
-                        v-model="query"
-                        @keyup="getAutocomplete"
-                        @keyup.38="listUp"
-                        @keyup.40="listDown"
-                        @keyup.enter="getGeoPosition"
-                        class="input"
-                    />
-                    <span class="highlight"></span>
-                    <span class="bar"></span>
-                    <label>Cerca per città o per indirizzo:</label>
-                    <ul
-                        class="dropdown_menu w-75 list-unstyled p-1"
-                        v-if="query.length > 0"
-                    >
-                        <li
-                            v-for="(address, index) in autocomplete"
-                            :key="index"
-                        >
-                            <input
-                                type="text"
-                                class="w-100"
-                                readonly
-                                :value="address"
-                                @click="setQuery(address)"
-                            />
-                        </li>
-                    </ul>
-                </div>
-                <button type="submit">Cerca</button>
-            </form>
+            <div class="d-flex">
+                <form @submit.prevent="getGeoPosition" class="col-12 d-flex">
+                    <div class="group">
+                        <input
+                            autocomplete="off"
+                            required=""
+                            type="text"
+                            id="query_address"
+                            v-model="query"
+                            @keyup="getAutocomplete"
+                            @keyup.enter="getGeoPosition"
+                            class="input"
+                        />
 
+                        <span class="highlight"></span>
+                        <span class="bar"></span>
+
+                        <label>Cerca per città o per indirizzo:</label>
+                        <ul
+                            class="dropdown_menu w-75 list-unstyled p-1"
+                            v-if="query.length > 0"
+                        >
+                            <li
+                                v-for="(address, index) in autocomplete"
+                                :key="index"
+                            >
+                                <input
+                                    type="text"
+                                    class="w-100"
+                                    readonly
+                                    :value="address"
+                                    @click="setQuery(address)"
+                                />
+                            </li>
+                        </ul>
+                        <button type="submit">Cerca</button>
+                    </div>
+
+                    <div class="col-3 my-3 mx-4">
+                        <p for="radius" class="form-label">
+                            Cerca nel raggio di {{ radius }} km
+
+                            <input
+                                type="range"
+                                min="0"
+                                max="100"
+                                step="10"
+                                v-model="radius"
+                                id="radius"
+                            />
+                        </p>
+                    </div>
+
+                    <div class="d-flex position-relative">
+                        <label for="rooms"
+                            >Camere
+                            <input type="number" name="room_number" id="rooms" v-model="rooms">
+                        </label>
+                    </div>
+                </form>
+            </div>
             <section id="flat-list">
                 <h2 class="my-3"></h2>
 
@@ -67,13 +90,14 @@ export default {
         return {
             query: "",
             autocomplete: [],
-            radius: 80,
+            radius: 20,
             flats: [],
             lat: "",
             lon: "",
             resultsAPI: "",
             responseAPI: "",
             isLoading: false,
+            rooms:1
         };
     },
     methods: {
@@ -95,7 +119,7 @@ export default {
             if (this.query) {
                 axios
                     .get(
-                        `https://api.tomtom.com/search/2/search/${this.query}.json?key=qSUikbBmShqOxwAwrrHX28luZ27pYwPx&limit=5&countrySet=IT&language=it-IT&limit=10`
+                        `https://api.tomtom.com/search/2/search/${this.query}.json?key=qSUikbBmShqOxwAwrrHX28luZ27pYwPx&limit=10&countrySet=IT&language=it-IT&limit=10`
                     )
                     .then((response) => {
                         const results = response.data.results;
@@ -201,11 +225,13 @@ export default {
                                     flatIds.push(flat.info.id);
                                 });
 
-                               const filterdFlats = this.flats.filter((flat) => {
-                                    return flatIds.includes(flat.id);
-                                });
+                                const filterdFlats = this.flats.filter(
+                                    (flat) => {
+                                        return flatIds.includes(flat.id);
+                                    }
+                                );
                                 console.log(filterdFlats);
-                                this.flats = filterdFlats
+                                this.flats = filterdFlats;
                             })
                             .catch((error) => console.error(error));
                     })
@@ -292,7 +318,7 @@ export default {
     font-size: 16px;
     padding: 10px 10px 10px 5px;
     display: block;
-    width: 200px;
+    width: 300px;
     border: none;
     border-bottom: 1px solid #515151;
     background: transparent;
@@ -504,7 +530,7 @@ button {
     border-radius: 16px;
     overflow: hidden;
     transition: all 0.2s;
-    margin-top: 15px;
+    margin-top: 5px;
 }
 
 button span {
