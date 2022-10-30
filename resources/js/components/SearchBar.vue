@@ -128,20 +128,35 @@
                     </nav>
                 </div>
                 <div class="col-12">
-                    <input
+                    <!-- <label class="btn btn-outline-success mx-2" :for="`btn-check-${service.id}`"
+                        v-for="service in services"
+                        >{{ service.label }}
+                        <input
                         type="checkbox"
                         class="btn-check"
                         :id="`btn-check-${service.id}`"
-                        checked
+                        
                         autocomplete="off"
-                        v-for="service in services"
 
 
                     />
-                    <label class="btn btn-outline-success mx-2" :for="`btn-check-${service.id}`"
-                        v-for="service in services"
-                        ><p>{{ service.label }}</p></label
+                        </label
+                    > -->
+
+                    <span v-for="(service) in services">
+                        <input
+                        type="checkbox"
+                        class="btn-check"
+                        :id="`btn-check-${service.id}`"
+                        
+                        autocomplete="off"
+                    />
+                    <label class="btn btn-outline-success" :for="`btn-check-${service.id}`"
+                        >{{ service.label }}</label
                     >
+                    </span>
+
+
                 </div>
                 <div class="col-12">
                     <section id="flat-list">
@@ -186,7 +201,7 @@ export default {
             bathrooms: 1,
             beds: 1,
             sqm: 30,
-            services:[]
+            services: [],
         };
     },
     methods: {
@@ -214,8 +229,7 @@ export default {
                 .catch((err) => {
                     this.error = "Errore durante il fetch dei servizi";
                 })
-                .then(() => {
-                });
+                .then(() => {});
         },
         getAutocomplete() {
             if (this.query) {
@@ -394,7 +408,7 @@ export default {
                 .catch((error) => console.error(error));
         },
     },
-    
+
     mounted() {
         if (this.$route.params.query) {
             this.query = this.$route.params.query;
