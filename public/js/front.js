@@ -5296,7 +5296,8 @@ __webpack_require__.r(__webpack_exports__);
       lon: "",
       resultsAPI: "",
       responseAPI: "",
-      isLoading: false
+      isLoading: false,
+      rooms: 1
     };
   },
   methods: {
@@ -5314,7 +5315,7 @@ __webpack_require__.r(__webpack_exports__);
     getAutocomplete: function getAutocomplete() {
       var _this2 = this;
       if (this.query) {
-        axios.get("https://api.tomtom.com/search/2/search/".concat(this.query, ".json?key=qSUikbBmShqOxwAwrrHX28luZ27pYwPx&limit=5&countrySet=IT&language=it-IT&limit=10")).then(function (response) {
+        axios.get("https://api.tomtom.com/search/2/search/".concat(this.query, ".json?key=qSUikbBmShqOxwAwrrHX28luZ27pYwPx&limit=10&countrySet=IT&language=it-IT&limit=10")).then(function (response) {
           var results = response.data.results;
           // console.log(results);
           _this2.autocomplete = [];
@@ -5364,7 +5365,7 @@ __webpack_require__.r(__webpack_exports__);
           console.log("geometrylist", JSON.stringify(geometryList));
           _this3.flats.forEach(function (flat) {
             var flatPOI = {
-              poi: {
+              flat: {
                 name: flat.title
               },
               address: {
@@ -5373,16 +5374,28 @@ __webpack_require__.r(__webpack_exports__);
               position: {
                 lat: flat.latitude,
                 lon: flat.longitude
+              },
+              info: {
+                id: flat.id
               }
             };
             flatList.push(flatPOI);
           });
-          console.log('JSON geometry:', JSON.stringify(geometryList));
-          console.log('JSON flatlist', JSON.stringify(flatList));
+          console.log("JSON geometry:", JSON.stringify(geometryList));
+          console.log("JSON flatlist", JSON.stringify(flatList));
           axios.get("https://api.tomtom.com/search/2/geometryFilter.json?key=OQPgwY4eUitV7IRklnutdiB8DVqRx8kG&geometryList=".concat(JSON.stringify(geometryList), "&poiList=").concat(JSON.stringify(flatList))).then(function (response) {
-            console.log("response:", response.data.results[0]);
-            _this3.flats = [response.data.results[0]];
+            console.log("response:", response.data.results);
+            var tomtomResponse = response.data.results;
             _this3.loading = false;
+            var flatIds = [];
+            tomtomResponse.forEach(function (flat) {
+              flatIds.push(flat.info.id);
+            });
+            var filterdFlats = _this3.flats.filter(function (flat) {
+              return flatIds.includes(flat.id);
+            });
+            console.log(filterdFlats);
+            _this3.flats = filterdFlats;
           })["catch"](function (error) {
             return console.error(error);
           });
@@ -5841,7 +5854,10 @@ var render = function render() {
     _c = _vm._self._c;
   return _c("div", [_c("div", {
     staticClass: "container"
+  }, [_c("div", {
+    staticClass: "d-flex"
   }, [_c("form", {
+    staticClass: "col-12 d-flex",
     on: {
       submit: function submit($event) {
         $event.preventDefault();
@@ -5869,12 +5885,6 @@ var render = function render() {
     },
     on: {
       keyup: [_vm.getAutocomplete, function ($event) {
-        if (!$event.type.indexOf("key") && $event.keyCode !== 38) return null;
-        return _vm.listUp.apply(null, arguments);
-      }, function ($event) {
-        if (!$event.type.indexOf("key") && $event.keyCode !== 40) return null;
-        return _vm.listDown.apply(null, arguments);
-      }, function ($event) {
         if (!$event.type.indexOf("key") && _vm._k($event.keyCode, "enter", 13, $event.key, "Enter")) return null;
         return _vm.getGeoPosition.apply(null, arguments);
       }],
@@ -5907,11 +5917,67 @@ var render = function render() {
         }
       }
     })]);
-  }), 0) : _vm._e()]), _vm._v(" "), _c("button", {
+  }), 0) : _vm._e(), _vm._v(" "), _c("button", {
     attrs: {
       type: "submit"
     }
-  }, [_vm._v("Cerca")])]), _vm._v(" "), _c("section", {
+  }, [_vm._v("Cerca")])]), _vm._v(" "), _c("div", {
+    staticClass: "col-3 my-3 mx-4"
+  }, [_c("p", {
+    staticClass: "form-label",
+    attrs: {
+      "for": "radius"
+    }
+  }, [_vm._v("\n                        Cerca nel raggio di " + _vm._s(_vm.radius) + " km\n\n                        "), _c("input", {
+    directives: [{
+      name: "model",
+      rawName: "v-model",
+      value: _vm.radius,
+      expression: "radius"
+    }],
+    attrs: {
+      type: "range",
+      min: "0",
+      max: "100",
+      step: "10",
+      id: "radius"
+    },
+    domProps: {
+      value: _vm.radius
+    },
+    on: {
+      __r: function __r($event) {
+        _vm.radius = $event.target.value;
+      }
+    }
+  })])]), _vm._v(" "), _c("div", {
+    staticClass: "d-flex position-relative"
+  }, [_c("label", {
+    attrs: {
+      "for": "rooms"
+    }
+  }, [_vm._v("Camere\n                        "), _c("input", {
+    directives: [{
+      name: "model",
+      rawName: "v-model",
+      value: _vm.rooms,
+      expression: "rooms"
+    }],
+    attrs: {
+      type: "number",
+      name: "room_number",
+      id: "rooms"
+    },
+    domProps: {
+      value: _vm.rooms
+    },
+    on: {
+      input: function input($event) {
+        if ($event.target.composing) return;
+        _vm.rooms = $event.target.value;
+      }
+    }
+  })])])])]), _vm._v(" "), _c("section", {
     attrs: {
       id: "flat-list"
     }
@@ -5961,7 +6027,13 @@ var render = function render() {
     }
   }), _vm._v(" "), _c("div", {
     staticClass: "card-body"
-  }, [_c("div", {
+  }, [_c("input", {
+    attrs: {
+      type: "number",
+      name: "",
+      id: ""
+    }
+  }), _vm._v(" "), _c("div", {
     staticClass: "row justify-content-between"
   }, [_c("div", {
     staticClass: "col-6"
@@ -5981,7 +6053,7 @@ var render = function render() {
     staticClass: "fa-solid fa-eye"
   }), _vm._v(" Vedi")])], 1)]), _vm._v(" "), _c("h5", {
     staticClass: "card-title"
-  }, [_vm._v(_vm._s(_vm.flat.poi.name))]), _vm._v(" "), _c("p", {
+  }, [_vm._v(_vm._s(_vm.flat.title))]), _vm._v(" "), _c("p", {
     staticClass: "card-text"
   })])]);
 };
@@ -11444,7 +11516,7 @@ exports = module.exports = __webpack_require__(/*! ../../../node_modules/css-loa
 
 
 // module
-exports.push([module.i, ".dropdown_menu[data-v-6849e9f0] {\n  position: absolute;\n  width: 100%;\n  z-index: 100;\n}\n.dropdown_menu input[data-v-6849e9f0] {\n  cursor: pointer;\n}\n.dropdown_menu input[data-v-6849e9f0]:focus {\n  background-color: #3471eb;\n}\n.group[data-v-6849e9f0] {\n  position: relative;\n}\n.input[data-v-6849e9f0] {\n  font-size: 16px;\n  padding: 10px 10px 10px 5px;\n  display: block;\n  width: 200px;\n  border: none;\n  border-bottom: 1px solid #515151;\n  background: transparent;\n}\n.input[data-v-6849e9f0]:focus {\n  outline: none;\n}\nlabel[data-v-6849e9f0] {\n  color: #999;\n  font-size: 18px;\n  font-weight: normal;\n  position: absolute;\n  pointer-events: none;\n  left: 5px;\n  top: 10px;\n  transition: 0.2s ease all;\n  -moz-transition: 0.2s ease all;\n  -webkit-transition: 0.2s ease all;\n}\n.input:focus ~ label[data-v-6849e9f0],\n.input:valid ~ label[data-v-6849e9f0] {\n  top: -20px;\n  font-size: 14px;\n  color: #3471eb;\n}\n.bar[data-v-6849e9f0] {\n  position: relative;\n  display: block;\n  width: 200px;\n}\n.bar[data-v-6849e9f0]:before,\n.bar[data-v-6849e9f0]:after {\n  content: \"\";\n  height: 2px;\n  width: 0;\n  bottom: 1px;\n  position: absolute;\n  background: #3471eb;\n  transition: 0.2s ease all;\n  -moz-transition: 0.2s ease all;\n  -webkit-transition: 0.2s ease all;\n}\n.bar[data-v-6849e9f0]:before {\n  left: 50%;\n}\n.bar[data-v-6849e9f0]:after {\n  right: 50%;\n}\n.input:focus ~ .bar[data-v-6849e9f0]:before,\n.input:focus ~ .bar[data-v-6849e9f0]:after {\n  width: 50%;\n}\n.highlight[data-v-6849e9f0] {\n  position: absolute;\n  height: 60%;\n  width: 100px;\n  top: 25%;\n  left: 0;\n  pointer-events: none;\n  opacity: 0.5;\n}\n.input:focus ~ .highlight[data-v-6849e9f0] {\n  animation: inputHighlighter-6849e9f0 0.3s ease;\n}\n@keyframes inputHighlighter-6849e9f0 {\nfrom {\n    background: #3471eb;\n}\nto {\n    width: 0;\n    background: transparent;\n}\n}\n.loader[data-v-6849e9f0] {\n  display: flex;\n  align-items: center;\n  justify-content: center;\n}\n#page-loader[data-v-6849e9f0] {\n  width: 150px;\n  height: 150px;\n}\n#page-loader circle[data-v-6849e9f0] {\n  fill: none;\n  stroke-width: 5;\n  stroke-linecap: round;\n  animation-name: loader-6849e9f0;\n  animation-duration: 4s;\n  animation-iteration-count: infinite;\n  animation-timing-function: ease-in-out;\n  transform-origin: center center;\n}\n#page-loader circle[data-v-6849e9f0]:nth-child(1) {\n  stroke: #ffc114;\n  stroke-dasharray: 50;\n  animation-delay: -0.2s;\n}\n#page-loader circle[data-v-6849e9f0]:nth-child(2) {\n  stroke: #ff5248;\n  stroke-dasharray: 100;\n  animation-delay: -0.4s;\n}\n#page-loader circle[data-v-6849e9f0]:nth-child(3) {\n  stroke: #19cdca;\n  stroke-dasharray: 180;\n  animation-delay: -0.6s;\n}\n#page-loader circle[data-v-6849e9f0]:nth-child(4) {\n  stroke: #4e88e1;\n  stroke-dasharray: 350;\n  stroke-dashoffset: -100;\n  animation-delay: -0.8s;\n}\n@keyframes loader-6849e9f0 {\n50% {\n    transform: rotate(360deg);\n}\n}\n.card[data-v-6849e9f0] {\n  border: none;\n  height: 100%;\n  padding: 0.5rem;\n  background-color: #f8fafc;\n  transition: border 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);\n  border-radius: 5px;\n  transition: transform 0.5s;\n}\n.card[data-v-6849e9f0]:hover {\n  box-shadow: 0 0 10px 4px rgba(208, 208, 208, 0.9098039216);\n  transform: scale(1.05);\n  z-index: 1;\n}\n.card img[data-v-6849e9f0] {\n  width: 100%;\n  min-height: 160px;\n  border-radius: 10px;\n}\n.header-card[data-v-6849e9f0] {\n  margin-top: 10px;\n  height: 45px;\n  padding: 0;\n  display: flex;\n  justify-content: space-between;\n}\n.header-card .custom-title[data-v-6849e9f0] {\n  color: #050505;\n  font-size: 13px;\n  font-weight: bold;\n  display: -webkit-box;\n  line-height: 1.2rem;\n  overflow: hidden;\n  -webkit-line-clamp: 2;\n  -webkit-box-orient: vertical;\n  /*     white-space: nowrap;\n  overflow: hidden;\n  text-overflow: ellipsis; */\n}\n.costum-text[data-v-6849e9f0] {\n  color: #515151;\n  display: -webkit-box;\n  overflow: hidden;\n  -webkit-line-clamp: 2;\n  -webkit-box-orient: vertical;\n}\nform > .row[data-v-6849e9f0] {\n  align-items: flex-end;\n}\n\n/* From uiverse.io by @adamgiebl */\nbutton[data-v-6849e9f0] {\n  font-family: inherit;\n  font-size: 20px;\n  background: #3471eb;\n  color: white;\n  padding: 0.2em 0.5em;\n  padding-left: 0.7em;\n  display: flex;\n  align-items: center;\n  border: none;\n  border-radius: 16px;\n  overflow: hidden;\n  transition: all 0.2s;\n  margin-top: 15px;\n}\nbutton span[data-v-6849e9f0] {\n  display: block;\n  margin-left: 0.3em;\n  transition: all 0.3s ease-in-out;\n}\nbutton svg[data-v-6849e9f0] {\n  display: block;\n  transform-origin: center center;\n  transition: transform 0.3s ease-in-out;\n}\nbutton:hover .svg-wrapper[data-v-6849e9f0] {\n  animation: fly-1-6849e9f0 0.6s ease-in-out infinite alternate;\n}\nbutton:hover svg[data-v-6849e9f0] {\n  transform: translateX(1.2em) rotate(45deg) scale(1.1);\n}\nbutton:hover span[data-v-6849e9f0] {\n  transform: translateX(5em);\n}\nbutton[data-v-6849e9f0]:active {\n  transform: scale(0.95);\n}\n@keyframes fly-1-6849e9f0 {\nfrom {\n    transform: translateY(0.1em);\n}\nto {\n    transform: translateY(-0.1em);\n}\n}\n.wrapper[data-v-6849e9f0] {\n  min-height: calc(100vh - 173px);\n}", ""]);
+exports.push([module.i, ".dropdown_menu[data-v-6849e9f0] {\n  position: absolute;\n  width: 100%;\n  z-index: 100;\n}\n.dropdown_menu input[data-v-6849e9f0] {\n  cursor: pointer;\n}\n.dropdown_menu input[data-v-6849e9f0]:focus {\n  background-color: #3471eb;\n}\n.group[data-v-6849e9f0] {\n  position: relative;\n}\n.input[data-v-6849e9f0] {\n  font-size: 16px;\n  padding: 10px 10px 10px 5px;\n  display: block;\n  width: 300px;\n  border: none;\n  border-bottom: 1px solid #515151;\n  background: transparent;\n}\n.input[data-v-6849e9f0]:focus {\n  outline: none;\n}\nlabel[data-v-6849e9f0] {\n  color: #999;\n  font-size: 18px;\n  font-weight: normal;\n  position: absolute;\n  pointer-events: none;\n  left: 5px;\n  top: 10px;\n  transition: 0.2s ease all;\n  -moz-transition: 0.2s ease all;\n  -webkit-transition: 0.2s ease all;\n}\n.input:focus ~ label[data-v-6849e9f0],\n.input:valid ~ label[data-v-6849e9f0] {\n  top: -20px;\n  font-size: 14px;\n  color: #3471eb;\n}\n.bar[data-v-6849e9f0] {\n  position: relative;\n  display: block;\n  width: 200px;\n}\n.bar[data-v-6849e9f0]:before,\n.bar[data-v-6849e9f0]:after {\n  content: \"\";\n  height: 2px;\n  width: 0;\n  bottom: 1px;\n  position: absolute;\n  background: #3471eb;\n  transition: 0.2s ease all;\n  -moz-transition: 0.2s ease all;\n  -webkit-transition: 0.2s ease all;\n}\n.bar[data-v-6849e9f0]:before {\n  left: 50%;\n}\n.bar[data-v-6849e9f0]:after {\n  right: 50%;\n}\n.input:focus ~ .bar[data-v-6849e9f0]:before,\n.input:focus ~ .bar[data-v-6849e9f0]:after {\n  width: 50%;\n}\n.highlight[data-v-6849e9f0] {\n  position: absolute;\n  height: 60%;\n  width: 100px;\n  top: 25%;\n  left: 0;\n  pointer-events: none;\n  opacity: 0.5;\n}\n.input:focus ~ .highlight[data-v-6849e9f0] {\n  animation: inputHighlighter-6849e9f0 0.3s ease;\n}\n@keyframes inputHighlighter-6849e9f0 {\nfrom {\n    background: #3471eb;\n}\nto {\n    width: 0;\n    background: transparent;\n}\n}\n.loader[data-v-6849e9f0] {\n  display: flex;\n  align-items: center;\n  justify-content: center;\n}\n#page-loader[data-v-6849e9f0] {\n  width: 150px;\n  height: 150px;\n}\n#page-loader circle[data-v-6849e9f0] {\n  fill: none;\n  stroke-width: 5;\n  stroke-linecap: round;\n  animation-name: loader-6849e9f0;\n  animation-duration: 4s;\n  animation-iteration-count: infinite;\n  animation-timing-function: ease-in-out;\n  transform-origin: center center;\n}\n#page-loader circle[data-v-6849e9f0]:nth-child(1) {\n  stroke: #ffc114;\n  stroke-dasharray: 50;\n  animation-delay: -0.2s;\n}\n#page-loader circle[data-v-6849e9f0]:nth-child(2) {\n  stroke: #ff5248;\n  stroke-dasharray: 100;\n  animation-delay: -0.4s;\n}\n#page-loader circle[data-v-6849e9f0]:nth-child(3) {\n  stroke: #19cdca;\n  stroke-dasharray: 180;\n  animation-delay: -0.6s;\n}\n#page-loader circle[data-v-6849e9f0]:nth-child(4) {\n  stroke: #4e88e1;\n  stroke-dasharray: 350;\n  stroke-dashoffset: -100;\n  animation-delay: -0.8s;\n}\n@keyframes loader-6849e9f0 {\n50% {\n    transform: rotate(360deg);\n}\n}\n.card[data-v-6849e9f0] {\n  border: none;\n  height: 100%;\n  padding: 0.5rem;\n  background-color: #f8fafc;\n  transition: border 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);\n  border-radius: 5px;\n  transition: transform 0.5s;\n}\n.card[data-v-6849e9f0]:hover {\n  box-shadow: 0 0 10px 4px rgba(208, 208, 208, 0.9098039216);\n  transform: scale(1.05);\n  z-index: 1;\n}\n.card img[data-v-6849e9f0] {\n  width: 100%;\n  min-height: 160px;\n  border-radius: 10px;\n}\n.header-card[data-v-6849e9f0] {\n  margin-top: 10px;\n  height: 45px;\n  padding: 0;\n  display: flex;\n  justify-content: space-between;\n}\n.header-card .custom-title[data-v-6849e9f0] {\n  color: #050505;\n  font-size: 13px;\n  font-weight: bold;\n  display: -webkit-box;\n  line-height: 1.2rem;\n  overflow: hidden;\n  -webkit-line-clamp: 2;\n  -webkit-box-orient: vertical;\n  /*     white-space: nowrap;\n  overflow: hidden;\n  text-overflow: ellipsis; */\n}\n.costum-text[data-v-6849e9f0] {\n  color: #515151;\n  display: -webkit-box;\n  overflow: hidden;\n  -webkit-line-clamp: 2;\n  -webkit-box-orient: vertical;\n}\nform > .row[data-v-6849e9f0] {\n  align-items: flex-end;\n}\n\n/* From uiverse.io by @adamgiebl */\nbutton[data-v-6849e9f0] {\n  font-family: inherit;\n  font-size: 20px;\n  background: #3471eb;\n  color: white;\n  padding: 0.2em 0.5em;\n  padding-left: 0.7em;\n  display: flex;\n  align-items: center;\n  border: none;\n  border-radius: 16px;\n  overflow: hidden;\n  transition: all 0.2s;\n  margin-top: 5px;\n}\nbutton span[data-v-6849e9f0] {\n  display: block;\n  margin-left: 0.3em;\n  transition: all 0.3s ease-in-out;\n}\nbutton svg[data-v-6849e9f0] {\n  display: block;\n  transform-origin: center center;\n  transition: transform 0.3s ease-in-out;\n}\nbutton:hover .svg-wrapper[data-v-6849e9f0] {\n  animation: fly-1-6849e9f0 0.6s ease-in-out infinite alternate;\n}\nbutton:hover svg[data-v-6849e9f0] {\n  transform: translateX(1.2em) rotate(45deg) scale(1.1);\n}\nbutton:hover span[data-v-6849e9f0] {\n  transform: translateX(5em);\n}\nbutton[data-v-6849e9f0]:active {\n  transform: scale(0.95);\n}\n@keyframes fly-1-6849e9f0 {\nfrom {\n    transform: translateY(0.1em);\n}\nto {\n    transform: translateY(-0.1em);\n}\n}\n.wrapper[data-v-6849e9f0] {\n  min-height: calc(100vh - 173px);\n}", ""]);
 
 // exports
 
@@ -59724,7 +59796,7 @@ var routes = new vue_router__WEBPACK_IMPORTED_MODULE_1__["default"]({
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__(/*! C:\laravel\boolbnb\resources\js\front.js */"./resources/js/front.js");
+module.exports = __webpack_require__(/*! C:\Laravel\boolbnb\resources\js\front.js */"./resources/js/front.js");
 
 
 /***/ })

@@ -57,7 +57,25 @@
                     <div class="d-flex position-relative">
                         <label for="rooms"
                             >Camere
-                            <input type="number" name="room_number" id="rooms" v-model="rooms">
+                            <input
+                                type="number"
+                                name="room_number"
+                                id="rooms"
+                                v-model="rooms"
+                                @change="getGeoPosition"
+                            />
+                        </label>
+                    </div>
+                    <div class="d-flex position-relative my-5">
+                        <label for="bathrooms"
+                            >Bagni
+                            <input
+                                type="number"
+                                name="bathroom_number"
+                                id="bathrooms"
+                                v-model="bathrooms"
+                                @change="getGeoPosition"
+                            />
                         </label>
                     </div>
                 </form>
@@ -92,12 +110,14 @@ export default {
             autocomplete: [],
             radius: 20,
             flats: [],
+            allFlats: [],
             lat: "",
             lon: "",
             resultsAPI: "",
             responseAPI: "",
             isLoading: false,
-            rooms:1
+            rooms: 1,
+            bathrooms: 1,
         };
     },
     methods: {
@@ -107,6 +127,7 @@ export default {
                 .get("http://localhost:8000/api/flats")
                 .then((res) => {
                     this.flats = res.data;
+                    this.allFlats = res.data;
                 })
                 .catch((err) => {
                     this.error = "Errore durante il fetch dei flats";
@@ -147,8 +168,6 @@ export default {
         },
 
         getGeoPosition() {
-            console.log("geoPos");
-            this.apartments = [];
             // Get Geodata from Axios based on input and radius(2000 standard)
             let query = this.query;
             let radius = this.radius * 1000;
@@ -182,8 +201,8 @@ export default {
                             "geometrylist",
                             JSON.stringify(geometryList)
                         );
-
-                        this.flats.forEach((flat) => {
+                        console.log("Tutti flats:", this.allFlats);
+                        this.allFlats.forEach((flat) => {
                             let flatPOI = {
                                 flat: {
                                     name: flat.title,
@@ -197,6 +216,7 @@ export default {
                                 },
                                 info: {
                                     id: flat.id,
+                                    rooms: flat.room_number
                                 },
                             };
 
@@ -225,9 +245,16 @@ export default {
                                     flatIds.push(flat.info.id);
                                 });
 
-                                const filterdFlats = this.flats.filter(
+                                console.log('flatIds', flatIds);
+
+
+                                const filterdFlats = this.allFlats.filter(
                                     (flat) => {
-                                        return flatIds.includes(flat.id);
+                                console.log(flat);
+
+                                        return flatIds.includes(flat.id)
+                                            && flat.room_number >= this.rooms
+                                            && flat.bathroom_number >= this.bathrooms;
                                     }
                                 );
                                 console.log(filterdFlats);
