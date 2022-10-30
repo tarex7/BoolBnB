@@ -121,14 +121,27 @@
                                         id="sqm"
                                         v-model="sqm"
                                         @change="getGeoPosition"
-                                        
                                     />
                                 </div>
-
-
                             </form>
                         </div>
                     </nav>
+                </div>
+                <div class="col-12">
+                    <input
+                        type="checkbox"
+                        class="btn-check"
+                        :id="`btn-check-${service.id}`"
+                        checked
+                        autocomplete="off"
+                        v-for="service in services"
+
+
+                    />
+                    <label class="btn btn-outline-success mx-2" :for="`btn-check-${service.id}`"
+                        v-for="service in services"
+                        ><p>{{ service.label }}</p></label
+                    >
                 </div>
                 <div class="col-12">
                     <section id="flat-list">
@@ -173,6 +186,7 @@ export default {
             bathrooms: 1,
             beds: 1,
             sqm: 30,
+            services:[]
         };
     },
     methods: {
@@ -189,6 +203,18 @@ export default {
                 })
                 .then(() => {
                     this.isLoading = false;
+                });
+        },
+        fetchServices() {
+            axios
+                .get("http://localhost:8000/api/services")
+                .then((res) => {
+                    this.services = res.data;
+                })
+                .catch((err) => {
+                    this.error = "Errore durante il fetch dei servizi";
+                })
+                .then(() => {
                 });
         },
         getAutocomplete() {
@@ -309,10 +335,10 @@ export default {
                                         return (
                                             flatIds.includes(flat.id) &&
                                             flat.room_number >= this.rooms &&
-                                            flat.bathroom_number >= this.bathrooms &&
+                                            flat.bathroom_number >=
+                                                this.bathrooms &&
                                             flat.bed_number >= this.beds &&
-                                            flat.square_mt >= this.sqm 
-                                                
+                                            flat.square_mt >= this.sqm
                                         );
                                     }
                                 );
@@ -368,6 +394,7 @@ export default {
                 .catch((error) => console.error(error));
         },
     },
+    
     mounted() {
         if (this.$route.params.query) {
             this.query = this.$route.params.query;
@@ -376,6 +403,7 @@ export default {
             this.radius = this.$route.params.radius;
         }
         this.fetchFlats();
+        this.fetchServices();
     },
     components: { FlatCard },
 };
