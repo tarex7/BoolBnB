@@ -28,6 +28,7 @@
                                     <h5 class="m-0 mx-2">{{ $flat->visible ? 'Visibile' : 'Non visibile' }}</h5>
                                 </button>
                             </form>
+                            <a href="{{ route('admin.sponsorships.index') }}">sponsorship</a>
                         </div>
                     </div>
 

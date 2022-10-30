@@ -59336,6 +59336,7 @@ window.Vue = __webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.common.
 
 //IMPORTO I COMPONENTI A LIVELLO GENERICO
 
+/* import SponsorshipPay from './components/sponsorships/SponsorshipPay.vue' */
 
 Vue.component('AppLoader', _components_AppLoader__WEBPACK_IMPORTED_MODULE_2__["default"]);
 var root = new Vue({
@@ -59345,6 +59346,14 @@ var root = new Vue({
     return h(_components_App_vue__WEBPACK_IMPORTED_MODULE_1__["default"]);
   }
 });
+
+/* const sponsorship = new Vue({
+  router,
+    el: '#sponsorship',
+    render: h => h(SponsorshipPay)
+})
+
+ */
 
 /***/ }),
 

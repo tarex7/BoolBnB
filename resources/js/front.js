@@ -14,6 +14,7 @@ import router from './router.js'
 
 //IMPORTO I COMPONENTI A LIVELLO GENERICO
 import App from './components/App.vue'
+/* import SponsorshipPay from './components/sponsorships/SponsorshipPay.vue' */
 import AppLoader from './components/AppLoader'
 
 Vue.component('AppLoader', AppLoader)
@@ -25,5 +26,10 @@ const root = new Vue({
 })
 
 
+/* const sponsorship = new Vue({
+  router,
+    el: '#sponsorship',
+    render: h => h(SponsorshipPay)
+})
 
-
+ */

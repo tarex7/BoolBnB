@@ -2,6 +2,8 @@
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\Api\OrderController;
+use App\Http\Controllers\Api\SponsorshipController;
 
 /*
 |--------------------------------------------------------------------------
@@ -28,5 +30,8 @@ Route::namespace('Api')->group(function () {
 Route::namespace('api')->group(function(){
     Route::get('/flats', 'FlatController@index');
     Route::get('/flats/{id}', 'FlatController@show');
+    Route::get('/sponsorships','SponsorshipController@index');
+    Route::get('/generate','OrderController@generate');
+    Route::post('/make/payment','OrderController@makePayment');
 
 });
