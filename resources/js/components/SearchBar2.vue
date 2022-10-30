@@ -1,41 +1,26 @@
 <template>
     <div>
         <div class="container">
-            <div class="row">
-                <div class="col-12">
-                    <nav class="navbar navbar-expand-lg navbar-light bg-light">
-                        <button
-                            class="navbar-toggler"
-                            type="button"
-                            data-toggle="collapse"
-                            data-target="#navbarSupportedContent"
-                            aria-controls="navbarSupportedContent"
-                            aria-expanded="false"
-                            aria-label="Toggle navigation"
-                        >
-                            <span class="navbar-toggler-icon"></span>
-                        </button>
-
-                        <div
-                            class="collapse navbar-collapse d-flex align-items-center"
-                            id="navbarSupportedContent"
-                        >
-                            <form
-                                @submit.prevent="getGeoPosition"
-                                class="form-inline my-2 my-lg-0 d-flex align-items-center"
-                            >
+            <div class="d-flex">
+                <form @submit.prevent="getGeoPosition" class="col-12 d-flex">
+                    <div class="row">
+                        <div class="col-12">
+                            <div class="group">
                                 <input
-                                    class="form-control mr-sm-2 input"
-                                    type="search"
-                                    placeholder="Dove vuoi andare?"
-                                    aria-label="Search"
                                     autocomplete="off"
                                     required=""
+                                    type="text"
                                     id="query_address"
                                     v-model="query"
                                     @keyup="getAutocomplete"
                                     @keyup.enter="getGeoPosition"
+                                    class="input"
                                 />
+        
+                                <span class="highlight"></span>
+                                <span class="bar"></span>
+        
+                                <label>Cerca per città o per indirizzo:</label>
                                 <ul
                                     class="dropdown_menu w-75 list-unstyled p-1"
                                     v-if="query.length > 0"
@@ -53,102 +38,73 @@
                                         />
                                     </li>
                                 </ul>
-                                <button
-                                    class="btn btn-outline-danger my-2 my-sm-0 ms-3"
-                                    type="submit"
-                                >
-                                    Cerca
-                                </button>
-
-                                <div class="input-group mb-3">
-                                    <div class="input-group-prepend">
-                                        <span class="input-group-text ms-5"
-                                            >Camere</span
-                                        >
-                                    </div>
+                                <button type="submit">Cerca</button>
+                            </div>
+        
+                        </div>
+                        <div class="col-12">
+                            <div class="col-3 my-3 mx-4">
+                                <p for="radius" class="form-label">
+                                    Cerca nel raggio di {{ radius }} km
+        
                                     <input
-                                        type="number"
-                                        class="form-control"
+                                        type="range"
+                                        min="0"
+                                        max="100"
+                                        step="10"
+                                        v-model="radius"
+                                        id="radius"
+                                    />
+                                </p>
+                            </div>
+        
+                            <div class="d-flex position-relative">
+                                <label for="rooms"
+                                    >Camere
+                                    <input
+                                        type="text"
                                         name="room_number"
                                         id="rooms"
                                         v-model="rooms"
                                         @change="getGeoPosition"
                                     />
-                                </div>
-
-                                <div class="input-group mb-3">
-                                    <div class="input-group-prepend">
-                                        <span class="input-group-text ms-5"
-                                            >Letti</span
-                                        >
-                                    </div>
+                                </label>
+                            </div>
+                            <div class="d-flex position-relative my-5">
+                                <label for="bathrooms"
+                                    >Bagni
                                     <input
                                         type="number"
-                                        class="form-control"
-                                        name="beds_number"
-                                        id="beds"
-                                        v-model="beds"
-                                        @change="getGeoPosition"
-                                    />
-                                </div>
-
-                                <div class="input-group mb-3">
-                                    <div class="input-group-prepend">
-                                        <span class="input-group-text ms-5"
-                                            >Bagni</span
-                                        >
-                                    </div>
-                                    <input
-                                        type="number"
-                                        class="form-control"
                                         name="bathroom_number"
                                         id="bathrooms"
                                         v-model="bathrooms"
                                         @change="getGeoPosition"
                                     />
-                                </div>
-
-                                <div class="input-group mb-3">
-                                    <div class="input-group-prepend">
-                                        <span class="input-group-text ms-5"
-                                            >Dimensione</span
-                                        >
-                                    </div>
-                                    <input
-                                        type="number"
-                                        class="form-control"
-                                        name="square_mt"
-                                        id="sqm"
-                                        v-model="sqm"
-                                        @change="getGeoPosition"
-                                        
-                                    />
-                                </div>
-
-
-                            </form>
+                                </label>
+                            </div>
                         </div>
-                    </nav>
-                </div>
-                <div class="col-12">
-                    <section id="flat-list">
-                        <h2 class="my-3"></h2>
-
-                        <!-- AppLoader -->
-                        <app-loader v-if="isLoading" />
-
-                        <!-- FLAT CARD -->
-                        <div class="row justify-content-between">
-                            <FlatCard
-                                v-for="flat in flats"
-                                :key="flat.id"
-                                :flat="flat"
-                            />
-                        </div>
-                    </section>
-                </div>
+                    </div>
+                </form>
             </div>
+            
+            <section id="flat-list">
+                <h2 class="my-3"></h2>
+
+                <!-- AppLoader -->
+                <app-loader v-if="isLoading" />
+
+                <!-- FLAT CARD -->
+                <div class="row justify-content-between">
+                    <FlatCard
+                        v-for="flat in flats"
+                        :key="flat.id"
+                        :flat="flat"
+                    />
+                </div>
+            </section>
         </div>
+
+        
     </div>
 </template>
 
@@ -171,8 +127,6 @@ export default {
             isLoading: false,
             rooms: 1,
             bathrooms: 1,
-            beds: 1,
-            sqm: 30,
         };
     },
     methods: {
@@ -271,7 +225,7 @@ export default {
                                 },
                                 info: {
                                     id: flat.id,
-                                    rooms: flat.room_number,
+                                    rooms: flat.room_number
                                 },
                             };
 
@@ -300,20 +254,16 @@ export default {
                                     flatIds.push(flat.info.id);
                                 });
 
-                                console.log("flatIds", flatIds);
+                                console.log('flatIds', flatIds);
+
 
                                 const filterdFlats = this.allFlats.filter(
                                     (flat) => {
-                                        console.log(flat);
+                                console.log(flat);
 
-                                        return (
-                                            flatIds.includes(flat.id) &&
-                                            flat.room_number >= this.rooms &&
-                                            flat.bathroom_number >= this.bathrooms &&
-                                            flat.bed_number >= this.beds &&
-                                            flat.square_mt >= this.sqm 
-                                                
-                                        );
+                                        return flatIds.includes(flat.id)
+                                            && flat.room_number >= this.rooms
+                                            && flat.bathroom_number >= this.bathrooms;
                                     }
                                 );
                                 console.log(filterdFlats);
@@ -381,11 +331,7 @@ export default {
 };
 </script>
 
-<style scoped lang="scss">
-.form-control .searchbar {
-    padding: 20px 50px;
-}
-
+<style lang="scss" scoped>
 .dropdown_menu {
     position: absolute;
     width: 100%;
@@ -398,5 +344,270 @@ export default {
             background-color: #3471eb;
         }
     }
+}
+
+.group {
+    position: relative;
+}
+
+.input {
+    font-size: 16px;
+    padding: 10px 10px 10px 5px;
+    display: block;
+    width: 300px;
+    border: none;
+    border-bottom: 1px solid #515151;
+    background: transparent;
+}
+
+.input:focus {
+    outline: none;
+}
+
+label {
+    color: #999;
+    font-size: 18px;
+    font-weight: normal;
+    position: absolute;
+    pointer-events: none;
+    left: 5px;
+    top: 10px;
+    transition: 0.2s ease all;
+    -moz-transition: 0.2s ease all;
+    -webkit-transition: 0.2s ease all;
+}
+
+.input:focus ~ label,
+.input:valid ~ label {
+    top: -20px;
+    font-size: 14px;
+    color: #3471eb;
+}
+
+.bar {
+    position: relative;
+    display: block;
+    width: 200px;
+}
+
+.bar:before,
+.bar:after {
+    content: "";
+    height: 2px;
+    width: 0;
+    bottom: 1px;
+    position: absolute;
+    background: #3471eb;
+    transition: 0.2s ease all;
+    -moz-transition: 0.2s ease all;
+    -webkit-transition: 0.2s ease all;
+}
+
+.bar:before {
+    left: 50%;
+}
+
+.bar:after {
+    right: 50%;
+}
+
+.input:focus ~ .bar:before,
+.input:focus ~ .bar:after {
+    width: 50%;
+}
+
+.highlight {
+    position: absolute;
+    height: 60%;
+    width: 100px;
+    top: 25%;
+    left: 0;
+    pointer-events: none;
+    opacity: 0.5;
+}
+
+.input:focus ~ .highlight {
+    animation: inputHighlighter 0.3s ease;
+}
+
+@keyframes inputHighlighter {
+    from {
+        background: #3471eb;
+    }
+
+    to {
+        width: 0;
+        background: transparent;
+    }
+}
+
+.loader {
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+#page-loader {
+    width: 150px;
+    height: 150px;
+
+    circle {
+        fill: none;
+        stroke-width: 5;
+        stroke-linecap: round;
+        animation-name: loader;
+        animation-duration: 4s;
+        animation-iteration-count: infinite;
+        animation-timing-function: ease-in-out;
+        transform-origin: center center;
+
+        &:nth-child(1) {
+            stroke: #ffc114;
+            stroke-dasharray: 50;
+            animation-delay: -0.2s;
+        }
+
+        &:nth-child(2) {
+            stroke: #ff5248;
+            stroke-dasharray: 100;
+            animation-delay: -0.4s;
+        }
+
+        &:nth-child(3) {
+            stroke: #19cdca;
+            stroke-dasharray: 180;
+            animation-delay: -0.6s;
+        }
+
+        &:nth-child(4) {
+            stroke: #4e88e1;
+            stroke-dasharray: 350;
+            stroke-dashoffset: -100;
+            animation-delay: -0.8s;
+        }
+
+        @keyframes loader {
+            50% {
+                transform: rotate(360deg);
+            }
+        }
+    }
+}
+
+.card {
+    border: none;
+    height: 100%;
+    padding: 0.5rem;
+    background-color: #f8fafc;
+    transition: border 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    border-radius: 5px;
+    transition: transform 0.5s;
+
+    &:hover {
+        box-shadow: 0 0 10px 4px #d0d0d0e8;
+        transform: scale(1.05);
+        z-index: 1;
+    }
+
+    img {
+        width: 100%;
+        min-height: 160px;
+        border-radius: 10px;
+    }
+}
+
+.header-card {
+    margin-top: 10px;
+    height: 45px;
+    padding: 0;
+    display: flex;
+    justify-content: space-between;
+
+    .custom-title {
+        color: #050505;
+        font-size: 13px;
+        font-weight: bold;
+        display: -webkit-box;
+        line-height: 1.2rem;
+        overflow: hidden;
+        -webkit-line-clamp: 2;
+        -webkit-box-orient: vertical;
+        /*     white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis; */
+    }
+}
+
+.costum-text {
+    color: #515151;
+    display: -webkit-box;
+    overflow: hidden;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+}
+
+form > .row {
+    align-items: flex-end;
+}
+
+/* From uiverse.io by @adamgiebl */
+button {
+    font-family: inherit;
+    font-size: 20px;
+    background: #3471eb;
+    color: white;
+    padding: 0.2em 0.5em;
+    padding-left: 0.7em;
+    display: flex;
+    align-items: center;
+    border: none;
+    border-radius: 16px;
+    overflow: hidden;
+    transition: all 0.2s;
+    margin-top: 5px;
+}
+
+button span {
+    display: block;
+    margin-left: 0.3em;
+    transition: all 0.3s ease-in-out;
+}
+
+button svg {
+    display: block;
+    transform-origin: center center;
+    transition: transform 0.3s ease-in-out;
+}
+
+button:hover .svg-wrapper {
+    animation: fly-1 0.6s ease-in-out infinite alternate;
+}
+
+button:hover svg {
+    transform: translateX(1.2em) rotate(45deg) scale(1.1);
+}
+
+button:hover span {
+    transform: translateX(5em);
+}
+
+button:active {
+    transform: scale(0.95);
+}
+
+@keyframes fly-1 {
+    from {
+        transform: translateY(0.1em);
+    }
+
+    to {
+        transform: translateY(-0.1em);
+    }
+}
+
+.wrapper {
+    min-height: calc(100vh - 173px);
 }
 </style>
