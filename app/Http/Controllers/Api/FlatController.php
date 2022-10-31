@@ -16,11 +16,9 @@ class FlatController extends Controller
      */
     public function index(Request $request)
     {
-        $lat = $request->get('lat');
        
-        $flats = Flat::
-        where('visible', 1)
-       
+        $flats = Flat::with(['services'])
+        ->where('visible', 1)
         ->orderBy('created_at', 'DESC')
         ->get();
 

@@ -1,4 +1,5 @@
 <template>
+
   <div class="card col-3 m-4 p-0">
     <img
       class="card-img-top  p-2"
@@ -20,10 +21,13 @@
       </div>
       <h5 class="card-title">{{ flat.title }}</h5>
 
-      <p class="card-text">
+      <p class="card-text" v-for="service in flat.services " > 
+
+        <i :class="service.icon"></i> {{ service.label}}
       </p>
     </div>
   </div>
+
 </template>
 
 <script>
@@ -34,7 +38,7 @@ export default {
       isLoading: false,
     };
   },
-  props: { flat: Object },
+  props: { flat: Object , services: Array},
   methods: {
 
     
@@ -46,7 +50,7 @@ export default {
 
 .card {
   img {
-    height: 250px;
+    max-height: 250px;
   }
 }
 

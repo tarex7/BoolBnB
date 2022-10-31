@@ -22,7 +22,7 @@
                         >
                             <form
                                 @submit.prevent="getGeoPosition"
-                                class="form-inline my-2 my-lg-0 d-flex align-items-center"
+                                class="form-inline my-2 my-lg-0 d-flex align-items-center position-relative"
                             >
                                 <input
                                     class="form-control mr-sm-2 input"
@@ -37,7 +37,7 @@
                                     @keyup.enter="getGeoPosition"
                                 />
                                 <ul
-                                    class="dropdown_menu w-75 list-unstyled p-1"
+                                    class="dropdown_menu w-75 list-unstyled p-1 mt-5"
                                     v-if="query.length > 0"
                                 >
                                     <li
@@ -111,7 +111,7 @@
                                 <div class="input-group mb-3">
                                     <div class="input-group-prepend">
                                         <span class="input-group-text ms-5"
-                                            >Dimensione</span
+                                            >Dimensione mq<sup>2</sup></span
                                         >
                                     </div>
                                     <input
@@ -127,41 +127,25 @@
                         </div>
                     </nav>
                 </div>
-                <div class="col-12">
-                    <!-- <label class="btn btn-outline-success mx-2" :for="`btn-check-${service.id}`"
-                        v-for="service in services"
-                        >{{ service.label }}
+                <div class="col-12 mb-5">
+                    <span v-for="service in services" @click="addService">
                         <input
-                        type="checkbox"
-                        class="btn-check"
-                        :id="`btn-check-${service.id}`"
-                        
-                        autocomplete="off"
-
-
-                    />
-                        </label
-                    > -->
-
-                    <span v-for="(service) in services">
-                        <input
-                        type="checkbox"
-                        class="btn-check"
-                        :id="`btn-check-${service.id}`"
-                        
-                        autocomplete="off"
-                    />
-                    <label class="btn btn-outline-success" :for="`btn-check-${service.id}`"
-                        >{{ service.label }}</label
-                    >
+                            type="checkbox"
+                            class="btn-check"
+                            :id="`btn-check-${service.id}`"
+                            autocomplete="off"
+                        />
+                        <label
+                            class="btn btn-outline-success"
+                            :for="`btn-check-${service.id}`"
+                            >{{ service.label }}</label
+                        >
                     </span>
-
-
                 </div>
                 <div class="col-12">
                     <section id="flat-list">
                         <h2 class="my-3"></h2>
-
+                        <h3>{{ message }}</h3>
                         <!-- AppLoader -->
                         <app-loader v-if="isLoading" />
 
@@ -171,6 +155,7 @@
                                 v-for="flat in flats"
                                 :key="flat.id"
                                 :flat="flat"
+                                :services="services"
                             />
                         </div>
                     </section>
@@ -202,6 +187,9 @@ export default {
             beds: 1,
             sqm: 30,
             services: [],
+            message: "",
+            checked: false,
+            servicesList:[]
         };
     },
     methods: {
@@ -212,6 +200,7 @@ export default {
                 .then((res) => {
                     this.flats = res.data;
                     this.allFlats = res.data;
+                    console.log(res.data);
                 })
                 .catch((err) => {
                     this.error = "Errore durante il fetch dei flats";
@@ -231,11 +220,19 @@ export default {
                 })
                 .then(() => {});
         },
+        addService(e) {
+            //let service = e.target.innerText
+            console.log(e.target.innerText);
+            const service = e.target.innerText
+            this.servicesList.push(service)
+            console.log(this.servicesList);
+           
+        },
         getAutocomplete() {
             if (this.query) {
                 axios
                     .get(
-                        `https://api.tomtom.com/search/2/search/${this.query}.json?key=qSUikbBmShqOxwAwrrHX28luZ27pYwPx&limit=10&countrySet=IT&language=it-IT&limit=10`
+                        `https://api.tomtom.com/search/2/search/${this.query}.json?key=qSUikbBmShqOxwAwrrHX28luZ27pYwPx&limit=5&countrySet=IT&language=it-IT&limit=10`
                     )
                     .then((response) => {
                         const results = response.data.results;
@@ -345,6 +342,8 @@ export default {
                                 const filterdFlats = this.allFlats.filter(
                                     (flat) => {
                                         console.log(flat);
+                                        console.log('flat services' ,flat.services);
+                                        console.log('services list' ,this.servicesList);
 
                                         return (
                                             flatIds.includes(flat.id) &&
@@ -352,11 +351,14 @@ export default {
                                             flat.bathroom_number >=
                                                 this.bathrooms &&
                                             flat.bed_number >= this.beds &&
-                                            flat.square_mt >= this.sqm
+                                            flat.square_mt >= this.sqm &&
+                                            flat.services.includes(this.servicesList)
                                         );
                                     }
                                 );
                                 console.log(filterdFlats);
+                                if (filterdFlats.length == 0)
+                                    this.message = "Nessun risultato";
                                 this.flats = filterdFlats;
                             })
                             .catch((error) => console.error(error));
@@ -430,6 +432,7 @@ export default {
 
 .dropdown_menu {
     position: absolute;
+    top: 20%;
     width: 100%;
     z-index: 100;
 
