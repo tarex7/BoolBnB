@@ -106,7 +106,7 @@ export default {
       //controllo se una email è valida
       if (
         this.form.email &&
-        !this.form.emailmatch(
+        !this.form.email.match(
           /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
         )
       )
