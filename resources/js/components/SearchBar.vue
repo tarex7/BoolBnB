@@ -316,8 +316,13 @@ export default {
                                 let selectedServices = [];
 
                                 nodeServices.forEach((nodeService) => {
-                                    selectedServices.push(parseInt(nodeService.value));
-                        console.log( 'tipo', typeof parseInt(nodeService.value) );
+                                    selectedServices.push(
+                                        parseInt(nodeService.value)
+                                    );
+                                    console.log(
+                                        "tipo",
+                                        typeof parseInt(nodeService.value)
+                                    );
                                 });
 
                                 console.log(
@@ -354,47 +359,62 @@ export default {
                                 );
                                 console.log(filterdFlats);
 
-
                                 if (filterdFlats.length == 0)
                                     this.message =
                                         "Non ci sono appartamenti con queste caratteristiche in questa zona";
 
                                 const filteredByServices = [];
 
-                                console.log('filteredByServices', filteredByServices);
-                                console.log('filterdFlats', filterdFlats);
-                                
-                                filterdFlats.forEach((flat) => {
+                                console.log(
+                                    "filteredByServices",
+                                    filteredByServices
+                                );
+                                console.log("filterdFlats", filterdFlats);
 
-                                    const servicesIds = [];
+                                if (this.selectedServices.length > 0) {
+                                    filterdFlats.forEach((flat) => {
+                                        const servicesIds = [];
 
-                                    flat.services.forEach((service) => {
-                                        servicesIds.push(service.id)
-                                    })
+                                        flat.services.forEach((service) => {
+                                            servicesIds.push(service.id);
+                                        });
 
-                                    console.log("flat services IDs", servicesIds);
-                                    console.log(
-                                        "selected services",
-                                        this.selectedServices
-                                    );
+                                        console.log(
+                                            "flat services IDs",
+                                            servicesIds
+                                        );
+                                        console.log(
+                                            "selected services",
+                                            this.selectedServices
+                                        );
 
-
-                                   
-                                    if (
-                                        this.selectedServices.some(
-                                            (element) => {
-                                                return servicesIds.includes(
-                                                    element
-                                                );
-                                            }
-                                        )
-                                    ) {
-                                        filteredByServices.push(flat);
-                                    }
-                                    console.log('filteredByServices', filteredByServices);
-                                    
+                                        if (
+                                            this.selectedServices.some(
+                                                (element) => {
+                                                    return servicesIds.includes(
+                                                        element
+                                                    );
+                                                }
+                                            )
+                                        ) {
+                                            filteredByServices.push(flat);
+                                        }
+                                        console.log(
+                                            "filteredByServices",
+                                            filteredByServices
+                                        );
+                                    });
                                     this.flats = filteredByServices;
-                                });
+                                    if (filteredByServices.length == 0)
+                                    this.message =
+                                        "Non ci sono appartamenti con queste caratteristiche in questa zona";
+                                } else {
+                                    this.flats = filterdFlats
+                                    if (filterdFlats.length == 0)
+                                    this.message =
+                                        "Non ci sono appartamenti con queste caratteristiche in questa zona";
+                                }
+
                                 console.log("this.flats", this.flats);
                             })
                             .catch((error) => console.error(error));
