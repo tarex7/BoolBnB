@@ -12,11 +12,14 @@
       <p>Prezzo: {{ flat.price_per_day }}€ per notte.</p>
     </div>
     <div class="flat-description">
+      <h5 class="fs-bold">{{ flat.title }}</h5>
+      <p>Prezzo: {{ flat.price_per_day }}€ per notte.</p>
+      <p>{{ flat.description }}</p>
       <router-link
         :to="{ name: 'flat-detail', params: { id: flat.id } }"
-        class="ml-5 mt-2 btn btn-primary btn-sm"
+        class="show-button"
       >
-        <i class="fa-solid fa-eye"></i> Vedi
+        <i class="fa-solid fa-eye"></i> Mostra Appartamento
       </router-link>
     </div>
   </div>
@@ -33,14 +36,15 @@ export default {
 <style scoped lang="scss">
 #flat-card {
   .flat-img {
+    position: relative;
+
     img {
-      position: relative;
       height: 400px;
-      &:hover {
-        filter: opacity(0.5);
-      }
+      filter: opacity(1);
+      transition: all 0.5s;
     }
   }
+
   .flat-info {
     position: absolute;
     bottom: 50px;
@@ -48,11 +52,55 @@ export default {
     background-color: #fff;
     width: 70%;
     padding: 1rem;
-    h5 {
-    }
+    transition: all 0.5s;
+    opacity: 1;
+
     p {
       margin: 0;
     }
   }
+  .flat-description {
+    height: 300px;
+    padding: 30px;
+    width: 70%;
+    background-color: white;
+    position: absolute;
+    bottom: 350px;
+    left: 30px;
+    visibility: hidden;
+    transition: all 0.5s;
+    opacity: 0;
+    z-index: -1;
+    // transition-delay: 0.2s;
+    p {
+      margin: 0;
+    }
+    .show-button {
+      background-color: black;
+      border: 2px solid black;
+      padding: 12px;
+      position: absolute;
+      bottom: 30px;
+      color: white;
+    }
+  }
+}
+
+#flat-card:hover .flat-info {
+  visibility: hidden;
+  bottom: -100px;
+  opacity: 0;
+  color: white;
+  z-index: -1;
+}
+#flat-card:hover .flat-description {
+  visibility: visible;
+  opacity: 1;
+  bottom: 50px;
+
+  z-index: 1;
+}
+#flat-card:hover img {
+  filter: opacity(0.4);
 }
 </style>

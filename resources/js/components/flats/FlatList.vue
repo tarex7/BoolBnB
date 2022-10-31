@@ -7,7 +7,7 @@
       <app-loader v-if="isLoading" />
 
       <!-- FLAT CARD -->
-      <div class="row g-3">
+      <div class="row g-3 clearfix">
         <flat-card v-for="flat in flats" :key="flat.id" :flat="flat" />
       </div>
     </div>
@@ -47,4 +47,8 @@ export default {
 };
 </script>
  <style scoped lang="scss">
+#flat-list {
+  padding-top: 40px;
+  padding-bottom: 40px;
+}
 </style>
