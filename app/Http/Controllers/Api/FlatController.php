@@ -45,57 +45,7 @@ class FlatController extends Controller
      */
     public function show()
     {
-        $geometryList = [
-            [
-                'type' => 'CIRCLE',
-                'position' => "40.55798 , 8.3222",
-                'radius' => 20000,
-            ]
-        ];
-
-        $flatList =
-        [
-            [
-                'poi' => [
-                    'name' => "Alghero Via Xx Settembre Lato Civico 112, Via 20 S"
-                ],
-                'address' => [
-                    'freeformAddress' => "Alghero Via Xx Settembre Lato Civico 112, Via 20 Settembre, 07041 Alghero"
-                ],
-                'position' => [
-                    'lat' => 40.5584600,
-                    'lon' =>8.3194300,
-                ],
-                'info' => [
-                    'id' => 10,
-                ]
-                ],
-            [
-                'poi' => [
-                    'name' => "Viale Borsellino, 90145 Palermo"
-                ],
-                'address' => [
-                    'freeformAddress' => "Viale Borsellino, 90145 Palermo"
-                ],
-                'position' => [
-                    'lat' => 38.1332800,
-                    'lon' =>13.3049700,
-                ],
-                'info' => [
-                    'id' => 15,
-                ]
-            ]
-
-
-        ];
-
-
-
-
-        $responseTomTom = Http::get("https://api.tomtom.com");
-
-        return response()->json($responseTomTom);
-
+      
     }
 
     /**

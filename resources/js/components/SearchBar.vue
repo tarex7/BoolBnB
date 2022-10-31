@@ -128,27 +128,27 @@
                     </nav>
                 </div>
                 <div class="col-12">
-                  
-
-                    <span v-for="(service) in services">
+                    <span v-for="service in services" :key="service.id">
                         <input
-                        type="checkbox"
-                        class="btn-check"
-                        :id="`btn-check-${service.id}`"
-                        name="service-name"
-                        :value="`${service.label}`"
-                        autocomplete="off"
-                    />
-                    <label class="btn btn-outline-success" :for="`btn-check-${service.id}`"
-                        >{{ service.label }}</label
-                    >
+                            type="checkbox"
+                            class="btn-check"
+                            :id="`btn-check-${service.id}`"
+                            name="service"
+                            :value="service.id"
+                            autocomplete="off"
+                        />
+                        <label
+                            class="btn btn-outline-success"
+                            :for="`btn-check-${service.id}`"
+                            >{{ service.label }}</label
+                        >
                     </span>
-
-
                 </div>
                 <div class="col-12">
                     <section id="flat-list">
-                        <h2 class="my-3 text-center mt-5">{{ this.message }}</h2>
+                        <h2 class="my-3 text-center mt-5">
+                            {{ this.message }}
+                        </h2>
 
                         <!-- AppLoader -->
                         <app-loader v-if="isLoading" />
@@ -190,7 +190,8 @@ export default {
             beds: 1,
             sqm: 30,
             services: [],
-            message:""
+            message: "",
+            selectedServices: [],
         };
     },
     methods: {
@@ -232,7 +233,6 @@ export default {
                         results.forEach((result) => {
                             let address = result.address.freeformAddress;
 
-
                             this.autocomplete.push(address);
                         });
                     })
@@ -260,7 +260,6 @@ export default {
                     .then((response) => {
                         let lat = response.data.results[0].position.lat;
                         let lon = response.data.results[0].position.lon;
-
 
                         let flatList = [];
 
@@ -310,7 +309,24 @@ export default {
                                 )}&poiList=${JSON.stringify(flatList)}`
                             )
                             .then((response) => {
-                                
+                                let nodeServices = document.querySelectorAll(
+                                    'input[type="checkbox"]:checked'
+                                );
+
+                                let selectedServices = [];
+
+                                nodeServices.forEach((nodeService) => {
+                                    selectedServices.push(parseInt(nodeService.value));
+                        console.log( 'tipo', typeof parseInt(nodeService.value) );
+                                });
+
+                                console.log(
+                                    "selectedService",
+                                    selectedServices
+                                );
+                                this.selectedServices = selectedServices;
+                                console.log(nodeServices);
+
                                 const tomtomResponse = response.data.results;
                                 this.loading = false;
 
@@ -337,8 +353,49 @@ export default {
                                     }
                                 );
                                 console.log(filterdFlats);
-                                if(filterdFlats.length == 0) this.message = 'Non ci sono appartamenti con queste caratteristiche in questa zona'
-                                this.flats = filterdFlats;
+
+
+                                if (filterdFlats.length == 0)
+                                    this.message =
+                                        "Non ci sono appartamenti con queste caratteristiche in questa zona";
+
+                                const filteredByServices = [];
+
+                                console.log('filteredByServices', filteredByServices);
+                                console.log('filterdFlats', filterdFlats);
+                                
+                                filterdFlats.forEach((flat) => {
+
+                                    const servicesIds = [];
+
+                                    flat.services.forEach((service) => {
+                                        servicesIds.push(service.id)
+                                    })
+
+                                    console.log("flat services IDs", servicesIds);
+                                    console.log(
+                                        "selected services",
+                                        this.selectedServices
+                                    );
+
+
+                                   
+                                    if (
+                                        this.selectedServices.some(
+                                            (element) => {
+                                                return servicesIds.includes(
+                                                    element
+                                                );
+                                            }
+                                        )
+                                    ) {
+                                        filteredByServices.push(flat);
+                                    }
+                                    console.log('filteredByServices', filteredByServices);
+                                    
+                                    this.flats = filteredByServices;
+                                });
+                                console.log("this.flats", this.flats);
                             })
                             .catch((error) => console.error(error));
                     })
