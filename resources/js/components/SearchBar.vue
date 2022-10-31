@@ -22,7 +22,7 @@
                         >
                             <form
                                 @submit.prevent="getGeoPosition"
-                                class="form-inline my-2 my-lg-0 d-flex align-items-center position-relative"
+                                class="form-inline my-2 my-lg-0 d-flex align-items-center"
                             >
                                 <input
                                     class="form-control mr-sm-2 input"
@@ -37,7 +37,7 @@
                                     @keyup.enter="getGeoPosition"
                                 />
                                 <ul
-                                    class="dropdown_menu w-75 list-unstyled p-1 mt-5"
+                                    class="dropdown_menu w-75 list-unstyled p-1"
                                     v-if="query.length > 0"
                                 >
                                     <li
@@ -111,7 +111,7 @@
                                 <div class="input-group mb-3">
                                     <div class="input-group-prepend">
                                         <span class="input-group-text ms-5"
-                                            >Dimensione mq<sup>2</sup></span
+                                            >Dimensione</span
                                         >
                                     </div>
                                     <input
@@ -127,25 +127,29 @@
                         </div>
                     </nav>
                 </div>
-                <div class="col-12 mb-5">
-                    <span v-for="service in services" @click="addService">
+                <div class="col-12">
+                  
+
+                    <span v-for="(service) in services">
                         <input
-                            type="checkbox"
-                            class="btn-check"
-                            :id="`btn-check-${service.id}`"
-                            autocomplete="off"
-                        />
-                        <label
-                            class="btn btn-outline-success"
-                            :for="`btn-check-${service.id}`"
-                            >{{ service.label }}</label
-                        >
+                        type="checkbox"
+                        class="btn-check"
+                        :id="`btn-check-${service.id}`"
+                        name="service-name"
+                        :value="`${service.label}`"
+                        autocomplete="off"
+                    />
+                    <label class="btn btn-outline-success" :for="`btn-check-${service.id}`"
+                        >{{ service.label }}</label
+                    >
                     </span>
+
+
                 </div>
                 <div class="col-12">
                     <section id="flat-list">
-                        <h2 class="my-3"></h2>
-                        <h3>{{ message }}</h3>
+                        <h2 class="my-3 text-center mt-5">{{ this.message }}</h2>
+
                         <!-- AppLoader -->
                         <app-loader v-if="isLoading" />
 
@@ -155,7 +159,6 @@
                                 v-for="flat in flats"
                                 :key="flat.id"
                                 :flat="flat"
-                                :services="services"
                             />
                         </div>
                     </section>
@@ -187,9 +190,7 @@ export default {
             beds: 1,
             sqm: 30,
             services: [],
-            message: "",
-            checked: false,
-            servicesList:[]
+            message:""
         };
     },
     methods: {
@@ -200,7 +201,6 @@ export default {
                 .then((res) => {
                     this.flats = res.data;
                     this.allFlats = res.data;
-                    console.log(res.data);
                 })
                 .catch((err) => {
                     this.error = "Errore durante il fetch dei flats";
@@ -220,14 +220,6 @@ export default {
                 })
                 .then(() => {});
         },
-        addService(e) {
-            //let service = e.target.innerText
-            console.log(e.target.innerText);
-            const service = e.target.innerText
-            this.servicesList.push(service)
-            console.log(this.servicesList);
-           
-        },
         getAutocomplete() {
             if (this.query) {
                 axios
@@ -236,14 +228,10 @@ export default {
                     )
                     .then((response) => {
                         const results = response.data.results;
-                        // console.log(results);
                         this.autocomplete = [];
                         results.forEach((result) => {
                             let address = result.address.freeformAddress;
 
-                            // console.log('address', address);
-                            // console.log("lat:", result.position.lat);
-                            // console.log("lon:", result.position.lon);
 
                             this.autocomplete.push(address);
                         });
@@ -272,13 +260,8 @@ export default {
                     .then((response) => {
                         let lat = response.data.results[0].position.lat;
                         let lon = response.data.results[0].position.lon;
-                        console.log("response", response);
 
-                        console.log("geoPoslat", lat);
 
-                        // console.log(lat);
-                        //console.log(lon);
-                        // Pass Geo data to ApiController and recieve apartements filtered as response
                         let flatList = [];
 
                         let geometryList = [
@@ -327,7 +310,7 @@ export default {
                                 )}&poiList=${JSON.stringify(flatList)}`
                             )
                             .then((response) => {
-                                console.log("response:", response.data.results);
+                                
                                 const tomtomResponse = response.data.results;
                                 this.loading = false;
 
@@ -342,8 +325,6 @@ export default {
                                 const filterdFlats = this.allFlats.filter(
                                     (flat) => {
                                         console.log(flat);
-                                        console.log('flat services' ,flat.services);
-                                        console.log('services list' ,this.servicesList);
 
                                         return (
                                             flatIds.includes(flat.id) &&
@@ -351,14 +332,12 @@ export default {
                                             flat.bathroom_number >=
                                                 this.bathrooms &&
                                             flat.bed_number >= this.beds &&
-                                            flat.square_mt >= this.sqm &&
-                                            flat.services.includes(this.servicesList)
+                                            flat.square_mt >= this.sqm
                                         );
                                     }
                                 );
                                 console.log(filterdFlats);
-                                if (filterdFlats.length == 0)
-                                    this.message = "Nessun risultato";
+                                if(filterdFlats.length == 0) this.message = 'Non ci sono appartamenti con queste caratteristiche in questa zona'
                                 this.flats = filterdFlats;
                             })
                             .catch((error) => console.error(error));
@@ -432,8 +411,8 @@ export default {
 
 .dropdown_menu {
     position: absolute;
-    top: 20%;
     width: 100%;
+    top: 80%;
     z-index: 100;
 
     input {
