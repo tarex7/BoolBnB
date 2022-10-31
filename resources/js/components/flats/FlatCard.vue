@@ -1,5 +1,5 @@
 <template>
-  <div id="flat-card" class="col-12 col-sm-6 col-xl-4">
+  <div id="flat-card" class="mt-4 col-12 col-sm-6 col-xl-4">
     <div class="flat-img">
       <img
         class="w-100 img-fluid"
@@ -73,7 +73,9 @@ export default {
     z-index: -1;
     // transition-delay: 0.2s;
     p {
-      margin: 0;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      max-height: 90px;
     }
     .show-button {
       background-color: black;

@@ -1,8 +1,6 @@
 <template>
   <section id="flat-list">
     <div class="container-fluid px-3">
-      <h2 class="my-3">APPARTAMENTI</h2>
-
       <!-- AppLoader -->
       <app-loader v-if="isLoading" />
 

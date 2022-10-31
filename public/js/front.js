@@ -2208,7 +2208,7 @@ var render = function render() {
     _c = _vm._self._c;
   return _c("div", {
     staticClass: "content"
-  }, [_c("router-view"), _vm._v(" "), _c("app-footer")], 1);
+  }, [_c("router-view"), _vm._v(" "), _c("AppFooter")], 1);
 };
 var staticRenderFns = [];
 render._withStripped = true;
@@ -2238,14 +2238,24 @@ var staticRenderFns = [function () {
   return _c("footer", [_c("div", {
     staticClass: "container"
   }, [_c("div", {
-    staticClass: "row row-cols-3"
+    staticClass: "row row-cols-1 row-cols-md-3"
   }, [_c("div", {
+    staticClass: "col mb-4 mb-md-1"
+  }, [_c("h1", {
+    staticClass: "mb-3"
+  }, [_vm._v("BoolBnB")]), _vm._v(" "), _c("h2", [_vm._v("Social")]), _vm._v(" "), _c("div", {
+    staticClass: "d-flex justify-content-around w-25"
+  }, [_c("i", {
+    staticClass: "fa-brands fa-instagram"
+  }), _vm._v(" "), _c("i", {
+    staticClass: "fa-brands fa-facebook"
+  }), _vm._v(" "), _c("i", {
+    staticClass: "fa-brands fa-twitter"
+  })])]), _vm._v(" "), _c("div", {
+    staticClass: "col mb-4 mb-md-1"
+  }, [_c("h2", [_vm._v("Servizi")]), _vm._v(" "), _c("ul", [_c("li", [_vm._v("Info")]), _vm._v(" "), _c("li", [_vm._v("Appartamenti")]), _vm._v(" "), _c("li", [_vm._v("Registrati")]), _vm._v(" "), _c("li", [_vm._v("Staff")])])]), _vm._v(" "), _c("div", {
     staticClass: "col"
-  }), _vm._v(" "), _c("div", {
-    staticClass: "col"
-  }, [_vm._v("link")]), _vm._v(" "), _c("div", {
-    staticClass: "col"
-  }, [_vm._v("contacts")])])])]);
+  }, [_c("h2", [_vm._v("Contatti")]), _vm._v("\n        Flat 20, Reynolds Neck, "), _c("br"), _vm._v("\n        North Helenaville, "), _c("br"), _vm._v("\n        FV77 8WS +2(305) 587-3407 "), _c("br"), _vm._v("\n        Info@Example.Com\n      ")])])])]);
 }];
 render._withStripped = true;
 
@@ -2326,7 +2336,7 @@ var render = function render() {
   var _vm = this,
     _c = _vm._self._c;
   return _c("div", {
-    staticClass: "col-12 col-sm-6 col-xl-4",
+    staticClass: "mt-4 col-12 col-sm-6 col-xl-4",
     attrs: {
       id: "flat-card"
     }
@@ -2386,9 +2396,7 @@ var render = function render() {
     }
   }, [_c("div", {
     staticClass: "container-fluid px-3"
-  }, [_c("h2", {
-    staticClass: "my-3"
-  }, [_vm._v("APPARTAMENTI")]), _vm._v(" "), _vm.isLoading ? _c("app-loader") : _vm._e(), _vm._v(" "), _c("div", {
+  }, [_vm.isLoading ? _c("app-loader") : _vm._e(), _vm._v(" "), _c("div", {
     staticClass: "row g-3 clearfix"
   }, _vm._l(_vm.flats, function (flat) {
     return _c("flat-card", {
@@ -6933,7 +6941,7 @@ exports = module.exports = __webpack_require__(/*! ../../../node_modules/css-loa
 
 
 // module
-exports.push([module.i, "footer[data-v-4ab6097e] {\n  height: 500px;\n  background-color: #001632;\n  color: #cecece;\n  padding-top: 40px;\n}", ""]);
+exports.push([module.i, "footer[data-v-4ab6097e] {\n  background-color: #001632;\n  color: #cecece;\n  padding: 40px;\n}\nfooter ul[data-v-4ab6097e] {\n  list-style-type: none;\n  padding: 0;\n}", ""]);
 
 // exports
 
@@ -6991,7 +6999,7 @@ exports = module.exports = __webpack_require__(/*! ../../../../node_modules/css-
 
 
 // module
-exports.push([module.i, "#flat-card .flat-img[data-v-30490ca9] {\n  position: relative;\n}\n#flat-card .flat-img img[data-v-30490ca9] {\n  height: 400px;\n  filter: opacity(1);\n  transition: all 0.5s;\n}\n#flat-card .flat-info[data-v-30490ca9] {\n  position: absolute;\n  bottom: 50px;\n  left: 30px;\n  background-color: #fff;\n  width: 70%;\n  padding: 1rem;\n  transition: all 0.5s;\n  opacity: 1;\n}\n#flat-card .flat-info p[data-v-30490ca9] {\n  margin: 0;\n}\n#flat-card .flat-description[data-v-30490ca9] {\n  height: 300px;\n  padding: 30px;\n  width: 70%;\n  background-color: white;\n  position: absolute;\n  bottom: 350px;\n  left: 30px;\n  visibility: hidden;\n  transition: all 0.5s;\n  opacity: 0;\n  z-index: -1;\n}\n#flat-card .flat-description p[data-v-30490ca9] {\n  margin: 0;\n}\n#flat-card .flat-description .show-button[data-v-30490ca9] {\n  background-color: black;\n  border: 2px solid black;\n  padding: 12px;\n  position: absolute;\n  bottom: 30px;\n  color: white;\n}\n#flat-card:hover .flat-info[data-v-30490ca9] {\n  visibility: hidden;\n  bottom: -100px;\n  opacity: 0;\n  color: white;\n  z-index: -1;\n}\n#flat-card:hover .flat-description[data-v-30490ca9] {\n  visibility: visible;\n  opacity: 1;\n  bottom: 50px;\n  z-index: 1;\n}\n#flat-card:hover img[data-v-30490ca9] {\n  filter: opacity(0.4);\n}", ""]);
+exports.push([module.i, "#flat-card .flat-img[data-v-30490ca9] {\n  position: relative;\n}\n#flat-card .flat-img img[data-v-30490ca9] {\n  height: 400px;\n  filter: opacity(1);\n  transition: all 0.5s;\n}\n#flat-card .flat-info[data-v-30490ca9] {\n  position: absolute;\n  bottom: 50px;\n  left: 30px;\n  background-color: #fff;\n  width: 70%;\n  padding: 1rem;\n  transition: all 0.5s;\n  opacity: 1;\n}\n#flat-card .flat-info p[data-v-30490ca9] {\n  margin: 0;\n}\n#flat-card .flat-description[data-v-30490ca9] {\n  height: 300px;\n  padding: 30px;\n  width: 70%;\n  background-color: white;\n  position: absolute;\n  bottom: 350px;\n  left: 30px;\n  visibility: hidden;\n  transition: all 0.5s;\n  opacity: 0;\n  z-index: -1;\n}\n#flat-card .flat-description p[data-v-30490ca9] {\n  overflow: hidden;\n  text-overflow: ellipsis;\n  max-height: 90px;\n}\n#flat-card .flat-description .show-button[data-v-30490ca9] {\n  background-color: black;\n  border: 2px solid black;\n  padding: 12px;\n  position: absolute;\n  bottom: 30px;\n  color: white;\n}\n#flat-card:hover .flat-info[data-v-30490ca9] {\n  visibility: hidden;\n  bottom: -100px;\n  opacity: 0;\n  color: white;\n  z-index: -1;\n}\n#flat-card:hover .flat-description[data-v-30490ca9] {\n  visibility: visible;\n  opacity: 1;\n  bottom: 50px;\n  z-index: 1;\n}\n#flat-card:hover img[data-v-30490ca9] {\n  filter: opacity(0.4);\n}", ""]);
 
 // exports
 
