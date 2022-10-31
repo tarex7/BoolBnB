@@ -127,6 +127,12 @@
                         </div>
                     </nav>
                 </div>
+                <div class="col-3 my-3">
+                    <label for="radius" class="form-label"
+                        >Cerca nel raggio di {{ radius }} km</label
+                    >
+                    <input type="range" class="form-range" id="radius" v-model="radius" step="10" min="0" max="50"/>
+                </div>
                 <div class="col-12">
                     <span v-for="service in services" :key="service.id">
                         <input
@@ -406,13 +412,13 @@ export default {
                                     });
                                     this.flats = filteredByServices;
                                     if (filteredByServices.length == 0)
-                                    this.message =
-                                        "Non ci sono appartamenti con queste caratteristiche in questa zona";
+                                        this.message =
+                                            "Non ci sono appartamenti con queste caratteristiche in questa zona";
                                 } else {
-                                    this.flats = filterdFlats
+                                    this.flats = filterdFlats;
                                     if (filterdFlats.length == 0)
-                                    this.message =
-                                        "Non ci sono appartamenti con queste caratteristiche in questa zona";
+                                        this.message =
+                                            "Non ci sono appartamenti con queste caratteristiche in questa zona";
                                 }
 
                                 console.log("this.flats", this.flats);
