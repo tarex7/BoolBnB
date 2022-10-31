@@ -22,18 +22,54 @@
       </AppAlert>
       <!-- intercetto vue sumbit.prevent per non ricaricare la pagina -->
       <form class="contact - form" @submit.prevent="submitForm" novalidate>
+        <!-- utente -->
         <div class="form-group">
-          <label for="email" class="form-label">Indirizzo Email</label>
+          <label for="sender_name" class="form-label">Nome Utente</label>
+          <input
+            type="text"
+            class="form-control"
+            :class="{ 'is-invalid': errors.sender_name }"
+            id="sender_name"
+            v-model.trim="form.sender_name"
+          />
+          <!-- STAMPO GLI ERRORI -->
+          <div v-if="errors.sender_name" class="invalid-feedback">
+            {{ errors.sender_name }}
+          </div>
+          <div v-else class="form-text">
+            Ti Risponderemo su questo indirizzo
+          </div>
+
+          <!-- Object -->
+          <label for="object" class="form-label">Nome Utente</label>
+          <input
+            type="text"
+            class="form-control"
+            :class="{ 'is-invalid': errors.object }"
+            id="object"
+            v-model.trim="form.object"
+          />
+          <!-- STAMPO GLI ERRORI -->
+          <div v-if="errors.object" class="invalid-feedback">
+            {{ errors.object }}
+          </div>
+          <div v-else class="form-text">
+            Ti Risponderemo su questo indirizzo
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label for="sender_email" class="form-label">Indirizzo Email</label>
           <input
             type="email"
             class="form-control"
-            :class="{ 'is-invalid': errors.email }"
-            id="email"
-            v-model.trim="form.email"
+            :class="{ 'is-invalid': errors.sender_email }"
+            id="sender_email"
+            v-model.trim="form.sender_email"
           />
           <!-- STAMPO GLI ERRORI -->
-          <div v-if="errors.email" class="invalid-feedback">
-            {{ errors.email }}
+          <div v-if="errors.sender_email" class="invalid-feedback">
+            {{ errors.sender_email }}
           </div>
           <div v-else class="form-text">
             Ti Risponderemo su questo indirizzo
@@ -41,19 +77,19 @@
         </div>
         <!-- Text-Area -->
         <div class="mb-3">
-          <label for="message" class="form-label"
+          <label for="text" class="form-label"
             >Inserisci qua il tuo messaggio</label
           >
           <textarea
             class="form-control"
-            :class="{ 'is-invalid': errors.message }"
-            id="message"
+            :class="{ 'is-invalid': errors.text }"
+            id="text"
             rows="10"
-            v-model.trim="form.message"
+            v-model.trim="form.text"
           ></textarea>
           <!-- STAMPO GLI ERRORI -->
-          <div v-if="errors.message" class="invalid-feedback">
-            {{ errors.message }}
+          <div v-if="errors.text" class="invalid-feedback">
+            {{ errors.text }}
           </div>
           <div v-else class="form-text">
             Scrivi tutto quello che deisideri sapere
@@ -77,8 +113,10 @@ export default {
     return {
       //DATA DENTRO AL FORM
       form: {
-        email: "",
-        message: "",
+        sender_name: "",
+        sender_email: "",
+        text: "",
+        object: "",
       },
       //Data degli errori possibili
 
@@ -98,19 +136,20 @@ export default {
       const errors = {};
 
       //controllo se c'è un messaggio
-      if (!this.form.message) errors.message = "Il messaggio è obbiglatorio";
+      if (!this.form.text) errors.text = "Il messaggio è obbiglatorio";
 
       //controllo se c'è un email
-      if (!this.form.email) errors.email = "L'email è obbiglatoria";
+      if (!this.form.sender_email)
+        errors.sender_email = "L'email è obbiglatoria";
 
       //controllo se una email è valida
       if (
-        this.form.email &&
-        !this.form.email.match(
+        this.form.sender_email &&
+        !this.form.sender_email.match(
           /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
         )
       )
-        errors.email = "L'email inserita non è valida";
+        errors.sender_email = "L'email inserita non è valida";
 
       //metto tutto nel data
       this.errors = errors;
@@ -139,24 +178,25 @@ export default {
       axios
         .post("http://localhost:8000/api/contact-message", this.form)
         .then((res) => {
+          console.log("iniviato");
           //verifico se ci sn errorri
           if (res.data.errors) {
             //creo un oggetto nuovo
             const errors = {};
 
-            const { email, message } = res.data.errors;
+            const { sender_email, text } = res.data.errors;
 
             //se mi arriva un errore cn la chiave mail // message
-            if (email) errors.email = email[0];
-            if (message) errors.message = message[0];
+            if (sender_email) errors.sender_email = sender_email[0];
+            if (text) errors.text = text[0];
 
             //prendo l'oggetto che ho creato e lo metto nei data
             this.errors = errors;
           }
           //Svuoto i campi
           else {
-            this.form.email = "";
-            this.form.message = "";
+            this.form.sender_email = "";
+            this.form.text = "";
             this.alertMessage = "Messaggio inviato";
           }
         })

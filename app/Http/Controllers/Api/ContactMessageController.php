@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\Mail;
 use App\Mail\ContactMessageMail;
+use App\Models\Message;
 
 class ContactMessageController extends Controller
 {
@@ -19,13 +20,13 @@ class ContactMessageController extends Controller
         $validator = Validator::make(
             $data,
             [
-                'email' => 'required|email',
-                'message' => 'required|string'
+                'sender_email' => 'required|email',
+                'text' => 'required|string'
             ],
             [
-                'email.required' => 'La mail è obbligatoria',
-                'email.email' => 'La mail inserita non è valida',
-                'message.required' => 'Il testo del messaggio è obbligatorio',
+                'sender_email.required' => 'La mail è obbligatoria',
+                'sender_email.email' => 'La mail inserita non è valida',
+                'text.required' => 'Il testo del messaggio è obbligatorio',
             ]
         );
 
@@ -36,9 +37,10 @@ class ContactMessageController extends Controller
             );
         }
 
-        $email = new ContactMessageMail($data['email'], $data['message']);
-        //NB MI MANDO L'EMAIL DA SOSTITUIRE
-        Mail::to(env('MAIL_ADMIN_ADDRESS'))->send($email);
+        $new_message = new Message();
+        $new_message->fill($data);
+        $new_message->flat_id = 1;
+        $new_message->save();
 
         //chimata api per verificare 
         return response('Mail Sent' . 204);
