@@ -6,6 +6,7 @@
         :src="`/storage/${flat.image}`"
         alt="Card image cap"
       />
+      <div class="sponsor" v-if="i < 6">Sponsorizzato</div>
     </div>
     <div class="flat-info">
       <h5 class="fs-bold">{{ flat.title }}</h5>
@@ -28,8 +29,11 @@
 <script>
 export default {
   name: "FlatCard",
+  data() {
+    return {};
+  },
 
-  props: { flat: Object },
+  props: { flat: Object, flats: Array, i: Number },
   methods: {},
 };
 </script>
@@ -42,6 +46,14 @@ export default {
       height: 400px;
       filter: opacity(1);
       transition: all 0.5s;
+    }
+    .sponsor {
+      position: absolute;
+      top: 10px;
+      right: 10px;
+      color: #cecece;
+      background-color: black;
+      padding: 4px;
     }
   }
 

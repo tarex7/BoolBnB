@@ -6,7 +6,13 @@
 
       <!-- FLAT CARD -->
       <div class="row g-3 clearfix">
-        <flat-card v-for="flat in flats" :key="flat.id" :flat="flat" />
+        <flat-card
+          v-for="(flat, i) in flats"
+          :key="flat.id"
+          :flat="flat"
+          :flats="flats"
+          :i="i"
+        />
       </div>
     </div>
   </section>
@@ -50,3 +56,4 @@ export default {
   padding-bottom: 40px;
 }
 </style>
+

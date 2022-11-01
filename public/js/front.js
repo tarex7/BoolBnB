@@ -2009,8 +2009,13 @@ __webpack_require__.r(__webpack_exports__);
 __webpack_require__.r(__webpack_exports__);
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: "FlatCard",
+  data: function data() {
+    return {};
+  },
   props: {
-    flat: Object
+    flat: Object,
+    flats: Array,
+    i: Number
   },
   methods: {}
 });
@@ -2348,7 +2353,9 @@ var render = function render() {
       src: "/storage/".concat(_vm.flat.image),
       alt: "Card image cap"
     }
-  })]), _vm._v(" "), _c("div", {
+  }), _vm._v(" "), _vm.i < 6 ? _c("div", {
+    staticClass: "sponsor"
+  }, [_vm._v("Sponsorizzato")]) : _vm._e()]), _vm._v(" "), _c("div", {
     staticClass: "flat-info"
   }, [_c("h5", {
     staticClass: "fs-bold"
@@ -2398,11 +2405,13 @@ var render = function render() {
     staticClass: "container-fluid px-3"
   }, [_vm.isLoading ? _c("app-loader") : _vm._e(), _vm._v(" "), _c("div", {
     staticClass: "row g-3 clearfix"
-  }, _vm._l(_vm.flats, function (flat) {
+  }, _vm._l(_vm.flats, function (flat, i) {
     return _c("flat-card", {
       key: flat.id,
       attrs: {
-        flat: flat
+        flat: flat,
+        flats: _vm.flats,
+        i: i
       }
     });
   }), 1)], 1)]);
@@ -2513,7 +2522,7 @@ var render = function render() {
       src: "/storage/".concat(_vm.flat.image),
       alt: "Card image cap"
     }
-  })]), _vm._v(" "), _c("div", {
+  }), _vm._v(" "), _c("div", [_vm._v("Sponsorizzato")])]), _vm._v(" "), _c("div", {
     staticClass: "col-6"
   }, [_c("div", {
     staticClass: "card-body"
@@ -6999,7 +7008,7 @@ exports = module.exports = __webpack_require__(/*! ../../../../node_modules/css-
 
 
 // module
-exports.push([module.i, "#flat-card .flat-img[data-v-30490ca9] {\n  position: relative;\n}\n#flat-card .flat-img img[data-v-30490ca9] {\n  height: 400px;\n  filter: opacity(1);\n  transition: all 0.5s;\n}\n#flat-card .flat-info[data-v-30490ca9] {\n  position: absolute;\n  bottom: 50px;\n  left: 30px;\n  background-color: #fff;\n  width: 70%;\n  padding: 1rem;\n  transition: all 0.5s;\n  opacity: 1;\n}\n#flat-card .flat-info p[data-v-30490ca9] {\n  margin: 0;\n}\n#flat-card .flat-description[data-v-30490ca9] {\n  height: 300px;\n  padding: 30px;\n  width: 70%;\n  background-color: white;\n  position: absolute;\n  bottom: 350px;\n  left: 30px;\n  visibility: hidden;\n  transition: all 0.5s;\n  opacity: 0;\n  z-index: -1;\n}\n#flat-card .flat-description p[data-v-30490ca9] {\n  overflow: hidden;\n  text-overflow: ellipsis;\n  max-height: 90px;\n}\n#flat-card .flat-description .show-button[data-v-30490ca9] {\n  background-color: black;\n  border: 2px solid black;\n  padding: 12px;\n  position: absolute;\n  bottom: 30px;\n  color: white;\n}\n#flat-card:hover .flat-info[data-v-30490ca9] {\n  visibility: hidden;\n  bottom: -100px;\n  opacity: 0;\n  color: white;\n  z-index: -1;\n}\n#flat-card:hover .flat-description[data-v-30490ca9] {\n  visibility: visible;\n  opacity: 1;\n  bottom: 50px;\n  z-index: 1;\n}\n#flat-card:hover img[data-v-30490ca9] {\n  filter: opacity(0.4);\n}", ""]);
+exports.push([module.i, "#flat-card .flat-img[data-v-30490ca9] {\n  position: relative;\n}\n#flat-card .flat-img img[data-v-30490ca9] {\n  height: 400px;\n  filter: opacity(1);\n  transition: all 0.5s;\n}\n#flat-card .flat-img .sponsor[data-v-30490ca9] {\n  position: absolute;\n  top: 10px;\n  right: 10px;\n  color: #cecece;\n  background-color: black;\n  padding: 4px;\n}\n#flat-card .flat-info[data-v-30490ca9] {\n  position: absolute;\n  bottom: 50px;\n  left: 30px;\n  background-color: #fff;\n  width: 70%;\n  padding: 1rem;\n  transition: all 0.5s;\n  opacity: 1;\n}\n#flat-card .flat-info p[data-v-30490ca9] {\n  margin: 0;\n}\n#flat-card .flat-description[data-v-30490ca9] {\n  height: 300px;\n  padding: 30px;\n  width: 70%;\n  background-color: white;\n  position: absolute;\n  bottom: 350px;\n  left: 30px;\n  visibility: hidden;\n  transition: all 0.5s;\n  opacity: 0;\n  z-index: -1;\n}\n#flat-card .flat-description p[data-v-30490ca9] {\n  overflow: hidden;\n  text-overflow: ellipsis;\n  max-height: 90px;\n}\n#flat-card .flat-description .show-button[data-v-30490ca9] {\n  background-color: black;\n  border: 2px solid black;\n  padding: 12px;\n  position: absolute;\n  bottom: 30px;\n  color: white;\n}\n#flat-card:hover .flat-info[data-v-30490ca9] {\n  visibility: hidden;\n  bottom: -100px;\n  opacity: 0;\n  color: white;\n  z-index: -1;\n}\n#flat-card:hover .flat-description[data-v-30490ca9] {\n  visibility: visible;\n  opacity: 1;\n  bottom: 50px;\n  z-index: 1;\n}\n#flat-card:hover img[data-v-30490ca9] {\n  filter: opacity(0.4);\n}", ""]);
 
 // exports
 
