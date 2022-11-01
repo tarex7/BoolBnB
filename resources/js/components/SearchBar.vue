@@ -30,7 +30,6 @@
                                     placeholder="Dove vuoi andare?"
                                     aria-label="Search"
                                     autocomplete="off"
-                                    required=""
                                     id="query_address"
                                     v-model="query"
                                     @keyup="getAutocomplete"
@@ -426,6 +425,8 @@ export default {
                             .catch((error) => console.error(error));
                     })
                     .catch((e) => console.error(e));
+            } else {
+                this.flats = this.allFlats
             }
         },
 
@@ -456,8 +457,6 @@ export default {
 
                 flatList.push(flatPOI);
             });
-            // console.log("geolist", JSON.stringify(geometryList));
-            //console.log(JSON.stringify(flatList));
             axios
                 .get(
                     `https://api.tomtom.com/search/2/geometryFilter.json?key=OQPgwY4eUitV7IRklnutdiB8DVqRx8kG&geometryList=${JSON.stringify(
