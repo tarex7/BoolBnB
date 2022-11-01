@@ -16,11 +16,28 @@ class FlatController extends Controller
     public function index()
     {
         //Vedo solo i Flat Visibili
-        $flats = Flat::where('visible', 1)->orderBy('created_at', 'DESC')->get();
+        $flats = Flat::where('visible', 1,'sponsorship')->orderBy('created_at', 'DESC')->get();
 
+        $data = [
+            'success' => true,
+            'results' => $flats,
+        ];
+        return response()->json($data);
         return response()->json($flats);
     }
 
+    public function sponsored(){
+          
+        $flats = Flat::where('is_sponsored', 1)->get();
+
+        $data = [
+            'success' => true,
+            'results' => $flats,
+
+        ];
+
+        return response()->json($data);
+    }
     /**
      * Store a newly created resource in storage.
      *

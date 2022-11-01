@@ -4,14 +4,23 @@
       Stai acquistando il prodotto con id: {{ $route.params.id }}
     </div>
     {{ form }}
-    <PaymentSponsorship
+    <v-braintree
       ref="paymentRef"
       :authorization="tokenApi"
       @loading="handleLoading"
       @onSuccess="paymentOnSuccess"
       @onError="paymentOnError"
-    />
-
+      locale="it_IT"
+    >
+      <template #button="slotProps">
+        <v-btn ref="paymentBtnRef" @click="slotProps.submit" />
+      </template>
+    </v-braintree>
+    <div>
+      <p v-if="error" class="text-red-500 mb-4">
+        {{ error }}
+      </p>
+    </div>
     <button
       v-if="!disableBuyButton"
       class="w-full text-center px-4 py-3 bg-green-500 rounded-md shadow-md text-white font-semibold"
@@ -32,6 +41,9 @@
 
 <script>
 export default {
+  authorization: {
+    required: true,
+  },
   async asyncData() {
     let tokenApi = null
     const response = await axios.$get('/api/orders/generate')
@@ -46,6 +58,7 @@ export default {
       tokenApi: '',
       disableBuyButton: true,
       loadingPayment: true,
+      error: '',
       form: {
         token: '',
         product: ''
@@ -82,7 +95,27 @@ export default {
         this.disableBuyButton = false
         this.loadingPayment = false
       }
+    },
+    onLoad () {
+      this.$emit('loading')
+    },
+    onSuccess (payload) {
+      const token = payload.nonce
+      this.$emit('onSuccess', token)
+      // const nonce = payload.nonce
+      // Do something great with the nonce...
+    },
+    // eslint-disable-next-line node/handle-callback-err
+    onError (error) {
+      const message = error.message
+      if (message === 'No payment method is available.') {
+        this.error = 'Seleziona un metodo di Pagamento'
+      } else {
+        this.error = message
+      }
+      this.$emit('onError', message)
     }
+
   }
 }
 </script>

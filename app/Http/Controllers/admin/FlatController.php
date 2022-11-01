@@ -8,6 +8,9 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
+use Carbon\Carbon;
+use App\Models\Sponsorship;
+Use App\Models\FlatSponsorship;
 
 class FlatController extends Controller
 
@@ -87,6 +90,22 @@ class FlatController extends Controller
     {
         $flats = Flat::all()->where('user_id', Auth::id());
         $services = Service::select('id', 'label', 'icon')->get();
+/*         $last_sponsorship = false;
+        $sponsor_detail =  null;
+        if($flats){
+            // ricerca dell'ultima sponsorizzazione
+            $last_sponsorship = FlatSponsorship::Where('flat_id', '=', $flats->id)->get();  
+
+            if(count($last_sponsorship) > 0){
+                $sponsor_detail = Sponsorship::find($last_sponsorship[count($last_sponsorship) - 1]->sponsorship_id);
+            }
+        }
+
+
+        $data = [
+            'flats' => $flats,
+            'has_sponsorship' =>  $sponsor_detail,
+        ]; */
 
         return view('admin.flats.index', compact('flats', 'services'));
     }
@@ -122,6 +141,7 @@ class FlatController extends Controller
         $data = $request->all();
         $flat = new Flat();
         $flat->fill($data);
+        $flat->is_sponsored = 0;
         $flat->user_id = Auth::id();
 
         //VISIBLE
@@ -154,9 +174,15 @@ class FlatController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function show(Flat $flat)
-    {
+    {   
+       /*  $sponsorship_type = null;
+        $sponsorship = null;
         if($flat->user_id != Auth::id()) return abort('404');
-
+        $sponsorship = FlatSponsorship::where('flat_id', $flat->id)->get();
+        if(count($sponsorship) > 0){
+            $sponsorship_type = Sponsorship::findOrfail($sponsorship[count($sponsorship) - 1]->sponsorship_id)->first();
+        }
+ */
         return view('admin.flats.show', compact('flat'));
         $services = Service::select('id', 'label', 'icon')->get();
 
@@ -234,6 +260,7 @@ class FlatController extends Controller
                 ->with('message', "Non sei autorizzato ad eliminare questo appartamento")
                 ->with('type', "warning");
         }
+        $flat->sponsorship()->sync([]);
         $flat->services()->detach();
         $flat->messages()->delete();
         $flat->views()->delete();

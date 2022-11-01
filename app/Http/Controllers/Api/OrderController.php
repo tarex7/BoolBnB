@@ -6,6 +6,9 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Http\Requests\OrderRequest;
 use App\Models\Sponsorship;
+use App\Models\FlatSponsorship;
+use App\Models\flat;
+use Carbon\Carbon;
 use LDAP\Result;
 
 class OrderController extends Controller
@@ -21,9 +24,9 @@ class OrderController extends Controller
     }
     public function makePayment(OrderRequest $request,Gateway $gateway){
 
-        $sponsorship = Sponsorship::find($request->sponsorship);
+        $product = Sponsorship::findOrFail($request->product);
         $result = $gateway->transaction()->sale([
-            'amount'=>$sponsorship->price,
+            'amount'=>$product->price,
             'paymentMethodNonce'=> $request->token,
             'options'=>[
                 'submitForSettlement'=>true,
@@ -31,6 +34,16 @@ class OrderController extends Controller
 
         ]);
         if($result->success){
+            /* $flat = Flat::find($request->flat);
+            $flat->is_sponsored = 1;
+            $flat->update();  */
+            $sponsorship = new Sponsorship();
+            /* $sponsorship->flat_id = $request->flat; */
+            $sponsorship->sponsorship_id = $request->product;
+/*             $sponsorship->start_date = Carbon::now()->format('Y-m-d');
+            $sponsorship->end_date = Carbon::now()->addHour($product->hour);
+            $sponsorship->timestamps = false;
+            $sponsorship->save(); */
             $data =[
                 'success'=>'true',
                 'message'=>"Transaziomne eseguita con successo",
