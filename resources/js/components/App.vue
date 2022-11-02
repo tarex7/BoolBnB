@@ -1,11 +1,11 @@
 <template>
-  <div class="content">
+  <div class="content" @search=" getDataFromSearch">
     <!-- HEADER -->
 
     <!-- JUMBOTRON -->
 
     <!-- ROTTE VIEW (CONTENUTO DINAMICO ALl'INTERNO DELLE PAGINE) -->
-    <router-view></router-view>
+    <router-view ></router-view>
 
     <!--FOOTER -->
     <AppFooter />
@@ -27,8 +27,14 @@ export default {
   data() {
     return {
       title: "BoolBnb",
+      test:""
     };
   },
+  methods: {
+    getDataFromSearch(test) {
+        this.test = test
+      }
+    },
   // MOUNTED
   mounted() {},
 };

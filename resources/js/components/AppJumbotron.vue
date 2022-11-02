@@ -1,5 +1,7 @@
 <template>
-  <section id="jumbotron"></section>
+  <section id="jumbotron">
+    
+  </section>
 </template>
 
 <script>
