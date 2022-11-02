@@ -20,7 +20,7 @@
 
                 <div class="border rounded mt-4">
                     <img src="{{ $flat->image ? asset('storage/' . $flat->image) : asset('images/placeholder.png') }}"
-                    alt="flat-image" id="preview" class="img-fluid">
+                        alt="flat-image" id="preview" class="img-fluid">
                 </div>
 
 
@@ -46,7 +46,7 @@
             <div class="col-7">
 
                 {{-- Titolo --}}
-                <div class="form-group">
+                <div class="form-group mb-3">
                     <label for="title" class="">Titolo *</label>
                     <input type="text" class="form-control @error('title') is-invalid @enderror" id="title"
                         name="title" value="{{ old('title', $flat->title) }}" required minlength="5" maxlength="50">
@@ -63,11 +63,11 @@
 
                     {{-- Descrizione --}}
                     <div class="mb-3 col-12">
-                        <div class="form-floating">
-                    <label for="description" class="">Descrizione *</label>
+                        <label for="description" class="">Descrizione *</label>
+                        <div class="form-floating mb-3">
 
                             <textarea class="form-control @error('description') is-invalid @enderror" placeholder="Leave a comment here"
-                                id="description" style="height: 300px" name="description">{{ old('description', $flat->description) }}</textarea>
+                                id="description" style="height: 150px" name="description">{{ old('description', $flat->description) }}</textarea>
 
                             {{-- MESSAGGIO ERRORE --}}
                             @error('description')
@@ -97,19 +97,19 @@
                             <label for="address">Indirizzo: *</label>
                             <div id="address-tomtom"></div>
 
-                            <input id="lat" type="text" class="form-control" name="latitude" 
+                            <input id="lat" type="text" class="form-control" name="latitude"
                                 value="{{ old('latitude', $flat->latitude) }}" hidden>
-                    
-                            <input id="lon" type="text" class="form-control" name="longitude" 
+
+                            <input id="lon" type="text" class="form-control" name="longitude"
                                 value="{{ old('longitude', $flat->longitude) }}" hidden>
-                    
-                    
+
+
                         </div>
-                    
+
 
                         <div class="d-flex mt-2">
                             {{-- METRI QUADRI --}}
-                            <div class="my-3 col-6 p-0">
+                            <div class="my-3 col-4 p-0 me-3">
                                 <label for="square_mt" class="form-label ">Superfice mq<sup>2</sup> *</label>
                                 <input type="number" class="form-control @error('square_mt') is-invalid @enderror"
                                     id="square_mt" name="square_mt" step="1"
@@ -122,7 +122,7 @@
                             </div>
 
                             {{-- NUMERO STANZE --}}
-                            <div class="my-3 col-6">
+                            <div class="my-3 col-4">
                                 <label for="room_number" class="form-label ">Camere *</label>
                                 <input type="number" class="form-control @error('room_number') is-invalid @enderror"
                                     id="room_number" name="room_number" step="1"
@@ -137,7 +137,7 @@
 
                         <div class="d-flex">
                             {{-- NUMERO LETTI --}}
-                            <div class="my-3 col-6 p-0">
+                            <div class="my-3 col-4 me-3 p-0">
                                 <label for="bed_number" class="form-label ">Letti *</label>
                                 <input type="number" class="form-control @error('bed_number') is-invalid @enderror"
                                     id="bed_number" name="bed_number" step="1"
@@ -149,7 +149,7 @@
                             </div>
 
                             {{-- NUMERO BAGNI --}}
-                            <div class="my-3 col-6">
+                            <div class="my-3 col-4">
                                 <label for="bathroom_number" class="form-label ">Bagni *</label>
                                 <input type="number"
                                     class="form-control @error('bathroom_number') is-invalid @enderror"
@@ -183,17 +183,20 @@
 
                             </div>
 
+                        </div>
 
-                            {{-- PREZZO PER NOTTE --}}
+                        {{-- PREZZO PER NOTTE --}}
+                        <div class="col-3">
+
 
                             <p class="mt-4 mb-2">Prezzo per notte *</p>
-                            <div class="input-group mb-3 col-3 p-0">
+                            <div class="input-group mb-3 p-0">
                                 <div class="input-group-prepend">
                                     <span class="input-group-text" id="basic-addon1">€</span>
+                                    
                                 </div>
-
                                 <input type="number"
-                                    class="form-control @error('price_per_day') is-invalid @enderror"
+                                    class=" form-control @error('price_per_day') is-invalid @enderror"
                                     id="price_per_day" name="price_per_day" step="1"
                                     value="{{ old('price_per_day', $flat->price_per_day) }}">
 
@@ -203,87 +206,86 @@
 
                                 </div>
                             @enderror
-
                         </div>
                     </div>
-                </div>
-                <div class="col-12 d-flex justify-content-end align-items-center my-5 px-5">
-                    <button type="submit" class="btn {{ !$flat->exists ? 'btn-success' : 'btn-warning' }} mr-5">{{ !$flat->exists ? 'Crea appartamento' : 'Aggiorna appartamento' }}</button>
-                    <a href="{{ route('admin.flats.index') }}" class="btn btn-primary">Indietro</a>
+
                 </div>
             </div>
+            <div class="col-12 d-flex justify-content-end align-items-center my-5">
+                <button type="submit"
+                    class="btn {{ !$flat->exists ? 'btn-success' : 'btn-warning' }} mr-5">{{ !$flat->exists ? 'Crea appartamento' : 'Aggiorna appartamento' }}</button>
+                <a href="{{ route('admin.flats.index') }}" class="btn btn-primary mx-5">Indietro</a>
+            </div>
+        </div>
 
-            </form>
+        </form>
 
-            <script>
-                var options = {
-                    searchOptions: {
-                        key: 'I7jwOnv7XxCbU6AV64AN8ZPGArFaIoTh',
-                        language: 'it-IT',
-                        limit: 10,
-                    },
-                    autocompleteOptions: {
-                        key: 'I7jwOnv7XxCbU6AV64AN8ZPGArFaIoTh',
-                        language: 'it-IT',
-                    }
-                };
-                const latInput = document.getElementById('lat');
-                const lonInput = document.getElementById('lon');
-                const addressContainer = document.getElementById('address-tomtom')
-            
-                const testbtn = document.getElementById('test');
-            
-                var ttSearchBox = new tt.plugins.SearchBox(tt.services, options);
-                var searchBoxHTML = ttSearchBox.getSearchBoxHTML();
-                addressContainer.append(searchBoxHTML);
-                const tomtomInput = document.getElementsByClassName("tt-search-box-input")[0];
-                let date = {}
-                ttSearchBox.on("tomtom.searchbox.resultsfound", function(data) {
-                    date = (data);
-                    let position = date.data.results.fuzzySearch.results[0].position;
-                    let lon = position.lng;
-                    let lat = position.lat;
-                    latInput.value = lat;
-                    lonInput.value = lon;
-                });
-                tomtomInput.setAttribute("name", "address");
-                tomtomInput.value = "<?php echo $flat->address; ?>";
-            
-                 //let axios = require('axios').default;
-            
-                
-            
-            
-                addressContainer.addEventListener("input", (e) => {
-                    console.log('call');
-                     axios.get(
-                             `https:api.tomtom.com/search/2/autocomplete/${addressContainer.value}.json?key=I7jwOnv7XxCbU6AV64AN8ZPGArFaIoTh&language=it-IT&limit=6`
-                         )
-                         .then((res) => {
-                             console.log(res.data);
-                         })
-                });
-            </script>
+        <script>
+            var options = {
+                searchOptions: {
+                    key: 'I7jwOnv7XxCbU6AV64AN8ZPGArFaIoTh',
+                    language: 'it-IT',
+                    limit: 10,
+                },
+                autocompleteOptions: {
+                    key: 'I7jwOnv7XxCbU6AV64AN8ZPGArFaIoTh',
+                    language: 'it-IT',
+                }
+            };
+            const latInput = document.getElementById('lat');
+            const lonInput = document.getElementById('lon');
+            const addressContainer = document.getElementById('address-tomtom')
 
-            <script>
-                const placeholder = "https://cdn2.vectorstock.com/i/thumb-large/48/06/image-preview-icon-picture-placeholder-vector-31284806.jpg";
-                const image = document.getElementById('image')
-                const preview = document.getElementById('preview')
+            const testbtn = document.getElementById('test');
 
-                image.addEventListener('input', () => {
-                    if (image.files && image.files[0]) {
-                        let reader = new FileReader();
-                        reader.readAsDataURL(image.files[0]);
-                        reader.addEventListener('load', event => {
-                            preview.src = event.target.result;
-                        });
-                    } else preview.src = placeholder;
-                    preview.setAttribute('src', placeholder);
-                })
-            </script>
+            var ttSearchBox = new tt.plugins.SearchBox(tt.services, options);
+            var searchBoxHTML = ttSearchBox.getSearchBoxHTML();
+            addressContainer.append(searchBoxHTML);
+            const tomtomInput = document.getElementsByClassName("tt-search-box-input")[0];
+            let date = {}
+            ttSearchBox.on("tomtom.searchbox.resultsfound", function(data) {
+                date = (data);
+                let position = date.data.results.fuzzySearch.results[0].position;
+                let lon = position.lng;
+                let lat = position.lat;
+                latInput.value = lat;
+                lonInput.value = lon;
+            });
+            tomtomInput.setAttribute("name", "address");
+            tomtomInput.value = "<?php echo $flat->address; ?>";
+
+            //let axios = require('axios').default;
+
+
+
+
+            addressContainer.addEventListener("input", (e) => {
+                console.log('call');
+                axios.get(
+                        `https:api.tomtom.com/search/2/autocomplete/${addressContainer.value}.json?key=I7jwOnv7XxCbU6AV64AN8ZPGArFaIoTh&language=it-IT&limit=6`
+                    )
+                    .then((res) => {
+                        console.log(res.data);
+                    })
+            });
+        </script>
+
+        <script>
+            const placeholder =
+                "https://cdn2.vectorstock.com/i/thumb-large/48/06/image-preview-icon-picture-placeholder-vector-31284806.jpg";
+            const image = document.getElementById('image')
+            const preview = document.getElementById('preview')
+
+            image.addEventListener('input', () => {
+                if (image.files && image.files[0]) {
+                    let reader = new FileReader();
+                    reader.readAsDataURL(image.files[0]);
+                    reader.addEventListener('load', event => {
+                        preview.src = event.target.result;
+                    });
+                } else preview.src = placeholder;
+                preview.setAttribute('src', placeholder);
+            })
+        </script>
 
         <script src="{{ asset('js/image_preview.js') }}"></script>
-
-
-
-            
