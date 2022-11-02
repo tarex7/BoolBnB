@@ -41,4 +41,6 @@ export default {
 </script>
 
 <!-- STYLE -->
-<style lang="scss" scoped> </style>
+<style lang="scss" >
+
+</style>

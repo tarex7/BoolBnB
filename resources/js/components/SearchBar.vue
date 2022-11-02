@@ -3,7 +3,7 @@
         <div class="container">
             <nav class="navbar-light bg-light">
                 <div class="row">
-                    <div class="col-12">
+                    <div class="col-7">
                         <form
                             @submit.prevent="getGeoPosition"
                             class="my-2 my-lg-0 d-flex justify-content-between"
@@ -48,7 +48,26 @@
                                     Cerca
                                 </button>
                             </div>
+
+                           
                         </form>
+                    </div>
+                    <div class="col-5">
+                        <div class="input-group mx-2">
+                            <label for="radius" class="form-label"
+                                >nel raggio di
+                                {{ radius }} km</label
+                            >
+                            <input
+                                type="range"
+                                class="form-range"
+                                id="radius"
+                                v-model="radius"
+                                step="10"
+                                min="0"
+                                max="50"
+                            />
+                        </div>
                     </div>
                     <div class="col-12 col-md-6 filters">
                         <div class="d-flex">
@@ -161,7 +180,7 @@
                                 v-for="flat in flats"
                                 :key="flat.id"
                                 :flat="flat"
-                                class="col-12 col-sm-6 col-md-4 col-lg-3 mt-4"
+                                class="col-12  col-md-4 col-lg-3 col mt-4"
                             />
                         </div>
                     </section>

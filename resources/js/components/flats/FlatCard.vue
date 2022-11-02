@@ -1,13 +1,17 @@
 <template>
-  <div  class="col-12">
-    <div class="card" >
-      <img class="card-img-top img-fluid" :src="`storage/${flat.image}`" alt="Card image cap">
-      <div class="card-body">
-        <h5 class="card-title">Card title</h5>
-        <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-        <a href="#" class="btn btn-primary">Go somewhere</a>
+  <div  class="col-12 d-flex justify-content-center">
+    <router-link :to=`${$route.params.id}`>
+      <div class="flat-card" >
+        <img class="card-img-top img-fluid" :src="`storage/${flat.image}`" alt="Card image cap">
+        <div class="card-body">
+          <h5 class="card-title text-custom_primary mt-2">{{flat.title}}</h5>
+          <!-- <p class="card-text fw-bold">{{ flat.address }}</p> -->
+          <p class="card-text fw-bold">{{ flat.price_per_day }} € a notte</p>
+          
+          
+        </div>
       </div>
-    </div>
+    </router-link>
   </div>
 </template>
 
@@ -111,14 +115,40 @@ export default {
 
 .card {
 
+
   img {
     max-height:500px;
     max-width:500px;
     height:auto;
     width:auto;
   }
+
+  transition: 0.5s  ;
+
+  .text-custom_primary {
+    color:#b11919;
+  }
+  
+  
+  
 }
 
+.flat-card:hover {
+  transform: scale(1.05);
+  box-shadow: rgba($color: #000, $alpha: 0.3) 0px 0px 11px;
+}
+
+.flat-card {
+  padding: 10px;
+  transition: 0.5s;
+  border-radius: 10px ;
+
+ img {
+  border-radius: 10px;
+  height: 300px;
+  object-fit: cover;
+ }
+}
 
 
 </style>
