@@ -1,14 +1,16 @@
 <template>
     <div>
         <div class="container">
-            <nav class="  navbar-light bg-light">
+            <nav class="navbar-light bg-light">
                 <div class="row">
                     <div class="col-12">
                         <form
                             @submit.prevent="getGeoPosition"
-                            class=" my-2 my-lg-0 d-flex justify-content-between">
-                            <div class="d-flex justify-content-between position-relative input-search">
-
+                            class="my-2 my-lg-0 d-flex justify-content-between"
+                        >
+                            <div
+                                class="d-flex justify-content-between position-relative input-search my-4"
+                            >
                                 <input
                                     class="form-control mr-sm-2 input"
                                     type="search"
@@ -20,14 +22,13 @@
                                     @keyup="getAutocomplete"
                                     @keyup.enter="getGeoPosition"
                                 />
+
                                 <ul
-                                    class="dropdown_menu w-75 list-unstyled p-1"
+                                    class="dropdown_menu list-unstyled p-1"
                                     v-if="query.length > 0"
                                 >
                                     <li
-                                        v-for="(
-                                            address, index
-                                        ) in autocomplete"
+                                        v-for="(address, index) in autocomplete"
                                         :key="index"
                                     >
                                         <input
@@ -41,18 +42,130 @@
                                 </ul>
 
                                 <button
-                                    class="btn btn-outline-danger my-2 my-sm-0 ms-3"
+                                    class="btn btn-outline-danger my-sm-0 ms-2 py-2"
                                     type="submit"
                                 >
                                     Cerca
                                 </button>
-
                             </div>
-                            
                         </form>
                     </div>
+                    <div class="col-12 col-md-6 filters">
+                        <div class="d-flex">
+                            <div class="input-group d-flex justify-content-center">
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text">Camere</span>
+                                </div>
+                                <input
+                                    type="number"
+                                    class="form-control"
+                                    name="room_number"
+                                    id="rooms"
+                                    v-model="rooms"
+                                    @change="getGeoPosition"
+                                />
+                            </div>
+
+                            <div class="input-group d-flex justify-content-center">
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text ms-1"
+                                        >Letti</span
+                                    >
+                                </div>
+                                <input
+                                    type="number"
+                                    class="form-control"
+                                    name="beds_number"
+                                    id="beds"
+                                    v-model="beds"
+                                    @change="getGeoPosition"
+                                />
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-12 col-md-6 filters mb-3">
+                        <div class="d-flex">
+                            <div class="input-group d-flex justify-content-center">
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text">Bagni</span>
+                                </div>
+                                <input
+                                    type="number"
+                                    class="form-control"
+                                    name="bathroom_number"
+                                    id="bathrooms"
+                                    v-model="bathrooms"
+                                    @change="getGeoPosition"
+                                />
+                            </div>
+
+                            <div class="input-group d-flex justify-content-center">
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text ms-1"
+                                        >mq<sup>2</sup></span
+                                    >
+                                </div>
+                                <input
+                                    type="number"
+                                    class="form-control"
+                                    name="square_mt"
+                                    id="sqm"
+                                    v-model="sqm"
+                                    @change="getGeoPosition"
+                                />
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="d-flex flex-wrap justify-content-between">
+
+                        <span v-for="service in services" :key="service.id" class="col-4 col-sm-3 col-md-2 mx-md-2 col-lg-1 px-1 d-flex justify-content-center service">
+                            <input
+                                type="checkbox"
+                                class="btn-check"
+                                :id="`btn-check-${service.id}`"
+                                name="service"
+                                :value="service.id"
+                                autocomplete="off"
+                            />
+                            <label
+                                class="btn btn-outline-success my-1 p-1 text-center "
+                                :for="`btn-check-${service.id}`"
+                                >
+                                    <p class="m-0 d-flex align-items-center ">
+                                        <!-- <i :class="`${service.icon} me-1`"></i> -->
+                                        <span>{{ service.label }}</span>
+                                    </p>
+                                
+                            </label>
+                        </span>
+
+                    </div>
+
                 </div>
             </nav>
+            <div class="row">
+                <div class="col">
+                    <section id="flat-list">
+                        <h2 class="my-3 text-center mt-5">
+                            {{ this.message }}
+                        </h2>
+  
+                        <!-- AppLoader -->
+                        <app-loader v-if="isLoading" />
+  
+                        <!-- FLAT CARD -->
+                        <div class="row justify-content-between">
+                                <FlatCard
+                                v-for="flat in flats"
+                                :key="flat.id"
+                                :flat="flat"
+                            />
+                        </div>
+                    </section>
+                </div>
+            </div>
         </div>
     </div>
 </template>
@@ -381,11 +494,11 @@ export default {
     padding: 20px 50px;
 }
 
-.searchbar {
-input {
-    width: 80%;
+.input-search {
+    width: 100%;
+    height: 45px;
 }
-}
+
 .dropdown_menu {
     position: absolute;
     width: 100%;
@@ -400,4 +513,28 @@ input {
         }
     }
 }
+.input-group-text {
+    width:70px;
+    
+}
+
+
+
+.input-group {
+    margin: 10px 0;
+}
+
+
+    label span {
+       min-width:60px;
+       display: flex;
+       align-items: center;
+       justify-content: center;
+    }
+
+.filters .form-control {
+    max-width: 60px;
+}
+
+
 </style>

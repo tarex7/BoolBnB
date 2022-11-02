@@ -44,9 +44,11 @@ export default {
     position: relative;
 
     img {
-      height: 400px;
+      min-width: 400px;
+      height: 300px;
       filter: opacity(1);
       transition: all 0.5s;
+      object-fit: cover;
     }
     .sponsor {
       position: absolute;
@@ -60,13 +62,16 @@ export default {
 
   .flat-info {
     position: absolute;
-    bottom: 50px;
+    bottom: 10px;
     left: 30px;
-    background-color: #fff;
+    background-color:rgba($color: #fff, $alpha: 0.75);
     width: 70%;
     padding: 1rem;
     transition: all 0.5s;
     opacity: 1;
+    border-radius: 5px;
+    box-shadow: #000 1px 2px 13px ;
+    font-weight: bold;
 
     p {
       margin: 0;

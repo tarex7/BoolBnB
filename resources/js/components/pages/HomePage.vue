@@ -33,9 +33,7 @@ export default {
     props: {},
     //METHODS
   methods: {
-    getDataFromSearch(test) {
-       this.test = test
-      }
+    
     },
     //COMPUTED
     computed: {},
