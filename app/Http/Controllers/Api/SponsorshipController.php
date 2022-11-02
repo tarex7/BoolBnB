@@ -15,3 +15,4 @@ class SponsorshipController extends Controller
         return SponsorshipResource::collection($sponsorships);
     }
 }
+ 
