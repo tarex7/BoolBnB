@@ -102,7 +102,7 @@ class FlatController extends Controller
         }
 
 
-        $data = [
+        $data = [ 
             'flats' => $flats,
             'has_sponsorship' =>  $sponsor_detail,
         ]; */
