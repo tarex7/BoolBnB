@@ -1,29 +1,14 @@
 <template>
     <div>
         <div class="container">
-            <div class="row">
-                <div class="col-12">
-                    <nav class="navbar navbar-expand-lg navbar-light bg-light">
-                        <button
-                            class="navbar-toggler"
-                            type="button"
-                            data-toggle="collapse"
-                            data-target="#navbarSupportedContent"
-                            aria-controls="navbarSupportedContent"
-                            aria-expanded="false"
-                            aria-label="Toggle navigation"
-                        >
-                            <span class="navbar-toggler-icon"></span>
-                        </button>
+            <nav class="  navbar-light bg-light">
+                <div class="row">
+                    <div class="col-12">
+                        <form
+                            @submit.prevent="getGeoPosition"
+                            class=" my-2 my-lg-0 d-flex justify-content-between">
+                            <div class="d-flex justify-content-between position-relative input-search">
 
-                        <div
-                            class="collapse navbar-collapse d-flex align-items-center"
-                            id="navbarSupportedContent"
-                        >
-                            <form
-                                @submit.prevent="getGeoPosition"
-                                class="form-inline my-2 my-lg-0 d-flex align-items-center"
-                            >
                                 <input
                                     class="form-control mr-sm-2 input"
                                     type="search"
@@ -40,7 +25,9 @@
                                     v-if="query.length > 0"
                                 >
                                     <li
-                                        v-for="(address, index) in autocomplete"
+                                        v-for="(
+                                            address, index
+                                        ) in autocomplete"
                                         :key="index"
                                     >
                                         <input
@@ -52,6 +39,7 @@
                                         />
                                     </li>
                                 </ul>
+
                                 <button
                                     class="btn btn-outline-danger my-2 my-sm-0 ms-3"
                                     type="submit"
@@ -59,125 +47,12 @@
                                     Cerca
                                 </button>
 
-                                <div class="input-group mb-3">
-                                    <div class="input-group-prepend">
-                                        <span class="input-group-text ms-5"
-                                            >Camere</span
-                                        >
-                                    </div>
-                                    <input
-                                        type="number"
-                                        class="form-control"
-                                        name="room_number"
-                                        id="rooms"
-                                        v-model="rooms"
-                                        @change="getGeoPosition"
-                                    />
-                                </div>
-
-                                <div class="input-group mb-3">
-                                    <div class="input-group-prepend">
-                                        <span class="input-group-text ms-5"
-                                            >Letti</span
-                                        >
-                                    </div>
-                                    <input
-                                        type="number"
-                                        class="form-control"
-                                        name="beds_number"
-                                        id="beds"
-                                        v-model="beds"
-                                        @change="getGeoPosition"
-                                    />
-                                </div>
-
-                                <div class="input-group mb-3">
-                                    <div class="input-group-prepend">
-                                        <span class="input-group-text ms-5"
-                                            >Bagni</span
-                                        >
-                                    </div>
-                                    <input
-                                        type="number"
-                                        class="form-control"
-                                        name="bathroom_number"
-                                        id="bathrooms"
-                                        v-model="bathrooms"
-                                        @change="getGeoPosition"
-                                    />
-                                </div>
-
-                                <div class="input-group mb-3">
-                                    <div class="input-group-prepend">
-                                        <span class="input-group-text ms-5"
-                                            >Dimensione</span
-                                        >
-                                    </div>
-                                    <input
-                                        type="number"
-                                        class="form-control"
-                                        name="square_mt"
-                                        id="sqm"
-                                        v-model="sqm"
-                                        @change="getGeoPosition"
-                                    />
-                                </div>
-                            </form>
-                        </div>
-                    </nav>
-                </div>
-                <div class="col-3 my-3">
-                    <label for="radius" class="form-label"
-                        >Cerca nel raggio di {{ radius }} km</label
-                    >
-                    <input
-                        type="range"
-                        class="form-range"
-                        id="radius"
-                        v-model="radius"
-                        step="10"
-                        min="0"
-                        max="50"
-                    />
-                </div>
-                <div class="col-12">
-                    <span v-for="service in services" :key="service.id">
-                        <input
-                            type="checkbox"
-                            class="btn-check"
-                            :id="`btn-check-${service.id}`"
-                            name="service"
-                            :value="service.id"
-                            autocomplete="off"
-                        />
-                        <label
-                            class="btn btn-outline-success"
-                            :for="`btn-check-${service.id}`"
-                            >{{ service.label }}</label
-                        >
-                    </span>
-                </div>
-
-                <div class="col-12">
-                    <section id="flat-list">
-                        <div class="container-fluid px-3">
-                            <!-- AppLoader -->
-                            <app-loader v-if="isLoading" />
-
-                            <!-- FLAT CARD -->
-                            <div class="row g-3 clearfix">
-                                <flat-card
-                                    v-for="(flat, i) in flats"
-                                    :key="flat.id"
-                                    :flat="flat"
-                                    :flats="flats"
-                                    :i="i"
-                                />
                             </div>
-                        </div>
-                    </section>
+                            
+                        </form>
+                    </div>
                 </div>
-            </div>
+            </nav>
         </div>
     </div>
 </template>
@@ -389,7 +264,10 @@ export default {
                                 if (this.selectedServices.length > 0) {
                                     filterdFlats.forEach((flat) => {
                                         console.log("ok");
-                                        console.log('flat.services', flat.services);
+                                        console.log(
+                                            "flat.services",
+                                            flat.services
+                                        );
                                         const servicesIds = [];
                                         if (flat.services.length > 0)
                                             flat.services.forEach((service) => {
@@ -503,10 +381,15 @@ export default {
     padding: 20px 50px;
 }
 
+.searchbar {
+input {
+    width: 80%;
+}
+}
 .dropdown_menu {
     position: absolute;
     width: 100%;
-    top: 80%;
+    top: 60px;
     z-index: 100;
 
     input {

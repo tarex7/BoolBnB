@@ -1,7 +1,7 @@
 <template>
     <div id="home-page" >
         <AppJumbotron />
-        <SearchBar @search="getDataFromSearch" />
+        <SearchBar />
         <!-- <div class="container-fluid">
             <div class="col-8 offset-2">
                 <flat-list  :filteredFlats="flats"/>

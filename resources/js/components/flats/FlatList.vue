@@ -1,11 +1,10 @@
 <template>
     <section id="flat-list">
-        <div class="container-fluid px-3">
+        <div class="container-fluid">
             <!-- AppLoader -->
             <app-loader v-if="isLoading" />
 
             <!-- FLAT CARD -->
-            <div class="row g-3 clearfix">
                 <flat-card
                     v-for="(flat, i) in flats"
                     :key="flat.id"
@@ -13,7 +12,6 @@
                     :flats="flats"
                     :i="i"
                 />
-            </div>
         </div>
     </section>
 </template>
