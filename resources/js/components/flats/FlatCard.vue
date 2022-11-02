@@ -39,6 +39,7 @@ export default {
 </script>
 <style scoped lang="scss">
 #flat-card {
+  position: relative;
   .flat-img {
     position: relative;
 
