@@ -12,8 +12,8 @@
                 @forelse ($flats as $flat)
                     <div class="card m-2 p-2 shadow" style="width: 20rem;">
                         <a href="{{ Route('admin.flats.show', $flat->id) }}">
-                            <img src="{{ asset('storage/' .$flat->image) }}" style="height: 15rem;" class="card-img-top {{ !$flat->visible ? 'opacity-25' : '' }}"
-                                alt="...">
+                            <img src="{{ asset('storage/' . $flat->image) }}" style="height: 15rem;"
+                                class="card-img-top {{ !$flat->visible ? 'opacity-25' : '' }}" alt="...">
 
                         </a>
                         <div class="card-body d-flex flex-column justify-content-between">
@@ -28,7 +28,12 @@
                                     <h5 class="m-0 mx-2">{{ $flat->visible ? 'Visibile' : 'Non visibile' }}</h5>
                                 </button>
                             </form>
-                            <a href="{{ route('admin.sponsorships.index') }}">sponsorship</a>
+                            {{-- <a href="{{ route('admin.sponsorships.index') }}">sponsorship</a> --}}
+                            @if ($has_sponsorship)
+                                <div>
+                                    <strong>Sponsorizzazione: </strong>{{ $has_sponsorship->name }}
+                                </div>
+                            @endif
                         </div>
                     </div>
 

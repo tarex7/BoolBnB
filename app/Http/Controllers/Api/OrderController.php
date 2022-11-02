@@ -34,16 +34,16 @@ class OrderController extends Controller
 
         ]);
         if($result->success){
-            /* $flat = Flat::find($request->flat);
+            $flat = Flat::find($request->flat);
             $flat->is_sponsored = 1;
-            $flat->update();  */
-            $sponsorship = new Sponsorship();
-            /* $sponsorship->flat_id = $request->flat; */
+            $flat->update(); 
+            $sponsorship = new FlatSponsorship();
+            $sponsorship->flat_id = $request->flat;
             $sponsorship->sponsorship_id = $request->product;
-/*             $sponsorship->start_date = Carbon::now()->format('Y-m-d');
-            $sponsorship->end_date = Carbon::now()->addHour($product->hour);
+            $sponsorship->starts_at = Carbon::now()->format('Y-m-d');
+            $sponsorship->ends_at = Carbon::now()->addHour($product->hour);
             $sponsorship->timestamps = false;
-            $sponsorship->save(); */
+            $sponsorship->save();
             $data =[
                 'success'=>'true',
                 'message'=>"Transaziomne eseguita con successo",

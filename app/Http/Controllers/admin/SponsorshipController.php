@@ -6,7 +6,6 @@ use App\Models\Sponsorship;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Braintree\Gateway;
-use App\Http\Resources\SponsorshipResource;
 
 class SponsorshipController extends Controller
 {

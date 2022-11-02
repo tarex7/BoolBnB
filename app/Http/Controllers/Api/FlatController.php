@@ -15,14 +15,15 @@ class FlatController extends Controller
      */
     public function index()
     {
+        $flats = Flat::with(['sponsorship'])->get();
         //Vedo solo i Flat Visibili
-        $flats = Flat::where('visible', 1,'sponsorship')->orderBy('created_at', 'DESC')->get();
+        $flats = Flat::where('visible', 1,)->orderBy('created_at', 'DESC')->get();
 
         $data = [
             'success' => true,
             'results' => $flats,
         ];
-        return response()->json($data);
+
         return response()->json($flats);
     }
 

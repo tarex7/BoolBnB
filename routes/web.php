@@ -27,8 +27,8 @@ Route::middleware('auth')
         //Route::get('/', 'HomeController@index')->name('home');
         Route::patch('/flats/{flat}/toggle', 'FlatController@toggle')->name('flats.toggle');
         Route::resource('flats', 'FlatController');
-        Route::get('/generate','OrderController@generate');
-        Route::post('/make/payment','OrderController@makePayment');
+/*         Route::get('/generate','OrderController@generate');
+        Route::post('/make/payment','OrderController@makePayment'); */
         Route::resource('sponsorships','SponsorshipController');
         
     });
