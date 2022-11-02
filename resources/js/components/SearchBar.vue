@@ -130,7 +130,15 @@
                     <label for="radius" class="form-label"
                         >Cerca nel raggio di {{ radius }} km</label
                     >
-                    <input type="range" class="form-range" id="radius" v-model="radius" step="10" min="0" max="50"/>
+                    <input
+                        type="range"
+                        class="form-range"
+                        id="radius"
+                        v-model="radius"
+                        step="10"
+                        min="0"
+                        max="50"
+                    />
                 </div>
                 <div class="col-12">
                     <span v-for="service in services" :key="service.id">
@@ -155,7 +163,7 @@
                         <div class="container-fluid px-3">
                             <!-- AppLoader -->
                             <app-loader v-if="isLoading" />
-                
+
                             <!-- FLAT CARD -->
                             <div class="row g-3 clearfix">
                                 <flat-card
@@ -169,7 +177,6 @@
                         </div>
                     </section>
                 </div>
-               
             </div>
         </div>
     </div>
@@ -256,7 +263,7 @@ export default {
 
         getGeoPosition() {
             // Get Geodata from Axios based on input and radius(2000 standard)
-            console.log('geo');
+            console.log("geo");
             let query = this.query;
             let radius = this.radius * 1000;
             if (query) {
@@ -381,11 +388,13 @@ export default {
 
                                 if (this.selectedServices.length > 0) {
                                     filterdFlats.forEach((flat) => {
+                                        console.log("ok");
+                                        console.log('flat.services', flat.services);
                                         const servicesIds = [];
-
-                                        flat.services.forEach((service) => {
-                                            servicesIds.push(service.id);
-                                        });
+                                        if (flat.services.length > 0)
+                                            flat.services.forEach((service) => {
+                                                servicesIds.push(service.id);
+                                            });
 
                                         console.log(
                                             "flat services IDs",
@@ -429,7 +438,7 @@ export default {
                     })
                     .catch((e) => console.error(e));
             } else {
-                this.flats = this.allFlats
+                this.flats = this.allFlats;
             }
         },
 

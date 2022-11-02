@@ -1,12 +1,12 @@
 <?php
 
-namespace App\Http\Controllers\Api;
+namespace App\Http\Controllers\api;
 
-use App\Http\Controllers\Controller;
-use App\Models\Flat;
+use App\Models\Service;
 use Illuminate\Http\Request;
+use App\Http\Controllers\Controller;
 
-class FlatController extends Controller
+class ServiceController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -15,10 +15,8 @@ class FlatController extends Controller
      */
     public function index()
     {
-        //Vedo solo i Flat Visibili
-        $flats = Flat::with('services')->where('visible', 1)->orderBy('created_at', 'DESC')->get();
-
-        return response()->json($flats);
+        $services = Service::all();
+        return response()->json($services);
     }
 
     /**
@@ -40,10 +38,7 @@ class FlatController extends Controller
      */
     public function show($id)
     {
-        $flat_lat_long = Flat::select(['latitude', 'longitude', 'id'])->find($id);
-
-        if(!$flat_lat_long) return response('Not found', 404);
-        return response()->json($flat_lat_long);
+        //
     }
 
     /**
