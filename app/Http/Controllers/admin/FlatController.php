@@ -10,7 +10,7 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
 use Carbon\Carbon;
 use App\Models\Sponsorship;
-Use App\Models\FlatSponsorship;
+use App\Models\FlatSponsorship;
 
 class FlatController extends Controller
 
@@ -86,28 +86,34 @@ class FlatController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
+        $have_one = true;
+        $last_sponsorship = false;
+        $sponsor_detail =  null;
+
         $flats = Flat::all()->where('user_id', Auth::id());
         $services = Service::select('id', 'label', 'icon')->get();
-/*         $last_sponsorship = false;
-        $sponsor_detail =  null;
+
         if($flats){
+            
             // ricerca dell'ultima sponsorizzazione
-            $last_sponsorship = FlatSponsorship::Where('flat_id', '=', $flats->id)->get();  
+            $last_sponsorship = FlatSponsorship::all();  
 
             if(count($last_sponsorship) > 0){
                 $sponsor_detail = Sponsorship::find($last_sponsorship[count($last_sponsorship) - 1]->sponsorship_id);
             }
         }
 
-
+        if(!$flats){
+            $have_one = false;                
+        }
         $data = [
             'flats' => $flats,
+            'have_one' => $have_one,
             'has_sponsorship' =>  $sponsor_detail,
-        ]; */
-
-        return view('admin.flats.index', compact('flats', 'services'));
+        ];
+        return view('admin.flats.index', compact('flats', 'services','data'));
     }
 
     /**
@@ -155,7 +161,7 @@ class FlatController extends Controller
 
         $flat->save();
 
-
+        $data = [];
 
 
 
@@ -175,18 +181,22 @@ class FlatController extends Controller
      */
     public function show(Flat $flat)
     {   
-       /*  $sponsorship_type = null;
+        $sponsorship_type = null;
         $sponsorship = null;
         if($flat->user_id != Auth::id()) return abort('404');
-        $sponsorship = FlatSponsorship::where('flat_id', $flat->id)->get();
+        $sponsorship = Sponsorship::where('flat_id', $flat->id)->get();
         if(count($sponsorship) > 0){
             $sponsorship_type = Sponsorship::findOrfail($sponsorship[count($sponsorship) - 1]->sponsorship_id)->first();
         }
- */
-        return view('admin.flats.show', compact('flat'));
+        $data = [
+            'have_one' => true,
+            'sponsorship' =>  $sponsorship_type,
+        ]; 
+
+        return view('admin.flats.show', compact('flat','data'));
         $services = Service::select('id', 'label', 'icon')->get();
 
-        return view('admin.flats.show', $flat, compact('flat', 'services'));
+        return view('admin.flats.show', $flat, compact('flat', 'services','data'));
 
     }
 
