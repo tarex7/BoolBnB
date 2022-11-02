@@ -1,27 +1,12 @@
 <template>
-  <div id="flat-card" class="mt-4 col-12 col-sm-6 col-xl-4">
-    <div class="flat-img">
-      <img
-        class="w-100 img-fluid"
-        :src="`/storage/${flat.image}`"
-        alt="Card image cap"
-      />
-      <div class="sponsor" v-if="i < 6">Sponsorizzato</div>
-    </div>
-    <div class="flat-info">
-      <h5 class="fs-bold">{{ flat.title }}</h5>
-      <p>Prezzo: {{ flat.price_per_day }}€ per notte.</p>
-    </div>
-    <div class="flat-description">
-      <h5 class="fs-bold">{{ flat.title }}</h5>
-      <p>Prezzo: {{ flat.price_per_day }}€ per notte.</p>
-      <p>{{ flat.description }}</p>
-      <router-link
-        :to="{ name: 'flat-detail', params: { id: flat.id } }"
-        class="show-button"
-      >
-        <i class="fa-solid fa-eye"></i> Mostra Appartamento
-      </router-link>
+  <div  class="col-12">
+    <div class="card" >
+      <img class="card-img-top img-fluid" :src="`storage/${flat.image}`" alt="Card image cap">
+      <div class="card-body">
+        <h5 class="card-title">Card title</h5>
+        <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+        <a href="#" class="btn btn-primary">Go somewhere</a>
+      </div>
     </div>
   </div>
 </template>
@@ -38,13 +23,13 @@ export default {
 };
 </script>
 <style scoped lang="scss">
-#flat-card {
+/*#flat-card {
   position: relative;
   .flat-img {
     position: relative;
 
     img {
-      min-width: 400px;
+      width:100%;
       height: 300px;
       filter: opacity(1);
       transition: all 0.5s;
@@ -60,7 +45,7 @@ export default {
     }
   }
 
-  .flat-info {
+ /* .flat-info {
     position: absolute;
     bottom: 10px;
     left: 30px;
@@ -76,8 +61,8 @@ export default {
     p {
       margin: 0;
     }
-  }
-  .flat-description {
+  }*/
+ /* .flat-description {
     height: 300px;
     padding: 30px;
     width: 70%;
@@ -94,8 +79,8 @@ export default {
       overflow: hidden;
       text-overflow: ellipsis;
       max-height: 90px;
-    }
-    .show-button {
+    }*/
+   /* .show-button {
       background-color: black;
       border: 2px solid black;
       padding: 12px;
@@ -104,7 +89,7 @@ export default {
       color: white;
     }
   }
-}
+
 
 #flat-card:hover .flat-info {
   visibility: hidden;
@@ -122,5 +107,18 @@ export default {
 }
 #flat-card:hover img {
   filter: opacity(0.4);
+}*/
+
+.card {
+
+  img {
+    max-height:500px;
+    max-width:500px;
+    height:auto;
+    width:auto;
+  }
 }
+
+
+
 </style>

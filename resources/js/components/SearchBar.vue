@@ -161,6 +161,7 @@
                                 v-for="flat in flats"
                                 :key="flat.id"
                                 :flat="flat"
+                                class="col-12 col-sm-6 col-md-4 col-lg-3 mt-4"
                             />
                         </div>
                     </section>
