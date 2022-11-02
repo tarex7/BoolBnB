@@ -24,7 +24,7 @@
       <form class="contact - form" @submit.prevent="submitForm" novalidate>
         <!-- utente -->
         <div class="form-group">
-          <label for="sender_name" class="form-label">Nome Utente</label>
+          <label for="sender_name" class="form-label">Nome</label>
           <input
             type="text"
             class="form-control"
@@ -36,12 +36,10 @@
           <div v-if="errors.sender_name" class="invalid-feedback">
             {{ errors.sender_name }}
           </div>
-          <div v-else class="form-text">
-            Ti Risponderemo su questo indirizzo
-          </div>
+          <div v-else class="form-text">Scrivi il tuo nome</div>
 
           <!-- Object -->
-          <label for="object" class="form-label">Nome Utente</label>
+          <label for="object" class="form-label">Oggetto</label>
           <input
             type="text"
             class="form-control"
@@ -53,9 +51,7 @@
           <div v-if="errors.object" class="invalid-feedback">
             {{ errors.object }}
           </div>
-          <div v-else class="form-text">
-            Ti Risponderemo su questo indirizzo
-          </div>
+          <div v-else class="form-text">Scrivi l'oggetto del messaggio</div>
         </div>
 
         <div class="form-group">
@@ -135,6 +131,12 @@ export default {
       //oggetto vuoto
       const errors = {};
 
+      //controllo se c'è un nome
+      if (!this.form.sender_name) errors.sender_name = "Il nome è obbligatorio";
+
+      //controllo se  c'è un oggetto
+      if (!this.form.object) errors.object = "L'oggetto è obbligatorio";
+
       //controllo se c'è un messaggio
       if (!this.form.text) errors.text = "Il messaggio è obbiglatorio";
 
@@ -184,11 +186,13 @@ export default {
             //creo un oggetto nuovo
             const errors = {};
 
-            const { sender_email, text } = res.data.errors;
+            const { sender_email, text, object, sender_name } = res.data.errors;
 
             //se mi arriva un errore cn la chiave mail // message
             if (sender_email) errors.sender_email = sender_email[0];
             if (text) errors.text = text[0];
+            if (sender_name) errors.sender_name = sender_name[0];
+            if (object) errors.object = object[0];
 
             //prendo l'oggetto che ho creato e lo metto nei data
             this.errors = errors;
@@ -197,6 +201,8 @@ export default {
           else {
             this.form.sender_email = "";
             this.form.text = "";
+            this.form.sender_name = "";
+            this.form.object = "";
             this.alertMessage = "Messaggio inviato";
           }
         })
