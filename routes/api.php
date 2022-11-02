@@ -28,5 +28,7 @@ Route::namespace('Api')->group(function () {
 Route::namespace('api')->group(function(){
     Route::get('/flats', 'FlatController@index');
     Route::get('/flats/{id}', 'FlatController@show');
+    Route::get('/services', 'ServiceController@index');
+
 
 });
