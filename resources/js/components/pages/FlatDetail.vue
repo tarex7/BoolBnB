@@ -1,98 +1,106 @@
 <template>
-  <div id="post-detail-page">
+  <div id="flat-detail-page">
     <AppLoader v-if="isLoading" />
     <div v-else-if="!isLoading && flat" :flat="flat">
       <div class="container">
-        <!-- FORM MESSAGGIO -->
-        <section id="message-form">
-          <!-- Componente loader -->
-          <AppLoader v-if="isLoading" />
-          <div v-else>
-            <AppAlert
-              v-if="alertMessage || hasErrors"
-              :type="hasErrors ? 'danger' : 'success'"
-              :dismissible="true"
-              @close="resetErrorsAndMessage"
-            >
-              <!-- Se c'è alert message metto il messaggio -->
-              <div v-if="alertMessage">{{ alertMessage }}</div>
-              <!-- gestisco gli errori -->
-              <ul v-if="hasErrors">
-                <!-- per ogni elemento dell'oggetto prendimi la chiava e prendimi il messaggio -->
-                <li v-for="(error, key) in errors" :key="key">
-                  {{ error }}
-                </li>
-              </ul>
-            </AppAlert>
-            <!-- intercetto vue sumbit.prevent per non ricaricare la pagina -->
-            <form
-              class="contact - form"
-              @submit.prevent="submitForm"
-              novalidate
-            >
-              <!-- utente -->
-              <div class="form-group">
-                <label for="sender_name" class="form-label">Nome</label>
-                <input
-                  type="text"
-                  class="form-control"
-                  :class="{ 'is-invalid': errors.sender_name }"
-                  id="sender_name"
-                  v-model.trim="form.sender_name"
-                />
-                <!-- STAMPO GLI ERRORI -->
-                <div v-if="errors.sender_name" class="invalid-feedback">
-                  {{ errors.sender_name }}
-                </div>
-                <div v-else class="form-text">Scrivi il tuo nome</div>
-              </div>
-              <div class="form-group">
-                <label for="sender_email" class="form-label"
-                  >Indirizzo Email</label
-                >
-                <input
-                  type="email"
-                  class="form-control"
-                  :class="{ 'is-invalid': errors.sender_email }"
-                  id="sender_email"
-                  v-model.trim="form.sender_email"
-                />
-                <!-- STAMPO GLI ERRORI -->
-                <div v-if="errors.sender_email" class="invalid-feedback">
-                  {{ errors.sender_email }}
-                </div>
-                <div v-else class="form-text">
-                  Ti Risponderemo su questo indirizzo
-                </div>
-              </div>
-              <!-- Text-Area -->
-              <div class="mb-3">
-                <label for="text" class="form-label"
-                  >Inserisci qua il tuo messaggio</label
-                >
-                <textarea
-                  class="form-control"
-                  :class="{ 'is-invalid': errors.text }"
-                  id="text"
-                  rows="10"
-                  v-model.trim="form.text"
-                ></textarea>
-                <!-- STAMPO GLI ERRORI -->
-                <div v-if="errors.text" class="invalid-feedback">
-                  {{ errors.text }}
-                </div>
-                <div v-else class="form-text">
-                  Scrivi tutto quello che deisideri sapere
-                </div>
-              </div>
-              <div class="d-flex justify-content-end">
-                <button type="submit" class="btn btn-success">Invia</button>
-              </div>
-              <p id="flat_id">{{ flat.id }}</p>
-            </form>
+        <div class="row">
+          <div class="col-12 p-0">
+            <h2 class="mt-3 mb-2">{{ flat.title }}</h2>
+
+            <img
+              class="rounded-3 my-3"
+              :src="`/storage/${flat.image}`"
+              :alt="flat.title"
+            />
           </div>
-        </section>
-        <!-- FINE FORM MESSAGGIO -->
+          <div class="col-12 col-md-7">
+            <h3>Appartamento in affitto a {{ flat.address }}</h3>
+            <hr class="my-3" />
+            <p>{{ flat.description }}</p>
+            <div>
+              <h4>Servizi</h4>
+            </div>
+          </div>
+          <!-- FORM MESSAGGIO -->
+          <div id="message-form" class="col-12 col-md-5 rounded-3 p-3">
+            <h4 class="my-2">Invia un messaggio al proprietario</h4>
+            <!-- Componente loader -->
+            <AppLoader v-if="isLoading" />
+            <div v-else>
+              <AppAlert
+                v-if="alertMessage || hasErrors"
+                :type="hasErrors ? 'danger' : 'success'"
+                :dismissible="true"
+                @close="resetErrorsAndMessage"
+              >
+                <!-- Se c'è alert message metto il messaggio -->
+                <div v-if="alertMessage">{{ alertMessage }}</div>
+                <!-- gestisco gli errori -->
+                <ul v-if="hasErrors">
+                  <!-- per ogni elemento dell'oggetto prendimi la chiava e prendimi il messaggio -->
+                  <li v-for="(error, key) in errors" :key="key">
+                    {{ error }}
+                  </li>
+                </ul>
+              </AppAlert>
+              <!-- intercetto vue sumbit.prevent per non ricaricare la pagina -->
+              <form
+                class="contact - form"
+                @submit.prevent="submitForm"
+                novalidate
+              >
+                <!-- utente -->
+                <div class="form-group">
+                  <label for="sender_name" class="form-label m-0">Nome</label>
+                  <input
+                    type="text"
+                    class="form-control mb-2"
+                    :class="{ 'is-invalid': errors.sender_name }"
+                    id="sender_name"
+                    v-model.trim="form.sender_name"
+                  />
+                  <!-- STAMPO GLI ERRORI -->
+                  <div v-if="errors.sender_name" class="invalid-feedback">
+                    {{ errors.sender_name }}
+                  </div>
+                </div>
+                <div class="form-group">
+                  <label for="sender_email" class="form-label m-0">Email</label>
+                  <input
+                    type="email"
+                    class="form-control mb-2"
+                    :class="{ 'is-invalid': errors.sender_email }"
+                    id="sender_email"
+                    v-model.trim="form.sender_email"
+                  />
+                  <!-- STAMPO GLI ERRORI -->
+                  <div v-if="errors.sender_email" class="invalid-feedback">
+                    {{ errors.sender_email }}
+                  </div>
+                </div>
+                <!-- Text-Area -->
+                <div class="mb-3">
+                  <label for="text" class="form-label m-0">Messaggio</label>
+                  <textarea
+                    class="form-control mb-2"
+                    :class="{ 'is-invalid': errors.text }"
+                    id="text"
+                    rows="10"
+                    v-model.trim="form.text"
+                  ></textarea>
+                  <!-- STAMPO GLI ERRORI -->
+                  <div v-if="errors.text" class="invalid-feedback">
+                    {{ errors.text }}
+                  </div>
+                </div>
+                <div class="d-flex justify-content-end">
+                  <button type="submit" class="btn btn-success">Invia</button>
+                </div>
+              </form>
+            </div>
+          </div>
+          <!-- FINE FORM MESSAGGIO -->
+        </div>
       </div>
     </div>
   </div>
@@ -114,7 +122,7 @@ export default {
         sender_name: "",
         sender_email: "",
         text: "",
-        flat_id: "",
+        flat_id: this.$route.params.id,
       },
 
       alertMessage: null,
@@ -247,8 +255,15 @@ export default {
 <style lang="scss" scoped>
 .container {
   margin-top: 80px;
+  margin-bottom: 20px;
   img {
-    height: 300px;
+    height: 600px;
+    width: 100%;
+    padding: 0;
+  }
+  #message-form {
+    border: 1px solid lightgray;
+    box-shadow: 0 0 5px lightgray;
   }
 }
 </style>
