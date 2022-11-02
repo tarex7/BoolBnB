@@ -18,7 +18,18 @@
             <hr class="my-3" />
             <p>{{ flat.description }}</p>
             <div>
+              <hr class="my-3" />
               <h4>Servizi</h4>
+              <div
+                class="d-flex"
+                v-for="(service, index) in flat.services"
+                :key="index"
+              >
+                <div class="mb-2">
+                  <i :class="service.icon" class=""></i>
+                  <span class="">{{ service.label }}</span>
+                </div>
+              </div>
             </div>
           </div>
           <!-- FORM MESSAGGIO -->
@@ -117,7 +128,7 @@ export default {
     return {
       flat: null,
       isLoading: false,
-
+      services: [],
       form: {
         sender_name: "",
         sender_email: "",
@@ -260,6 +271,12 @@ export default {
     height: 600px;
     width: 100%;
     padding: 0;
+  }
+  i {
+    font-size: 1.3rem;
+  }
+  span {
+    font-size: 1.2rem;
   }
   #message-form {
     border: 1px solid lightgray;

@@ -5636,6 +5636,7 @@ __webpack_require__.r(__webpack_exports__);
     return {
       flat: null,
       isLoading: false,
+      services: [],
       form: {
         sender_name: "",
         sender_email: "",
@@ -6270,7 +6271,18 @@ var render = function render() {
     staticClass: "col-12 col-md-7"
   }, [_c("h3", [_vm._v("Appartamento in affitto a " + _vm._s(_vm.flat.address))]), _vm._v(" "), _c("hr", {
     staticClass: "my-3"
-  }), _vm._v(" "), _c("p", [_vm._v(_vm._s(_vm.flat.description))]), _vm._v(" "), _c("div", [_c("h4", [_vm._v("Servizi")])])]), _vm._v(" "), _c("div", {
+  }), _vm._v(" "), _c("p", [_vm._v(_vm._s(_vm.flat.description))]), _vm._v(" "), _c("div", [_c("hr", {
+    staticClass: "my-3"
+  }), _vm._v(" "), _c("h4", [_vm._v("Servizi")]), _vm._v(" "), _vm._l(_vm.flat.services, function (service, index) {
+    return _c("div", {
+      key: index,
+      staticClass: "d-flex"
+    }, [_c("div", {
+      staticClass: "mb-2"
+    }, [_c("i", {
+      "class": service.icon
+    }), _vm._v(" "), _c("span", {}, [_vm._v(_vm._s(service.label))])])]);
+  })], 2)]), _vm._v(" "), _c("div", {
     staticClass: "col-12 col-md-5 rounded-3 p-3",
     attrs: {
       id: "message-form"
@@ -11845,7 +11857,7 @@ exports = module.exports = __webpack_require__(/*! ../../../../node_modules/css-
 
 
 // module
-exports.push([module.i, ".container[data-v-341bdc40] {\n  margin-top: 80px;\n  margin-bottom: 20px;\n}\n.container img[data-v-341bdc40] {\n  height: 600px;\n  width: 100%;\n  padding: 0;\n}\n.container #message-form[data-v-341bdc40] {\n  border: 1px solid lightgray;\n  box-shadow: 0 0 5px lightgray;\n}", ""]);
+exports.push([module.i, ".container[data-v-341bdc40] {\n  margin-top: 80px;\n  margin-bottom: 20px;\n}\n.container img[data-v-341bdc40] {\n  height: 600px;\n  width: 100%;\n  padding: 0;\n}\n.container i[data-v-341bdc40] {\n  font-size: 1.3rem;\n}\n.container span[data-v-341bdc40] {\n  font-size: 1.2rem;\n}\n.container #message-form[data-v-341bdc40] {\n  border: 1px solid lightgray;\n  box-shadow: 0 0 5px lightgray;\n}", ""]);
 
 // exports
 
