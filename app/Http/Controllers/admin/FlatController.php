@@ -96,13 +96,13 @@ class FlatController extends Controller
         $services = Service::select('id', 'label', 'icon')->get();
 
         if($flats){
-            
+
             // ricerca dell'ultima sponsorizzazione
             $last_sponsorship = FlatSponsorship::all();  
 
             if(count($last_sponsorship) > 0){
                 $sponsor_detail = Sponsorship::find($last_sponsorship[count($last_sponsorship) - 1]->sponsorship_id);
-            }
+            } 
         }
 
         if(!$flats){
