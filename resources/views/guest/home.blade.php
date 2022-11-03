@@ -1,90 +1,145 @@
-@extends('layouts.app')
-
-@section('content')
-    <section id="root">
-       <div class="container text-center">
-        <h1 class="text-muted display-1 mt-5"> Coming soon...</h1>
-       </div>
-    </section>
-@endsection
-
-
-
-
-
-
-{{-- <!DOCTYPE html>
+<!doctype html>
 <html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
-    <head>
-        <meta charset="utf-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1">
 
-        <title>Laravel</title>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
 
-        <!-- Fonts -->
-        <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@200;600&display=swap" rel="stylesheet">
+    <!-- CSRF Token -->
+    <meta name="csrf-token" content="{{ csrf_token() }}">
 
-        <script src="{{asset('js/front.js')}}" defer ></script>
+    <title>{{ config('app.name', 'Laravel') }}</title>
 
-        <!-- Styles -->
-        <style>
-            html, body {
-                background-color: #fff;
-                color: #636b6f;
-                font-family: 'Nunito', sans-serif;
-                font-weight: 200;
-                height: 100vh;
-                margin: 0;
-            }
+    <!-- Scripts -->
+    <script src="{{ asset('js/app.js') }}" defer></script>
+    <script src="{{ asset('js/front.js') }}" defer></script>
 
-            .full-height {
-                height: 100vh;
-            }
+    {{-- Tomtom map --}}
+    <script type="text/javascript" src="https://api.tomtom.com/maps-sdk-for-web/cdn/6.x/6.20.0/maps/maps-web.min.js">
+    </script>
 
-            .flex-center {
-                align-items: center;
-                display: flex;
-                justify-content: center;
-            }
+    {{-- Tomtom searchbar --}}
+    <script src="https://api.tomtom.com/maps-sdk-for-web/cdn/6.x/6.1.2-public-preview.15/services/services-web.min.js">
+    </script>
+    <script src="https://api.tomtom.com/maps-sdk-for-web/cdn/plugins/SearchBox/3.1.3-public-preview.0/SearchBox-web.js">
+    </script>
+    <script>
+        (function() {
+            window.SS = window.SS || {};
+            SS.Require = function(callback) {
+                if (typeof callback === 'function') {
+                    if (window.SS && SS.EventTrack) {
+                        callback();
+                    } else {
+                        var siteSpect = document.getElementById('siteSpectLibraries');
+                        var head = document.getElementsByTagName('head')[0];
+                        if (siteSpect === null && typeof head !== 'undefined') {
+                            siteSpect = document.createElement('script');
+                            siteSpect.type = 'text/javascript';
+                            siteSpect.src = '/__ssobj/core.js+ssdomvar.js+generic-adapter.js';
+                            siteSpect.async = true;
+                            siteSpect.id = 'siteSpectLibraries';
+                            head.appendChild(siteSpect);
+                        }
+                        if (window.addEventListener) {
+                            siteSpect.addEventListener('load', callback, false);
+                        } else {
+                            siteSpect.attachEvent('onload', callback, false);
+                        }
+                    }
+                }
+            };
+        })();
+    </script>
 
-            .position-ref {
-                position: relative;
-            }
 
-            .top-right {
-                position: absolute;
-                right: 10px;
-                top: 18px;
-            }
+    {{-- Delete confirmation --}}
+    <script src="{{ asset('js/delete_confirmation.js') }}" defer></script>
 
-            .content {
-                text-align: center;
-            }
+    <!-- Fonts -->
+    <link rel="dns-prefetch" href="//fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css?family=Nunito" rel="stylesheet">
 
-            .title {
-                font-size: 84px;
-            }
 
-            .links > a {
-                color: #636b6f;
-                padding: 0 25px;
-                font-size: 13px;
-                font-weight: 600;
-                letter-spacing: .1rem;
-                text-decoration: none;
-                text-transform: uppercase;
-            }
 
-            .m-b-md {
-                margin-bottom: 30px;
-            }
-        </style>
-    </head>
-    <body>
-        
+    {{-- Font awesome --}}
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css"
+        integrity="sha512-xh6O/CkQoPOWDdYTDqeRdPCVd1SpvCA9XXcUnZS2FmJNp1coAFzvtCN9BmamE+4aHK8yyUHUSCcJHgXloTyT2A=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
 
-                <div id="root"></div>
+    <!-- Styles -->
+    <link rel='stylesheet' type='text/css'
+        href='https://api.tomtom.com/maps-sdk-for-web/cdn/plugins/SearchBox/3.1.3-public-preview.0/SearchBox.css' />
+    <link rel="stylesheet" href="https://api.tomtom.com/maps-sdk-for-web/cdn/6.x/6.20.0/maps/maps.css">
+    <link href="{{ asset('css/app.css') }}" rel="stylesheet">
 
-           
-    </body>
-</html> --}}
+</head>
+
+<body class="bg-light">
+
+
+    <div class="container">
+        <header style="position:fixed; top:0; left:0; right:0; z-index: 1">
+
+
+            <nav class="navbar navbar-expand-md navbar-light bg-white shadow-sm d-flex justify-content-between">
+    
+                <a href="{{ url('/') }}">
+                    <img class="img-fluid  p-1" src={{ asset('images/boolbnb_logo.png') }} alt="logo Air BnB"
+                        style="height:60px; width: 250px;">
+    
+                </a>
+                
+    
+                <div class="d-flex" id="navbarSupportedContent">
+                    <!-- Left Side Of Navbar -->
+                    <ul></ul>
+    
+                    <ul class="navbar mr-3 d-flex ">
+                        <!-- Authentication Links -->
+                        @guest
+                            <li class="nav-item list-unstyled">
+                                <a class="nav-link text-dark " href="{{ route('login') }}">Accedi</a>
+                            </li>
+                            @if (Route::has('register'))
+                                <li class="nav-item list-unstyled">
+                                    <a class="nav-link text-dark list-unstyled mx-4" href="{{ route('register') }}">Registrati</a>
+                                </li>
+                            @endif
+                        @else
+                            <li class="nav-item dropdown list-unstyled">
+    
+    
+                                <div class="d-flex mx-3 " aria-labelledby="navbarDropdown">
+                                    <a class="dropdown-item text-dark mx-3 list-unstyled" href="{{ route('admin.flats.index') }}">
+                                        I miei appartamenti
+                                    </a>
+                                    <a class="dropdown-item" href="{{ route('logout') }}"
+                                        onclick="event.preventDefault();
+                                                             document.getElementById('logout-form').submit();">
+                                        {{ __('Logout') }}
+                                    </a>
+    
+    
+                                    <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
+                                        @csrf
+                                    </form>
+                                </div>
+                            </li>
+                        @endguest
+                    </ul>
+    
+                    <!-- Right Side Of Navbar -->
+                </div>
+    
+            </nav>
+        </header>
+    </div>
+
+
+
+
+    <div id="root"></div>
+</body>
+
+</html>
