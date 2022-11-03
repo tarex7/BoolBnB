@@ -8,17 +8,19 @@
             </div>
         </div> -->
         <!-- FLAT LIST COMPONENTE-->
+        <AppFooter/>
     </div>
 </template>
 
 <script>
 import FlatList from "../flats/FlatList.vue";
 import AppJumbotron from "../AppJumbotron.vue";
+import AppFooter from "../AppFooter.vue";
 import SearchBar from "../SearchBar.vue";
 export default {
     name: "HomePage",
     //COMPONENTS
-  components: { AppJumbotron, FlatList, SearchBar },
+  components: { AppJumbotron, FlatList, SearchBar,AppFooter },
 
   
     
