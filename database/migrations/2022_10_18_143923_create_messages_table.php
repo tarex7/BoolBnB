@@ -17,7 +17,7 @@ class CreateMessagesTable extends Migration
             $table->id();
             $table->string('sender_name')->required();
             $table->string('sender_email')->required();
-            
+            $table->string('object');
             $table->text('text');
 
             $table->timestamps();

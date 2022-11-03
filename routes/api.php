@@ -22,6 +22,13 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 Route::namespace('Api')->group(function () {
     Route::get("/flats", 'FlatController@index');
     Route::get("/flats/{id}", 'FlatController@show');
-    Route::post('/contact-message', 'ContactMessageController@send');
+});
+
+
+Route::namespace('api')->group(function(){
+    Route::get('/flats', 'FlatController@index');
+    Route::get('/flats/{id}', 'FlatController@show');
     Route::get('/services', 'ServiceController@index');
+
+
 });
