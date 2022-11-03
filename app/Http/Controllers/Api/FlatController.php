@@ -40,10 +40,10 @@ class FlatController extends Controller
      */
     public function show($id)
     {
-        $flat_lat_long = Flat::select(['latitude', 'longitude', 'id'])->find($id);
-
-        if(!$flat_lat_long) return response('Not found', 404);
-        return response()->json($flat_lat_long);
+        $flat = Flat::with('services')->find($id);
+        if (!$flat) return response('Not found', 404);
+        return response()->json($flat);
+        
     }
 
     /**

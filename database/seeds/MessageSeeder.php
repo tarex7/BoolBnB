@@ -24,7 +24,7 @@ class MessageSeeder extends Seeder
             $new_message->flat_id = Arr::random($flat_ids);
             $new_message->sender_name = $faker->userName();
             $new_message->sender_email = $faker->email();
-            $new_message->object = $faker->sentence();
+            
             $new_message->text = $faker->text(500);
 
             $new_message->save();

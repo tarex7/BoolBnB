@@ -18,6 +18,7 @@
     <script type="text/javascript" src="https://api.tomtom.com/maps-sdk-for-web/cdn/6.x/6.20.0/maps/maps-web.min.js">
     </script>
 
+
     {{-- Tomtom searchbar --}}
     <script src="https://api.tomtom.com/maps-sdk-for-web/cdn/6.x/6.1.2-public-preview.15/services/services-web.min.js">
     </script>
@@ -51,6 +52,9 @@
             };
         })();
     </script>
+    {{-- tom tom map --}}
+
+    <link rel="stylesheet" href="https://api.tomtom.com/maps-sdk-for-web/cdn/6.x/6.20.0/maps/maps.css">
 
 
     {{-- Delete confirmation --}}
