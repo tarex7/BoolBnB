@@ -22,6 +22,14 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 Route::namespace('Api')->group(function () {
     Route::get("/flats", 'FlatController@index');
     Route::get("/flats/{id}", 'FlatController@show');
+
+    
+
+    //Generate token 
+Route::get('/orders/generate' , 'Orders\OrderController@generate');
+
+//Make payment
+Route::post('/orders/make/payment' , 'Orders\OrderController@makePayment');
 });
 
 
