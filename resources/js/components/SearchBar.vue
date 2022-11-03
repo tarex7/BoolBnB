@@ -3,7 +3,7 @@
         <div class="container">
             <nav class="navbar-light bg-light">
                 <div class="row">
-                    <div class="col-7">
+                    <div class="col-12 col-md-6 col-lg-3 mt-3">
                         <form
                             @submit.prevent="getGeoPosition"
                             class="my-2 my-lg-0 d-flex justify-content-between"
@@ -52,7 +52,7 @@
                            
                         </form>
                     </div>
-                    <div class="col-5">
+                    <div class="col-12 col-md-6 col-lg-3 mt-3">
                         <div class="input-group mx-2">
                             <label for="radius" class="form-label"
                                 >nel raggio di
@@ -69,7 +69,7 @@
                             />
                         </div>
                     </div>
-                    <div class="col-12 col-md-6 filters">
+                    <div class="col-6 col-md-6 filters col-sm-6 col-lg-3 mt-4">
                         <div class="d-flex">
                             <div class="input-group d-flex justify-content-center">
                                 <div class="input-group-prepend">
@@ -103,7 +103,7 @@
                         </div>
                     </div>
 
-                    <div class="col-12 col-md-6 filters mb-3">
+                    <div class="col-6 col-md-6 filters mb-3 col-sm-6 col-lg-3 mt-4">
                         <div class="d-flex">
                             <div class="input-group d-flex justify-content-center">
                                 <div class="input-group-prepend">
