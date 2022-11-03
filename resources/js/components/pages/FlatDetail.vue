@@ -8,26 +8,36 @@
             <h2 class="mt-3 mb-2">{{ flat.title }}</h2>
 
             <img
-              class="rounded-3 my-3"
+              class="rounded-4 my-3"
               :src="`/storage/${flat.image}`"
               :alt="flat.title"
             />
           </div>
-          <div class="col-12 col-md-7">
-            <h3>Appartamento in affitto a {{ flat.address }}</h3>
+          <div class="col-12 col-md-7 pe-3">
+            <div class="d-flex justify-content-between">
+              <h3>Appartamento in affitto a {{ flat.address }}</h3>
+              <h3>{{ flat.price_per_day }}€ notte</h3>
+            </div>
+            <p class="d-flex">
+              {{ flat.square_mt }}mq - {{ flat.room_number }} Camere -
+              {{ flat.bathroom_number }} Bagni - {{ flat.bed_number }} Letti
+            </p>
             <hr class="my-3" />
             <p>{{ flat.description }}</p>
             <div>
               <hr class="my-3" />
+
               <h4>Servizi</h4>
-              <div
-                class="d-flex"
-                v-for="(service, index) in flat.services"
-                :key="index"
-              >
-                <div class="mb-2">
-                  <i :class="service.icon" class=""></i>
-                  <span class="">{{ service.label }}</span>
+              <div class="row row-cols-3">
+                <div
+                  class="d-flex"
+                  v-for="(service, index) in flat.services"
+                  :key="index"
+                >
+                  <div class="mb-2">
+                    <i :class="service.icon" class=""></i>
+                    <span class="">{{ service.label }}</span>
+                  </div>
                 </div>
               </div>
             </div>
@@ -111,6 +121,7 @@
             </div>
           </div>
           <!-- FINE FORM MESSAGGIO -->
+          <FlatMap :flat="flat" />
         </div>
       </div>
     </div>
@@ -121,9 +132,10 @@
 import AppAlert from "../AppAlert.vue";
 import FlatCard from "../flats/FlatCard.vue";
 import AppLoader from "../AppLoader.vue";
+import FlatMap from "../FlatMap.vue";
 export default {
   name: "FlatDetail",
-  components: { AppLoader, FlatCard, AppAlert },
+  components: { AppLoader, FlatCard, AppAlert, FlatMap },
   data() {
     return {
       flat: null,
@@ -163,10 +175,7 @@ export default {
           this.isLoading = false;
         });
     },
-    getFlatId() {
-      let flat_id = document.getElementById("flat_id").innerText;
-      this.flat_id = flat_id;
-    },
+
     //funziione di validazione lato frontend per nn fare ricaricare la paginae e bloccare il form
     validateForm() {
       //oggetto vuoto
@@ -215,14 +224,12 @@ export default {
     },
 
     sendMessage() {
-      this.getFlatId();
       //quando parte la chiamata il caricamento
       this.isLoading = true;
       //faccio la chiamata alla mia rotta contact con un oggetto cn tutti i campi del form che voglio passare
       axios
         .post("http://localhost:8000/api/contact-message", this.form)
         .then((res) => {
-          console.log("inviato");
           //verifico se ci sn errorri
           if (res.data.errors) {
             //creo un oggetto nuovo
@@ -247,17 +254,12 @@ export default {
 
             this.alertMessage = "Messaggio inviato";
           }
-        })
-        .catch((err) => {
-          this.errors = { http: "Si è verificato un errore" };
-        })
-        .then(() => {
-          //quando termina la chiamata il caricamento (spengo)
           this.isLoading = false;
         });
     },
   },
-  mounted() {
+  mounted() {},
+  created() {
     this.fetchFlat();
   },
 };
