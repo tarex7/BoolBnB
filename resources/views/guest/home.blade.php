@@ -103,7 +103,7 @@
                             </li>
                             @if (Route::has('register'))
                                 <li class="nav-item list-unstyled">
-                                    <a class="nav-link text-dark list-unstyled" href="{{ route('register') }}">Registrati</a>
+                                    <a class="nav-link text-dark list-unstyled mx-4" href="{{ route('register') }}">Registrati</a>
                                 </li>
                             @endif
                         @else
