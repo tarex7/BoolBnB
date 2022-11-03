@@ -1,35 +1,33 @@
 <template>
-    <div class="col-12 d-flex justify-content-center">
-        <div class="flat-card">
-            <router-link :to="`/flats${flat.id}`">
-                <img
-                    class="card-img-top img-fluid"
-                    :src="`storage/${flat.image}`"
-                    alt="Card image cap"
-                />
-            </router-link>
-            <div class="card-body">
-                <h5 class="card-title text-custom_primary mt-2">
-                    {{ flat.title }}
-                </h5>
-                <!-- <p class="card-text fw-bold">{{ flat.address }}</p> -->
-                <p class="card-text fw-bold">
-                    {{ flat.price_per_day }} € a notte
-                </p>
-            </div>
-        </div>
+  <div class="col-12 d-flex justify-content-center">
+    <div class="flat-card">
+      <router-link :to="`/flats/${flat.id}`">
+        <img
+          class="card-img-top img-fluid"
+          :src="`storage/${flat.image}`"
+          alt="Card image cap"
+        />
+      </router-link>
+      <div class="card-body">
+        <h5 class="card-title text-custom_primary mt-2">
+          {{ flat.title }}
+        </h5>
+        <!-- <p class="card-text fw-bold">{{ flat.address }}</p> -->
+        <p class="card-text fw-bold">{{ flat.price_per_day }} € a notte</p>
+      </div>
     </div>
+  </div>
 </template>
 
 <script>
 export default {
-    name: "FlatCard",
-    data() {
-        return {};
-    },
+  name: "FlatCard",
+  data() {
+    return {};
+  },
 
-    props: { flat: Object, flats: Array, i: Number },
-    methods: {},
+  props: { flat: Object, flats: Array, i: Number },
+  methods: {},
 };
 </script>
 <style scoped lang="scss">
@@ -120,38 +118,38 @@ export default {
 }*/
 
 .card {
-    img {
-        max-height: 500px;
-        max-width: 500px;
-        height: auto;
-        width: auto;
-    }
+  img {
+    max-height: 500px;
+    max-width: 500px;
+    height: auto;
+    width: auto;
+  }
 
-    transition: 0.5s;
+  transition: 0.5s;
 
-    .text-custom_primary {
-        color: #b11919;
-    }
+  .text-custom_primary {
+    color: #b11919;
+  }
 }
 
 .flat-card:hover {
-    transform: scale(1.05);
-    box-shadow: rgba($color: #000, $alpha: 0.3) 0px 0px 11px;
+  transform: scale(1.05);
+  box-shadow: rgba($color: #000, $alpha: 0.3) 0px 0px 11px;
 }
 
 .flat-card {
-    padding: 10px;
-    transition: 0.5s;
+  padding: 10px;
+  transition: 0.5s;
+  border-radius: 10px;
+
+  img {
     border-radius: 10px;
+    height: 300px;
+    object-fit: cover;
+  }
 
-    img {
-        border-radius: 10px;
-        height: 300px;
-        object-fit: cover;
-    }
-
-    .link {
-        text-decoration: none;
-    }
+  .link {
+    text-decoration: none;
+  }
 }
 </style>
