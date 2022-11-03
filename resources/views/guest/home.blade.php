@@ -91,19 +91,19 @@
                 </a>
                 
     
-                <div class="" id="navbarSupportedContent">
+                <div class="d-flex" id="navbarSupportedContent">
                     <!-- Left Side Of Navbar -->
                     <ul></ul>
     
-                    <ul class="navbar-nav mr-auto d-flex ">
+                    <ul class="navbar mr-3 d-flex ">
                         <!-- Authentication Links -->
                         @guest
-                            <li class="nav-item">
-                                <a class="nav-link text-dark" href="{{ route('login') }}">Accedi</a>
+                            <li class="nav-item list-unstyled">
+                                <a class="nav-link text-dark " href="{{ route('login') }}">Accedi</a>
                             </li>
                             @if (Route::has('register'))
-                                <li class="nav-item">
-                                    <a class="nav-link text-dark" href="{{ route('register') }}">Registrati</a>
+                                <li class="nav-item list-unstyled">
+                                    <a class="nav-link text-dark list-unstyled" href="{{ route('register') }}">Registrati</a>
                                 </li>
                             @endif
                         @else
