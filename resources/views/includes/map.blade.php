@@ -17,8 +17,9 @@
 <input id="lon" type="text" class="form-control" name="longitude" id="lon"
     value="{{ old('longitude', $flat->longitude) }}" hidden>
 
-    <div id="map" style="width: 100%;height: 600px">
+    <div id="map" style="width: 100%;height: 550px">
     </div>
+    
     <script type="text/javascript">
 
         const latitude = document.getElementById('lat').value;
