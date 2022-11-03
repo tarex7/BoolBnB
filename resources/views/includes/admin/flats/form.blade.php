@@ -14,7 +14,7 @@
     <div class="card rounded-lg p-4 col-9 shadow">
         <div class="row">
 
-            <div class="col-5">
+            <div class="col-4">
                 {{-- IMAGE --}}
 
 
@@ -43,7 +43,7 @@
 
             </div>
 
-            <div class="col-7">
+            <div class="col-8">
 
                 {{-- Titolo --}}
                 <div class="form-group mb-3">
@@ -176,7 +176,7 @@
                                             id="{{ $service->label }}" name="services[]"
                                             value="{{ $service->id }}">
                                         <label class="form-check-label mr-1" for="{{ $service->label }}">
-                                            {{ $service->label }} <i class="{{ $service->icon }}"></i>
+                                            {{ $service->label }}
                                         </label>
                                     </div>
                                 @endforeach
@@ -186,7 +186,7 @@
                         </div>
 
                         {{-- PREZZO PER NOTTE --}}
-                        <div class="col-3">
+                        <div class="col-4 px-0">
 
 
                             <p class="mt-4 mb-2">Prezzo per notte *</p>
@@ -211,10 +211,10 @@
 
                 </div>
             </div>
-            <div class="col-12 d-flex justify-content-end align-items-center my-5">
+            <div class="col-12 d-flex justify-content-end align-items-center my-5 px-0">
                 <button type="submit"
                     class="btn {{ !$flat->exists ? 'btn-success' : 'btn-warning' }} mr-5">{{ !$flat->exists ? 'Crea appartamento' : 'Aggiorna appartamento' }}</button>
-                <a href="{{ route('admin.flats.index') }}" class="btn btn-primary mx-5">Indietro</a>
+                <a href="{{ route('admin.flats.index') }}" class="btn btn-primary mx-2">Indietro</a>
             </div>
         </div>
 
