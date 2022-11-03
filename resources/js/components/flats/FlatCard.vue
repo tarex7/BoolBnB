@@ -1,52 +1,49 @@
 <template>
-  <div id="flat-card" class="mt-4 col-12 col-sm-6 col-xl-4">
-    <div class="flat-img">
-      <img
-        class="w-100 img-fluid"
-        :src="`/storage/${flat.image}`"
-        alt="Card image cap"
-      />
-      <div class="sponsor" v-if="i < 6">Sponsorizzato</div>
+    <div class="col-12 d-flex justify-content-center">
+        <div class="flat-card">
+            <router-link :to="`/flats${flat.id}`">
+                <img
+                    class="card-img-top img-fluid"
+                    :src="`storage/${flat.image}`"
+                    alt="Card image cap"
+                />
+            </router-link>
+            <div class="card-body">
+                <h5 class="card-title text-custom_primary mt-2">
+                    {{ flat.title }}
+                </h5>
+                <!-- <p class="card-text fw-bold">{{ flat.address }}</p> -->
+                <p class="card-text fw-bold">
+                    {{ flat.price_per_day }} € a notte
+                </p>
+            </div>
+        </div>
     </div>
-    <div class="flat-info">
-      <h5 class="fs-bold">{{ flat.title }}</h5>
-      <p>Prezzo: {{ flat.price_per_day }}€ per notte.</p>
-    </div>
-    <div class="flat-description">
-      <h5 class="fs-bold">{{ flat.title }}</h5>
-      <p>Prezzo: {{ flat.price_per_day }}€ per notte.</p>
-      <p>{{ flat.description }}</p>
-      <router-link
-        :to="{ name: 'flat-detail', params: { id: flat.id } }"
-        class="show-button"
-      >
-        <i class="fa-solid fa-eye"></i> Mostra Appartamento
-      </router-link>
-    </div>
-  </div>
 </template>
 
 <script>
 export default {
-  name: "FlatCard",
-  data() {
-    return {};
-  },
+    name: "FlatCard",
+    data() {
+        return {};
+    },
 
-  props: { flat: Object, flats: Array, i: Number },
-  methods: {},
+    props: { flat: Object, flats: Array, i: Number },
+    methods: {},
 };
 </script>
 <style scoped lang="scss">
-#flat-card {
+/*#flat-card {
   position: relative;
   .flat-img {
     position: relative;
 
     img {
-      height: 400px;
+      width:100%;
+      height: 300px;
       filter: opacity(1);
       transition: all 0.5s;
+      object-fit: cover;
     }
     .sponsor {
       position: absolute;
@@ -58,21 +55,24 @@ export default {
     }
   }
 
-  .flat-info {
+ /* .flat-info {
     position: absolute;
-    bottom: 50px;
+    bottom: 10px;
     left: 30px;
-    background-color: #fff;
+    background-color:rgba($color: #fff, $alpha: 0.75);
     width: 70%;
     padding: 1rem;
     transition: all 0.5s;
     opacity: 1;
+    border-radius: 5px;
+    box-shadow: #000 1px 2px 13px ;
+    font-weight: bold;
 
     p {
       margin: 0;
     }
-  }
-  .flat-description {
+  }*/
+/* .flat-description {
     height: 300px;
     padding: 30px;
     width: 70%;
@@ -89,8 +89,8 @@ export default {
       overflow: hidden;
       text-overflow: ellipsis;
       max-height: 90px;
-    }
-    .show-button {
+    }*/
+/* .show-button {
       background-color: black;
       border: 2px solid black;
       padding: 12px;
@@ -99,7 +99,7 @@ export default {
       color: white;
     }
   }
-}
+
 
 #flat-card:hover .flat-info {
   visibility: hidden;
@@ -117,5 +117,41 @@ export default {
 }
 #flat-card:hover img {
   filter: opacity(0.4);
+}*/
+
+.card {
+    img {
+        max-height: 500px;
+        max-width: 500px;
+        height: auto;
+        width: auto;
+    }
+
+    transition: 0.5s;
+
+    .text-custom_primary {
+        color: #b11919;
+    }
+}
+
+.flat-card:hover {
+    transform: scale(1.05);
+    box-shadow: rgba($color: #000, $alpha: 0.3) 0px 0px 11px;
+}
+
+.flat-card {
+    padding: 10px;
+    transition: 0.5s;
+    border-radius: 10px;
+
+    img {
+        border-radius: 10px;
+        height: 300px;
+        object-fit: cover;
+    }
+
+    .link {
+        text-decoration: none;
+    }
 }
 </style>

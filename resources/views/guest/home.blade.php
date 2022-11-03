@@ -78,64 +78,63 @@
 <body class="bg-light">
 
 
-    <header style="position:fixed; top:0; left:0; right:0; z-index: 1">
+    <div class="container">
+        <header style="position:fixed; top:0; left:0; right:0; z-index: 1">
 
 
-        <nav class="navbar navbar-expand-md navbar-light bg-white shadow-sm d-flex justify-content-between">
-
-            <a href="{{ url('/') }}">
-                <img class="img-fluid  p-1" src={{ asset('images/boolbnb_logo.png') }} alt="logo Air BnB"
-                    style="height:60px; width: 250px;">
-
-            </a>
-            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
-                aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="{{ __('Toggle navigation') }}">
-                <span class="navbar-toggler-icon"></span>
-            </button>
-
-            <div class="" id="navbarSupportedContent">
-                <!-- Left Side Of Navbar -->
-                <ul></ul>
-
-                <ul class="navbar-nav mr-auto d-flex ">
-                    <!-- Authentication Links -->
-                    @guest
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" href="{{ route('login') }}">Accedi</a>
-                        </li>
-                        @if (Route::has('register'))
-                            <li class="nav-item">
-                                <a class="nav-link text-dark" href="{{ route('register') }}">Registrati</a>
+            <nav class="navbar navbar-expand-md navbar-light bg-white shadow-sm d-flex justify-content-between">
+    
+                <a href="{{ url('/') }}">
+                    <img class="img-fluid  p-1" src={{ asset('images/boolbnb_logo.png') }} alt="logo Air BnB"
+                        style="height:60px; width: 250px;">
+    
+                </a>
+                
+    
+                <div class="d-flex" id="navbarSupportedContent">
+                    <!-- Left Side Of Navbar -->
+                    <ul></ul>
+    
+                    <ul class="navbar mr-3 d-flex ">
+                        <!-- Authentication Links -->
+                        @guest
+                            <li class="nav-item list-unstyled">
+                                <a class="nav-link text-dark " href="{{ route('login') }}">Accedi</a>
                             </li>
-                        @endif
-                    @else
-                        <li class="nav-item dropdown">
-
-
-                            <div class="d-flex " aria-labelledby="navbarDropdown">
-                                <a class="dropdown-item text-dark mx-3" href="{{ route('admin.flats.index') }}">
-                                    I miei appartamenti
-                                </a>
-                                <a class="dropdown-item" href="{{ route('logout') }}"
-                                    onclick="event.preventDefault();
-                                                         document.getElementById('logout-form').submit();">
-                                    {{ __('Logout') }}
-                                </a>
-
-
-                                <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
-                                    @csrf
-                                </form>
-                            </div>
-                        </li>
-                    @endguest
-                </ul>
-
-                <!-- Right Side Of Navbar -->
-            </div>
-
-        </nav>
-    </header>
+                            @if (Route::has('register'))
+                                <li class="nav-item list-unstyled">
+                                    <a class="nav-link text-dark list-unstyled mx-4" href="{{ route('register') }}">Registrati</a>
+                                </li>
+                            @endif
+                        @else
+                            <li class="nav-item dropdown">
+    
+    
+                                <div class="d-flex " aria-labelledby="navbarDropdown">
+                                    <a class="dropdown-item text-dark mx-3" href="{{ route('admin.flats.index') }}">
+                                        I miei appartamenti
+                                    </a>
+                                    <a class="dropdown-item" href="{{ route('logout') }}"
+                                        onclick="event.preventDefault();
+                                                             document.getElementById('logout-form').submit();">
+                                        {{ __('Logout') }}
+                                    </a>
+    
+    
+                                    <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
+                                        @csrf
+                                    </form>
+                                </div>
+                            </li>
+                        @endguest
+                    </ul>
+    
+                    <!-- Right Side Of Navbar -->
+                </div>
+    
+            </nav>
+        </header>
+    </div>
 
 
 

@@ -33,9 +33,7 @@ export default {
     props: {},
     //METHODS
   methods: {
-    getDataFromSearch(test) {
-       this.test = test
-      }
+    
     },
     //COMPUTED
     computed: {},
@@ -43,4 +41,6 @@ export default {
 </script>
 
 <!-- STYLE -->
-<style lang="scss" scoped> </style>
+<style lang="scss" >
+
+</style>

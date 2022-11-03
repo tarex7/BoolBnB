@@ -1,5 +1,5 @@
 <template>
-  <div class="content" @search=" getDataFromSearch">
+  <div class="content">
     <!-- HEADER -->
 
     <!-- JUMBOTRON -->
@@ -8,7 +8,7 @@
     <router-view ></router-view>
 
     <!--FOOTER -->
-    <AppFooter />
+    <!-- <AppFooter /> -->
   </div>
 </template>
 
@@ -31,11 +31,14 @@ export default {
     };
   },
   methods: {
-    getDataFromSearch(test) {
-        this.test = test
-      }
+    
     },
   // MOUNTED
   mounted() {},
 };
 </script>
+
+<style>
+
+
+</style>
