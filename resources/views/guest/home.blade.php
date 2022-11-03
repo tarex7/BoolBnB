@@ -110,7 +110,7 @@
                             <li class="nav-item dropdown list-unstyled">
     
     
-                                <div class="d-flex " aria-labelledby="navbarDropdown">
+                                <div class="d-flex mx-3 " aria-labelledby="navbarDropdown">
                                     <a class="dropdown-item text-dark mx-3 list-unstyled" href="{{ route('admin.flats.index') }}">
                                         I miei appartamenti
                                     </a>

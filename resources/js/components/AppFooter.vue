@@ -1,6 +1,6 @@
 <template>
   <footer>
-    <div class="container">
+    <div class="container mt-5">
       <div class="row row-cols-1 row-cols-md-3">
         <div class="col mb-4 mb-md-1">
           <h1 class="mb-3">BoolBnB</h1>

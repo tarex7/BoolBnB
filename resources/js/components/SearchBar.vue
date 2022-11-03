@@ -164,7 +164,7 @@
 
                 </div>
             </nav>
-            <div class="row">
+            <div class="row mb-5 pb-5">
                 <div class="col">
                     <section id="flat-list">
                         <h2 class="my-3 text-center mt-5">
