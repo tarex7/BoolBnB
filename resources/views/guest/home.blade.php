@@ -107,11 +107,11 @@
                                 </li>
                             @endif
                         @else
-                            <li class="nav-item dropdown">
+                            <li class="nav-item dropdown list-unstyled">
     
     
                                 <div class="d-flex " aria-labelledby="navbarDropdown">
-                                    <a class="dropdown-item text-dark mx-3" href="{{ route('admin.flats.index') }}">
+                                    <a class="dropdown-item text-dark mx-3 list-unstyled" href="{{ route('admin.flats.index') }}">
                                         I miei appartamenti
                                     </a>
                                     <a class="dropdown-item" href="{{ route('logout') }}"
