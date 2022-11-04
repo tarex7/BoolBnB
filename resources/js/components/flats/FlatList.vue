@@ -1,17 +1,19 @@
 <template>
     <section id="flat-list">
-        <div class="container-fluid">
+        <div class="container">
             <!-- AppLoader -->
             <app-loader v-if="isLoading" />
 
             <!-- FLAT CARD -->
+               <div class="row">
                 <flat-card
-                    v-for="(flat, i) in flats"
-                    :key="flat.id"
-                    :flat="flat"
-                    :flats="flats"
-                    :i="i"
-                />
+                v-for="(flat, i) in flats"
+                :key="flat.id"
+                :flat="flat"
+                :flats="flats"
+                :i="i"
+            />
+               </div>
         </div>
     </section>
 </template>

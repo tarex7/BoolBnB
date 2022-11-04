@@ -1,6 +1,6 @@
 <template>
-    <div class="col-12 d-flex justify-content-center">
-        <div class="flat-card">
+    <div class="col-12 col-sm-6 col-md-4 col-lg-3">
+        <div class="flat-card m-1">
             <router-link :to="`/flats${flat.id}`">
                 <img
                     class="card-img-top img-fluid"
@@ -119,20 +119,7 @@ export default {
   filter: opacity(0.4);
 }*/
 
-.card {
-    img {
-        max-height: 500px;
-        max-width: 500px;
-        height: auto;
-        width: auto;
-    }
 
-    transition: 0.5s;
-
-    .text-custom_primary {
-        color: #b11919;
-    }
-}
 
 .flat-card:hover {
     transform: scale(1.05);
@@ -143,11 +130,12 @@ export default {
     padding: 10px;
     transition: 0.5s;
     border-radius: 10px;
+    object-fit: contain;
+
 
     img {
         border-radius: 10px;
-        height: 300px;
-        object-fit: cover;
+       
     }
 
     .link {

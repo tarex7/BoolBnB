@@ -438,10 +438,16 @@ export default {
 
 #query_address {
     height: 50px;
+    border-radius: 0;
 }
 
 #search-btn {
     height: 50px;
+    width: 120px;
+    background-color: crimson;
+    border-radius: 0;
+    border: 0;
+
 }
 
 label span {

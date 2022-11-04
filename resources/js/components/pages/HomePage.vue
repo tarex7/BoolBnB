@@ -3,12 +3,10 @@
       <AppJumbotron/>
       
       
-      <!-- <div class="container-fluid">
-      <div class="col-8 offset-2">
+       <div class="container-fluid">
         <flat-list  :filteredFlats="flats"/>
         
-      </div>
-    </div> -->
+    </div> 
       <!-- FLAT LIST COMPONENTE-->
       <router-view @search="getData"></router-view>
 
