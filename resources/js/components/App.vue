@@ -1,14 +1,14 @@
 <template>
   <div class="content">
-    <!-- HEADER -->
+      <!-- HEADER -->
 
-    <!-- JUMBOTRON -->
+      <!-- JUMBOTRON -->
 
-    <!-- ROTTE VIEW (CONTENUTO DINAMICO ALl'INTERNO DELLE PAGINE) -->
-    <router-view ></router-view>
+      <!-- ROTTE VIEW (CONTENUTO DINAMICO ALl'INTERNO DELLE PAGINE) -->
+      <router-view ></router-view>
 
-    <!--FOOTER -->
-    <!-- <AppFooter /> -->
+      <!--FOOTER -->
+      <!-- <AppFooter /> -->
   </div>
 </template>
 
@@ -25,20 +25,20 @@ export default {
   name: "App",
   // DATA
   data() {
-    return {
-      title: "BoolBnb",
-      test:""
-    };
+      return {
+          title: "BoolBnb",
+          test: "",
+      };
   },
-  methods: {
-    
-    },
+methods: {
+  getData(prop) {
+      console.log(prop);
+    }
+  },
+  props: {},
   // MOUNTED
   mounted() {},
 };
 </script>
 
-<style>
-
-
-</style>
+<style></style>

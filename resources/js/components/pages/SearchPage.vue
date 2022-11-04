@@ -1,5 +1,7 @@
 <template>
     <div>
+        <AppJumbotron/>
+
         <div class="container">
             <nav class="navbar-light bg-light">
                 <div class="row">
@@ -41,12 +43,12 @@
                                     </li>
                                 </ul>
 
-                                <button
-                                    class="btn btn-outline-danger my-sm-0 ms-2 py-2"
-                                    type="submit"
-                                >
-                                    Cerca
-                                </button>
+                                    <button
+                                        class="btn btn-outline-danger my-sm-0 ms-2 py-2"
+                                        type="submit"
+                                    >
+                                        Cerca
+                                    </button>
                             </div>
                         </form>
                     </div>
@@ -198,10 +200,11 @@
 </template>
 
 <script>
-import FlatCard from "./flats/FlatCard.vue";
+import AppJumbotron from "../AppJumbotron.vue";
+import FlatCard from "../flats/FlatCard.vue";
 
 export default {
-    name: "SearchBar",
+    name: "SearchPage",
     data() {
         return {
             query: "",
@@ -224,7 +227,7 @@ export default {
         };
     },
     props: {
-        title: String,
+        
     },
     methods: {
         fetchFlats() {
@@ -280,8 +283,8 @@ export default {
         },
 
         getGeoPosition() {
-            this.$root.$emit("eventing", this.radius);
 
+            // Get Geodata from Axios based on input and radius(2000 standard)
             console.log("geo");
             let query = this.query;
             let radius = this.radius * 1000;
@@ -443,21 +446,12 @@ export default {
                                             filteredByServices
                                         );
                                     });
-
-                                    //this.flats = filteredByServices;
+                                    this.flats = filteredByServices;
                                     if (filteredByServices.length == 0)
                                         this.message =
                                             "Non ci sono appartamenti con queste caratteristiche in questa zona";
                                 } else {
-                                    let data = filterdFlats
-                                    console.log("questi sono i flats filtrati", filterdFlats);
-
-                                    //this.flats = filterdFlats;
-                                    this.$router.push({
-                                        name: "search",
-                                        params: { data },
-                                    });
-
+                                    this.flats = filterdFlats;
                                     if (filterdFlats.length == 0)
                                         this.message =
                                             "Non ci sono appartamenti con queste caratteristiche in questa zona";
@@ -471,12 +465,6 @@ export default {
             } else {
                 this.flats = this.allFlats;
             }
-        },
-
-        shareSearch() {
-            let data = this.flats;
-            console.log("data", data);
-            this.$router.push({ name: "search", params: { data } });
         },
 
         filterFlats() {
@@ -522,16 +510,23 @@ export default {
     },
 
     mounted() {
-        if (this.$route.params.query) {
+       /* if (this.$route.params.query) {
             this.query = this.$route.params.query;
         }
         if (this.$route.params.radius) {
             this.radius = this.$route.params.radius;
         }
-        this.fetchFlats();
+        //this.fetchFlats();*/
         this.fetchServices();
+        console.log('this flats searchpage', this.flats);
+
+        let data = this.$route.params.data;
+        console.log("data is", data);
+        this.flats = data
+
     },
-    components: { FlatCard },
+   
+    components: { FlatCard, AppJumbotron },
 };
 </script>
 
