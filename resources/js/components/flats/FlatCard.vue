@@ -1,7 +1,7 @@
 <template>
     <div class="col-12 col-sm-6 col-md-4 col-lg-3">
         <div class="flat-card m-1">
-            <router-link :to="`/flats${flat.id}`">
+            <router-link :to="`/flats/${flat.id}`">
                 <img
                     class="card-img-top img-fluid"
                     :src="`storage/${flat.image}`"
