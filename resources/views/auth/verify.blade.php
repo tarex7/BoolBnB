@@ -1,6 +1,18 @@
 @extends('layouts.app')
+<style>
+    .bg-img {
+        background-image: url("/images/sea.jpg");
+    }
 
+    .bg-format {
+        background-size: cover;
+        background-repeat: no-repeat;
+        background-position-y: center;
+        height: 100vh;
+    }
+</style>
 @section('content')
+<div>
 <div class="container">
     <div class="row justify-content-center">
         <div class="col-md-8">
@@ -24,5 +36,6 @@
             </div>
         </div>
     </div>
+</div>
 </div>
 @endsection

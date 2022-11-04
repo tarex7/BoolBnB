@@ -1,10 +1,23 @@
 @extends('layouts.app')
 
 @section('content')
-<div class="container">
+<style>
+    .bg-img {
+        background-image: url("/images/stanza.jpg");
+    }
+
+    .bg-format {
+        background-size: cover;
+        background-repeat: no-repeat;
+        background-position-y: center;
+        height: 100vh;
+    }
+</style>
+
+<div class="bg-img bg-format">
     <div class="row justify-content-center">
-        <div class="col-md-8">
-            <div class="card">
+        <div class="col-md-8 p-4">
+            <div class="card" style="margin-top: 10vh">
                 <div class="card-header">{{ __('Login') }}</div>
 
                 <div class="card-body">
@@ -25,7 +38,7 @@
                             </div>
                         </div>
 
-                        <div class="form-group row">
+                        <div class="form-group row my-3">
                             <label for="password" class="col-md-4 col-form-label text-md-right">{{ __('Password') }}</label>
 
                             <div class="col-md-6">
@@ -51,7 +64,7 @@
                             </div>
                         </div>
 
-                        <div class="form-group row mb-0">
+                        <div class="form-group row pb-5">
                             <div class="col-md-8 offset-md-4">
                                 <button type="submit" class="btn btn-primary">
                                     {{ __('Login') }}
