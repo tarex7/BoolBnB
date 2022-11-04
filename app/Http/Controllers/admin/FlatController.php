@@ -20,6 +20,7 @@ class FlatController extends Controller
         'description' => 'required|string',
         'image' => 'nullable|image| mimes:jpeg,jpg,png,webp',
         //ADDRESS AGGIUNGERE
+        'address'=>'required|min:5|max:5000',
         'price_per_day' => 'required|numeric|min:1|max:3000',
         'room_number' => 'required|numeric|min:1|max:50',
         'bed_number' => 'required|numeric|min:1|max:10',
@@ -44,7 +45,7 @@ class FlatController extends Controller
         'image.mimes' => "Le immagini ammesse sono solo in formato .jpeg, .jpg o .png",
 
         //ADDRESS
-        // 'address.required' => 'Questo è un parametro obbligatorio',
+         'address.required' => "L'indirizzo dell'appartamento è obbligatorio",
 
         // PRICE FOR DAY
         'price_per_day.required' => 'Inserire un prezzo',

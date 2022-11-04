@@ -22,14 +22,12 @@
                             class="h5">Torna alla lista </strong></a>
                 </div>
             </div>
-            <div class="col-6">
+            <div class="col-lg-6 col-sm-12">
                 <div class="card p-4">
                     <h2>{{ $flat->title }}</h2>
 
-
-                    <img class="float-left mr-2 img-fluid" width="500" src="{{ asset('storage/' . $flat->image) }}"
+                    <img class="float-left mr-2 img-fluid" width="500" src=" {{ $flat->image ? asset('storage/' . $flat->image) : asset('images/placeholder.png') }}"
                         alt="{{ $flat->title }}">
-
                     <p class="h4 my-4 py-2 w-75">{{ $flat->address }}</p>
                     <div class="info d-flex mt-4 border align-items-center my-2 p-3">
                         <p class=" mb-0">{{ $flat->square_mt }} m<sup>2</sup></p>
@@ -73,7 +71,7 @@
             </div>
 
 
-            <div class="col-6">
+            <div class="col-lg-6 col-sm-12">
 
                 <div class="card p-3">
                     <h4 class="mb-0">Statistiche</h4>

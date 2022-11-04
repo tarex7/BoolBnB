@@ -12,7 +12,8 @@
                 @forelse ($flats as $flat)
                     <div class="card m-2 p-2 shadow" style="width: 20rem;">
                         <a href="{{ Route('admin.flats.show', $flat->id) }}">
-                            <img src="{{ asset('storage/' .$flat->image) }}" style="height: 15rem;" class="card-img-top {{ !$flat->visible ? 'opacity-25' : '' }}"
+
+                            <img src="{{ $flat->image ? asset('storage/' . $flat->image) : asset('images/placeholder.png') }}" style="height: 15rem;" class="card-img-top {{ !$flat->visible ? 'opacity-25' : '' }}"
                                 alt="...">
 
                         </a>
@@ -41,4 +42,5 @@
             </div>
         </div>
     </div>
+    @include('includes.footer')
 @endsection

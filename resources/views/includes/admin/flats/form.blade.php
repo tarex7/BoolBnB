@@ -18,9 +18,9 @@
                 {{-- IMAGE --}}
 
 
-                <div class="border rounded mt-4">
+                <div class="mt-4">
                     <img src="{{ $flat->image ? asset('storage/' . $flat->image) : asset('images/placeholder.png') }}"
-                        alt="flat-image" id="preview" class="img-fluid">
+                        alt="flat-image" id="preview" class="img-fluid border rounded">
                 </div>
 
 
@@ -79,17 +79,17 @@
                         {{-- Indirizzo --}}
                         {{-- Titolo --}}
                         {{-- <div class="form-group mt-4">
-                            <label for="address" class=" mb-1">Indirizzo</label>
-                            <input type="text" class="form-control @error('address') is-invalid @enderror"
-                                id="address" name="address" value="{{ old('address', $flat->address) }}" required
-                                minlength="5" maxlength="50">
+                                    <label for="address" class=" mb-1">Indirizzo</label>
+                                    <input type="text" class="form-control @error('address') is-invalid @enderror"
+                                        id="address" name="address" value="{{ old('address', $flat->address) }}" required
+                                        minlength="5" maxlength="50">
 
-                            @error('title')
-                                <div class="invalid-feedback">
-                                    {{ $message }}
-                                </div>
-                            @enderror
-                        </div> --}}
+                                    @error('title')
+                                        <div class="invalid-feedback">
+                                            {{ $message }}
+                                        </div>
+                                    @enderror
+                                </div> --}}
 
                         {{-- Indirizzo tomtom searchbar --}}
 
@@ -97,12 +97,14 @@
                             <label for="address">Indirizzo: *</label>
                             <div id="address-tomtom"></div>
 
-                            <input id="lat" type="text" class="form-control" name="latitude"
+                            <input id="lat" type="text" class="form-control @error('address') is-invalid @enderror" name="latitude"
                                 value="{{ old('latitude', $flat->latitude) }}" hidden>
 
-                            <input id="lon" type="text" class="form-control" name="longitude"
+                            <input id="lon" type="text" class="form-control @error('address') is-invalid @enderror" name="longitude"
                                 value="{{ old('longitude', $flat->longitude) }}" hidden>
-
+                                @error('address')
+                                <div class="invalid-feedback">{{ $message }} </div>
+                            @enderror
 
                         </div>
 
@@ -193,7 +195,7 @@
                             <div class="input-group mb-3 p-0">
                                 <div class="input-group-prepend">
                                     <span class="input-group-text" id="basic-addon1">€</span>
-                                    
+
                                 </div>
                                 <input type="number"
                                     class=" form-control @error('price_per_day') is-invalid @enderror"
@@ -217,75 +219,80 @@
                 <a href="{{ route('admin.flats.index') }}" class="btn btn-primary mx-2">Indietro</a>
             </div>
         </div>
-
-        </form>
-
-        <script>
-            var options = {
-                searchOptions: {
-                    key: 'I7jwOnv7XxCbU6AV64AN8ZPGArFaIoTh',
-                    language: 'it-IT',
-                    limit: 10,
-                },
-                autocompleteOptions: {
-                    key: 'I7jwOnv7XxCbU6AV64AN8ZPGArFaIoTh',
-                    language: 'it-IT',
-                }
-            };
-            const latInput = document.getElementById('lat');
-            const lonInput = document.getElementById('lon');
-            const addressContainer = document.getElementById('address-tomtom')
-
-            const testbtn = document.getElementById('test');
-
-            var ttSearchBox = new tt.plugins.SearchBox(tt.services, options);
-            var searchBoxHTML = ttSearchBox.getSearchBoxHTML();
-            addressContainer.append(searchBoxHTML);
-            const tomtomInput = document.getElementsByClassName("tt-search-box-input")[0];
-            let date = {}
-            ttSearchBox.on("tomtom.searchbox.resultsfound", function(data) {
-                date = (data);
-                let position = date.data.results.fuzzySearch.results[0].position;
-                let lon = position.lng;
-                let lat = position.lat;
-                latInput.value = lat;
-                lonInput.value = lon;
-            });
-            tomtomInput.setAttribute("name", "address");
-            tomtomInput.value = "<?php echo $flat->address; ?>";
-
-            //let axios = require('axios').default;
+    </div>
+</div>
+</div>
+@include('includes.footer')
 
 
+</form>
+
+<script>
+    var options = {
+        searchOptions: {
+            key: 'I7jwOnv7XxCbU6AV64AN8ZPGArFaIoTh',
+            language: 'it-IT',
+            limit: 10,
+        },
+        autocompleteOptions: {
+            key: 'I7jwOnv7XxCbU6AV64AN8ZPGArFaIoTh',
+            language: 'it-IT',
+        }
+    };
+    const latInput = document.getElementById('lat');
+    const lonInput = document.getElementById('lon');
+    const addressContainer = document.getElementById('address-tomtom')
+
+    const testbtn = document.getElementById('test');
+
+    var ttSearchBox = new tt.plugins.SearchBox(tt.services, options);
+    var searchBoxHTML = ttSearchBox.getSearchBoxHTML();
+    addressContainer.append(searchBoxHTML);
+    const tomtomInput = document.getElementsByClassName("tt-search-box-input")[0];
+    let date = {}
+    ttSearchBox.on("tomtom.searchbox.resultsfound", function(data) {
+        date = (data);
+        let position = date.data.results.fuzzySearch.results[0].position;
+        let lon = position.lng;
+        let lat = position.lat;
+        latInput.value = lat;
+        lonInput.value = lon;
+    });
+    tomtomInput.setAttribute("name", "address");
+    tomtomInput.value = "<?php echo $flat->address; ?>";
+
+    //let axios = require('axios').default;
 
 
-            addressContainer.addEventListener("input", (e) => {
-                console.log('call');
-                axios.get(
-                        `https:api.tomtom.com/search/2/autocomplete/${addressContainer.value}.json?key=I7jwOnv7XxCbU6AV64AN8ZPGArFaIoTh&language=it-IT&limit=6`
-                    )
-                    .then((res) => {
-                        console.log(res.data);
-                    })
-            });
-        </script>
 
-        <script>
-            const placeholder =
-                "https://cdn2.vectorstock.com/i/thumb-large/48/06/image-preview-icon-picture-placeholder-vector-31284806.jpg";
-            const image = document.getElementById('image')
-            const preview = document.getElementById('preview')
 
-            image.addEventListener('input', () => {
-                if (image.files && image.files[0]) {
-                    let reader = new FileReader();
-                    reader.readAsDataURL(image.files[0]);
-                    reader.addEventListener('load', event => {
-                        preview.src = event.target.result;
-                    });
-                } else preview.src = placeholder;
-                preview.setAttribute('src', placeholder);
+    addressContainer.addEventListener("input", (e) => {
+        console.log('call');
+        axios.get(
+                `https:api.tomtom.com/search/2/autocomplete/${addressContainer.value}.json?key=I7jwOnv7XxCbU6AV64AN8ZPGArFaIoTh&language=it-IT&limit=6`
+            )
+            .then((res) => {
+                console.log(res.data);
             })
-        </script>
+    });
+</script>
 
-        <script src="{{ asset('js/image_preview.js') }}"></script>
+<script>
+    const placeholder =
+        "https://cdn2.vectorstock.com/i/thumb-large/48/06/image-preview-icon-picture-placeholder-vector-31284806.jpg";
+    const image = document.getElementById('image')
+    const preview = document.getElementById('preview')
+
+    image.addEventListener('input', () => {
+        if (image.files && image.files[0]) {
+            let reader = new FileReader();
+            reader.readAsDataURL(image.files[0]);
+            reader.addEventListener('load', event => {
+                preview.src = event.target.result;
+            });
+        } else preview.src = placeholder;
+        preview.setAttribute('src', placeholder);
+    })
+</script>
+
+<script src="{{ asset('js/image_preview.js') }}"></script>

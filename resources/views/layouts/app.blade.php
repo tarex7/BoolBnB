@@ -76,7 +76,7 @@
 </head>
 
 <body class="bg-light">
-    <div id="app">
+    <div id="app" style="height: 100px">
 
 
         <nav class="navbar navbar-expand-md navbar-light bg-white shadow-sm d-flex justify-content-between">
@@ -86,10 +86,10 @@
                     style="height:60px; width: 250px;">
 
             </a>
-            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+            {{-- <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
                 aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="{{ __('Toggle navigation') }}">
                 <span class="navbar-toggler-icon"></span>
-            </button>
+            </button> --}}
 
             <div class="" id="navbarSupportedContent">
                 <!-- Left Side Of Navbar -->
@@ -137,7 +137,6 @@
 
         @include('includes.admin.alert')
         @yield('content')
-
     </div>
 </body>
 
