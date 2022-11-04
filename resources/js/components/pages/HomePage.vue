@@ -1,7 +1,8 @@
 <template>
   <div id="home-page">
-      <AppJumbotron />
-      <SearchBar :title="title" />
+      <AppJumbotron/>
+      
+      
       <!-- <div class="container-fluid">
       <div class="col-8 offset-2">
         <flat-list  :filteredFlats="flats"/>
@@ -21,6 +22,7 @@ import AppJumbotron from "../AppJumbotron.vue";
 import AppFooter from "../AppFooter.vue";
 import SearchBar from "../SearchBar.vue";
 import { title } from "process";
+
 export default {
   name: "HomePage",
   //COMPONENTS

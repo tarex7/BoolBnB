@@ -1,14 +1,16 @@
 <template>
-  <section id="jumbotron">
-    
+  <section id="jumbotron" class="position-relative">
+      <SearchBar/>
   </section>
 </template>
 
 <script>
+import SearchBar from './SearchBar.vue';
+
 export default {
   name: "AppJumbotron",
   // COMPONENTS
-  components: {},
+  components: { SearchBar },
   // DATA
   data() {
     return {};
@@ -26,7 +28,8 @@ export default {
 <!-- STYLE -->
 <style lang="scss" scoped>
 #jumbotron {
-  height: 700px;
+  position: relative;
+  height: 500px;
   background-image: url("./../../../public/images/jumbo.png");
   background-repeat: no-repeat;
   background-size: cover;
@@ -34,6 +37,14 @@ export default {
 
   @media screen and (max-width: 800px) {
     height: 400px;
+  }
+
+  .searchbar {
+   width:80%;
+  }
+
+  .search-container {
+    height: 100%;
   }
 }
 </style>

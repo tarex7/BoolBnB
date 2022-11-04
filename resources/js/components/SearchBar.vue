@@ -1,16 +1,13 @@
 <template>
-    <div>
-        <div class="container">
-            <nav class="navbar-light bg-light">
-                <div class="row">
-                    <div class="col-12 col-md-6 col-lg-3 mt-3">
+        <div class="container position-relative">
+            <nav class="navbar-light bg-transparent d-flex justify-content-center w-100">
+                    <div class="col-12 col-md-6 col-lg-6 mt-3">
                         <form
                             @submit.prevent="getGeoPosition"
-                            class="my-2 my-lg-0 d-flex justify-content-between"
+                            
                         >
-                            <div
-                                class="d-flex justify-content-between position-relative input-search my-4"
-                            >
+                            <div class="d-flex justify-content-between position-relative input-search my-4">
+
                                 <input
                                     class="form-control mr-sm-2 input"
                                     type="search"
@@ -42,134 +39,16 @@
                                 </ul>
 
                                 <button
-                                    class="btn btn-outline-danger my-sm-0 ms-2 py-2"
+                                    class="btn btn-dark my-sm-0 ms-2 py-2"
                                     type="submit"
+                                    id="search-btn"
                                 >
                                     Cerca
                                 </button>
+
                             </div>
                         </form>
                     </div>
-                    <div class="col-12 col-md-6 col-lg-3 mt-3">
-                        <div class="input-group mx-2">
-                            <label for="radius" class="form-label"
-                                >nel raggio di {{ radius }} km</label
-                            >
-                            <input
-                                type="range"
-                                class="form-range"
-                                id="radius"
-                                v-model="radius"
-                                step="10"
-                                min="0"
-                                max="50"
-                            />
-                        </div>
-                    </div>
-                    <div class="col-6 col-md-6 filters col-sm-6 col-lg-3 mt-4">
-                        <div class="d-flex">
-                            <div
-                                class="input-group d-flex justify-content-center"
-                            >
-                                <div class="input-group-prepend">
-                                    <span class="input-group-text">Camere</span>
-                                </div>
-                                <input
-                                    type="number"
-                                    class="form-control"
-                                    name="room_number"
-                                    id="rooms"
-                                    v-model="rooms"
-                                    @change="getGeoPosition"
-                                />
-                            </div>
-
-                            <div
-                                class="input-group d-flex justify-content-center"
-                            >
-                                <div class="input-group-prepend">
-                                    <span class="input-group-text ms-1"
-                                        >Letti</span
-                                    >
-                                </div>
-                                <input
-                                    type="number"
-                                    class="form-control"
-                                    name="beds_number"
-                                    id="beds"
-                                    v-model="beds"
-                                    @change="getGeoPosition"
-                                />
-                            </div>
-                        </div>
-                    </div>
-
-                    <div
-                        class="col-6 col-md-6 filters mb-3 col-sm-6 col-lg-3 mt-4"
-                    >
-                        <div class="d-flex">
-                            <div
-                                class="input-group d-flex justify-content-center"
-                            >
-                                <div class="input-group-prepend">
-                                    <span class="input-group-text">Bagni</span>
-                                </div>
-                                <input
-                                    type="number"
-                                    class="form-control"
-                                    name="bathroom_number"
-                                    id="bathrooms"
-                                    v-model="bathrooms"
-                                    @change="getGeoPosition"
-                                />
-                            </div>
-
-                            <div
-                                class="input-group d-flex justify-content-center"
-                            >
-                                <div class="input-group-prepend">
-                                    <span class="input-group-text ms-1"
-                                        >mq<sup>2</sup></span
-                                    >
-                                </div>
-                                <input
-                                    type="number"
-                                    class="form-control"
-                                    name="square_mt"
-                                    id="sqm"
-                                    v-model="sqm"
-                                    @change="getGeoPosition"
-                                />
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="d-flex flex-wrap justify-content-between">
-                        <span
-                            v-for="service in services"
-                            :key="service.id"
-                            class="col-4 col-sm-3 col-md-2 mx-md-2 col-lg-1 px-1 d-flex justify-content-center service"
-                        >
-                            <input
-                                type="checkbox"
-                                class="btn-check"
-                                :id="`btn-check-${service.id}`"
-                                name="service"
-                                :value="service.id"
-                                autocomplete="off"
-                            />
-                            <label
-                                class="btn btn-outline-success my-1 p-1 text-center"
-                                :for="`btn-check-${service.id}`"
-                            >
-                                <p class="m-0 d-flex align-items-center">
-                                    <!-- <i :class="`${service.icon} me-1`"></i> -->
-                                    <span>{{ service.label }}</span>
-                                </p>
-                            </label>
-                        </span>
-                    </div>
-                </div>
             </nav>
             <div class="row mb-5 pb-5">
                 <div class="col">
@@ -181,20 +60,11 @@
                         <!-- AppLoader -->
                         <app-loader v-if="isLoading" />
 
-                        <!-- FLAT CARD -->
-                        <div class="row justify-content-between">
-                            <FlatCard
-                                v-for="flat in flats"
-                                :key="flat.id"
-                                :flat="flat"
-                                class="col-12 col-md-4 col-lg-3 col mt-4"
-                            />
-                        </div>
+                       
                     </section>
                 </div>
             </div>
         </div>
-    </div>
 </template>
 
 <script>
@@ -449,8 +319,11 @@ export default {
                                         this.message =
                                             "Non ci sono appartamenti con queste caratteristiche in questa zona";
                                 } else {
-                                    let data = filterdFlats
-                                    console.log("questi sono i flats filtrati", filterdFlats);
+                                    let data = filterdFlats;
+                                    console.log(
+                                        "questi sono i flats filtrati",
+                                        filterdFlats
+                                    );
 
                                     //this.flats = filterdFlats;
                                     this.$router.push({
@@ -563,8 +436,12 @@ export default {
     width: 70px;
 }
 
-.input-group {
-    margin: 10px 0;
+#query_address {
+    height: 50px;
+}
+
+#search-btn {
+    height: 50px;
 }
 
 label span {
@@ -574,7 +451,10 @@ label span {
     justify-content: center;
 }
 
-.filters .form-control {
-    max-width: 60px;
+.container {
+    top: 50%;
 }
+
+
+
 </style>
