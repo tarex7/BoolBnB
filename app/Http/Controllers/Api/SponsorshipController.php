@@ -5,6 +5,7 @@ namespace App\Http\Controllers\api;
 use App\Models\Sponsorship;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use App\Http\Resources\SponsorshipResource;
 
 class SponsorshipController extends Controller
 {
@@ -12,6 +13,6 @@ class SponsorshipController extends Controller
 
         $sponsorships = Sponsorship::all();
 
-        return response()->json($sponsorships,200);
+        return SponsorshipResource::collection($sponsorships);
     }
 }

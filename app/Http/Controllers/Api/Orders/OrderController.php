@@ -6,6 +6,7 @@ use Braintree\Gateway;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Orders\OrderRequest;
+use App\Models\Sponsorship;
 
 class OrderController extends Controller
 {
@@ -25,9 +26,11 @@ class OrderController extends Controller
     public function makePayment(OrderRequest $request, Gateway $gateway)
     {
 
+        $sponsorship = Sponsorship::find($request->sponsorship);
+
         $result = $gateway->transaction()->sale(
             [
-                'amount' => $request->amount,
+                'amount' => $sponsorship->price,
                 'paymentMethodNonce' => $request->token,
                 'options' => [
                     'submitForSettlement' => true
