@@ -3,6 +3,13 @@
 
 // Variables
 @import 'variables';
+// Variables
 
 // Bootstrap
 @import '~bootstrap/scss/bootstrap';
+
+@media only screen and (max-width: 576px) {
+    .logo{
+       height: 50px
+    }
+}

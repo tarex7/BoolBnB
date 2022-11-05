@@ -10819,3 +10819,8 @@ textarea.form-control-lg {
     display: none !important;
   }
 }
+@media only screen and (max-width: 576px) {
+  .logo {
+    height: 50px;
+  }
+}
