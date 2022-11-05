@@ -4,21 +4,23 @@
 
         <div class="container">
             <div class="row">
-                <div class="col-12mt-3">
-                    <div class="card filters">
+                <div class="col-12 col-lg-2 mt-3 filters">
+                    <div class="card">
                         <div class="card-header">Filtra per:</div>
-                        <div class="card-body d-flex justify-content-between flex-wrap">
-
+                        <div
+                            class="card-body d-flex justify-content-sm-between justify-content-center flex-wrap"
+                        >
                             <!-- Rooms-->
-                            <div class="cs_btn my-2">
-                                <div class="btn-title text-center">
-                                   Camere
-                                </div>
+                            <div class="cs_btn my-2 mx-2">
+                                <div class="btn-title text-center">Camere</div>
                                 <div
                                     class="d-flex align-items-center justify-content-center p-0 cs_btn_body"
                                 >
                                     <div class="minus">
-                                        <i class="fa-solid fa-minus p-2" @click="rooms--"></i>
+                                        <i
+                                            class="fa-solid fa-minus p-2"
+                                            @click="rooms--"
+                                        ></i>
                                     </div>
                                     <input
                                         type="text"
@@ -28,21 +30,25 @@
                                         v-model="rooms"
                                     />
                                     <div class="plus">
-                                        <i class="fa-solid fa-plus p-2" @click="rooms++" ></i>
+                                        <i
+                                            class="fa-solid fa-plus p-2"
+                                            @click="rooms++"
+                                        ></i>
                                     </div>
                                 </div>
                             </div>
 
                             <!-- beds-->
-                            <div class="cs_btn my-2">
-                                <div class="btn-title text-center">
-                                   Letti
-                                </div>
+                            <div class="cs_btn my-2 mx-2">
+                                <div class="btn-title text-center">Letti</div>
                                 <div
                                     class="d-flex align-items-center justify-content-center p-0 cs_btn_body"
                                 >
                                     <div class="minus">
-                                        <i class="fa-solid fa-minus p-2" @click="beds--"></i>
+                                        <i
+                                            class="fa-solid fa-minus p-2"
+                                            @click="beds--"
+                                        ></i>
                                     </div>
                                     <input
                                         type="text"
@@ -52,21 +58,25 @@
                                         v-model="beds"
                                     />
                                     <div class="plus">
-                                        <i class="fa-solid fa-plus p-2" @click="beds++" ></i>
+                                        <i
+                                            class="fa-solid fa-plus p-2"
+                                            @click="beds++"
+                                        ></i>
                                     </div>
                                 </div>
                             </div>
 
                             <!-- Bathrooms-->
-                            <div class="cs_btn my-2">
-                                <div class="btn-title text-center">
-                                   Bagni
-                                </div>
+                            <div class="cs_btn my-2 mx-2">
+                                <div class="btn-title text-center">Bagni</div>
                                 <div
                                     class="d-flex align-items-center justify-content-center p-0 cs_btn_body"
                                 >
                                     <div class="minus">
-                                        <i class="fa-solid fa-minus p-2" @click="bathrooms--"></i>
+                                        <i
+                                            class="fa-solid fa-minus p-2"
+                                            @click="bathrooms--"
+                                        ></i>
                                     </div>
                                     <input
                                         type="text"
@@ -76,21 +86,27 @@
                                         v-model="bathrooms"
                                     />
                                     <div class="plus">
-                                        <i class="fa-solid fa-plus p-2" @click="bathrooms++" ></i>
+                                        <i
+                                            class="fa-solid fa-plus p-2"
+                                            @click="bathrooms++"
+                                        ></i>
                                     </div>
                                 </div>
                             </div>
 
                             <!-- Square mts-->
-                            <div class="cs_btn my-2">
+                            <div class="cs_btn my-2 mx-2">
                                 <div class="btn-title text-center">
-                                   Metri quadri
+                                    Metri quadri
                                 </div>
                                 <div
                                     class="d-flex align-items-center justify-content-center p-0 cs_btn_body"
                                 >
                                     <div class="minus">
-                                        <i class="fa-solid fa-minus p-2" @click="sqm--"></i>
+                                        <i
+                                            class="fa-solid fa-minus p-2"
+                                            @click="sqm--"
+                                        ></i>
                                     </div>
                                     <input
                                         type="text"
@@ -100,13 +116,76 @@
                                         v-model="sqm"
                                     />
                                     <div class="plus">
-                                        <i class="fa-solid fa-plus p-2" @click="sqm++" ></i>
+                                        <i
+                                            class="fa-solid fa-plus p-2"
+                                            @click="sqm++"
+                                        ></i>
                                     </div>
                                 </div>
                             </div>
-
-                            
                         </div>
+                    </div>
+
+                    <!-- Services -->
+
+                    <!-- <span
+                        v-for="service in services"
+                        :key="service.id"
+                        class="col-4 col-sm-3 col-md-2 mx-md-2 col-lg-1 px-1 d-flex justify-content-center form-check align-items-center"
+                    >
+                        <input
+                            type="checkbox"
+                            class="form-check-input"
+                            :id="`btn-check-${service.id}`"
+                            name="service"
+                            :value="service.id"
+                            autocomplete="off"
+                        />
+                        <label
+                            class="text-center"
+                            :for="`btn-check-${service.id}`"
+                        >
+                            <p class="m-0 d-flex align-items-center">
+                                <i :class="`${service.icon} me-1`"></i> 
+                                <span>{{ service.label }}</span>
+                            </p>
+                        </label>
+                    </span> -->
+
+                    <!-- <div
+                        class="form-check border-bottom my-4 custom-checkbox"
+                        v-for="service in services"
+                        :key="service.id"
+                    >
+                        <input
+                            class="form-check-input"
+                            type="checkbox"
+                            value=""
+                            id="flexCheckDefault"
+                        />
+                        <label class="form-check-label" for="flexCheckDefault">
+                            <span class="d-flex justify-content-start">{{
+                                service.label
+                            }}</span>
+                        </label>
+                    </div> -->
+
+                    <div
+                        class="form-check form-switch w-50"
+                        v-for="service in services"
+                        :key="service.id"
+                    >
+                        <input
+                            class="form-check-input"
+                            type="checkbox"
+                            id="flexSwitchCheckChecked"
+                            checked
+                        />
+                        <label
+                            class="form-check-label"
+                            for="flexSwitchCheckChecked"
+                            >{{ service.label }}</label
+                        >
                     </div>
                 </div>
             </div>
@@ -161,13 +240,11 @@ export default {
             services: [],
             message: "",
             selectedServices: [],
-            btnValue:0
+            btnValue: 0,
         };
     },
     props: {},
     methods: {
-       
-        
         fetchFlats() {
             this.isLoading = true;
             axios
@@ -516,32 +593,45 @@ label span {
 
 .cs_btn {
     max-width: 150px;
+    height: 70px;
     .cs_btn_body {
         border: 1px solid lightgray;
     }
     input {
         border-radius: 0;
         border: 0;
-    
+        height: 40px;
     }
 
-   .input-group-text {
-    border: 0px transparent solid;
-    padding: 12px;
-   }
+    .input-group-text {
+        border: 0px transparent solid;
+        padding: 12px;
+    }
 
-   .input-group-text:focus {
-    outline: none;
-   }
+    .input-group-text:focus {
+        outline: none;
+    }
     .btn-title {
         padding: 4px;
     }
     .minus,
     .plus {
+        display: flex;
+        align-items: center;
         background-color: lightgray;
         padding: 5px;
         cursor: pointer;
         border: 3px solid transparent;
+        height: 40px;
+    }
+
+    input[type="checkbox"] {
+        transform: scale(1.5);
+        display: none;
+    }
+
+    .filters .form-check-input {
+        width: 2rem;
     }
 }
 </style>
