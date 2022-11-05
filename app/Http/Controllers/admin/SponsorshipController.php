@@ -24,7 +24,7 @@ class SponsorshipController extends Controller
             'flat' => $request->flat,
         ];
 
-        return view('admin.flats.sponsorships.index', compact('sponsorships','data'));
+        return view('admin.flats.sponsorships.index', $data);
     }
 
 
