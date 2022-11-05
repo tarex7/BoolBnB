@@ -4,26 +4,28 @@
 
         <div class="container">
             <div class="row">
-                <div class="col-12 col-lg-2 mt-3 filters">
-                    <div class="card">
-                        <div class="card-header">Filtra per:</div>
+                <div class="col-12 col-md-5 col-lg-3 mt-3 filters">
+                    <div class="card rounded-0">
+                        <div class="card-header h4">Filtra per:</div>
                         <div
-                            class="card-body d-flex justify-content-sm-between justify-content-center flex-wrap"
+                            class="card-body d-flex justify-content-sm-between justify-content-lg-center justify-content-center flex-wrap"
                         >
                             <!-- Rooms-->
                             <div class="cs_btn my-2 mx-2">
-                                <div class="btn-title text-center">Camere</div>
+                                <div class="btn-title text-center h5">Camere</div>
                                 <div
                                     class="d-flex align-items-center justify-content-center p-0 cs_btn_body"
                                 >
                                     <div class="minus">
                                         <i
                                             class="fa-solid fa-minus p-2"
-                                            @click="rooms--"
+                                            @click="getGeoPosition();rooms--"
+                                        
                                         ></i>
                                     </div>
                                     <input
-                                        type="text"
+                                        type="number"
+                                    
                                         name="rooms"
                                         id="rooms"
                                         class="w-75 input-group-text"
@@ -32,7 +34,7 @@
                                     <div class="plus">
                                         <i
                                             class="fa-solid fa-plus p-2"
-                                            @click="rooms++"
+                                            @click="getGeoPosition(); rooms++"
                                         ></i>
                                     </div>
                                 </div>
@@ -40,18 +42,19 @@
 
                             <!-- beds-->
                             <div class="cs_btn my-2 mx-2">
-                                <div class="btn-title text-center">Letti</div>
+                                <div class="btn-title text-center h5">Letti</div>
                                 <div
                                     class="d-flex align-items-center justify-content-center p-0 cs_btn_body"
                                 >
                                     <div class="minus">
                                         <i
                                             class="fa-solid fa-minus p-2"
-                                            @click="beds--"
+                                            @click="getGeoPosition();beds--"
                                         ></i>
                                     </div>
                                     <input
                                         type="text"
+                                        @change="getGeoPosition"
                                         name="bed_number"
                                         id="beds"
                                         class="w-75 input-group-text"
@@ -60,7 +63,7 @@
                                     <div class="plus">
                                         <i
                                             class="fa-solid fa-plus p-2"
-                                            @click="beds++"
+                                            @click="getGeoPosition();beds++"
                                         ></i>
                                     </div>
                                 </div>
@@ -68,18 +71,19 @@
 
                             <!-- Bathrooms-->
                             <div class="cs_btn my-2 mx-2">
-                                <div class="btn-title text-center">Bagni</div>
+                                <div class="btn-title text-center h5">Bagni</div>
                                 <div
                                     class="d-flex align-items-center justify-content-center p-0 cs_btn_body"
                                 >
                                     <div class="minus">
                                         <i
                                             class="fa-solid fa-minus p-2"
-                                            @click="bathrooms--"
+                                            @click="getGeoPosition();bathrooms--"
                                         ></i>
                                     </div>
                                     <input
                                         type="text"
+                                        @change="getGeoPosition"
                                         name="bed_number"
                                         id="number_bathroom"
                                         class="w-75 input-group-text"
@@ -88,7 +92,7 @@
                                     <div class="plus">
                                         <i
                                             class="fa-solid fa-plus p-2"
-                                            @click="bathrooms++"
+                                            @click="getGeoPosition();bathrooms++"
                                         ></i>
                                     </div>
                                 </div>
@@ -96,7 +100,7 @@
 
                             <!-- Square mts-->
                             <div class="cs_btn my-2 mx-2">
-                                <div class="btn-title text-center">
+                                <div class="btn-title text-center h5">
                                     Metri quadri
                                 </div>
                                 <div
@@ -105,11 +109,12 @@
                                     <div class="minus">
                                         <i
                                             class="fa-solid fa-minus p-2"
-                                            @click="sqm--"
+                                            @click="getGeoPosition();sqm--"
                                         ></i>
                                     </div>
                                     <input
                                         type="text"
+                                        @change="getGeoPosition"
                                         name="square_mt"
                                         id="square_mt"
                                         class="w-75 input-group-text"
@@ -118,75 +123,42 @@
                                     <div class="plus">
                                         <i
                                             class="fa-solid fa-plus p-2"
-                                            @click="sqm++"
+                                            @click="getGeoPosition();sqm++"
                                         ></i>
                                     </div>
                                 </div>
                             </div>
                         </div>
+                        <!-- Services -->
+                        <div class="px-2">
+                            <div class="px-3 mt-3">
+                                <h4>Servizi</h4>
+                                <div class="border"></div>
+                            </div>
+                            <div
+                                class="form-check form-switch m-3"
+                                v-for="service in services"
+                                :key="service.id"
+                            >
+                                <input
+                                    class="form-check-input"
+                                    type="checkbox"
+                                    id="flexSwitchCheckChecked"
+                                    :value="service.id"
+                                    @change="getGeoPosition"
+                                />
+                                <i  :class="`${service.icon} fa-lg mx-2`"></i>
+
+                                <label
+                                    class="form-check-label h5"
+                                    for="flexSwitchCheckChecked"
+                                    >{{ service.label }}</label
+                                >
+                            </div>
+                        </div>
                     </div>
 
-                    <!-- Services -->
-
-                    <!-- <span
-                        v-for="service in services"
-                        :key="service.id"
-                        class="col-4 col-sm-3 col-md-2 mx-md-2 col-lg-1 px-1 d-flex justify-content-center form-check align-items-center"
-                    >
-                        <input
-                            type="checkbox"
-                            class="form-check-input"
-                            :id="`btn-check-${service.id}`"
-                            name="service"
-                            :value="service.id"
-                            autocomplete="off"
-                        />
-                        <label
-                            class="text-center"
-                            :for="`btn-check-${service.id}`"
-                        >
-                            <p class="m-0 d-flex align-items-center">
-                                <i :class="`${service.icon} me-1`"></i> 
-                                <span>{{ service.label }}</span>
-                            </p>
-                        </label>
-                    </span> -->
-
-                    <!-- <div
-                        class="form-check border-bottom my-4 custom-checkbox"
-                        v-for="service in services"
-                        :key="service.id"
-                    >
-                        <input
-                            class="form-check-input"
-                            type="checkbox"
-                            value=""
-                            id="flexCheckDefault"
-                        />
-                        <label class="form-check-label" for="flexCheckDefault">
-                            <span class="d-flex justify-content-start">{{
-                                service.label
-                            }}</span>
-                        </label>
-                    </div> -->
-
-                    <div
-                        class="form-check form-switch w-50"
-                        v-for="service in services"
-                        :key="service.id"
-                    >
-                        <input
-                            class="form-check-input"
-                            type="checkbox"
-                            id="flexSwitchCheckChecked"
-                            checked
-                        />
-                        <label
-                            class="form-check-label"
-                            for="flexSwitchCheckChecked"
-                            >{{ service.label }}</label
-                        >
-                    </div>
+                    
                 </div>
             </div>
             <div class="row mb-5 pb-5">
@@ -234,9 +206,9 @@ export default {
             responseAPI: "",
             isLoading: false,
             rooms: 0,
-            bathrooms: 1,
-            beds: 1,
-            sqm: 30,
+            bathrooms: 0,
+            beds: 0,
+            sqm: 0,
             services: [],
             message: "",
             selectedServices: [],
@@ -250,7 +222,7 @@ export default {
             axios
                 .get("http://localhost:8000/api/flats")
                 .then((res) => {
-                    this.allFlats = res.data;
+                    this.flats = res.data;
                 })
                 .catch((err) => {
                     this.error = "Errore durante il fetch dei flats";
@@ -297,6 +269,7 @@ export default {
         },
 
         getGeoPosition() {
+            this.fetchFlats
             let query = this.query;
             let radius = this.radius * 1000;
             if (query) {
@@ -324,7 +297,7 @@ export default {
                             JSON.stringify(geometryList)
                         );
                         console.log("Tutti flats:", this.allFlats);
-                        this.allFlats.forEach((flat) => {
+                        this.flats.forEach((flat) => {
                             let flatPOI = {
                                 flat: {
                                     name: flat.title,
@@ -357,17 +330,19 @@ export default {
                                 )}&poiList=${JSON.stringify(flatList)}`
                             )
                             .then((response) => {
-                                console.log("X", response.data.results);
                                 let nodeServices = document.querySelectorAll(
-                                    'input[type="checkbox"]:checked'
-                                );
+                                    'input[type="checkbox"]'
+                                    );
+                                    console.log("nodeservices", nodeServices);
 
                                 let selectedServices = [];
-
+                                
                                 nodeServices.forEach((nodeService) => {
+                                    if(nodeService.checked)
                                     selectedServices.push(
                                         parseInt(nodeService.value)
-                                    );
+                                        );
+                                        console.log('valore del checkbox',parseInt(nodeService.value));
                                 });
 
                                 console.log(
@@ -389,7 +364,7 @@ export default {
 
                                 console.log("flatIds", flatIds);
 
-                                const filterdFlats = this.allFlats.filter(
+                                const filterdFlats = this.flats.filter(
                                     (flat) => {
                                         console.log(flat);
 
@@ -527,7 +502,7 @@ export default {
         }
         //this.fetchFlats();*/
         this.fetchServices();
-        this.fetchFlats();
+       // this.fetchFlats();
         console.log("this flats searchpage", this.flats);
 
         let data = this.$route.params.data;
@@ -632,6 +607,10 @@ label span {
 
     .filters .form-check-input {
         width: 2rem;
+    }
+
+    .icon {
+        width: 80px;
     }
 }
 </style>

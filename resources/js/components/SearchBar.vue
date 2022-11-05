@@ -150,9 +150,7 @@ export default {
         },
 
         getGeoPosition() {
-            this.$root.$emit("eventing", this.radius);
 
-            console.log("geo");
             let query = this.query;
             let radius = this.radius * 1000;
             if (query) {
