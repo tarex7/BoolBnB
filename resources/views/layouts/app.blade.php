@@ -82,8 +82,7 @@
         <nav class="navbar navbar-expand-md navbar-light bg-white shadow-sm d-flex justify-content-between">
 
             <a href="{{ url('/') }}">
-                <img class="img-fluid  p-1" src={{ asset('images/boolbnb_logo.png') }} alt="logo Air BnB"
-                    style="height:60px; width: 250px;">
+                <img class="img-fluid col-6 col-sm-8 col-md-10 col-lg-12" src={{ asset('images/boolbnb_logo.png') }} alt="logo Air BnB">
 
             </a>
             {{-- <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
@@ -91,7 +90,7 @@
                 <span class="navbar-toggler-icon"></span>
             </button> --}}
 
-            <div class="" id="navbarSupportedContent">
+            <div class="me-3" id="navbarSupportedContent">
                 <!-- Left Side Of Navbar -->
                 <ul></ul>
 

@@ -1,32 +1,51 @@
 @extends('layouts.app')
 
+<style>
+    @media only screen and (max-width: 1500px) {
+        .button {
+            margin-right: 32px;
+            justify-content: flex-start
+        }
 
+        .btn {
+            height:40px ;
+            width: 86px;
+            margin: 5px;
+        }
+        .fix-heigt{line-height:1.5; }
+        .font-sz{
+            font-size: 12px;
+            line-height:1.1;
+        }
+    }
+</style>
 @section('content')
     <div class="container">
 
-
         <div class="row">
             <div class="col-12">
-                <div class="d-flex justify-content-end my-3">
+                <div class="d-flex button my-3">
                     @if ($flat->user_id === Auth::id())
                         <a href="{{ route('admin.flats.edit', $flat->id) }}" class="btn  btn-warning "><strong
-                                class="h5">Modifica </strong></a>
-                        <form action="{{ route('admin.flats.destroy', $flat->id) }}" method="POST" class="delete-form">
+                                class=" fix-heigt">Modifica </strong></a>
+                        <form action="{{ route('admin.flats.destroy', $flat->id) }}" method="POST" class="delete-form m-0">
                             @csrf
                             @method('DELETE')
-                            <button class="btn btn-danger text-light  mx-3"> <strong class="h5">Elimina
-                                </strong></button>
+                            <button class="btn btn-danger text-light"> 
+                                <strong>Elimina</strong>
+                            </button>
                         </form>
                     @endif
                     <a href="{{ route('admin.flats.index') }}" class="btn btn-primary text-white"><strong
-                            class="h5">Torna alla lista </strong></a>
+                            class="font-sz">Torna indietro </strong></a>
                 </div>
             </div>
-            <div class="col-lg-6 col-sm-12">
+            <div class="col-lg-6 col-sm-10 col-md-11 col-11">
                 <div class="card p-4">
                     <h2>{{ $flat->title }}</h2>
 
-                    <img class="float-left mr-2 img-fluid" width="500" src=" {{ $flat->image ? asset('storage/' . $flat->image) : asset('images/placeholder.png') }}"
+                    <img class="float-left mr-2 img-fluid" width="500"
+                        src=" {{ $flat->image ? asset('storage/' . $flat->image) : asset('images/placeholder.png') }}"
                         alt="{{ $flat->title }}">
                     <p class="h4 my-4 py-2 w-75">{{ $flat->address }}</p>
                     <div class="info d-flex mt-4 border align-items-center my-2 p-3">
@@ -71,7 +90,7 @@
             </div>
 
 
-            <div class="col-lg-6 col-sm-12">
+            <div class="col-lg-6 col-sm-10 col-md-11 col-11">
 
                 <div class="card p-3">
                     <h4 class="mb-0">Statistiche</h4>
@@ -79,9 +98,9 @@
 
                     <div class="mt-5">
                         <h4 class="mb-3">Posizione</h4>
-                         @include('includes.map')
-                         
-                      
+                        @include('includes.map')
+
+
                     </div>
 
                 </div>
