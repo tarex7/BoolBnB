@@ -12,6 +12,11 @@ class SponsorshipController extends Controller
 
     {
         $sponsorships = Sponsorship::all();
-        return view('admin.flats.sponsorship',compact('sponsorships'));
+        return view('admin.flats.sponsorships.index', compact('sponsorships'));
+    }
+
+
+    public function show(Sponsorship $sponsorship){
+        return view('admin.flats.sponsorships.show',$sponsorship);
     }
 }

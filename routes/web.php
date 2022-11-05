@@ -24,6 +24,7 @@ Route::middleware('auth')
     ->group(function () {
 
         Route::get('/sponsorships', 'SponsorshipController@index')->name('sponsorships');
+        Route::get('/sponsorships/{sponsorship}', 'SponsorshipController@show')->name('sponsorship.show');
         Route::patch('/flats/{flat}/toggle', 'FlatController@toggle')->name('flats.toggle');
         Route::resource('flats', 'FlatController');
     });

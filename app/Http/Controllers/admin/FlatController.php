@@ -157,7 +157,7 @@ class FlatController extends Controller
     {
         if($flat->user_id != Auth::id()) return abort('404');
 
-        return view('admin.flats.show', compact('flat'));
+        //return view('admin.flats.show', compact('flat'));
         $services = Service::select('id', 'label', 'icon')->get();
 
         return view('admin.flats.show', $flat, compact('flat', 'services'));
