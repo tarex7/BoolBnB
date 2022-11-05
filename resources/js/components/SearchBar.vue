@@ -328,7 +328,7 @@ export default {
                                     //this.flats = filterdFlats;
                                     this.$router.push({
                                         name: "search",
-                                        params: { data },
+                                        params: { data, query },
                                     });
 
                                     if (filterdFlats.length == 0)
