@@ -1,6 +1,6 @@
 <template>
     <div>
-        <AppJumbotron/>
+        <AppJumbotron />
 
         <div class="container">
             <nav class="navbar-light bg-light">
@@ -43,12 +43,12 @@
                                     </li>
                                 </ul>
 
-                                    <button
-                                        class="btn btn-outline-danger my-sm-0 ms-2 py-2"
-                                        type="submit"
-                                    >
-                                        Cerca
-                                    </button>
+                                <button
+                                    class="btn btn-outline-danger my-sm-0 ms-2 py-2"
+                                    type="submit"
+                                >
+                                    Cerca
+                                </button>
                             </div>
                         </form>
                     </div>
@@ -65,6 +65,7 @@
                                 step="10"
                                 min="0"
                                 max="50"
+                                @change="getGeoPosition"
                             />
                         </div>
                     </div>
@@ -226,16 +227,13 @@ export default {
             selectedServices: [],
         };
     },
-    props: {
-        
-    },
+    props: {},
     methods: {
         fetchFlats() {
             this.isLoading = true;
             axios
                 .get("http://localhost:8000/api/flats")
                 .then((res) => {
-                    this.flats = res.data;
                     this.allFlats = res.data;
                 })
                 .catch((err) => {
@@ -283,9 +281,6 @@ export default {
         },
 
         getGeoPosition() {
-
-            // Get Geodata from Axios based on input and radius(2000 standard)
-            console.log("geo");
             let query = this.query;
             let radius = this.radius * 1000;
             if (query) {
@@ -346,6 +341,7 @@ export default {
                                 )}&poiList=${JSON.stringify(flatList)}`
                             )
                             .then((response) => {
+                                console.log("X", response.data.results);
                                 let nodeServices = document.querySelectorAll(
                                     'input[type="checkbox"]:checked'
                                 );
@@ -356,16 +352,13 @@ export default {
                                     selectedServices.push(
                                         parseInt(nodeService.value)
                                     );
-                                    console.log(
-                                        "tipo",
-                                        typeof parseInt(nodeService.value)
-                                    );
                                 });
 
                                 console.log(
                                     "selectedService",
                                     selectedServices
                                 );
+
                                 this.selectedServices = selectedServices;
                                 console.log(nodeServices);
 
@@ -510,7 +503,7 @@ export default {
     },
 
     mounted() {
-       /* if (this.$route.params.query) {
+        /* if (this.$route.params.query) {
             this.query = this.$route.params.query;
         }
         if (this.$route.params.radius) {
@@ -518,14 +511,19 @@ export default {
         }
         //this.fetchFlats();*/
         this.fetchServices();
-        console.log('this flats searchpage', this.flats);
+        this.fetchFlats();
+        console.log("this flats searchpage", this.flats);
 
         let data = this.$route.params.data;
+        let query = this.$route.params.query
+        this.query = query
+        console.log(query);
         console.log("data is", data);
-        this.flats = data
+        this.flats = data;
+       
 
     },
-   
+
     components: { FlatCard, AppJumbotron },
 };
 </script>
