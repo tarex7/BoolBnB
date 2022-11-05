@@ -2,17 +2,29 @@
 
 namespace App\Http\Controllers\admin;
 
-use App\Http\Controllers\Controller;
+use Braintree\Gateway;
 use App\Models\Sponsorship;
 use Illuminate\Http\Request;
+use App\Http\Controllers\Controller;
 
 class SponsorshipController extends Controller
 {
-    public function index()
+    public function index(Request $request,Gateway $gateway)
 
     {
         $sponsorships = Sponsorship::all();
-        return view('admin.flats.sponsorships.index', compact('sponsorships'));
+
+        $token_auto = $gateway->clientToken()->generate();
+        $sponsorships = Sponsorship::all();
+
+        $data = [
+            'have_one' => true,
+            'sponsorships' => $sponsorships,
+            'tokenAutorization' => $token_auto,
+            'flat' => $request->flat,
+        ];
+
+        return view('admin.flats.sponsorships.index', compact('sponsorships','data'));
     }
 
 
@@ -20,3 +32,4 @@ class SponsorshipController extends Controller
         return view('admin.flats.sponsorships.show',$sponsorship);
     }
 }
+
