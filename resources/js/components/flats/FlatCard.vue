@@ -15,6 +15,7 @@
                 <!-- <p class="card-text fw-bold">{{ flat.address }}</p> -->
                 <p class="card-text fw-bold">
                     {{ flat.price_per_day }} € a notte
+                    <p v-for="service in flat.services">{{ service.label}}</p>
                 </p>
             </div>
         </div>

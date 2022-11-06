@@ -76,7 +76,7 @@ export default {
         return {
             query: "",
             autocomplete: [],
-            radius: 20,
+            radius: 50,
             flats: [],
             allFlats: [],
             lat: "",

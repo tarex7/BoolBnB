@@ -265,7 +265,7 @@ export default {
         return {
             query: "",
             autocomplete: [],
-            radius: 20,
+            radius: 50,
             flats: [],
             allFlats: [],
             lat: "",
@@ -412,13 +412,76 @@ export default {
                                     flatIds.push(flat.info.id);
                                 });
 
+                                let nodeServices = document.querySelectorAll(
+                                    'input[type="checkbox"]'
+                                );
+
+                                //Creo lista dei servizi selezionati
+                                let selectedServices = [];
+
+                                nodeServices.forEach((nodeService) => {
+                                    if (nodeService.checked)
+                                        selectedServices.push(
+                                            parseInt(nodeService.value)
+                                        );
+                                });
+
+                                this.selectedServices = selectedServices;
+
+                                console.log(
+                                    "this.selectedServices",
+                                    this.selectedServices
+                                );
+
+                                console.log("servizi", selectedServices);
+
                                 //Creo nuova lista con i flat trovati
                                 const filteredByRadius = this.allFlats.filter(
                                     (flat) => {
-                                        return flatIds.includes(flat.id) ;
+                                        return (
+                                            flatIds.includes(flat.id) &&
+                                            flat.room_number >= this.rooms &&
+                                            flat.bathroom_number >=
+                                                this.bathrooms &&
+                                            flat.bed_number >= this.beds &&
+                                            flat.square_mt >= this.sqm
+                                        );
                                     }
                                 );
-                                this.flats = filteredByRadius;
+
+                                const filteredByServices = [];
+
+                                if (this.selectedServices.length > 0) {
+                                    filteredByRadius.forEach((flat) => {
+                                        //creo lista id dei servizi del flat
+                                        const servicesIds = [];
+
+                                        flat.services.forEach((service) => {
+                                            servicesIds.push(service.id);
+                                        });
+
+                                        console.log(
+                                            "Id dei servizi",
+                                            flat.address,
+                                            servicesIds
+                                        );
+
+                                        if (
+                                            this.selectedServices.every(
+                                                (element) => {
+                                                    return servicesIds.includes(
+                                                        element
+                                                    );
+                                                }
+                                            )
+                                        ) {
+                                            filteredByServices.push(flat);
+                                        }
+                                    });
+                                    this.flats = filteredByServices;
+                                } else {
+                                    this.flats = filteredByRadius;
+                                }
                             });
                     });
             }
