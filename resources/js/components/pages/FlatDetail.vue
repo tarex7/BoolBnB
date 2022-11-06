@@ -5,7 +5,7 @@
             <div v-else-if="!isLoading && flat" :flat="flat">
                 <div class="container">
                     <div class="row">
-                        <div class="col-12">
+                        <div class="col-12 mt-5">
                             <h3 class="mt-3 mb-2">{{ flat.title }}</h3>
                         </div>
 
@@ -350,6 +350,10 @@ export default {
         border: 1px solid lightgray;
         box-shadow: 0 0 5px lightgray;
        
+    }
+
+    form {
+        height: 575px;
     }
 }
 </style>

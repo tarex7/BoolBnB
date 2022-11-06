@@ -27,3 +27,16 @@
 .card {
     border-radius: 0;
 }
+
+.bg-primary-cs {
+    background-color: #dc143c;
+}
+
+.form-control:focus {
+    border-color: #dc143c;
+    box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075), 0 0 8px rgba(255, 0, 0, 0.9);
+  }
+
+  .input-group-text{
+    background-color: #fff;
+  }

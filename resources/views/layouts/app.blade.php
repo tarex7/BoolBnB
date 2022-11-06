@@ -23,6 +23,11 @@
     </script>
     <script src="https://api.tomtom.com/maps-sdk-for-web/cdn/plugins/SearchBox/3.1.3-public-preview.0/SearchBox-web.js">
     </script>
+    <!-- includes the Braintree JS client SDK -->
+<script src="https://js.braintreegateway.com/web/dropin/1.33.4/js/dropin.min.js"></script>
+
+<!-- includes jQuery -->
+<script src="http://code.jquery.com/jquery-3.2.1.min.js" crossorigin="anonymous"></script>
     <script>
         (function() {
             window.SS = window.SS || {};

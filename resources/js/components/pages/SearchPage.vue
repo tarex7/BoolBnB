@@ -4,9 +4,9 @@
         <AppJumbotron />
         <div class="container">
             <div class="row">
-                <div class="col-12 mt-3">
+                <div class="col-12 my-5 d-flex justify-content-center">
                     <nav
-                        class="navbar-light bg-transparent  my-3 px-4"
+                        class="navbar-light bg-transparent w-50 my-3 px-4"
                     >
                         <form @submit.prevent="getGeoPosition">
                             <div
@@ -43,7 +43,7 @@
                                 </ul>
 
                                 <button class="btn btn-dark my-sm-0 ms-2 py-2" type="submit" id="search-btn">
-                                    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+                                    <i class="fa-solid text-white fa-magnifying-glass fa-lg"></i>
                                   </button>
                             </div>
                         </form>
@@ -53,9 +53,9 @@
               <div class="row">
                 <div class="col-12 col-md-12 col-lg-4 filters">
                     <div class="card rounded-0">
-                        <div class="card-header h4">Filtra per:</div>
+                        <div class="card-header h4 bg-primary-cs text-white">Filtra per:</div>
                         <div
-                            class="card-body d-flex justify-content-sm-between justify-content-lg-center justify-content-center row py-lg-5"
+                            class="card-body d-flex justify-content-sm-between justify-content-lg-center justify-content-center my-5 row py-lg-4"
                         >
                             <!-- rooms-->
                             <div class="cs_btn my-2 col-1 w-50">
@@ -65,7 +65,7 @@
                                 >
                                     <div class="minus">
                                         <i
-                                            class="fa-solid fa-minus p-2"
+                                            class="fa-solid text-white fa-minus p-2 text-white"
                                             @click="getGeoPosition();rooms--"
                                         ></i>
                                     </div>
@@ -78,7 +78,7 @@
                                     />
                                     <div class="plus">
                                         <i
-                                            class="fa-solid fa-plus p-2"
+                                            class="fa-solid text-white fa-plus p-2"
                                             @click="getGeoPosition();rooms++"
                                         ></i>
                                     </div>
@@ -93,7 +93,7 @@
                                 >
                                     <div class="minus">
                                         <i
-                                            class="fa-solid fa-minus p-2"
+                                            class="fa-solid text-white fa-minus p-2"
                                             @click="getGeoPosition();beds--"
                                         ></i>
                                     </div>
@@ -106,7 +106,7 @@
                                     />
                                     <div class="plus">
                                         <i
-                                            class="fa-solid fa-plus p-2"
+                                            class="fa-solid text-white fa-plus p-2"
                                             @click="getGeoPosition();beds++"
                                         ></i>
                                     </div>
@@ -121,7 +121,7 @@
                                 >
                                     <div class="minus">
                                         <i
-                                            class="fa-solid fa-minus p-2"
+                                            class="fa-solid text-white fa-minus p-2"
                                             @click="getGeoPosition();bathrooms--"
                                         ></i>
                                     </div>
@@ -134,7 +134,7 @@
                                     />
                                     <div class="plus">
                                         <i
-                                            class="fa-solid fa-plus p-2"
+                                            class="fa-solid text-white fa-plus p-2"
                                             @click="getGeoPosition();bathrooms++"
                                         ></i>
                                     </div>
@@ -151,7 +151,7 @@
                                 >
                                     <div class="minus">
                                         <i
-                                            class="fa-solid fa-minus p-2"
+                                            class="fa-solid text-white fa-minus p-2"
                                             @click="getGeoPosition();sqm--"
                                         ></i>
                                     </div>
@@ -164,7 +164,7 @@
                                     />
                                     <div class="plus">
                                         <i
-                                            class="fa-solid fa-plus p-2"
+                                            class="fa-solid text-white fa-plus p-2"
                                             @click="getGeoPosition();sqm++"
                                         ></i>
                                     </div>
@@ -177,7 +177,7 @@
                 <!-- Services -->
                 <div class="col-12 col-lg-8">
                     <div class="card rounded-0">
-                        <h4 class="card-header">Servizi</h4>
+                        <h4 class="card-header bg-primary-cs text-white">Servizi</h4>
                         <div class="px-2 row row-cols-3 ">
                             <div
                                 class="form-check form-switch m-3 me-5 col"
@@ -558,9 +558,10 @@ export default {
 
 .plus,
 .minus {
-    background-color: lightgray;
+    background-color:#dc143c;
     padding: 3.3px;
     border: none;
+    
 }
 
 label span {
@@ -576,9 +577,14 @@ label span {
     width: 50px;
     background-color: crimson;
     border: 0;
+    transition: .3s;
+}
+
+#search-btn:hover {
+    transform: scale(1.10);
+}
   
   
-  }
 
 .filters .form-control {
     max-width: 60px;
@@ -587,5 +593,17 @@ label span {
     .icon {
         width: 80px;
     }
+}
+
+#query_address{
+    background-color: #fff;
+    height: 55px;
+    border-radius: 0 20px 0 20px;
+    border: 1px solid #dc143c;
+}
+
+#query_address:focus {
+    outline-color: #dc143c;
+
 }
 </style>
