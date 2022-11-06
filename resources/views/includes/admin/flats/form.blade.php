@@ -10,11 +10,11 @@
 
 @csrf
 
-<div class="container-fluid d-flex justify-content-center">
+<div class="container d-flex justify-content-center">
     <div class="card rounded-lg p-4 col-12 shadow">
         <div class="row">
 
-            <div class="col-12">
+            <div class="col-12 col-lg-6">
                 {{-- IMAGE --}}
 
 
@@ -43,7 +43,7 @@
 
             </div>
 
-            <div class="col-12">
+            <div class="col-12 col-lg-6">
 
                 {{-- Titolo --}}
                 <div class="form-group mb-3">
