@@ -42,13 +42,9 @@
                                     </li>
                                 </ul>
 
-                                <button
-                                    class="btn btn-dark my-sm-0 ms-2 py-2"
-                                    type="submit"
-                                    id="search-btn"
-                                >
-                                    Cerca
-                                </button>
+                                <button class="btn btn-dark my-sm-0 ms-2 py-2" type="submit" id="search-btn">
+                                    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+                                  </button>
                             </div>
                         </form>
                     </nav>
@@ -574,8 +570,19 @@ label span {
     justify-content: center;
 }
 
+#search-btn {
+    border-radius: 50%;
+    height: 50px;
+    width: 50px;
+    background-color: crimson;
+    border: 0;
+  
+  
+  }
+
 .filters .form-control {
     max-width: 60px;
+    background-color: #fff;
 
     .icon {
         width: 80px;

@@ -7,7 +7,7 @@
 
         <div class="row">
             <div class="col-12">
-                <div class="d-flex justify-content-between my-3">
+                <div class="d-flex justify-content-between my-5">
                     @if ($flat->user_id === Auth::id())
                      <a href="{{ route('admin.sponsorships') }}" class="btn btn-success mr-5 "><strong class="h5 mx-5"><i class="fa-solid fa-crown mx-4 fa-lg"></i>Metti in vista il tuo appartamento!<i class="fa-solid fa-crown mx-4 fa-lg"></i></strong></a>
                         <div class="d-flex justify-content-end">
@@ -16,7 +16,7 @@
                         <form action="{{ route('admin.flats.destroy', $flat->id) }}" method="POST" class="delete-form">
                             @csrf
                             @method('DELETE')
-                            <button class="btn btn-danger text-light  mx-3"> <strong class="h5">Elimina
+                            <button class="btn btn-primary-cs text-light  mx-3"> <strong class="h6">Elimina
                                 </strong></button>
                         </form>
                         <a href="{{ route('admin.flats.index') }}" class="btn btn-primary text-white"><strong

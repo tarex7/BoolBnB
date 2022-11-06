@@ -54,12 +54,13 @@ export default {
 .flat-card {
     padding: 10px;
     transition: 0.5s;
-    border-radius: 10px;
+    border-radius: 0 20px 0 20px;
     object-fit: contain;
     display: flex;
     flex-direction: column;
     align-items: start;
-    box-shadow: rgba($color: #000000, $alpha: 0.5) 0 0 3px;
+    box-shadow: rgba($color: #000000, $alpha: 0.3) 0 0 1px;
+    
     
 
 

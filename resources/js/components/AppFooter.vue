@@ -54,8 +54,8 @@ export default {
 <!-- STYLE -->
 <style lang="scss" scoped>
 footer {
-  background-color: #001632;
-  color: #cecece;
+  background-color: #838383;
+  color: #ffffff;
   padding: 40px;
   ul {
     list-style-type: none;

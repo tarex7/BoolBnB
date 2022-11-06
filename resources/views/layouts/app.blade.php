@@ -126,6 +126,7 @@
 
                             <div class="d-flex me-3 justify-content-center w-100" aria-labelledby="navbarDropdown">
                                 <a class="dropdown-item text-dark mx-3 text-white" href="{{ route('admin.flats.index') }}">
+                                    <i class="fa-solid fa-house-lock"></i>
                                     I miei appartamenti
                                 </a>
                                 <a class="dropdown-item text-white" href="{{ route('logout') }}"

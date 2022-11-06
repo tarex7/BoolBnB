@@ -310,15 +310,11 @@ export default {
 #query_address {
   height: 50px;
   border-radius: 0;
+  background-color: #fff;
+  border-radius: 0 10px 0 10px;
 }
 
-#search-btn {
-  height: 50px;
-  width: 120px;
-  background-color: crimson;
-  border-radius: 0;
-  border: 0;
-}
+
 
 label span {
   min-width: 60px;
@@ -331,6 +327,10 @@ label span {
   border-radius: 50%;
   height: 50px;
   width: 50px;
+  background-color: crimson;
+  border: 0;
+
+
 }
 
 .container {
