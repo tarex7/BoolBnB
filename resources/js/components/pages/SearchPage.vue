@@ -1,194 +1,178 @@
 <template>
     <div>
-        <AppJumbotron class="mb-5" />
+        <AppJumbotron />
 
         <div class="container">
-            <div class="row">
-                <div class="col-12 col-lg-2 mt-3 filters">
-                    <div class="card">
-                        <div class="card-header">Filtra per:</div>
-                        <div
-                            class="card-body d-flex justify-content-sm-between justify-content-center flex-wrap"
+            <nav class="navbar-light bg-light">
+                <div class="row">
+                    <div class="col-12 col-md-6 col-lg-3 mt-3">
+                        <form
+                            @submit.prevent="getGeoPosition"
+                            class="my-2 my-lg-0 d-flex justify-content-between"
                         >
-                            <!-- Rooms-->
-                            <div class="cs_btn my-2 mx-2">
-                                <div class="btn-title text-center">Camere</div>
-                                <div
-                                    class="d-flex align-items-center justify-content-center p-0 cs_btn_body"
+                            <div
+                                class="d-flex justify-content-between position-relative input-search my-4"
+                            >
+                                <input
+                                    class="form-control mr-sm-2 input"
+                                    type="search"
+                                    placeholder="Dove vuoi andare?"
+                                    aria-label="Search"
+                                    autocomplete="off"
+                                    id="query_address"
+                                    v-model="query"
+                                    @keyup="getAutocomplete"
+                                    @keyup.enter="getGeoPosition"
+                                />
+
+                                <ul
+                                    class="dropdown_menu list-unstyled p-1"
+                                    v-if="query.length > 0"
                                 >
-                                    <div class="minus">
-                                        <i
-                                            class="fa-solid fa-minus p-2"
-                                            @click="rooms--"
-                                        ></i>
-                                    </div>
-                                    <input
-                                        type="text"
-                                        name="rooms"
-                                        id="rooms"
-                                        class="w-75 input-group-text"
-                                        v-model="rooms"
-                                    />
-                                    <div class="plus">
-                                        <i
-                                            class="fa-solid fa-plus p-2"
-                                            @click="rooms++"
-                                        ></i>
-                                    </div>
+                                    <li
+                                        v-for="(address, index) in autocomplete"
+                                        :key="index"
+                                    >
+                                        <input
+                                            type="text"
+                                            class="w-100"
+                                            readonly
+                                            :value="address"
+                                            @click="setQuery(address)"
+                                        />
+                                    </li>
+                                </ul>
+
+                                <button
+                                    class="btn btn-outline-danger my-sm-0 ms-2 py-2"
+                                    type="submit"
+                                >
+                                    Cerca
+                                </button>
+                            </div>
+                        </form>
+                    </div>
+                    <div class="col-12 col-md-6 col-lg-3 mt-3">
+                        <div class="input-group mx-2">
+                            <label for="radius" class="form-label"
+                                >nel raggio di {{ radius }} km</label
+                            >
+                            <input
+                                type="range"
+                                class="form-range"
+                                id="radius"
+                                v-model="radius"
+                                step="10"
+                                min="0"
+                                max="50"
+                            />
+                        </div>
+                    </div>
+                    <div class="col-6 col-md-6 filters col-sm-6 col-lg-3 mt-4">
+                        <div class="d-flex">
+                            <div
+                                class="input-group d-flex justify-content-center"
+                            >
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text">Camere</span>
                                 </div>
+                                <input
+                                    type="number"
+                                    class="form-control"
+                                    name="room_number"
+                                    id="rooms"
+                                    v-model="rooms"
+                                    @change="getGeoPosition"
+                                />
                             </div>
 
-                            <!-- beds-->
-                            <div class="cs_btn my-2 mx-2">
-                                <div class="btn-title text-center">Letti</div>
-                                <div
-                                    class="d-flex align-items-center justify-content-center p-0 cs_btn_body"
-                                >
-                                    <div class="minus">
-                                        <i
-                                            class="fa-solid fa-minus p-2"
-                                            @click="beds--"
-                                        ></i>
-                                    </div>
-                                    <input
-                                        type="text"
-                                        name="bed_number"
-                                        id="beds"
-                                        class="w-75 input-group-text"
-                                        v-model="beds"
-                                    />
-                                    <div class="plus">
-                                        <i
-                                            class="fa-solid fa-plus p-2"
-                                            @click="beds++"
-                                        ></i>
-                                    </div>
+                            <div
+                                class="input-group d-flex justify-content-center"
+                            >
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text ms-1"
+                                        >Letti</span
+                                    >
                                 </div>
-                            </div>
-
-                            <!-- Bathrooms-->
-                            <div class="cs_btn my-2 mx-2">
-                                <div class="btn-title text-center">Bagni</div>
-                                <div
-                                    class="d-flex align-items-center justify-content-center p-0 cs_btn_body"
-                                >
-                                    <div class="minus">
-                                        <i
-                                            class="fa-solid fa-minus p-2"
-                                            @click="bathrooms--"
-                                        ></i>
-                                    </div>
-                                    <input
-                                        type="text"
-                                        name="bed_number"
-                                        id="number_bathroom"
-                                        class="w-75 input-group-text"
-                                        v-model="bathrooms"
-                                    />
-                                    <div class="plus">
-                                        <i
-                                            class="fa-solid fa-plus p-2"
-                                            @click="bathrooms++"
-                                        ></i>
-                                    </div>
-                                </div>
-                            </div>
-
-                            <!-- Square mts-->
-                            <div class="cs_btn my-2 mx-2">
-                                <div class="btn-title text-center">
-                                    Metri quadri
-                                </div>
-                                <div
-                                    class="d-flex align-items-center justify-content-center p-0 cs_btn_body"
-                                >
-                                    <div class="minus">
-                                        <i
-                                            class="fa-solid fa-minus p-2"
-                                            @click="sqm--"
-                                        ></i>
-                                    </div>
-                                    <input
-                                        type="text"
-                                        name="square_mt"
-                                        id="square_mt"
-                                        class="w-75 input-group-text"
-                                        v-model="sqm"
-                                    />
-                                    <div class="plus">
-                                        <i
-                                            class="fa-solid fa-plus p-2"
-                                            @click="sqm++"
-                                        ></i>
-                                    </div>
-                                </div>
+                                <input
+                                    type="number"
+                                    class="form-control"
+                                    name="beds_number"
+                                    id="beds"
+                                    v-model="beds"
+                                    @change="getGeoPosition"
+                                />
                             </div>
                         </div>
                     </div>
 
-                    <!-- Services -->
-
-                    <!-- <span
-                        v-for="service in services"
-                        :key="service.id"
-                        class="col-4 col-sm-3 col-md-2 mx-md-2 col-lg-1 px-1 d-flex justify-content-center form-check align-items-center"
-                    >
-                        <input
-                            type="checkbox"
-                            class="form-check-input"
-                            :id="`btn-check-${service.id}`"
-                            name="service"
-                            :value="service.id"
-                            autocomplete="off"
-                        />
-                        <label
-                            class="text-center"
-                            :for="`btn-check-${service.id}`"
-                        >
-                            <p class="m-0 d-flex align-items-center">
-                                <i :class="`${service.icon} me-1`"></i> 
-                                <span>{{ service.label }}</span>
-                            </p>
-                        </label>
-                    </span> -->
-
-                    <!-- <div
-                        class="form-check border-bottom my-4 custom-checkbox"
-                        v-for="service in services"
-                        :key="service.id"
-                    >
-                        <input
-                            class="form-check-input"
-                            type="checkbox"
-                            value=""
-                            id="flexCheckDefault"
-                        />
-                        <label class="form-check-label" for="flexCheckDefault">
-                            <span class="d-flex justify-content-start">{{
-                                service.label
-                            }}</span>
-                        </label>
-                    </div> -->
-
                     <div
-                        class="form-check form-switch w-50"
-                        v-for="service in services"
-                        :key="service.id"
+                        class="col-6 col-md-6 filters mb-3 col-sm-6 col-lg-3 mt-4"
                     >
-                        <input
-                            class="form-check-input"
-                            type="checkbox"
-                            id="flexSwitchCheckChecked"
-                            checked
-                        />
-                        <label
-                            class="form-check-label"
-                            for="flexSwitchCheckChecked"
-                            >{{ service.label }}</label
+                        <div class="d-flex">
+                            <div
+                                class="input-group d-flex justify-content-center"
+                            >
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text">Bagni</span>
+                                </div>
+                                <input
+                                    type="number"
+                                    class="form-control"
+                                    name="bathroom_number"
+                                    id="bathrooms"
+                                    v-model="bathrooms"
+                                    @change="getGeoPosition"
+                                />
+                            </div>
+
+                            <div
+                                class="input-group d-flex justify-content-center"
+                            >
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text ms-1"
+                                        >mq<sup>2</sup></span
+                                    >
+                                </div>
+                                <input
+                                    type="number"
+                                    class="form-control"
+                                    name="square_mt"
+                                    id="sqm"
+                                    v-model="sqm"
+                                    @change="getGeoPosition"
+                                />
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="d-flex flex-wrap justify-content-between">
+                        <span
+                            v-for="service in services"
+                            :key="service.id"
+                            class="col-4 col-sm-3 col-md-2 mx-md-2 col-lg-1 px-1 d-flex justify-content-center service"
                         >
+                            <input
+                                type="checkbox"
+                                class="btn-check"
+                                :id="`btn-check-${service.id}`"
+                                name="service"
+                                :value="service.id"
+                                autocomplete="off"
+                            />
+                            <label
+                                class="btn btn-outline-success my-1 p-1 text-center"
+                                :for="`btn-check-${service.id}`"
+                            >
+                                <p class="m-0 d-flex align-items-center">
+                                    <!-- <i :class="`${service.icon} me-1`"></i> -->
+                                    <span>{{ service.label }}</span>
+                                </p>
+                            </label>
+                        </span>
                     </div>
                 </div>
-            </div>
+            </nav>
             <div class="row mb-5 pb-5">
                 <div class="col">
                     <section id="flat-list">
@@ -233,14 +217,13 @@ export default {
             resultsAPI: "",
             responseAPI: "",
             isLoading: false,
-            rooms: 0,
+            rooms: 1,
             bathrooms: 1,
             beds: 1,
             sqm: 30,
             services: [],
             message: "",
             selectedServices: [],
-            btnValue: 0,
         };
     },
     props: {},
@@ -250,6 +233,7 @@ export default {
             axios
                 .get("http://localhost:8000/api/flats")
                 .then((res) => {
+                    this.flats = res.data;
                     this.allFlats = res.data;
                 })
                 .catch((err) => {
@@ -297,6 +281,8 @@ export default {
         },
 
         getGeoPosition() {
+            // Get Geodata from Axios based on input and radius(2000 standard)
+            console.log("geo");
             let query = this.query;
             let radius = this.radius * 1000;
             if (query) {
@@ -357,7 +343,6 @@ export default {
                                 )}&poiList=${JSON.stringify(flatList)}`
                             )
                             .then((response) => {
-                                console.log("X", response.data.results);
                                 let nodeServices = document.querySelectorAll(
                                     'input[type="checkbox"]:checked'
                                 );
@@ -368,13 +353,16 @@ export default {
                                     selectedServices.push(
                                         parseInt(nodeService.value)
                                     );
+                                    console.log(
+                                        "tipo",
+                                        typeof parseInt(nodeService.value)
+                                    );
                                 });
 
                                 console.log(
                                     "selectedService",
                                     selectedServices
                                 );
-
                                 this.selectedServices = selectedServices;
                                 console.log(nodeServices);
 
@@ -527,15 +515,12 @@ export default {
         }
         //this.fetchFlats();*/
         this.fetchServices();
-        this.fetchFlats();
         console.log("this flats searchpage", this.flats);
 
         let data = this.$route.params.data;
-        let query = this.$route.params.query;
-        this.query = query;
-        console.log(query);
         console.log("data is", data);
-        this.flats = data;
+        this.flats = data.filterdFlats;
+        this.query = data.query;
     },
 
     components: { FlatCard, AppJumbotron },
@@ -567,21 +552,11 @@ export default {
     }
 }
 .input-group-text {
-    // width: 70px;
-
-    border-radius: 0;
+    width: 70px;
 }
 
 .input-group {
     margin: 10px 0;
-}
-
-.form-control {
-    border-radius: 0;
-}
-
-#rooms.form-control {
-    max-width: 20%;
 }
 
 label span {
@@ -591,47 +566,7 @@ label span {
     justify-content: center;
 }
 
-.cs_btn {
-    max-width: 150px;
-    height: 70px;
-    .cs_btn_body {
-        border: 1px solid lightgray;
-    }
-    input {
-        border-radius: 0;
-        border: 0;
-        height: 40px;
-    }
-
-    .input-group-text {
-        border: 0px transparent solid;
-        padding: 12px;
-    }
-
-    .input-group-text:focus {
-        outline: none;
-    }
-    .btn-title {
-        padding: 4px;
-    }
-    .minus,
-    .plus {
-        display: flex;
-        align-items: center;
-        background-color: lightgray;
-        padding: 5px;
-        cursor: pointer;
-        border: 3px solid transparent;
-        height: 40px;
-    }
-
-    input[type="checkbox"] {
-        transform: scale(1.5);
-        display: none;
-    }
-
-    .filters .form-check-input {
-        width: 2rem;
-    }
+.filters .form-control {
+    max-width: 60px;
 }
 </style>

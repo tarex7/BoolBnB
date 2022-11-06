@@ -218,17 +218,11 @@ export default {
                                     }
                                 );
                                 console.log(filterdFlats);
-                                let data = {
-                                    filterdFlats: filterdFlats,
-                                    query: this.query,
-                                };
-
-                                if (this.$router.currentRoute.name === "home") {
-                                    this.$router.push({
-                                        name: "search",
-                                        params: { data },
-                                    });
-                                }
+                                let data = {filterdFlats:filterdFlats,query:this.query};
+                                this.$router.push({
+                                    name: "search",
+                                    params: { data },
+                                });
                             })
                             .catch((error) => console.error(error));
                     })
