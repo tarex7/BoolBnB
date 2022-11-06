@@ -212,7 +212,7 @@
 
                 <div class="col-12">
                     <section id="flat-list">
-                        <h1>{{ this.query }}</h1>
+                       
                         <h2 class="my-3 text-center mt-5">
                             {{ this.message }}
                         </h2>

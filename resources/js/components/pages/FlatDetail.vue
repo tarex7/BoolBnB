@@ -1,5 +1,5 @@
 <template>
-    <div class="offset-2">
+    <div>
         <div id="flat-detail-page">
             <AppLoader v-if="isLoading" />
             <div v-else-if="!isLoading && flat" :flat="flat">
@@ -9,7 +9,7 @@
                             <h3 class="mt-3 mb-2">{{ flat.title }}</h3>
                         </div>
 
-                        <div class="col-5">
+                        <div class="col-12 col-lg-6">
                             <img
                                 class="rounded-4 my-3"
                                 :src="`/storage/${flat.image}`"
@@ -17,12 +17,10 @@
                             />
 
                             <div class="d-flex justify-content-between">
-                                <h3>
-                                    Appartamento in affitto a {{ flat.address }}
-                                </h3>
+                                <h4>Appartamento {{ flat.address }}</h4>
                                 <h3>{{ flat.price_per_day }}€ notte</h3>
                             </div>
-                            
+
                             <p class="d-flex">
                                 {{ flat.square_mt }}mq -
                                 {{ flat.room_number }} Camere -
@@ -35,7 +33,8 @@
                                 <hr class="my-3" />
 
                                 <h4>Servizi</h4>
-                                <div class="row row-cols-3">
+                                <div class="border mb-3"></div>
+                                <div class="row row-cols-3 mt-3 mb-5">
                                     <div
                                         class="d-flex"
                                         v-for="(
@@ -57,13 +56,13 @@
                             </div>
                         </div>
 
-                        <div class="col-6 mt-4">
+                        <div class="col-12  col-lg-6 mt-4">
                             <!-- FORM MESSAGGIO -->
                             <div
                                 id="message-form"
-                                class="col-12 col-md-8 rounded-3 p-3"
+                                class="col-12  rounded-3 p-3"
                             >
-                                <h4 class="my-2">
+                                <h4 class="my-2 my-lg-0">
                                     Invia un messaggio al proprietario
                                 </h4>
                                 <!-- Componente loader -->
@@ -183,7 +182,7 @@
                             <!-- FINE FORM MESSAGGIO -->
                         </div>
 
-                        <div class="col-9">
+                        <div class="col-12">
                             <FlatMap :flat="flat" />
                         </div>
                     </div>
@@ -345,11 +344,12 @@ export default {
         font-size: 1.3rem;
     }
     span {
-        font-size: 1.2rem;
+        font-size: 0.8rem;
     }
     #message-form {
         border: 1px solid lightgray;
         box-shadow: 0 0 5px lightgray;
+       
     }
 }
 </style>
