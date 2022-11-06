@@ -1,13 +1,11 @@
 <template>
     <div>
         <!-- JUMBOTRON -->
-<AppJumbotron/>
+        <AppJumbotron />
         <div class="container">
             <div class="row">
-                <nav
-                    class="navbar-light bg-transparent d-flex justify-content-center w-100 mt-5"
-                >
-                    <div class="col-12 col-md-6 col-lg-6 mt-3">
+                <div class="col-12 col-md-6 col-lg-6 mt-3">
+                        <nav class="navbar-light bg-transparent d-flex justify-content-center w-100 mt-5 ">
                         <form @submit.prevent="getGeoPosition">
                             <div
                                 class="d-flex justify-content-between position-relative input-search my-4"
@@ -51,8 +49,8 @@
                                 </button>
                             </div>
                         </form>
+                    </nav>
                     </div>
-                </nav>
 
                 <div class="col-12 col-md-5 col-lg-3 mt-3 filters">
                     <div class="card rounded-0">
@@ -60,26 +58,21 @@
                         <div
                             class="card-body d-flex justify-content-sm-between justify-content-lg-center justify-content-center flex-wrap"
                         >
-                            <!-- Rooms-->
+                            <!-- rooms-->
                             <div class="cs_btn my-2 mx-2">
-                                <div class="btn-title text-center h5">
-                                    Camere
-                                </div>
+                                <div class="btn-title text-center">Camere</div>
                                 <div
                                     class="d-flex align-items-center justify-content-center p-0 cs_btn_body"
                                 >
                                     <div class="minus">
                                         <i
                                             class="fa-solid fa-minus p-2"
-                                            @click="
-                                                getGeoPosition();
-                                                rooms--;
-                                            "
+                                            @click="rooms--"
                                         ></i>
                                     </div>
                                     <input
-                                        type="number"
-                                        name="rooms"
+                                        type="text"
+                                        name="bed_number"
                                         id="rooms"
                                         class="w-75 input-group-text"
                                         v-model="rooms"
@@ -87,43 +80,26 @@
                                     <div class="plus">
                                         <i
                                             class="fa-solid fa-plus p-2"
-                                            @click="
-                                                getGeoPosition();
-                                                rooms++;
-                                            "
+                                            @click="rooms++"
                                         ></i>
                                     </div>
                                 </div>
-                                <input
-                                    type="number"
-                                    class="form-control"
-                                    name="room_number"
-                                    id="rooms"
-                                    v-model="rooms"
-                                    @change="getGeoPosition"
-                                />
                             </div>
 
                             <!-- beds-->
                             <div class="cs_btn my-2 mx-2">
-                                <div class="btn-title text-center h5">
-                                    Letti
-                                </div>
+                                <div class="btn-title text-center">Letti</div>
                                 <div
                                     class="d-flex align-items-center justify-content-center p-0 cs_btn_body"
                                 >
                                     <div class="minus">
                                         <i
                                             class="fa-solid fa-minus p-2"
-                                            @click="
-                                                getGeoPosition();
-                                                beds--;
-                                            "
+                                            @click="beds--"
                                         ></i>
                                     </div>
                                     <input
                                         type="text"
-                                        @change="getGeoPosition"
                                         name="bed_number"
                                         id="beds"
                                         class="w-75 input-group-text"
@@ -132,98 +108,97 @@
                                     <div class="plus">
                                         <i
                                             class="fa-solid fa-plus p-2"
-                                            @click="
-                                                getGeoPosition();
-                                                beds++;
-                                            "
+                                            @click="beds++"
+                                        ></i>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- bathrooms-->
+                            <div class="cs_btn my-2 mx-2">
+                                <div class="btn-title text-center">Bagni</div>
+                                <div
+                                    class="d-flex align-items-center justify-content-center p-0 cs_btn_body"
+                                >
+                                    <div class="minus">
+                                        <i
+                                            class="fa-solid fa-minus p-2"
+                                            @click="bathrooms--"
+                                        ></i>
+                                    </div>
+                                    <input
+                                        type="text"
+                                        name="bed_number"
+                                        id="bathrooms"
+                                        class="w-75 input-group-text"
+                                        v-model="bathrooms"
+                                    />
+                                    <div class="plus">
+                                        <i
+                                            class="fa-solid fa-plus p-2"
+                                            @click="bathrooms++"
+                                        ></i>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- sqm-->
+                            <div class="cs_btn my-2 mx-2">
+                                <div class="btn-title text-center">
+                                    Metri<sup>2</sup>
+                                </div>
+                                <div
+                                    class="d-flex align-items-center justify-content-center p-0 cs_btn_body"
+                                >
+                                    <div class="minus">
+                                        <i
+                                            class="fa-solid fa-minus p-2"
+                                            @click="sqm--"
+                                        ></i>
+                                    </div>
+                                    <input
+                                        type="text"
+                                        name="bed_number"
+                                        id="sqm"
+                                        class="w-75 input-group-text"
+                                        v-model="sqm"
+                                    />
+                                    <div class="plus">
+                                        <i
+                                            class="fa-solid fa-plus p-2"
+                                            @click="sqm++"
                                         ></i>
                                     </div>
                                 </div>
                             </div>
                         </div>
                     </div>
-
-                    <!-- Bathrooms-->
-                    <div class="cs_btn my-2 mx-2">
-                        <div class="btn-title text-center h5">Bagni</div>
-                        <div
-                            class="d-flex align-items-center justify-content-center p-0 cs_btn_body"
-                        >
-                            <div class="minus">
-                                <i
-                                    class="fa-solid fa-minus p-2"
-                                    @click="
-                                        getGeoPosition();
-                                        bathrooms--;
-                                    "
-                                ></i>
-                            </div>
-                            <input
-                                type="text"
-                                @change="getGeoPosition"
-                                name="bed_number"
-                                id="number_bathroom"
-                                class="w-75 input-group-text"
-                                v-model="bathrooms"
-                            />
-                            <div class="plus">
-                                <i
-                                    class="fa-solid fa-plus p-2"
-                                    @click="
-                                        getGeoPosition();
-                                        bathrooms++;
-                                    "
-                                ></i>
-                            </div>
+                    <!-- Services -->
+                    <div class="px-2">
+                        <div class="px-3 mt-3">
+                            <h4>Servizi</h4>
+                            <div class="border"></div>
                         </div>
-                        <input
-                            type="number"
-                            class="form-control"
-                            name="bathroom_number"
-                            id="bathrooms"
-                            v-model="bathrooms"
-                            @change="getGeoPosition"
-                        />
-                    </div>
-
-                    <!-- Square mts-->
-                    <div class="cs_btn my-2 mx-2">
-                        <div class="btn-title text-center h5">Metri quadri</div>
-                        <input
-                            type="number"
-                            class="form-control"
-                            name="square_mt"
-                            id="sqm"
-                            v-model="sqm"
-                            @change="getGeoPosition"
-                        />
-                    </div>
-                </div>
-                <!-- Services -->
-                <div class="px-2">
-                    <div class="px-3 mt-3">
-                        <h4>Servizi</h4>
-                        <div class="border"></div>
-                    </div>
-                    <div
-                        class="form-check form-switch m-3"
-                        v-for="service in services"
-                        :key="service.id"
-                    >
-                        <input
-                            class="form-check-input"
-                            type="checkbox"
-                            id="flexSwitchCheckChecked"
-                            :value="service.id"
-                            @change="getGeoPosition"
-                        />
-                        <i :class="`${service.icon} fa-lg mx-2`"></i>
-
-                        <label
-                            class="form-check-label h5"
-                            for="flexSwitchCheckChecked"
-                            >{{ service.label }}</label
+                        <div
+                            class="form-check form-switch m-3"
+                            v-for="service in services"
+                            :key="service.id"
                         >
+                            <input
+                                class="form-check-input"
+                                type="checkbox"
+                                id="flexSwitchCheckChecked"
+                                :value="service.id"
+                                @change="getGeoPosition"
+                            />
+                            <i :class="`${service.icon} fa-lg mx-2`"></i>
+
+                            <label
+                                class="form-check-label h5"
+                                for="flexSwitchCheckChecked"
+                                >{{ service.label }}</label
+                            >
+                        </div>
                     </div>
                 </div>
             </div>
@@ -289,7 +264,7 @@ export default {
             axios
                 .get("http://localhost:8000/api/flats")
                 .then((res) => {
-                    //this.flats = res.data;
+                    this.flats = res.data;
                     this.Allflats = res.data;
                 })
                 .catch((err) => {
@@ -577,10 +552,14 @@ export default {
 }
 .input-group-text {
     width: 70px;
+    border-radius: 0;
 }
 
-.input-group {
-    margin: 10px 0;
+.plus,
+.minus {
+    background-color: lightgray;
+    padding: 3.3px;
+    border: none;
 }
 
 label span {
