@@ -1,7 +1,7 @@
 @extends('layouts.app')
 
 <style>
-    @media only screen and (max-width: 1500px) {
+    @media only screen and (max-width: 1600px) {
         .button {
             margin-right: 32px;
             justify-content: flex-start
@@ -44,7 +44,7 @@
                 <div class="card p-4">
                     <h2>{{ $flat->title }}</h2>
 
-                    <img class="float-left mr-2 img-fluid" width="500"
+                    <img class="float-left mr-2 img-fluid" 
                         src=" {{ $flat->image ? asset('storage/' . $flat->image) : asset('images/placeholder.png') }}"
                         alt="{{ $flat->title }}">
                     <p class="h4 my-4 py-2 w-75">{{ $flat->address }}</p>

@@ -35,39 +35,50 @@
         }
 
         .new {
-            font-size: 80px;
+            font-size: 75px;
             color: goldenrod;
             text-shadow: 2px 2px 4px black;
 
         }
+
         @media only screen and (min-width: 285px) {
-            .card{
-                width: 80%;
+            .card {
+                width: 90%;
             }
         }
+
         @media only screen and (min-width: 442px) {
-            .card{
+            .card {
                 width: 70%;
-                padding-bottom:2rem; 
+                padding-bottom: 2rem;
             }
         }
+
         @media only screen and (min-width: 580px) {
-            .card{
+            .card {
                 width: 45%;
             }
         }
-        
+
         @media only screen and (min-width: 992px) {
 
             .new {
                 display: flex;
                 text-align: center;
-                font-size: 28px;
+                font-size: 35px;
                 left: 50%;
 
             }
-            .card{
+
+            .card {
                 width: 23%;
+            }
+        }
+
+        @media only screen and (min-width: 1200px) {
+
+            .card {
+                width: 20%;
             }
         }
     </style>
@@ -88,7 +99,7 @@
                 @endif
                 <div class=" wrapper d-flex flex-wrap justify-content-start my-5">
                     @forelse ($flats as $flat)
-                        <div class="card col-12 col-lg-12 col-md-10  col-sm-10 m-2 p-2  shadow" >
+                        <div class="card m-2 p-2  shadow">
                             <a href="{{ Route('admin.flats.show', $flat->id) }}">
 
                                 <img src="{{ $flat->image ? asset('storage/' . $flat->image) : asset('images/placeholder.png') }}"
