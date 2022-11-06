@@ -72,6 +72,7 @@
         href='https://api.tomtom.com/maps-sdk-for-web/cdn/plugins/SearchBox/3.1.3-public-preview.0/SearchBox.css' />
     <link rel="stylesheet" href="https://api.tomtom.com/maps-sdk-for-web/cdn/6.x/6.20.0/maps/maps.css">
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
+    <link href="{{ asset('css/custom-css.css') }}" rel="stylesheet">
 
 </head>
 
@@ -82,36 +83,64 @@
         <header style="position:fixed; top:0; left:0; right:0; z-index: 1">
 
 
-            <nav class="navbar navbar-expand-md navbar-light bg-white shadow-sm d-flex justify-content-between">
-    
+            <nav class="navbar navbar-expand main-nav shadow-sm d-flex justify-content-between">
+
                 <a href="{{ url('/') }}">
-                    <img class="img-fluid  p-1" src={{ asset('images/boolbnb_logo.png') }} alt="logo Air BnB"
-                        style="height:60px; width: 250px;">
-    
+                    
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="-50 0 500 100" style="height:60px; width: 180px">
+                        <defs>
+                            <style>
+                                .cls-1 {
+                                    font-size: 48.44px;
+                                    stroke: #fff;
+                                    stroke-miterlimit: 10;
+                                    stroke-width: 2px;
+                                    font-family: AdobeGothicStd-Bold-KSCpc-EUC-H, Adobe Gothic Std;
+                                }
+
+                                .cls-1,
+                                .cls-2 {
+                                    fill: #fff;
+                                }
+
+                                .cls-2 {
+                                    font-size: 106.49px;
+                                    font-family: BrushScriptStd, Brush Script Std;
+                                }
+                            </style>
+                        </defs>
+                        <g id="Layer_2" data-name="Layer 2">
+                            <g id="Layer_1-2" data-name="Layer 1"><text class="cls-1"
+                                    transform="translate(72.99 84.86)">oolBnB</text><text class="cls-2"
+                                    transform="translate(0 88.39)">B</text></g>
+                        </g>
+                    </svg>
                 </a>
-                
-    
-                <div class="d-flex" id="navbarSupportedContent">
+
+
+                <div class="d-flex me-4" id="navbarSupportedContent">
                     <!-- Left Side Of Navbar -->
                     <ul></ul>
-    
-                    <ul class="navbar mr-3 d-flex ">
+
+                    <ul class="navbar me-3 d-flex  mt-3 p-0 ">
                         <!-- Authentication Links -->
                         @guest
                             <li class="nav-item list-unstyled">
-                                <a class="nav-link text-dark " href="{{ route('login') }}">Accedi</a>
+                                <a class="nav-link text-dark text-white me-2 " href="{{ route('login') }}">Accedi</a>
                             </li>
                             @if (Route::has('register'))
                                 <li class="nav-item list-unstyled">
-                                    <a class="nav-link text-dark list-unstyled mx-4" href="{{ route('register') }}">Registrati</a>
+                                    <a class="nav-link text-dark list-unstyled text-white"
+                                        href="{{ route('register') }}">Registrati</a>
                                 </li>
                             @endif
                         @else
                             <li class="nav-item dropdown list-unstyled">
-    
-    
+
+
                                 <div class="d-flex mx-3 " aria-labelledby="navbarDropdown">
-                                    <a class="dropdown-item text-dark mx-3 list-unstyled" href="{{ route('admin.flats.index') }}">
+                                    <a class="dropdown-item text-dark mx-3 list-unstyled"
+                                        href="{{ route('admin.flats.index') }}">
                                         I miei appartamenti
                                     </a>
                                     <a class="dropdown-item" href="{{ route('logout') }}"
@@ -119,8 +148,8 @@
                                                              document.getElementById('logout-form').submit();">
                                         {{ __('Logout') }}
                                     </a>
-    
-    
+
+
                                     <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
                                         @csrf
                                     </form>
@@ -128,10 +157,10 @@
                             </li>
                         @endguest
                     </ul>
-    
+
                     <!-- Right Side Of Navbar -->
                 </div>
-    
+
             </nav>
         </header>
     </div>
