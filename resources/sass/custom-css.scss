@@ -6,8 +6,19 @@
 .btn-primary-cs {
     background-color: #dc143c;
     color: #fff;
-    
+    border-radius: 0px;
+    font-size: 0.7rem;
+    transition: .3s ;
+    text-decoration: none;
+    padding: 10px;
+    border-radius: 0 5px 0 5px;
 }
+
+.btn-primary-cs:hover {
+    transform: scale(1.05);
+    background-color: #dc143c;
+}
+    
 
  .form-control {
     background-color: lightgray;

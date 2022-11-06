@@ -139,11 +139,11 @@
 
 
                                 <div class="d-flex mx-3 " aria-labelledby="navbarDropdown">
-                                    <a class="dropdown-item text-dark mx-3 list-unstyled"
+                                    <a class="dropdown-item text-dark mx-3 list-unstyled text-white"
                                         href="{{ route('admin.flats.index') }}">
                                         I miei appartamenti
                                     </a>
-                                    <a class="dropdown-item" href="{{ route('logout') }}"
+                                    <a class="dropdown-item text-white" href="{{ route('logout') }}"
                                         onclick="event.preventDefault();
                                                              document.getElementById('logout-form').submit();">
                                         {{ __('Logout') }}

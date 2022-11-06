@@ -26,7 +26,7 @@ Route::namespace('api')->group(function(){
     Route::get('/flats', 'FlatController@index');
     Route::get('/flats/{id}', 'FlatController@show');
     Route::get('/services', 'ServiceController@index');
-    Route::get('/contact-message', 'contactMessageController@send');
+    Route::post('/contact-message', 'contactMessageController@send');
 
 
 });
