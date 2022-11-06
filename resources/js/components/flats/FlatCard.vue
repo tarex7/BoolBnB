@@ -1,6 +1,7 @@
 <template>
-    <div class="col-12 col-sm-6 col-md-4 col-lg-3">
-        <div class="flat-card m-1">
+    <div class="col-12  col-md-6 col-lg-4">
+        <div class="flat-card m-1 border ">
+
             <router-link :to="`/flats/${flat.id}`">
                 <img
                     class="card-img-top img-fluid"
@@ -8,16 +9,23 @@
                     alt="Card image cap"
                 />
             </router-link>
+
             <div class="card-body">
-                <h5 class="card-title text-custom_primary mt-2">
+                <h5 class="card-title text-custom_primary my-4">
                     {{ flat.title }}
                 </h5>
                 <!-- <p class="card-text fw-bold">{{ flat.address }}</p> -->
-                <p class="card-text fw-bold">
+                <p class="card-text fw-bold h4">
                     {{ flat.price_per_day }} € a notte
-                    <p v-for="service in flat.services">{{ service.label}}</p>
                 </p>
+                <p>{{ flat.address }}</p>
+                <div class="d-flex">
+                  <p>Servizi: </p>
+                  <p v-for="service in flat.services"><i class="mx-2" :class="service.icon"></i></p>
+                </div>
+
             </div>
+
         </div>
     </div>
 </template>
@@ -34,91 +42,7 @@ export default {
 };
 </script>
 <style scoped lang="scss">
-/*#flat-card {
-  position: relative;
-  .flat-img {
-    position: relative;
 
-    img {
-      width:100%;
-      height: 300px;
-      filter: opacity(1);
-      transition: all 0.5s;
-      object-fit: cover;
-    }
-    .sponsor {
-      position: absolute;
-      top: 10px;
-      right: 10px;
-      color: #cecece;
-      background-color: black;
-      padding: 4px;
-    }
-  }
-
- /* .flat-info {
-    position: absolute;
-    bottom: 10px;
-    left: 30px;
-    background-color:rgba($color: #fff, $alpha: 0.75);
-    width: 70%;
-    padding: 1rem;
-    transition: all 0.5s;
-    opacity: 1;
-    border-radius: 5px;
-    box-shadow: #000 1px 2px 13px ;
-    font-weight: bold;
-
-    p {
-      margin: 0;
-    }
-  }*/
-/* .flat-description {
-    height: 300px;
-    padding: 30px;
-    width: 70%;
-    background-color: white;
-    position: absolute;
-    bottom: 350px;
-    left: 30px;
-    visibility: hidden;
-    transition: all 0.5s;
-    opacity: 0;
-    z-index: -1;
-    // transition-delay: 0.2s;
-    p {
-      overflow: hidden;
-      text-overflow: ellipsis;
-      max-height: 90px;
-    }*/
-/* .show-button {
-      background-color: black;
-      border: 2px solid black;
-      padding: 12px;
-      position: absolute;
-      bottom: 30px;
-      color: white;
-    }
-  }
-
-
-#flat-card:hover .flat-info {
-  visibility: hidden;
-  bottom: -100px;
-  opacity: 0;
-  color: white;
-  z-index: -1;
-}
-#flat-card:hover .flat-description {
-  visibility: visible;
-  opacity: 1;
-  bottom: 50px;
-
-  z-index: 1;
-}
-#flat-card:hover img {
-  filter: opacity(0.4);
-}*/
 
 
 
@@ -132,10 +56,17 @@ export default {
     transition: 0.5s;
     border-radius: 10px;
     object-fit: contain;
+    display: flex;
+    flex-direction: column;
+    align-items: start;
+    box-shadow: rgba($color: #000000, $alpha: 0.5) 0 0 3px;
+    
 
 
     img {
         border-radius: 10px;
+        
+       object-fit: cover;
        
     }
 

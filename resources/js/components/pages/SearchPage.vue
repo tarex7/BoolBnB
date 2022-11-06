@@ -4,8 +4,10 @@
         <AppJumbotron />
         <div class="container">
             <div class="row">
-                <div class="col-12 col-md-6 col-lg-6 mt-3">
-                        <nav class="navbar-light bg-transparent d-flex justify-content-center w-100 mt-5 ">
+                <div class="col-12 mt-3">
+                    <nav
+                        class="navbar-light bg-transparent  my-3 px-4"
+                    >
                         <form @submit.prevent="getGeoPosition">
                             <div
                                 class="d-flex justify-content-between position-relative input-search my-4"
@@ -50,16 +52,17 @@
                             </div>
                         </form>
                     </nav>
-                    </div>
+                </div>
 
-                <div class="col-12 col-md-5 col-lg-3 mt-3 filters">
+              <div class="row">
+                <div class="col-12 col-md-12 col-lg-4 filters">
                     <div class="card rounded-0">
                         <div class="card-header h4">Filtra per:</div>
                         <div
-                            class="card-body d-flex justify-content-sm-between justify-content-lg-center justify-content-center flex-wrap"
+                            class="card-body d-flex justify-content-sm-between justify-content-lg-center justify-content-center row py-lg-5"
                         >
                             <!-- rooms-->
-                            <div class="cs_btn my-2 mx-2">
+                            <div class="cs_btn my-2 col-1 w-50">
                                 <div class="btn-title text-center">Camere</div>
                                 <div
                                     class="d-flex align-items-center justify-content-center p-0 cs_btn_body"
@@ -67,7 +70,7 @@
                                     <div class="minus">
                                         <i
                                             class="fa-solid fa-minus p-2"
-                                            @click="rooms--"
+                                            @click="getGeoPosition();rooms--"
                                         ></i>
                                     </div>
                                     <input
@@ -80,14 +83,14 @@
                                     <div class="plus">
                                         <i
                                             class="fa-solid fa-plus p-2"
-                                            @click="rooms++"
+                                            @click="getGeoPosition();rooms++"
                                         ></i>
                                     </div>
                                 </div>
                             </div>
 
                             <!-- beds-->
-                            <div class="cs_btn my-2 mx-2">
+                            <div class="cs_btn my-2 col-1 w-50">
                                 <div class="btn-title text-center">Letti</div>
                                 <div
                                     class="d-flex align-items-center justify-content-center p-0 cs_btn_body"
@@ -95,7 +98,7 @@
                                     <div class="minus">
                                         <i
                                             class="fa-solid fa-minus p-2"
-                                            @click="beds--"
+                                            @click="getGeoPosition();beds--"
                                         ></i>
                                     </div>
                                     <input
@@ -108,14 +111,14 @@
                                     <div class="plus">
                                         <i
                                             class="fa-solid fa-plus p-2"
-                                            @click="beds++"
+                                            @click="getGeoPosition();beds++"
                                         ></i>
                                     </div>
                                 </div>
                             </div>
 
                             <!-- bathrooms-->
-                            <div class="cs_btn my-2 mx-2">
+                            <div class="cs_btn my-2 col-1 w-50">
                                 <div class="btn-title text-center">Bagni</div>
                                 <div
                                     class="d-flex align-items-center justify-content-center p-0 cs_btn_body"
@@ -123,7 +126,7 @@
                                     <div class="minus">
                                         <i
                                             class="fa-solid fa-minus p-2"
-                                            @click="bathrooms--"
+                                            @click="getGeoPosition();bathrooms--"
                                         ></i>
                                     </div>
                                     <input
@@ -136,14 +139,14 @@
                                     <div class="plus">
                                         <i
                                             class="fa-solid fa-plus p-2"
-                                            @click="bathrooms++"
+                                            @click="getGeoPosition();bathrooms++"
                                         ></i>
                                     </div>
                                 </div>
                             </div>
 
                             <!-- sqm-->
-                            <div class="cs_btn my-2 mx-2">
+                            <div class="cs_btn my-2 col-1 w-50">
                                 <div class="btn-title text-center">
                                     Metri<sup>2</sup>
                                 </div>
@@ -153,7 +156,7 @@
                                     <div class="minus">
                                         <i
                                             class="fa-solid fa-minus p-2"
-                                            @click="sqm--"
+                                            @click="getGeoPosition();sqm--"
                                         ></i>
                                     </div>
                                     <input
@@ -166,65 +169,68 @@
                                     <div class="plus">
                                         <i
                                             class="fa-solid fa-plus p-2"
-                                            @click="sqm++"
+                                            @click="getGeoPosition();sqm++"
                                         ></i>
                                     </div>
                                 </div>
                             </div>
                         </div>
                     </div>
-                    <!-- Services -->
-                    <div class="px-2">
-                        <div class="px-3 mt-3">
-                            <h4>Servizi</h4>
-                            <div class="border"></div>
-                        </div>
-                        <div
-                            class="form-check form-switch m-3"
-                            v-for="service in services"
-                            :key="service.id"
-                        >
-                            <input
-                                class="form-check-input"
-                                type="checkbox"
-                                id="flexSwitchCheckChecked"
-                                :value="service.id"
-                                @change="getGeoPosition"
-                            />
-                            <i :class="`${service.icon} fa-lg mx-2`"></i>
-
-                            <label
-                                class="form-check-label h5"
-                                for="flexSwitchCheckChecked"
-                                >{{ service.label }}</label
+                    
+                </div>
+                <!-- Services -->
+                <div class="col-12 col-lg-8">
+                    <div class="card rounded-0">
+                        <h4 class="card-header">Servizi</h4>
+                        <div class="px-2 row row-cols-3 ">
+                            <div
+                                class="form-check form-switch m-3 me-5 col"
+                                v-for="service in services"
+                                :key="service.id"
                             >
+                                <input
+                                    class="form-check-input"
+                                    type="checkbox"
+                                    id="flexSwitchCheckChecked"
+                                    :value="service.id"
+                                    @change="getGeoPosition"
+                                />
+                                <i :class="`${service.icon} fa-lg `"></i>
+
+                                <label
+                                    class="form-check-label h5"
+                                    for="flexSwitchCheckChecked"
+                                    >{{ service.label }}</label
+                                >
+                            </div>
                         </div>
                     </div>
                 </div>
-            </div>
-        </div>
+              </div>
 
-        <div class="row mb-5 pb-5">
-            <div class="col">
-                <section id="flat-list">
-                    <h1>{{ this.query }}</h1>
-                    <h2 class="my-3 text-center mt-5">
-                        {{ this.message }}
-                    </h2>
 
-                    <!-- AppLoader -->
-                    <app-loader v-if="isLoading" />
 
-                    <!-- FLAT CARD -->
-                    <div class="row justify-content-between">
-                        <FlatCard
-                            v-for="flat in flats"
-                            :key="flat.id"
-                            :flat="flat"
-                            class="col-12 col-md-4 col-lg-3 col mt-4"
-                        />
-                    </div>
-                </section>
+                <div class="col-12">
+                    <section id="flat-list">
+                        <h1>{{ this.query }}</h1>
+                        <h2 class="my-3 text-center mt-5">
+                            {{ this.message }}
+                        </h2>
+
+                        <!-- AppLoader -->
+                        <app-loader v-if="isLoading" />
+
+                        <!-- FLAT CARD -->
+                        <div class="row justify-content-between">
+                            <FlatCard
+                                v-for="flat in flats"
+                                :key="flat.id"
+                                :flat="flat"
+                                class="col-12 col-md-4 col-lg-3 col mt-4"
+                            />
+                        </div>
+                    </section>
+                </div>
             </div>
         </div>
     </div>
@@ -511,15 +517,14 @@ export default {
         if (this.$route.params.radius) {
             this.radius = this.$route.params.radius;
         }*/
-        this.fetchFlats();
         this.fetchServices();
         console.log("this allflats searchpage", this.allFlats);
 
         let data = this.$route.params.data;
         console.log("data is", data);
         this.flats = data.filterdFlats;
-        this.allFlats = data.allFlats;
-        this.query = data.query;
+         this.allFlats = data.allFlats;
+         this.query = data.query;
     },
 
     components: { FlatCard, AppJumbotron },
