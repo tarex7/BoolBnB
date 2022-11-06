@@ -1,9 +1,59 @@
 <template>
     <div>
-        <AppJumbotron />
+        <!-- JUMBOTRON -->
 
         <div class="container">
             <div class="row">
+                <nav
+                    class="navbar-light bg-transparent d-flex justify-content-center w-100 mt-5"
+                >
+                    <div class="col-12 col-md-6 col-lg-6 mt-3">
+                        <form @submit.prevent="getGeoPosition">
+                            <div
+                                class="d-flex justify-content-between position-relative input-search my-4"
+                            >
+                                <input
+                                    class="form-control mr-sm-2 input"
+                                    type="search"
+                                    placeholder="Dove vuoi andare?"
+                                    aria-label="Search"
+                                    autocomplete="off"
+                                    id="query_address"
+                                    v-model="query"
+                                    @keyup="getAutocomplete"
+                                    @keyup.enter="getGeoPosition"
+                                />
+
+                                <ul
+                                    class="dropdown_menu list-unstyled p-1"
+                                    v-if="query.length > 0"
+                                >
+                                    <li
+                                        v-for="(address, index) in autocomplete"
+                                        :key="index"
+                                    >
+                                        <input
+                                            type="text"
+                                            class="w-100"
+                                            readonly
+                                            :value="address"
+                                            @click="setQuery(address)"
+                                        />
+                                    </li>
+                                </ul>
+
+                                <button
+                                    class="btn btn-dark my-sm-0 ms-2 py-2"
+                                    type="submit"
+                                    id="search-btn"
+                                >
+                                    Cerca
+                                </button>
+                            </div>
+                        </form>
+                    </div>
+                </nav>
+
                 <div class="col-12 col-md-5 col-lg-3 mt-3 filters">
                     <div class="card rounded-0">
                         <div class="card-header h4">Filtra per:</div>
@@ -12,20 +62,23 @@
                         >
                             <!-- Rooms-->
                             <div class="cs_btn my-2 mx-2">
-                                <div class="btn-title text-center h5">Camere</div>
+                                <div class="btn-title text-center h5">
+                                    Camere
+                                </div>
                                 <div
                                     class="d-flex align-items-center justify-content-center p-0 cs_btn_body"
                                 >
                                     <div class="minus">
                                         <i
                                             class="fa-solid fa-minus p-2"
-                                            @click="getGeoPosition();rooms--"
-                                        
+                                            @click="
+                                                getGeoPosition();
+                                                rooms--;
+                                            "
                                         ></i>
                                     </div>
                                     <input
                                         type="number"
-                                    
                                         name="rooms"
                                         id="rooms"
                                         class="w-75 input-group-text"
@@ -34,7 +87,10 @@
                                     <div class="plus">
                                         <i
                                             class="fa-solid fa-plus p-2"
-                                            @click="getGeoPosition(); rooms++"
+                                            @click="
+                                                getGeoPosition();
+                                                rooms++;
+                                            "
                                         ></i>
                                     </div>
                                 </div>
@@ -50,14 +106,19 @@
 
                             <!-- beds-->
                             <div class="cs_btn my-2 mx-2">
-                                <div class="btn-title text-center h5">Letti</div>
+                                <div class="btn-title text-center h5">
+                                    Letti
+                                </div>
                                 <div
                                     class="d-flex align-items-center justify-content-center p-0 cs_btn_body"
                                 >
                                     <div class="minus">
                                         <i
                                             class="fa-solid fa-minus p-2"
-                                            @click="getGeoPosition();beds--"
+                                            @click="
+                                                getGeoPosition();
+                                                beds--;
+                                            "
                                         ></i>
                                     </div>
                                     <input
@@ -71,7 +132,10 @@
                                     <div class="plus">
                                         <i
                                             class="fa-solid fa-plus p-2"
-                                            @click="getGeoPosition();beds++"
+                                            @click="
+                                                getGeoPosition();
+                                                beds++;
+                                            "
                                         ></i>
                                     </div>
                                 </div>
@@ -79,111 +143,113 @@
                         </div>
                     </div>
 
-                            <!-- Bathrooms-->
-                            <div class="cs_btn my-2 mx-2">
-                                <div class="btn-title text-center h5">Bagni</div>
-                                <div
-                                    class="d-flex align-items-center justify-content-center p-0 cs_btn_body"
-                                >
-                                    <div class="minus">
-                                        <i
-                                            class="fa-solid fa-minus p-2"
-                                            @click="getGeoPosition();bathrooms--"
-                                        ></i>
-                                    </div>
-                                    <input
-                                        type="text"
-                                        @change="getGeoPosition"
-                                        name="bed_number"
-                                        id="number_bathroom"
-                                        class="w-75 input-group-text"
-                                        v-model="bathrooms"
-                                    />
-                                    <div class="plus">
-                                        <i
-                                            class="fa-solid fa-plus p-2"
-                                            @click="getGeoPosition();bathrooms++"
-                                        ></i>
-                                    </div>
-                                </div>
-                                <input
-                                    type="number"
-                                    class="form-control"
-                                    name="bathroom_number"
-                                    id="bathrooms"
-                                    v-model="bathrooms"
-                                    @change="getGeoPosition"
-                                />
+                    <!-- Bathrooms-->
+                    <div class="cs_btn my-2 mx-2">
+                        <div class="btn-title text-center h5">Bagni</div>
+                        <div
+                            class="d-flex align-items-center justify-content-center p-0 cs_btn_body"
+                        >
+                            <div class="minus">
+                                <i
+                                    class="fa-solid fa-minus p-2"
+                                    @click="
+                                        getGeoPosition();
+                                        bathrooms--;
+                                    "
+                                ></i>
                             </div>
-
-                            <!-- Square mts-->
-                            <div class="cs_btn my-2 mx-2">
-                                <div class="btn-title text-center h5">
-                                    Metri quadri
-                                </div>
-                                <input
-                                    type="number"
-                                    class="form-control"
-                                    name="square_mt"
-                                    id="sqm"
-                                    v-model="sqm"
-                                    @change="getGeoPosition"
-                                />
-                            </div>
-                        </div>
-                        <!-- Services -->
-                        <div class="px-2">
-                            <div class="px-3 mt-3">
-                                <h4>Servizi</h4>
-                                <div class="border"></div>
-                            </div>
-                            <div
-                                class="form-check form-switch m-3"
-                                v-for="service in services"
-                                :key="service.id"
-                            >
-                                <input
-                                    class="form-check-input"
-                                    type="checkbox"
-                                    id="flexSwitchCheckChecked"
-                                    :value="service.id"
-                                    @change="getGeoPosition"
-                                />
-                                <i  :class="`${service.icon} fa-lg mx-2`"></i>
-
-                                <label
-                                    class="form-check-label h5"
-                                    for="flexSwitchCheckChecked"
-                                    >{{ service.label }}</label
-                                >
-                            </div>
-                        </div>
-                    </div>
-
-                    
-                </div>
-            </nav>
-            <div class="row mb-5 pb-5">
-                <div class="col">
-                    <section id="flat-list">
-                        <h2 class="my-3 text-center mt-5">
-                            {{ this.message }}
-                        </h2>
-
-                        <!-- AppLoader -->
-                        <app-loader v-if="isLoading" />
-
-                        <!-- FLAT CARD -->
-                        <div class="row justify-content-between">
-                            <FlatCard
-                                v-for="flat in flats"
-                                :key="flat.id"
-                                :flat="flat"
-                                class="col-12 col-md-4 col-lg-3 col mt-4"
+                            <input
+                                type="text"
+                                @change="getGeoPosition"
+                                name="bed_number"
+                                id="number_bathroom"
+                                class="w-75 input-group-text"
+                                v-model="bathrooms"
                             />
+                            <div class="plus">
+                                <i
+                                    class="fa-solid fa-plus p-2"
+                                    @click="
+                                        getGeoPosition();
+                                        bathrooms++;
+                                    "
+                                ></i>
+                            </div>
                         </div>
-                    </section>
+                        <input
+                            type="number"
+                            class="form-control"
+                            name="bathroom_number"
+                            id="bathrooms"
+                            v-model="bathrooms"
+                            @change="getGeoPosition"
+                        />
+                    </div>
+
+                    <!-- Square mts-->
+                    <div class="cs_btn my-2 mx-2">
+                        <div class="btn-title text-center h5">Metri quadri</div>
+                        <input
+                            type="number"
+                            class="form-control"
+                            name="square_mt"
+                            id="sqm"
+                            v-model="sqm"
+                            @change="getGeoPosition"
+                        />
+                    </div>
                 </div>
+                <!-- Services -->
+                <div class="px-2">
+                    <div class="px-3 mt-3">
+                        <h4>Servizi</h4>
+                        <div class="border"></div>
+                    </div>
+                    <div
+                        class="form-check form-switch m-3"
+                        v-for="service in services"
+                        :key="service.id"
+                    >
+                        <input
+                            class="form-check-input"
+                            type="checkbox"
+                            id="flexSwitchCheckChecked"
+                            :value="service.id"
+                            @change="getGeoPosition"
+                        />
+                        <i :class="`${service.icon} fa-lg mx-2`"></i>
+
+                        <label
+                            class="form-check-label h5"
+                            for="flexSwitchCheckChecked"
+                            >{{ service.label }}</label
+                        >
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="row mb-5 pb-5">
+            <div class="col">
+                <section id="flat-list">
+                    <h1>{{ this.query }}</h1>
+                    <h2 class="my-3 text-center mt-5">
+                        {{ this.message }}
+                    </h2>
+
+                    <!-- AppLoader -->
+                    <app-loader v-if="isLoading" />
+
+                    <!-- FLAT CARD -->
+                    <div class="row justify-content-between">
+                        <FlatCard
+                            v-for="flat in flats"
+                            :key="flat.id"
+                            :flat="flat"
+                            class="col-12 col-md-4 col-lg-3 col mt-4"
+                        />
+                    </div>
+                </section>
             </div>
         </div>
     </div>
@@ -223,8 +289,8 @@ export default {
             axios
                 .get("http://localhost:8000/api/flats")
                 .then((res) => {
-                    this.flats = res.data;
-                    this.flats = res.data;
+                    //this.flats = res.data;
+                    this.Allflats = res.data;
                 })
                 .catch((err) => {
                     this.error = "Errore durante il fetch dei flats";
@@ -271,11 +337,12 @@ export default {
         },
 
         getGeoPosition() {
-            this.fetchFlats
-            // Get Geodata from Axios based on input and radius(2000 standard)
-            console.log("geo");
+            console.log("Geo position from search page");
+
+            //Prendo valori della query e del raggio
             let query = this.query;
             let radius = this.radius * 1000;
+            //Chiamata tomtom per ricevere posizione
             if (query) {
                 this.loading = true;
                 axios
@@ -283,11 +350,12 @@ export default {
                         `https://api.tomtom.com/search/2/geocode/${query}.json?key=qSUikbBmShqOxwAwrrHX28luZ27pYwPx&limit=1&radius=${radius}`
                     )
                     .then((response) => {
+                        //Prendo lat e lon
                         let lat = response.data.results[0].position.lat;
                         let lon = response.data.results[0].position.lon;
 
                         let flatList = [];
-
+                        //Creo geometry list
                         let geometryList = [
                             {
                                 type: "CIRCLE",
@@ -296,12 +364,14 @@ export default {
                             },
                         ];
 
+                        //stampo geometry list
                         console.log(
                             "geometrylist",
                             JSON.stringify(geometryList)
                         );
-                        console.log("Tutti flats:", this.allFlats);
-                        this.flats.forEach((flat) => {
+
+                        //creo flatPOI per ogni flat e li metto in flalist
+                        this.allFlats.forEach((flat) => {
                             let flatPOI = {
                                 flat: {
                                     name: flat.title,
@@ -321,12 +391,11 @@ export default {
 
                             flatList.push(flatPOI);
                         });
-
-                        console.log(
-                            "JSON geometry:",
-                            JSON.stringify(geometryList)
-                        );
+                        //stampo flatlist
                         console.log("JSON flatlist", JSON.stringify(flatList));
+
+                        //chiamata per filtrare flats in base al raggio in km
+
                         axios
                             .get(
                                 `https://api.tomtom.com/search/2/geometryFilter.json?key=OQPgwY4eUitV7IRklnutdiB8DVqRx8kG&geometryList=${JSON.stringify(
@@ -334,127 +403,24 @@ export default {
                                 )}&poiList=${JSON.stringify(flatList)}`
                             )
                             .then((response) => {
-                                let nodeServices = document.querySelectorAll(
-                                    'input[type="checkbox"]'
-                                    );
-                                    console.log("nodeservices", nodeServices);
+                                const filteredFlatsByTomtom =
+                                    response.data.results;
 
-                                let selectedServices = [];
-                                
-                                nodeServices.forEach((nodeService) => {
-                                    if(nodeService.checked)
-                                    selectedServices.push(
-                                        parseInt(nodeService.value)
-                                        );
-                                    console.log(
-                                        "tipo",
-                                        typeof parseInt(nodeService.value)
-                                    );
-                                        console.log('valore del checkbox',parseInt(nodeService.value));
-                                });
-
-                                console.log(
-                                    "selectedService",
-                                    selectedServices
-                                );
-                                this.selectedServices = selectedServices;
-                                console.log(nodeServices);
-
-                                const tomtomResponse = response.data.results;
-                                this.loading = false;
-
+                                //creo una lista di ID dei flat trovati nel raggio
                                 const flatIds = [];
-
-                                tomtomResponse.forEach((flat) => {
+                                filteredFlatsByTomtom.forEach((flat) => {
                                     flatIds.push(flat.info.id);
                                 });
 
-                                console.log("flatIds", flatIds);
-
-                                const filterdFlats = this.flats.filter(
+                                //Creo nuova lista con i flat trovati
+                                const filteredByRadius = this.allFlats.filter(
                                     (flat) => {
-                                        console.log(flat);
-
-                                        return (
-                                            flatIds.includes(flat.id) &&
-                                            flat.room_number >= this.rooms &&
-                                            flat.bathroom_number >=
-                                                this.bathrooms &&
-                                            flat.bed_number >= this.beds &&
-                                            flat.square_mt >= this.sqm
-                                        );
+                                        return flatIds.includes(flat.id) ;
                                     }
                                 );
-                                console.log(filterdFlats);
-
-                                if (filterdFlats.length == 0)
-                                    this.message =
-                                        "Non ci sono appartamenti con queste caratteristiche in questa zona";
-
-                                const filteredByServices = [];
-
-                                console.log(
-                                    "filteredByServices",
-                                    filteredByServices
-                                );
-                                console.log("filterdFlats", filterdFlats);
-
-                                if (this.selectedServices.length > 0) {
-                                    filterdFlats.forEach((flat) => {
-                                        console.log("ok");
-                                        console.log(
-                                            "flat.services",
-                                            flat.services
-                                        );
-                                        const servicesIds = [];
-                                        if (flat.services.length > 0)
-                                            flat.services.forEach((service) => {
-                                                servicesIds.push(service.id);
-                                            });
-
-                                        console.log(
-                                            "flat services IDs",
-                                            servicesIds
-                                        );
-                                        console.log(
-                                            "selected services",
-                                            this.selectedServices
-                                        );
-
-                                        if (
-                                            this.selectedServices.some(
-                                                (element) => {
-                                                    return servicesIds.includes(
-                                                        element
-                                                    );
-                                                }
-                                            )
-                                        ) {
-                                            filteredByServices.push(flat);
-                                        }
-                                        console.log(
-                                            "filteredByServices",
-                                            filteredByServices
-                                        );
-                                    });
-                                    this.flats = filteredByServices;
-                                    if (filteredByServices.length == 0)
-                                        this.message =
-                                            "Non ci sono appartamenti con queste caratteristiche in questa zona";
-                                } else {
-                                    this.flats = filterdFlats;
-                                    if (filterdFlats.length == 0)
-                                        this.message =
-                                            "Non ci sono appartamenti con queste caratteristiche in questa zona";
-                                }
-
-                                console.log("this.flats", this.flats);
-                            })
-                            .catch((error) => console.error(error));
-                    })
-                    .catch((e) => console.error(e));
-            } else {
-                this.flats = this.allFlats;
+                                this.flats = filteredByRadius;
+                            });
+                    });
             }
         },
 
@@ -500,20 +466,21 @@ export default {
         },
     },
 
-    mounted() {
+    created() {
         /* if (this.$route.params.query) {
             this.query = this.$route.params.query;
         }
         if (this.$route.params.radius) {
             this.radius = this.$route.params.radius;
-        }
-        //this.fetchFlats();*/
+        }*/
+        this.fetchFlats();
         this.fetchServices();
-        console.log("this flats searchpage", this.flats);
+        console.log("this allflats searchpage", this.allFlats);
 
         let data = this.$route.params.data;
         console.log("data is", data);
         this.flats = data.filterdFlats;
+        this.allFlats = data.allFlats;
         this.query = data.query;
     },
 

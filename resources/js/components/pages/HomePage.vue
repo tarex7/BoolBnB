@@ -7,18 +7,8 @@
         </div>
         <!-- FLAT LIST COMPONENTE-->
         <router-view @search="getData"></router-view>
-  <div id="home-page">
-      <AppJumbotron/>
-      
-      
-       <div class="container-fluid">
-        <flat-list  :filteredFlats="flats"/>
-        
-    </div> 
-      <!-- FLAT LIST COMPONENTE-->
-      <router-view></router-view>
-
-        <AppFooter />
+       
+        <AppFooter/>
     </div>
 </template>
 

@@ -4,7 +4,10 @@
             class="navbar-light bg-transparent d-flex justify-content-center w-100"
         >
             <div class="col-12 col-md-6 col-lg-6 mt-3">
-                <form @submit.prevent="getGeoPosition">
+                
+                <form
+                @submit.prevent="getGeoPosition">
+                 
                     <div
                         class="d-flex justify-content-between position-relative input-search my-4"
                     >
@@ -137,7 +140,9 @@ export default {
         },
 
         getGeoPosition() {
-
+            console.log("geosearch");
+            //this.fetchFlats()
+            console.log(this.allFlats);
             let query = this.query;
             let radius = this.radius * 1000;
             if (query) {
@@ -166,6 +171,7 @@ export default {
                         );
                         console.log("Tutti flats:", this.allFlats);
                         this.allFlats.forEach((flat) => {
+
                             let flatPOI = {
                                 flat: {
                                     name: flat.title,
@@ -204,6 +210,8 @@ export default {
 
                                 const flatIds = [];
 
+                                console.log('filtered by tomtom ', filteredFlatsByTomtom);
+
                                 filteredFlatsByTomtom.forEach((flat) => {
                                     flatIds.push(flat.info.id);
                                 });
@@ -220,6 +228,7 @@ export default {
                                 console.log(filterdFlats);
                                 let data = {
                                     filterdFlats: filterdFlats,
+                                    allFlats: this.allFlats,
                                     query: this.query,
                                 };
 
