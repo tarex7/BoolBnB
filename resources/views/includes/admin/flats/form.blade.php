@@ -11,10 +11,10 @@
 @csrf
 
 <div class="container-fluid d-flex justify-content-center">
-    <div class="card rounded-lg p-4 col-9 shadow">
+    <div class="card rounded-lg p-4 col-12 shadow">
         <div class="row">
 
-            <div class="col-4">
+            <div class="col-12">
                 {{-- IMAGE --}}
 
 
@@ -35,7 +35,7 @@
                 </div>
 
                 {{-- VISIBILITA' --}}
-                <div class="mb-3 form-check col-6  p-3">
+                <div class="mb-3 form-check col-12  p-3">
                     <input type="checkbox" class="form-check-input" id="visible" name="visible" value="1"
                         @if (old('visible', $flat->visible)) checked @endif>
                     <label class="form-check-label" for="visible">Rendi visibile l'appartamento</label>
@@ -43,7 +43,7 @@
 
             </div>
 
-            <div class="col-8">
+            <div class="col-12">
 
                 {{-- Titolo --}}
                 <div class="form-group mb-3">
@@ -107,7 +107,7 @@
                         </div>
 
 
-                        <div class="d-flex mt-2">
+                        <div class="d-flex mt-2 justify-content-evenly">
                             {{-- METRI QUADRI --}}
                             <div class="my-3 col-4 p-0 me-3">
                                 <label for="square_mt" class="form-label ">Superfice mq<sup>2</sup> *</label>
@@ -135,7 +135,7 @@
 
                         </div>
 
-                        <div class="d-flex">
+                        <div class="d-flex justify-content-evenly">
                             {{-- NUMERO LETTI --}}
                             <div class="my-3 col-4 me-3 p-0">
                                 <label for="bed_number" class="form-label ">Letti *</label>
@@ -167,10 +167,10 @@
                             {{-- CHECKBOX - SERVICE --}}
                             <p class="mb-2 ">Servizi</p>
 
-                            <div class=" d-flex flex-wrap justify-content-between">
+                            <div class="row row-cols-2 justify-content-between">
 
                                 @foreach ($services as $service)
-                                    <div class="my-2 mr-2 w-25">
+                                    <div class="my-2 mr-2 col">
                                         <input class="mr-0" type="checkbox"
                                             @if (in_array($service->id, old('services', $services_ids))) checked @endif
                                             id="{{ $service->label }}" name="services[]"
@@ -186,7 +186,7 @@
                         </div>
 
                         {{-- PREZZO PER NOTTE --}}
-                        <div class="col-4 px-0">
+                        <div class="col-12 px-0">
 
 
                             <p class="mt-4 mb-2">Prezzo per notte *</p>
@@ -211,10 +211,10 @@
 
                 </div>
             </div>
-            <div class="col-12 d-flex justify-content-end align-items-center my-5 px-0">
+            <div class="col-12 d-flex justify-content-between align-items-center my-5 px-0">
+                <a href="{{ route('admin.flats.index') }}" class="btn btn-primary mx-2">Indietro</a>
                 <button type="submit"
                     class="btn {{ !$flat->exists ? 'btn-success' : 'btn-warning' }} mr-5">{{ !$flat->exists ? 'Crea appartamento' : 'Aggiorna appartamento' }}</button>
-                <a href="{{ route('admin.flats.index') }}" class="btn btn-primary mx-2">Indietro</a>
             </div>
         </div>
 
