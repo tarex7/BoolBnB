@@ -93,9 +93,34 @@
                 </div>
 
             </div>
-            <div class="col-12">
-                <div class="border my-3"></div>
 
+            <div class="col-12">
+                <div class="border my-5 "><h2 class="my-2 text-center">Messaggi</h2>
+                
+                    <ol class="list-group list-group-numbered">
+                        @foreach ($messages as $message)
+                        <li class="list-group-item d-flex justify-content-between align-items-start my-3" >
+                          <div class="ms-2 me-auto">
+                            <div class="fw-bold mb-1">Messaggio da : <strong>{{ $message->sender_name}}</strong></div>
+                          <span class="">Ricevuto il: {{ $message->getDate($message->created_at) }} alle ore {{ $message->getTime($message->created_at) }}</span>
+    
+                            <div class="border mb-3"></div>
+                            {{ $message->text}}
+                          </div>
+                          <div class="d-flex">
+                            <form action="">
+                                <button class="btn btn-danger btn-sm">Elimina</button>
+                            </form>
+                          </div>
+                        </li>
+                        @endforeach
+    
+    
+    
+    
+                       
+                      </ol>
+                </div>
 
 
             </div>

@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\admin;
 
 use App\Models\Flat;
+use App\Models\Message;
 use App\Models\Service;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
@@ -157,10 +158,10 @@ class FlatController extends Controller
     {
         if($flat->user_id != Auth::id()) return abort('404');
 
-        //return view('admin.flats.show', compact('flat'));
         $services = Service::select('id', 'label', 'icon')->get();
+        $messages = Message::where('flat_id','=', $flat->id)->get();
 
-        return view('admin.flats.show', $flat, compact('flat', 'services'));
+        return view('admin.flats.show', $flat, compact('flat', 'services','messages'));
 
     }
 
