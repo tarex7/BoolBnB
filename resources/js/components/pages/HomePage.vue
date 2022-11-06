@@ -1,4 +1,12 @@
 <template>
+    <div id="home-page">
+        <AppJumbotron />
+
+        <div class="container-fluid">
+            <flat-list :filteredFlats="flats" />
+        </div>
+        <!-- FLAT LIST COMPONENTE-->
+        <router-view @search="getData"></router-view>
   <div id="home-page">
       <AppJumbotron/>
       
@@ -10,8 +18,8 @@
       <!-- FLAT LIST COMPONENTE-->
       <router-view></router-view>
 
-      <AppFooter />
-  </div>
+        <AppFooter />
+    </div>
 </template>
 
 <script>
@@ -22,29 +30,29 @@ import SearchBar from "../SearchBar.vue";
 import { title } from "process";
 
 export default {
-  name: "HomePage",
-  //COMPONENTS
-  components: { AppJumbotron, FlatList, SearchBar, AppFooter },
+    name: "HomePage",
+    //COMPONENTS
+    components: { AppJumbotron, FlatList, SearchBar, AppFooter },
 
-  // DATA
-  data() {
-      return {
-          flats: [],
-          test: "",
-      };
-  },
-  //PROPS
-  props: {
-      title: String,
-  },
-  //METHODS
-  methods: {
-      getData(prop) {
-          console.log(prop);
-      },
-  },
-  //COMPUTED
-  computed: {},
+    // DATA
+    data() {
+        return {
+            flats: [],
+            test: "",
+        };
+    },
+    //PROPS
+    props: {
+        title: String,
+    },
+    //METHODS
+    methods: {
+        getData(prop) {
+            console.log(prop);
+        },
+    },
+    //COMPUTED
+    computed: {},
 };
 </script>
 

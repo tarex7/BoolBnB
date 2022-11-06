@@ -137,7 +137,7 @@ export default {
         },
 
         getGeoPosition() {
-            console.log("geo");
+
             let query = this.query;
             let radius = this.radius * 1000;
             if (query) {
