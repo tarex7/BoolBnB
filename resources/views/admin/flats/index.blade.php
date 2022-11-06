@@ -89,15 +89,15 @@
     @endif
     <div class="container">
         <div class="row">
-            <div class="col-12 wrapper d-flex flex-wrap ">
-                @if (count($flats) === 1)
+            <div class=" ">
+                @if (count($flats) > 0)
                     <div class="col-12 d-flex justify-content-end my-5 ">
                         <a href="{{ route('admin.flats.create') }}" class="btn btn-primary  text-white "><strong
                                 class="h5">Aggiungi un appartamento</strong></a>
                         <div class="offset-1"></div>
                     </div>
                 @endif
-                <div class=" wrapper d-flex flex-wrap justify-content-start my-5">
+                <div class="d-flex flex-wrap justify-content-start my-5">
                     @forelse ($flats as $flat)
                         <div class="card m-2 p-2  shadow">
                             <a href="{{ Route('admin.flats.show', $flat->id) }}">

@@ -110,6 +110,7 @@
                                 value="{{ old('longitude', $flat->longitude) }}" hidden>
                                 @error('address')
                                 <div class="invalid-feedback">{{ $message }} </div>
+                                
                             @enderror
 
                         </div>
@@ -230,8 +231,6 @@
 </div>
 
 
-</form>
-
 
 <script>
     var options = {
@@ -302,4 +301,3 @@
 </script>
 
 <script src="{{ asset('js/image_preview.js') }}"></script>
-@include('includes.footer')

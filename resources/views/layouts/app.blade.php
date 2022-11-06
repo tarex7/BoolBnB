@@ -94,7 +94,7 @@
                 <!-- Left Side Of Navbar -->
                 <ul></ul>
 
-                <ul class="navbar-nav mr-auto d-flex flex-column">
+                <ul class="navbar-nav d-flex">
                     <!-- Authentication Links -->
                     @guest
                         <li class="nav-item">

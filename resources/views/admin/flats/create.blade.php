@@ -1,13 +1,13 @@
 @extends('layouts.app')
 
-<div class="container-fluid">
 
-   @section('content')
+@section('content')
+    <div class="container-fluid">
         <header>
             <h3 class="text-center my-3">Crea appartamento</h3>
         </header>
 
         @include('includes.admin.flats.form')
-    @endsection
-    
-</div>
+        @include('includes.footer')
+    </div>
+@endsection

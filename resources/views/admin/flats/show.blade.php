@@ -1,7 +1,7 @@
 @extends('layouts.app')
 
 <style>
-    @media only screen and (max-width: 1600px) {
+    @media only screen and (min-width: 300px) {
         .button {
             margin-right: 32px;
             justify-content: flex-start

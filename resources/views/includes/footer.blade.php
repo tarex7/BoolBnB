@@ -13,7 +13,7 @@
     }
 
 </style>
-<footer >
+<footer class="col-12" >
     <div class="container col-lg-12 pt-5 pb-2">
         <div class="row row-cols-1 row-cols-md-3">
             <div class="col-lg-3 col-sm-12 mb-4 mb-md-1 ">
