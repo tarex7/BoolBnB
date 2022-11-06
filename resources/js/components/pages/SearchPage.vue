@@ -1,7 +1,7 @@
 <template>
     <div>
         <!-- JUMBOTRON -->
-
+<AppJumbotron/>
         <div class="container">
             <div class="row">
                 <nav
