@@ -1,7 +1,7 @@
 @extends('layouts.app')
 
 @section('content')
-    <style>
+    {{-- <style>
         .bg-img {
             background-image: url("/images/stanza.jpg");
         }
@@ -11,8 +11,9 @@
             background-repeat: no-repeat;
             background-position-y: center;
             height: 100vh;
+
         }
-    </style>
+    </style> --}}
     <div class="bg-img bg-format">
         <div class="container">
             <div class="row justify-content-center">

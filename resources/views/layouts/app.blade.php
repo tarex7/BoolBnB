@@ -79,10 +79,39 @@
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
     <link href="{{ asset('css/custom-css.css') }}" rel="stylesheet">
 
+    <style>
+        footer {
+            background-color: #424242;
+            color: #ffffff;
+            padding: 40px;
+
+
+
+
+
+        }
+
+        footer ul {
+            list-style-type: none;
+            padding: 0;
+        }
+
+        a {
+            text-decoration: none;
+            color: #fff;
+        }
+
+        h5 {
+            margin-bottom: 5px;
+            color: #dc143c;
+        }
+    </style>
+
 </head>
 
 <body class="bg-light">
-    <div id="app" >
+
+    <div id="app">
 
 
         <nav class="navbar navbar-expand-lg bg-light">
@@ -90,8 +119,7 @@
 
                 <a href="{{ url('/') }}" class="col">
 
-                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="-50 0 500 100"
-                        style="height:60px; width: 180px">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="-50 0 500 100" style="height:60px; width: 180px">
                         <defs>
                             <style>
                                 .cls-1 {
@@ -137,30 +165,34 @@
                                         href="{{ route('register') }}">Registrati</a>
                                 </li>
                             @endif
-                            @else
+                        @else
                             <a class="dropdown-item text-dark  text-end list-unstyled mx-3"
-                                    href="{{ route('admin.flats.index') }}">
-                                    I miei appartamenti
-                                </a>
-                                <a class="dropdown-item text-end mx-3" href="{{ route('logout') }}"
-                                    onclick="event.preventDefault();
+                                href="{{ route('admin.flats.index') }}">
+                                I miei appartamenti
+                            </a>
+                            <a class="dropdown-item text-end mx-3" href="{{ route('logout') }}"
+                                onclick="event.preventDefault();
                                                          document.getElementById('logout-form').submit();">
-                                    {{ __('Logout') }}
-                                </a>
-                                <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none text-end">
-                                    @csrf
-                                </form>
-                                @endguest
-                        </ul>
-                        
-                    </div>
+                                {{ __('Logout') }}
+                            </a>
+                            <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none text-end">
+                                @csrf
+                            </form>
+                        @endguest
+                    </ul>
+
                 </div>
-            </nav>
+            </div>
+        </nav>
+    @include('includes.jumbotron')
+
         @include('includes.admin.alert')
         @yield('content')
 
     </div>
-    @include('includes.footer')
+    <div class="mt-5">
+        @include('includes.footer')
+    </div>
 
 </body>
 

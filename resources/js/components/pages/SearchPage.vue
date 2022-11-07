@@ -4,9 +4,9 @@
         <AppJumbotron />
         <div class="container">
             <div class="row">
-                <div class="col-12 my-5 d-flex justify-content-center">
+                <div class="col-12 d-flex justify-content-center ">
                     <nav
-                        class="navbar-light bg-transparent w-50 my-3 px-4"
+                        class="navbar-light bg-transparent my-3 "
                     >
                         <form @submit.prevent="getGeoPosition">
                             <div
@@ -34,7 +34,7 @@
                                     >
                                         <input
                                             type="text"
-                                            class="w-100"
+                                            class=""
                                             readonly
                                             :value="address"
                                             @click="setQuery(address)"
@@ -55,7 +55,7 @@
                     <div class="card rounded-0">
                         <div class="card-header h4 bg-primary-cs text-white">Filtra per:</div>
                         <div
-                            class="card-body d-flex justify-content-sm-between justify-content-lg-center justify-content-center my-5 row py-lg-4"
+                            class="card-body d-flex justify-content-sm-between justify-content-lg-center justify-content-center my-2 row py-lg-1"
                         >
                             <!-- rooms-->
                             <div class="cs_btn my-2 col-1 w-50">
@@ -195,7 +195,7 @@
                 <div class="col-12 col-lg-8">
                     <div class="card rounded-0">
                         <h4 class="card-header bg-primary-cs text-white mb-4">Servizi</h4>
-                        <div class="px-2 row row-cols-3 py-4">
+                        <div class="px-2 row row-cols-3  pb-5">
                             <div
                                 class="form-check form-switch m-3 me-5 col"
                                 v-for="service in services"
@@ -208,12 +208,12 @@
                                     :value="service.id"
                                     @change="getGeoPosition"
                                 />
-                                <i :class="`${service.icon} fa-lg `"></i>
+                                <i :class="`${service.icon}  `"></i>
 
                                 <label
                                     class="form-check-label h5"
                                     for="flexSwitchCheckChecked"
-                                    >{{ service.label }}</label
+                                    ><small>{{ service.label }}</small></label
                                 >
                             </div>
                         </div>
@@ -247,10 +247,12 @@
                 </div>
             </div>
         </div>
+        <AppFooter class="mt-5"/>
     </div>
 </template>
 
 <script>
+import AppFooter from "../AppFooter.vue";
 import AppJumbotron from "../AppJumbotron.vue";
 import FlatCard from "../flats/FlatCard.vue";
 
@@ -541,7 +543,7 @@ export default {
          this.query = data.query;
     },
 
-    components: { FlatCard, AppJumbotron },
+    components: { FlatCard, AppJumbotron, AppFooter },
 };
 </script>
 
@@ -579,6 +581,7 @@ export default {
     background-color:#dc143c;
     padding: 3.3px;
     border: none;
+    cursor: pointer;
     
 }
 
@@ -618,6 +621,7 @@ label span {
     height: 55px;
     border-radius: 0 20px 0 20px;
     border: 1px solid #dc143c;
+    padding-right:  90px;
 }
 
 #query_address:focus {

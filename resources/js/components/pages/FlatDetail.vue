@@ -1,5 +1,6 @@
 <template>
     <div>
+        <AppJumbotron/>
         <div id="flat-detail-page">
             <AppLoader v-if="isLoading" />
             <div v-else-if="!isLoading && flat" :flat="flat">
@@ -189,6 +190,7 @@
                 </div>
             </div>
         </div>
+        <AppFooter/>
     </div>
 </template>
 
@@ -197,9 +199,11 @@ import AppAlert from "../AppAlert.vue";
 import FlatCard from "../flats/FlatCard.vue";
 import AppLoader from "../AppLoader.vue";
 import FlatMap from "../FlatMap.vue";
+import AppJumbotron from "../AppJumbotron.vue";
+import AppFooter from "../AppFooter.vue";
 export default {
     name: "FlatDetail",
-    components: { AppLoader, FlatCard, AppAlert, FlatMap },
+    components: { AppLoader, FlatCard, AppAlert, FlatMap, AppJumbotron, AppFooter },
     data() {
         return {
             flat: null,

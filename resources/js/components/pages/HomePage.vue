@@ -6,7 +6,7 @@
             <flat-list :filteredFlats="flats" />
         </div>
         <!-- FLAT LIST COMPONENTE-->
-        <router-view @search="getData"></router-view>
+        <router-view ></router-view>
        
         <AppFooter/>
     </div>

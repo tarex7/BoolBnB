@@ -105,10 +105,11 @@
 
                     <div class="col-12">
                         <div class="border my-5 ">
-                            <h3 class="my-2 text-center">Messaggi</h3>
+                            <h3 class="my-2 text-center">I tuoi messaggi</h3>
+                            <div class="border"></div>
                 
                             <ol class="list-group list-group-numbered rounded-0 px-5 ">
-                                @foreach ($messages as $message)
+                                @forelse ($messages as $message)
                                     <li class="list-group-item  d-flex justify-content-between align-items-start my-3">
                                         <div class="ms-2 me-auto">
                                             <div class="fw-bold mb-1">Messaggio da : <strong>{{ $message->sender_name }}</strong></div>
@@ -124,7 +125,12 @@
                                             </form> --}}
                                         </div>
                                     </li>
-                                @endforeach
+                                    @empty 
+                                    <h4 class="my-2 text-center my-3">Non hai ancora ricevuto messaggi</h4>
+
+
+
+                                @endforelse
                 
                 
                 

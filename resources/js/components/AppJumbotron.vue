@@ -44,12 +44,6 @@ export default {
         height: 400px;
     }
 
-    .searchbar {
-        width: 80%;
-    }
 
-    .search-container {
-        height: 100%;
-    }
 }
 </style>
