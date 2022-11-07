@@ -31,16 +31,6 @@ class AppServiceProvider extends ServiceProvider
             return FakerFactory::create('it_IT');
         });
 
-        $this->app->singleton(Gateway::class, function ($app) {
-            return new Gateway(
-                [
-                    'environment' => 'sandbox',
-                    'merchantId' => '88shqs3gnqq3267x',
-                    'publicKey' => 'chx64dqbh5chqs4g',
-                    'privateKey' => 'e67dcb8830150e0a751faaeacfe8d250',
-
-                ]
-            );
-        });
+        
     }
 }
