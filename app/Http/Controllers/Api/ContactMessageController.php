@@ -38,16 +38,15 @@ class ContactMessageController extends Controller
                 ['errors' => $validator->errors()]
             );
         }
-
         //Salvo i dati nel database
         $new_message = new Message();
         $new_message->fill($data);
-       // $new_message->flat_id ;
-        $new_message->save();
+       $new_message->flat_id = 1 ;
+       $new_message->save();
 
         //Se il validatore passa o no ho questa riposta
         if ($validator->fails()) return response()->json('Il messaggio non è stato inviato');
-        else return response()->json('IL messaggio è stato inviato correttamente' . 204);
+        else return response()->json('Il messaggio è stato inviato correttamente' . 204);
     }
 }
 

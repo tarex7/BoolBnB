@@ -210,6 +210,7 @@ export default {
                 sender_email: "",
                 text: "",
                 flat_id: this.$route.params.id,
+                object:"ciao"
             },
 
             alertMessage: null,
@@ -295,6 +296,8 @@ export default {
             axios
                 .post("http://localhost:8000/api/contact-message", this.form)
                 .then((res) => {
+                    console.log(res);
+
                     //verifico se ci sn errorri
                     if (res.data.errors) {
                         //creo un oggetto nuovo

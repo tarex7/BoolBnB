@@ -15,7 +15,7 @@ class AddFlatIdToMessagesTable extends Migration
     {
         Schema::table('messages', function (Blueprint $table) {
             $table->unsignedBigInteger('flat_id')->after('id');
-            $table->foreign('flat_id')->references('id')->on('flats')->onDelete('cascade');
+            $table->foreign('flat_id')->references('id')->on('flats');
 
         });
     }

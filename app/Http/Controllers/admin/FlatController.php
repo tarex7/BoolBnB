@@ -84,7 +84,7 @@ class FlatController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Flat $flat)
     {
         $flats = Flat::all()->where('user_id', Auth::id());
         $services = Service::select('id', 'label', 'icon')->get();
