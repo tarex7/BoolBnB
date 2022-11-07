@@ -29,7 +29,7 @@
                                         class="col-md-4 col-form-label text-md-right">{{ __('Indirizzo E-Mail ') }}</label>
 
                                     <div class="col-md-6 col-sm-10 col-11">
-                                        <input id="email" type="email"
+                                        <input id="email" type="email" placeholder="pippo@pippo.com"
                                             class="form-control my-4 @error('email') is-invalid @enderror" name="email"
                                             value="{{ old('email') }}" required autocomplete="email" autofocus>
 
