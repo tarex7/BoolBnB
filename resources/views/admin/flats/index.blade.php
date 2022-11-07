@@ -3,9 +3,9 @@
 @section('content')
     <div class="container-fluid">
         <div class="row">
-            <div class="col-12 d-flex justify-content-end my-5 ">
-                <a href="{{ route('admin.flats.create') }}" class="btn btn-primary  text-white "><strong
-                        class="h5">Aggiungi appartamento</strong></a>
+            <div class="col-12 d-flex justify-content-end my-5 px-5 ">
+                <a href="{{ route('admin.flats.create') }}" class=" btn-primary-cs  text-white "><strong
+                        class="h6">Aggiungi appartamento</strong></a>
                 <div class="offset-1"></div>
             </div>
             <div class="col-12 wrapper d-flex flex-wrap justify-content-center">
@@ -19,14 +19,16 @@
                         <div class="card-body d-flex flex-column justify-content-between">
                             <h5 class="card-title">{{ $flat->title }}</h5>
 
-                            <form action="{{ route('admin.flats.toggle', $flat) }}" method="POST" class="m-0">
+                            <form action="{{ route('admin.flats.toggle', $flat) }}" method="POST" class="m-0 d-flex justify-content-between">
                                 @csrf
                                 @method('PATCH')
                                 <button class="btn btn-outline d-flex align-items-center px-0" type='submit'>
                                     <i
-                                        class="fa-3x fa-solid fa-toggle-{{ $flat->visible ? 'on' : 'off' }} text-{{ $flat->visible ? 'success' : 'danger' }} "></i>
+                                        class="fa-xl fa-solid fa-toggle-{{ $flat->visible ? 'on' : 'off' }} text-{{ $flat->visible ? 'success' : 'danger' }} "></i>
                                     <h5 class="m-0 mx-2">{{ $flat->visible ? 'Visibile' : 'Non visibile' }}</h5>
                                 </button>
+                                <i class="fa-regular fa-xl fa-envelope mt-3"></i>
+
                             </form>
                         </div>
                     </div>
@@ -42,3 +44,4 @@
         </div>
     </div>
 @endsection
+

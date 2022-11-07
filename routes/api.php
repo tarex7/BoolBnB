@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Api\Orders\OrderController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -22,6 +23,15 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 Route::namespace('Api')->group(function () {
     Route::get("/flats", 'FlatController@index');
     Route::get("/flats/{id}", 'FlatController@show');
+    Route::get('sponsorships','SponsorshipController@index');
+
+    
+
+    //Generate token 
+Route::get('/orders/generate' , 'Orders\OrderController@generate');
+
+//Make payment
+Route::post('/orders/make/payment' , 'Orders\OrderController@makePayment');
 });
 
 
@@ -29,6 +39,7 @@ Route::namespace('api')->group(function(){
     Route::get('/flats', 'FlatController@index');
     Route::get('/flats/{id}', 'FlatController@show');
     Route::get('/services', 'ServiceController@index');
+    Route::post('/contact-message', 'contactMessageController@send');
 
 
 });

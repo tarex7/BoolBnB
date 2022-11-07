@@ -23,6 +23,11 @@
     </script>
     <script src="https://api.tomtom.com/maps-sdk-for-web/cdn/plugins/SearchBox/3.1.3-public-preview.0/SearchBox-web.js">
     </script>
+    <!-- includes the Braintree JS client SDK -->
+<script src="https://js.braintreegateway.com/web/dropin/1.33.4/js/dropin.min.js"></script>
+
+<!-- includes jQuery -->
+<script src="http://code.jquery.com/jquery-3.2.1.min.js" crossorigin="anonymous"></script>
     <script>
         (function() {
             window.SS = window.SS || {};
@@ -72,6 +77,7 @@
         href='https://api.tomtom.com/maps-sdk-for-web/cdn/plugins/SearchBox/3.1.3-public-preview.0/SearchBox.css' />
     <link rel="stylesheet" href="https://api.tomtom.com/maps-sdk-for-web/cdn/6.x/6.20.0/maps/maps.css">
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
+    <link href="{{ asset('css/custom-css.css') }}" rel="stylesheet">
 
 </head>
 
@@ -79,42 +85,56 @@
     <div id="app">
 
 
-        <nav class="navbar navbar-expand-md navbar-light bg-white shadow-sm d-flex justify-content-between">
-
+        <nav class="navbar navbar-expand-md main-nav shadow-sm d-flex justify-content-between">
             <a href="{{ url('/') }}">
-                <img class="img-fluid  p-1" src={{ asset('images/boolbnb_logo.png') }} alt="logo Air BnB"
-                    style="height:60px; width: 250px;">
+                    
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="-50 0 500 100" style="height:60px; width: 180px">
+                    <defs>
+                        <style>
+                            .cls-1 {
+                                font-size: 48.44px;
+                                stroke: #fff;
+                                stroke-miterlimit: 10;
+                                stroke-width: 2px;
+                                font-family: AdobeGothicStd-Bold-KSCpc-EUC-H, Adobe Gothic Std;
+                            }
 
+                            .cls-1,
+                            .cls-2 {
+                                fill: #fff;
+                            }
+
+                            .cls-2 {
+                                font-size: 106.49px;
+                                font-family: BrushScriptStd, Brush Script Std;
+                            }
+                        </style>
+                    </defs>
+                    <g id="Layer_2" data-name="Layer 2">
+                        <g id="Layer_1-2" data-name="Layer 1"><text class="cls-1"
+                                transform="translate(72.99 84.86)">oolBnB</text><text class="cls-2"
+                                transform="translate(0 88.39)">B</text></g>
+                    </g>
+                </svg>
             </a>
-            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
-                aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="{{ __('Toggle navigation') }}">
-                <span class="navbar-toggler-icon"></span>
-            </button>
+           
 
-            <div class="" id="navbarSupportedContent">
-                <!-- Left Side Of Navbar -->
-                <ul></ul>
+           
 
                 <ul class="navbar-nav mr-auto d-flex flex-column">
                     <!-- Authentication Links -->
                     @guest
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" href="{{ route('login') }}">Accedi</a>
-                        </li>
-                        @if (Route::has('register'))
-                            <li class="nav-item">
-                                <a class="nav-link text-dark" href="{{ route('register') }}">Registrati</a>
-                            </li>
-                        @endif
-                    @else
+                  
+                    
                         <li class="nav-item dropdown">
 
 
-                            <div class="d-flex " aria-labelledby="navbarDropdown">
-                                <a class="dropdown-item text-dark mx-3" href="{{ route('admin.flats.index') }}">
+                            <div class="d-flex me-3 justify-content-center w-100" aria-labelledby="navbarDropdown">
+                                <a class="dropdown-item text-dark mx-3 text-white" href="{{ route('admin.flats.index') }}">
+                                    <i class="fa-solid fa-house-lock"></i>
                                     I miei appartamenti
                                 </a>
-                                <a class="dropdown-item" href="{{ route('logout') }}"
+                                <a class="dropdown-item text-white" href="{{ route('logout') }}"
                                     onclick="event.preventDefault();
                                                          document.getElementById('logout-form').submit();">
                                     {{ __('Logout') }}
@@ -139,6 +159,8 @@
         @yield('content')
 
     </div>
+@include('includes.footer')
+
 </body>
 
 </html>

@@ -1,12 +1,11 @@
 <?php
 
-namespace App\Http\Controllers\Api;
+namespace App\Http\Controllers\admin;
 
 use App\Http\Controllers\Controller;
-use App\Models\Flat;
 use Illuminate\Http\Request;
 
-class FlatController extends Controller
+class MessageController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -15,10 +14,17 @@ class FlatController extends Controller
      */
     public function index()
     {
-        //Vedo solo i Flat Visibili
-        $flats = Flat::with('services')->where('visible', 1)->orderBy('created_at', 'DESC')->get();
+        //
+    }
 
-        return response()->json($flats);
+    /**
+     * Show the form for creating a new resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function create()
+    {
+        //
     }
 
     /**
@@ -40,9 +46,18 @@ class FlatController extends Controller
      */
     public function show($id)
     {
-        $flat = Flat::with('services')->find($id);
-        if (!$flat) return response('Not found', 404);
-        return response()->json($flat);
+        //
+    }
+
+    /**
+     * Show the form for editing the specified resource.
+     *
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function edit($id)
+    {
+        //
     }
 
     /**

@@ -7,19 +7,23 @@
 
         <div class="row">
             <div class="col-12">
-                <div class="d-flex justify-content-end my-3">
+                <div class="d-flex justify-content-between my-5">
                     @if ($flat->user_id === Auth::id())
-                        <a href="{{ route('admin.flats.edit', $flat->id) }}" class="btn  btn-warning "><strong
+                     <a href="{{ route('admin.sponsorships') }}" class="btn btn-success mr-5 "><strong class="h5 mx-5"><i class="fa-solid fa-crown mx-4 fa-lg"></i>Metti in vista il tuo appartamento!<i class="fa-solid fa-crown mx-4 fa-lg"></i></strong></a>
+                        <div class="d-flex justify-content-end">
+                            <a href="{{ route('admin.flats.edit', $flat->id) }}" class="btn  btn-warning "><strong
                                 class="h5">Modifica </strong></a>
                         <form action="{{ route('admin.flats.destroy', $flat->id) }}" method="POST" class="delete-form">
                             @csrf
                             @method('DELETE')
-                            <button class="btn btn-danger text-light  mx-3"> <strong class="h5">Elimina
+                            <button class="btn btn-primary-cs text-light  mx-3"> <strong class="h6">Elimina
                                 </strong></button>
                         </form>
-                    @endif
-                    <a href="{{ route('admin.flats.index') }}" class="btn btn-primary text-white"><strong
+                        <a href="{{ route('admin.flats.index') }}" class="btn btn-primary text-white"><strong
                             class="h5">Torna alla lista </strong></a>
+                        </div>
+                    @endif
+                    
                 </div>
             </div>
             <div class="col-6">
@@ -89,9 +93,34 @@
                 </div>
 
             </div>
-            <div class="col-12">
-                <div class="border my-3"></div>
 
+            <div class="col-12">
+                <div class="border my-5 "><h2 class="my-2 text-center">Messaggi</h2>
+                
+                    <ol class="list-group list-group-numbered">
+                        @foreach ($messages as $message)
+                        <li class="list-group-item d-flex justify-content-between align-items-start my-3" >
+                          <div class="ms-2 me-auto">
+                            <div class="fw-bold mb-1">Messaggio da : <strong>{{ $message->sender_name}}</strong></div>
+                          <span class="">Ricevuto il: {{ $message->getDate($message->created_at) }} alle ore {{ $message->getTime($message->created_at) }}</span>
+    
+                            <div class="border mb-3"></div>
+                            {{ $message->text}}
+                          </div>
+                          <div class="d-flex">
+                            <form action="">
+                                <button class="btn btn-danger btn-sm">Elimina</button>
+                            </form>
+                          </div>
+                        </li>
+                        @endforeach
+    
+    
+    
+    
+                       
+                      </ol>
+                </div>
 
 
             </div>

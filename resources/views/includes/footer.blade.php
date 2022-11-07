@@ -1,5 +1,4 @@
-<template>
-  <footer>
+<footer id="footer" class="bg-light">
     <div class="container mt-5">
       <div class="row row-cols-1 row-cols-md-3">
         <div class="col mb-4 mb-md-1">
@@ -30,36 +29,3 @@
       </div>
     </div>
   </footer>
-</template>
-
-<script>
-export default {
-  name: "AppFooter",
-  // COMPONENTS
-  components: {},
-  // DATA
-  data() {
-    return {};
-  },
-  //PROPS
-  props: {},
-  //METHODS
-  methods: {},
-  //COMPUTED
-  computed: {},
-};
-</script>
-
-
-<!-- STYLE -->
-<style lang="scss" scoped>
-footer {
-  background-color: #838383;
-  color: #ffffff;
-  padding: 40px;
-  ul {
-    list-style-type: none;
-    padding: 0;
-  }
-}
-</style>
