@@ -118,7 +118,7 @@
                 </a>
 
 
-                <div class="d-flex me-4" id="navbarSupportedContent">
+                <div class="me-4" id="navbarSupportedContent">
                     <!-- Left Side Of Navbar -->
                     <ul></ul>
 
@@ -141,13 +141,12 @@
                                 <div class="d-flex mx-3 " aria-labelledby="navbarDropdown">
                                     <a class="dropdown-item text-dark mx-4 list-unstyled text-white"
                                         href="{{ route('admin.flats.index') }}">
-                                        <i class="fa-solid fa-house-lock"></i>
                                         I miei appartamenti
                                     </a>
                                     <a class="dropdown-item text-white" href="{{ route('logout') }}"
                                         onclick="event.preventDefault();
                                                              document.getElementById('logout-form').submit();">
-                                        {{ __('Logout') }} <i class="fa-solid fa-person-walking-arrow-right"></i>
+                                        {{ __('Logout') }}
                                     </a>
 
 

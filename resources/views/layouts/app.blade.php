@@ -24,10 +24,10 @@
     <script src="https://api.tomtom.com/maps-sdk-for-web/cdn/plugins/SearchBox/3.1.3-public-preview.0/SearchBox-web.js">
     </script>
     <!-- includes the Braintree JS client SDK -->
-<script src="https://js.braintreegateway.com/web/dropin/1.33.4/js/dropin.min.js"></script>
+    <script src="https://js.braintreegateway.com/web/dropin/1.33.4/js/dropin.min.js"></script>
 
-<!-- includes jQuery -->
-<script src="http://code.jquery.com/jquery-3.2.1.min.js" crossorigin="anonymous"></script>
+    <!-- includes jQuery -->
+    <script src="http://code.jquery.com/jquery-3.2.1.min.js" crossorigin="anonymous"></script>
     <script>
         (function() {
             window.SS = window.SS || {};
@@ -82,12 +82,12 @@
 </head>
 
 <body class="bg-light">
-    <div id="app">
+    <div id="app" >
 
 
         <nav class="navbar navbar-expand-md main-nav shadow-sm d-flex justify-content-between">
             <a href="{{ url('/') }}">
-                    
+
                 <svg xmlns="http://www.w3.org/2000/svg" viewBox="-50 0 500 100" style="height:60px; width: 180px">
                     <defs>
                         <style>
@@ -113,25 +113,31 @@
                     <g id="Layer_2" data-name="Layer 2">
                         <g id="Layer_1-2" data-name="Layer 1"><text class="cls-1"
                                 transform="translate(72.99 84.86)">oolBnB</text><text class="cls-2"
-                                transform="translate(0 88.39)">B</text></g>
+                                transform="translate(0 88.39)">B</text>
+                        </g>
                     </g>
                 </svg>
             </a>
-           
 
-           
+            <div class="me-3" id="navbarSupportedContent">
+                <!-- Left Side Of Navbar -->
 
-                <ul class="navbar-nav mr-auto d-flex flex-column">
+                <ul class="navbar-nav d-flex">
                     <!-- Authentication Links -->
                     @guest
-                  
-                    
+                        <li class="nav-item">
+                            <a class="nav-link text-light" href="{{ route('login') }}">Accedi</a>
+                        </li>
+                        @if (Route::has('register'))
+                            <li class="nav-item">
+                                <a class="nav-link text-light" href="{{ route('register') }}">Registrati</a>
+                            </li>
+                        @endif
+                    @else
                         <li class="nav-item dropdown">
-
-
+                            <!-- Authentication Links -->
                             <div class="d-flex me-3 justify-content-center w-100" aria-labelledby="navbarDropdown">
                                 <a class="dropdown-item text-dark mx-3 text-white" href="{{ route('admin.flats.index') }}">
-                                    <i class="fa-solid fa-house-lock"></i>
                                     I miei appartamenti
                                 </a>
                                 <a class="dropdown-item text-white" href="{{ route('logout') }}"
@@ -148,7 +154,6 @@
                         </li>
                     @endguest
                 </ul>
-
                 <!-- Right Side Of Navbar -->
             </div>
 
@@ -159,7 +164,7 @@
         @yield('content')
 
     </div>
-@include('includes.footer')
+    @include('includes.footer')
 
 </body>
 
