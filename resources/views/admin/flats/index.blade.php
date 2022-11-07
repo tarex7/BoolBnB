@@ -117,7 +117,7 @@
                                         class="fa-xl fa-solid fa-toggle-{{ $flat->visible ? 'on' : 'off' }} text-{{ $flat->visible ? 'success' : 'danger' }} "></i>
                                     <h5 class="m-0 mx-2">{{ $flat->visible ? 'Visibile' : 'Non visibile' }}</h5>
                                 </button>
-                                <i class="fa-regular fa-xl fa-envelope mt-3"></i>
+                                {{-- <i class="fa-regular fa-xl fa-envelope mt-3"></i> --}}
 
                             </form>
                         </div>

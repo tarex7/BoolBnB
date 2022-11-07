@@ -13,6 +13,28 @@
     border-radius: 0 5px 0 5px;
 }
 
+.btn-secondary-cs {
+    background-color: #2c5bb3;
+    color: #fff;
+    border-radius: 0px;
+    font-size: 0.7rem;
+    transition: .3s ;
+    text-decoration: none;
+    padding: 10px;
+    border-radius: 0 5px 0 5px;
+}
+.btn-third-cs {
+    background-color: #e7d52f;
+    color: #fff;
+    border-radius: 0px;
+    font-size: 0.7rem;
+    transition: .3s ;
+    text-decoration: none;
+    padding: 10px;
+    border-radius: 0 5px 0 5px;
+    color: #333;
+}
+
 .btn-primary-cs:hover {
     transform: scale(1.05);
     background-color: #dc143c;
@@ -38,4 +60,16 @@
 
   .input-group-text{
     background-color: #fff;
+  }
+
+  #login-form.card-body {
+    padding: 50px 20px;
+  }
+
+  .home-link {
+    color: #dc143c;
+  }
+
+  .fa-circle {
+    color: #dc143c;
   }

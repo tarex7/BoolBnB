@@ -20,17 +20,16 @@
                     <div class="card" style="margin-top: 15vh">
                         <div class="card-header">{{ __('Login') }}</div>
 
-                        <div class="card-body">
+                        <div class="card-body" id="login-form">
                             <form method="POST" action="{{ route('login') }}">
                                 @csrf
 
                                 <div class="form-group row">
-                                    <label for="email"
-                                        class="col-md-4 col-form-label text-md-right">{{ __('Indirizzo E-Mail ') }}</label>
+                                    <p class="m-0" >{{ __('Indirizzo E-Mail ') }}</p>
 
-                                    <div class="col-md-6 col-sm-10 col-11">
+                                    <div class="col-md-12 col-sm-10 col-11">
                                         <input id="email" type="email" placeholder="pippo@pippo.com"
-                                            class="form-control my-4 @error('email') is-invalid @enderror" name="email"
+                                            class="form-control my-2 @error('email') is-invalid @enderror" name="email"
                                             value="{{ old('email') }}" required autocomplete="email" autofocus>
 
                                         @error('email')
@@ -42,12 +41,12 @@
                                 </div>
 
                                 <div class="form-group row">
-                                    <label for="password"
-                                        class="col-md-4 col-form-label text-md-right">{{ __('Password') }}</label>
+                                    <p for="password"
+                                        class="mt-3 mb-0">{{ __('Password') }}</p>
 
-                                        <div class="col-md-6 col-sm-10 col-11">
+                                        <div class="col-md-12 col-sm-10 col-11">
                                         <input id="password" type="password"
-                                            class="form-control @error('password') is-invalid @enderror" name="password"
+                                            class="form-control my-2 @error('password') is-invalid @enderror" name="password"
                                             required autocomplete="current-password">
 
                                         @error('password')
@@ -59,7 +58,7 @@
                                 </div>
 
                                 <div class="form-group row">
-                                    <div class="col-md-6 offset-md-4">
+                                    <div class="col-md-12 ">
                                         <div class="form-check my-3">
                                             <input class="form-check-input" type="checkbox" name="remember" id="remember"
                                                 {{ old('remember') ? 'checked' : '' }}>
@@ -72,14 +71,14 @@
                                 </div>
 
                                 <div class="form-group row mb-0">
-                                    <div class="col-md-8 offset-md-4 d-flex justify-content-between">
+                                    <div class="col-md-12  d-flex justify-content-center">
 
                                         @if (Route::has('password.request'))
                                             <a class="" href="{{ route('password.request') }}">
                                                 {{ __('Hai dimenticato la tua password?') }}
                                             </a>
 
-                                            <button type="submit" class="btn btn-primary-cs">
+                                            <button type="submit" class="btn btn-primary-cs ms-5">
                                                 {{ __('Entra') }}
                                             </button>
                                         @endif

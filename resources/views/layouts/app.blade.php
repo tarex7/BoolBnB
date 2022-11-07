@@ -85,81 +85,77 @@
     <div id="app" >
 
 
-        <nav class="navbar navbar-expand-md main-nav shadow-sm d-flex justify-content-between">
-            <a href="{{ url('/') }}">
+        <nav class="navbar navbar-expand-lg bg-light">
+            <div class="container-fluid">
 
-                <svg xmlns="http://www.w3.org/2000/svg" viewBox="-50 0 500 100" style="height:60px; width: 180px">
-                    <defs>
-                        <style>
-                            .cls-1 {
-                                font-size: 48.44px;
-                                stroke: #fff;
-                                stroke-miterlimit: 10;
-                                stroke-width: 2px;
-                                font-family: AdobeGothicStd-Bold-KSCpc-EUC-H, Adobe Gothic Std;
-                            }
+                <a href="{{ url('/') }}" class="col">
 
-                            .cls-1,
-                            .cls-2 {
-                                fill: #fff;
-                            }
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="-50 0 500 100"
+                        style="height:60px; width: 180px">
+                        <defs>
+                            <style>
+                                .cls-1 {
+                                    font-size: 48.44px;
+                                    stroke: #fff;
+                                    stroke-miterlimit: 10;
+                                    stroke-width: 2px;
+                                    font-family: AdobeGothicStd-Bold-KSCpc-EUC-H, Adobe Gothic Std;
+                                }
 
-                            .cls-2 {
-                                font-size: 106.49px;
-                                font-family: BrushScriptStd, Brush Script Std;
-                            }
-                        </style>
-                    </defs>
-                    <g id="Layer_2" data-name="Layer 2">
-                        <g id="Layer_1-2" data-name="Layer 1"><text class="cls-1"
-                                transform="translate(72.99 84.86)">oolBnB</text><text class="cls-2"
-                                transform="translate(0 88.39)">B</text>
+                                .cls-1,
+                                .cls-2 {
+                                    fill: #dc143c;
+                                }
+
+                                .cls-2 {
+                                    font-size: 106.49px;
+                                    font-family: BrushScriptStd, Brush Script Std;
+                                }
+                            </style>
+                        </defs>
+                        <g id="Layer_2" data-name="Layer 2">
+                            <g id="Layer_1-2" data-name="Layer 1"><text class="cls-1"
+                                    transform="translate(72.99 84.86)">oolBnB</text><text class="cls-2"
+                                    transform="translate(0 88.39)">B</text></g>
                         </g>
-                    </g>
-                </svg>
-            </a>
-
-            <div class="me-3" id="navbarSupportedContent">
-                <!-- Left Side Of Navbar -->
-
-                <ul class="navbar-nav d-flex">
-                    <!-- Authentication Links -->
-                    @guest
-                        <li class="nav-item">
-                            <a class="nav-link text-light" href="{{ route('login') }}">Accedi</a>
-                        </li>
-                        @if (Route::has('register'))
-                            <li class="nav-item">
-                                <a class="nav-link text-light" href="{{ route('register') }}">Registrati</a>
+                    </svg>
+                </a>
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
+                    data-bs-target="#navbarTogglerDemo01" aria-controls="navbarTogglerDemo01" aria-expanded="false"
+                    aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse flex-grow-0" id="navbarTogglerDemo01">
+                    <ul class="navbar-nav mx-auto mb-2 mb-lg-0 d-flex ">
+                        @guest
+                            <li class="nav-item list-unstyled">
+                                <a class="nav-link text-dark  mx-3 text-end" href="{{ route('login') }}">Accedi</a>
                             </li>
-                        @endif
-                    @else
-                        <li class="nav-item dropdown">
-                            <!-- Authentication Links -->
-                            <div class="d-flex me-3 justify-content-center w-100" aria-labelledby="navbarDropdown">
-                                <a class="dropdown-item text-dark mx-3 text-white" href="{{ route('admin.flats.index') }}">
+                            @if (Route::has('register'))
+                                <li class="nav-item list-unstyled">
+                                    <a class="nav-link text-dark text-end list-unstyled mx-3 "
+                                        href="{{ route('register') }}">Registrati</a>
+                                </li>
+                            @endif
+                            @else
+                            <a class="dropdown-item text-dark  text-end list-unstyled mx-3"
+                                    href="{{ route('admin.flats.index') }}">
                                     I miei appartamenti
                                 </a>
-                                <a class="dropdown-item text-white" href="{{ route('logout') }}"
+                                <a class="dropdown-item text-end mx-3" href="{{ route('logout') }}"
                                     onclick="event.preventDefault();
                                                          document.getElementById('logout-form').submit();">
                                     {{ __('Logout') }}
                                 </a>
-
-
-                                <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
+                                <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none text-end">
                                     @csrf
                                 </form>
-                            </div>
-                        </li>
-                    @endguest
-                </ul>
-                <!-- Right Side Of Navbar -->
-            </div>
-
-        </nav>
-
-
+                                @endguest
+                        </ul>
+                        
+                    </div>
+                </div>
+            </nav>
         @include('includes.admin.alert')
         @yield('content')
 

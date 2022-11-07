@@ -56,7 +56,7 @@
                         // encrypted payment information in a variable called a payment method nonce
                         $.ajax({
                             type: 'POST',
-                            url: 'http://127.0.0.1:8000/api/make/payment',
+                            url: 'http://127.0.0.1:8000/api/orders/make/payment',
                             data: {
                                 "token": payload.nonce,
                                 "product": id,

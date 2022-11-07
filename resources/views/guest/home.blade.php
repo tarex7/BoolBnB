@@ -121,28 +121,26 @@
                         aria-label="Toggle navigation">
                         <span class="navbar-toggler-icon"></span>
                     </button>
-                    <div class="collapse navbar-collapse" id="navbarTogglerDemo01">
+                    <div class="collapse navbar-collapse flex-grow-0" id="navbarTogglerDemo01">
                         <ul class="navbar-nav mx-auto mb-2 mb-lg-0 d-flex ">
                             @guest
                                 <li class="nav-item list-unstyled">
-                                    <a class="nav-link text-dark  ms-3 text-end" href="{{ route('login') }}">Accedi</a>
+                                    <a class="nav-link text-dark  me-3 home-link text-end" href="{{ route('login') }}">Accedi</a>
                                 </li>
                                 @if (Route::has('register'))
                                     <li class="nav-item list-unstyled">
-                                        <a class="nav-link text-dark text-end list-unstyled "
+                                        <a class="nav-link text-dark text-end list-unstyled me-3 home-link "
                                             href="{{ route('register') }}">Registrati</a>
                                     </li>
                                 @endif
                                 @else
-                                <a class="dropdown-item text-dark  text-end list-unstyled "
+                                <a class="dropdown-item text-dark  text-end list-unstyled me-3 home-link"
                                         href="{{ route('admin.flats.index') }}">
-                                        <i class="fa-solid fa-house-lock"></i>
                                         I miei appartamenti
                                     </a>
-                                    <a class="dropdown-item text-end " href="{{ route('logout') }}"
+                                    <a class="dropdown-item text-end me-3 home-link" href="{{ route('logout') }}"
                                         onclick="event.preventDefault();
                                                              document.getElementById('logout-form').submit();">
-                                                             <i class="fa-solid fa-person-walking-arrow-right"></i>
                                         {{ __('Logout') }}
                                     </a>
                                     <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none text-end">
