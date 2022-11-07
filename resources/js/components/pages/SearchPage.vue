@@ -170,6 +170,23 @@
                                     </div>
                                 </div>
                             </div>
+                            <!-- Radius km -->
+                            <div class="col-12 mt-5">
+                                <label for="customRange2" class="form-label"
+                                    >Nel raggio di
+                                    {{ this.radius }} km</label
+                                >
+                                <input
+                                    type="range"
+                                    class="form-range"
+                                    min="0"
+                                    max="50"
+                                    id="customRange2"
+                                    step="5"
+                                    v-model="radius"
+                                    @change="getGeoPosition"
+                                />
+                            </div>
                         </div>
                     </div>
                     
@@ -177,8 +194,8 @@
                 <!-- Services -->
                 <div class="col-12 col-lg-8">
                     <div class="card rounded-0">
-                        <h4 class="card-header bg-primary-cs text-white">Servizi</h4>
-                        <div class="px-2 row row-cols-3 ">
+                        <h4 class="card-header bg-primary-cs text-white mb-4">Servizi</h4>
+                        <div class="px-2 row row-cols-3 py-4">
                             <div
                                 class="form-check form-switch m-3 me-5 col"
                                 v-for="service in services"
@@ -201,6 +218,7 @@
                             </div>
                         </div>
                     </div>
+                    
                 </div>
               </div>
 
@@ -217,7 +235,7 @@
                         <app-loader v-if="isLoading" />
 
                         <!-- FLAT CARD -->
-                        <div class="row justify-content-between">
+                        <div class="row justify-content-start">
                             <FlatCard
                                 v-for="flat in flats"
                                 :key="flat.id"
@@ -605,5 +623,9 @@ label span {
 #query_address:focus {
     outline-color: #dc143c;
 
+}
+
+.card-header {
+    border-radius: 0;
 }
 </style>
