@@ -1,65 +1,83 @@
 <template>
-  <footer>
-    <div class="container mt-5">
-      <div class="row row-cols-1 row-cols-md-3">
-        <div class="col mb-4 mb-md-1">
-          <h1 class="mb-3">BoolBnB</h1>
-          <h2>Social</h2>
-          <div class="d-flex justify-content-around w-25">
-            <i class="fa-brands fa-instagram"></i>
-            <i class="fa-brands fa-facebook"></i>
-            <i class="fa-brands fa-twitter"></i>
-          </div>
+    <footer>
+        <div class="container">
+          <div class="row">
+            <div class="col-6 col-md-3 mt-3 d-flex flex-column">
+                <h5 class="text-uppercase">Info</h5>
+                <a href="#">Come funziona BoolBnB</a>
+                <a href="#">NewsRoom</a>
+                <a href="#">BoolBnB Premium</a>
+                <a href="#">HotelsWorld</a>
+                <a href="#">Lavora con noi</a>
+            </div>
+            <div class="col-6 col-md-3 mt-3 d-flex flex-column">
+                <h5 class="text-uppercase">Ospita</h5>
+                <a href="#">Diventa un host</a>
+                <a href="#">Centro risorse</a>
+                <a href="#">Offri un'Esperienza</a>
+                <a href="#">Community Center</a>
+                <a href="#">Accessibilità</a>
+            </div>
+            <div class="col-6 col-md-3 mt-3 d-flex flex-column">
+                <h5 class="text-uppercase">Community</h5>
+                <a href="#">BoolBnB associates</a>
+                <a href="#">Invita degli amici</a>
+                <a href="#">Diversità e appartenenza</a>
+                <a href="#">Supporto al vicinato</a>
+                <a href="#">Open Home</a>
+            </div>
+            <div class="col-6 col-md-3 mt-3 d-flex flex-column">
+                <h5 class="text-uppercase">Social</h5>
+                <div class="d-flex">
+                  <a href="#"><i class="fa-brands me-3 fa-facebook"></i></a>
+                <a href="#"><i class="fa-brands me-3 fa-instagram"></i></a>
+                <a href="#"><i class="fa-brands me-3 fa-twitter"></i></a>
+                <!-- <a href="#"><i class="fa-brands fa-youtube"></i></a> -->
+                <a href="#"><i class="fa-brands fa-whatsapp"></i></a>
+                </div>
+            </div>
         </div>
-        <div class="col mb-4 mb-md-1">
-          <h2>Servizi</h2>
-          <ul>
-            <li>Info</li>
-            <li>Appartamenti</li>
-            <li>Registrati</li>
-            <li>Staff</li>
-          </ul>
         </div>
-        <div class="col">
-          <h2>Contatti</h2>
-          Flat 20, Reynolds Neck, <br />
-          North Helenaville, <br />
-          FV77 8WS +2(305) 587-3407 <br />
-          Info@Example.Com
-        </div>
-      </div>
-    </div>
-  </footer>
+    </footer>
 </template>
 
 <script>
 export default {
-  name: "AppFooter",
-  // COMPONENTS
-  components: {},
-  // DATA
-  data() {
-    return {};
-  },
-  //PROPS
-  props: {},
-  //METHODS
-  methods: {},
-  //COMPUTED
-  computed: {},
+    name: "AppFooter",
+    // COMPONENTS
+    components: {},
+    // DATA
+    data() {
+        return {};
+    },
+    //PROPS
+    props: {},
+    //METHODS
+    methods: {},
+    //COMPUTED
+    computed: {},
 };
 </script>
-
 
 <!-- STYLE -->
 <style lang="scss" scoped>
 footer {
-  background-color: #838383;
-  color: #ffffff;
-  padding: 40px;
-  ul {
-    list-style-type: none;
-    padding: 0;
-  }
+    background-color: #9c9c9c;
+    color: #ffffff;
+    padding: 40px;
+    ul {
+        list-style-type: none;
+        padding: 0;
+    }
+
+    a {
+        text-decoration: none;
+        color: #fff;
+    }
+
+    h5 {
+      margin-bottom: 5px;
+      color: #dc143c;
+    }
 }
 </style>
