@@ -41,7 +41,6 @@ class ContactMessageController extends Controller
         //Salvo i dati nel database
         $new_message = new Message();
         $new_message->fill($data);
-       $new_message->flat_id = 1 ;
        $new_message->save();
 
         //Se il validatore passa o no ho questa riposta

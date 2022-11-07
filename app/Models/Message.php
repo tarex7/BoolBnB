@@ -13,7 +13,7 @@ class Message extends Model
       'sender_email',
       'sender_name',
       'text',
-     
+      'flat_id',
       'object'
       
     ];
