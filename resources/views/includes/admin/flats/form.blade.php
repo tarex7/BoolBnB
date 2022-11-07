@@ -264,7 +264,7 @@ ttSearchBox.on("tomtom.searchbox.resultsfound", function(data) {
     lonInput.value = lon;
 });
 tomtomInput.setAttribute("name", "address");
-tomtomInput.value = "<?php echo $flat->address; ?>";
+tomtomInput.value = "";
 
 //let axios = require('axios').default;
 
