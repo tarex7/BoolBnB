@@ -179,7 +179,7 @@
                                 <input
                                     type="range"
                                     class="form-range"
-                                    min="0"
+                                    min="5"
                                     max="50"
                                     id="customRange2"
                                     step="5"
@@ -262,7 +262,7 @@ export default {
         return {
             query: "",
             autocomplete: [],
-            radius: 50,
+            radius: 20,
             flats: [],
             allFlats: [],
             lat: "",

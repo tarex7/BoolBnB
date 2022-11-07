@@ -6,8 +6,9 @@
             <div v-else-if="!isLoading && flat" :flat="flat">
                 <div class="container">
                     <div class="row">
+                        <div class="col-12"><router-link to="/home" class="btn-primary-cs">Torna alla home</router-link></div>
                         <div class="col-12 mt-5">
-                            <h3 class="mt-3 mb-2">{{ flat.title }}</h3>
+                            <h3 class="mt-3 mb-2 text-danger">{{ flat.title }}</h3>
                         </div>
 
                         <div class="col-12 col-lg-6">

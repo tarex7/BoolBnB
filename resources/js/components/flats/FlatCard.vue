@@ -1,5 +1,5 @@
 <template>
-    <div class="col-12  col-md-6 col-lg-4">
+    <div class="col-12  col-md-6 col-lg-3">
         <div class="flat-card m-1 border ">
 
             <router-link :to="`/flats/${flat.id}`">
@@ -11,11 +11,11 @@
             </router-link>
 
             <div class="card-body">
-                <h5 class="card-title text-custom_primary my-4">
+                <h6 class="card-title text-custom_primary my-4">
                     {{ flat.title }}
-                </h5>
+                </h6>
                 <!-- <p class="card-text fw-bold">{{ flat.address }}</p> -->
-                <p class="card-text fw-bold h4">
+                <p class="card-text fw-bold h5">
                     {{ flat.price_per_day }} € a notte
                 </p>
                 <p>{{ flat.address }}</p>
@@ -47,12 +47,11 @@ export default {
 
 
 .flat-card:hover {
-    transform: scale(1.05);
-    box-shadow: rgba($color: #000, $alpha: 0.3) 0px 0px 11px;
+    box-shadow: rgba($color: #000, $alpha: 0.7) 0px 0px 5px;
 }
 
 .flat-card {
-    padding: 10px;
+    padding: 12px;
     transition: 0.5s;
     border-radius: 0 20px 0 20px;
     object-fit: contain;
@@ -60,6 +59,7 @@ export default {
     flex-direction: column;
     align-items: start;
     box-shadow: rgba($color: #000000, $alpha: 0.3) 0 0 1px;
+    margin: 50px 0;
     
     
 
